@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Zshrc: Startup Files | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="shell 环境有必要保持一定的整洁性, 毕竟多台机器之间多少要做些配置环境上的同步.本文简单讨论了 zsh 使用中配置文件规范性.
+zsh 的 man 手册中提到, zsh 的配置加载顺序如下
+最高优先级, 所有情况下都会加载
+12/etc/zshenv$HOME/.zshenv
+login shell 配置, 两组文件的区别在于, 中间存在着 zshrc 的加载
+12345/etc/zprof">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zshrc: Startup Files">
+<meta property="og:url" content="http://yoursite.com/2013/07/01/2013-07-01-zshrc-startup-files/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="shell 环境有必要保持一定的整洁性, 毕竟多台机器之间多少要做些配置环境上的同步.本文简单讨论了 zsh 使用中配置文件规范性.
+zsh 的 man 手册中提到, zsh 的配置加载顺序如下
+最高优先级, 所有情况下都会加载
+12/etc/zshenv$HOME/.zshenv
+login shell 配置, 两组文件的区别在于, 中间存在着 zshrc 的加载
+12345/etc/zprof">
+<meta property="og:updated_time" content="2016-12-13T08:33:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Zshrc: Startup Files">
+<meta name="twitter:description" content="shell 环境有必要保持一定的整洁性, 毕竟多台机器之间多少要做些配置环境上的同步.本文简单讨论了 zsh 使用中配置文件规范性.
+zsh 的 man 手册中提到, zsh 的配置加载顺序如下
+最高优先级, 所有情况下都会加载
+12/etc/zshenv$HOME/.zshenv
+login shell 配置, 两组文件的区别在于, 中间存在着 zshrc 的加载
+12345/etc/zprof">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2013-07-01-zshrc-startup-files" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/07/01/2013-07-01-zshrc-startup-files/" class="article-date">
+  <time datetime="2013-07-01T14:54:00.000Z" itemprop="datePublished">2013-07-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/shell-environment-zshrc/">shell environment zshrc</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Zshrc: Startup Files
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>shell 环境有必要保持一定的整洁性, 毕竟多台机器之间多少要做些配置环境上的同步.<br>本文简单讨论了 zsh 使用中配置文件规范性.</p>
+<p>zsh 的 man 手册中提到, zsh 的配置加载顺序如下</p>
+<p>最高优先级, 所有情况下都会加载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/etc/zshenv</div><div class="line">$HOME/.zshenv</div></pre></td></tr></table></figure>
+<p>login shell 配置, 两组文件的区别在于, 中间存在着 zshrc 的加载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/etc/zprofile</div><div class="line">$HOME/.zprofile</div><div class="line"></div><div class="line">/etc/zlogin</div><div class="line">$HOME/.zlogin</div></pre></td></tr></table></figure>
+<p>交互shell配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/etc/zshrc</div><div class="line">$HOME/.zshrc</div></pre></td></tr></table></figure>
+<p>三种配置文件的差异, 在于加载的时机不同.</p>
+<p><code>/etc</code> 目录下的配置文件会影响机器上的所有用户, 相比起 $HOME 配置文件, 加载顺序优先级比较高<br>但是除了系统管理员, 大部分情况下就一个人用的机器, 没多大关心的必要.<br> 平时除了偶尔切换到 root 下, 基本不会考虑多用户的情况. 这里就不过多涉及了.</p>
+<p><strong>env配置</strong></p>
+<p>顾名思义属于环境配置, 只要新启动的shell实例, 都会重新加载. 这就意味这个文件的内容会重复加载, 不适合加入需要依赖io等耗时的操作, 影响了shell的执行速度</p>
+<p>我通过这个配置文件, 区分不同机器, 比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">VIMID=&quot;hits-office&quot;</div></pre></td></tr></table></figure>
+<p>方便 vim 中可以根据<code>$VIM</code>加载工作环境下的特殊配置, 比如以 gbk 作为默认文件编码 :( .</p>
+<p><strong>login shell</strong></p>
+<p>部分发行版在这个配置文件中加入了<code>. $HOME/.zshrc</code> , 这种做法也意味着, 两者比较难区分.</p>
+<p><strong>zshrc</strong></p>
+<p>鉴于大部分人都是在交互式环境下使用 shell , 也就意味着这个文件是最常修改的配置文件, 比如著名的<code>oh-my-zsh</code>, 其入口文件便是<code>$HOME/.zshrc</code>. </p>
+<p>刚接触shell的人, 对于 login shell 和 interactive shell 常常傻傻分不清.<br>由于对与shell的定制和配置往往是增加 function, alias, 以及补全等等, 都是为了方便shell操作, 所以大多数情况下都是修改<code>zshrc</code>实现的.</p>
+<p>那么 <code>.zprofile</code> 是不是有点多余呢? 以下讨论 <code>.zprofile</code> 可以发挥作用的场景</p>
+<p>场景#1: <code>export A=abc</code> 定义全局常量</p>
+<p>仅仅在登入系统时执行一次, 某些需要调用<code>hostname</code>之类耗时的操作也可以放在这里, 不会因为重复执行而浪费 CPU 运算.</p>
+<p>场景#2: 初始化虚拟环境</p>
+<p>在安装 <code>rvm</code> 或者 <code>pythonbrew</code> 的情况, 需要在当前环境加载相对应的初始化脚本, 才能使用 <code>rvm use xxx</code>, <code>pythonbrew use xxx</code> 等方式修改当前 interceptor.</p>
+<figure class="highlight plain"><figcaption><span>~/.zprofile</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#load default profile config</div><div class="line">. $HOME/.profile</div><div class="line"></div><div class="line"># Load RVM into a shell session *as a function*</div><div class="line">[[ -s &quot;$HOME/.rvm/scripts/rvm&quot; ]] &amp;&amp; source &quot;$HOME/.rvm/scripts/rvm&quot;</div><div class="line"># Load pythonbrew into a shell session *as a function*</div><div class="line">[[ -s &quot;$HOME/.pythonbrew/etc/bashrc&quot; ]] &amp;&amp; source &quot;$HOME/.pythonbrew/etc/bashrc&quot;</div><div class="line"></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2013/07/01/2013-07-01-zshrc-startup-files/" data-id="ciwn93wad0000s1ypx6tahug0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2013/08/03/2013-08-03-longene-qq-on-archlinux/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Archlinux Longene QQ 轻松上手
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apple/">Apple</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Apple/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Apple/iOS/mobile/">mobile</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/async/">async</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/async/php-daemon/">php daemon</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/async/php-daemon/php/">php</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/async/php-daemon/php/network/">network</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java/sourcecode/">sourcecode</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java/sourcecode/nio/">nio</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/keyboard/">keyboard</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/keyboard/toy/">toy</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux-desktop-app-qq-archlinux/">linux-desktop, app, qq, archlinux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/web-server/">web server</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/php/tutorial/">tutorial</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/php/tutorial/book/">book</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/php-composer-classmap/">php composer classmap</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php-composer/">php, composer</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming-language/">programming language</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming-language/oop/">oop</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming-language/oop/编程语言/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming-language/oop/编程语言/面向对象/">面向对象</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell-environment-zshrc/">shell environment zshrc</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tutor/">tutor</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/tutor/vim/">vim</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/zsh/">zsh</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/zsh/script/">script</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/zsh/script/tutorial/">tutorial</a></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/13/new-post/">new post</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/13/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/25/2015-04-25-my-new-poker-2/">新的 poker 2 到手</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/24/2015-04-24-how-to-understand-object-oriented-programming/">如何理解面向对象编程</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/18/2015-04-18-routing-with-nginx-basic-rewrite-directives/">nginx 路由杂谈 - rewrite 指令与重定向</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

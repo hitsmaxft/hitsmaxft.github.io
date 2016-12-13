@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>自定义 zsh 自动补全功能初探 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="zsh 已经不是什么新鲜事了, oh-my-zsh 相信很多人都已经在用了.
+但zsh 存在一个明显的问题, 它并不是什么开箱即用的工具, 需要大量配置, 也很难上手扩充新功能, 这点和vim非常相似.
+常用的 alias 和 shell script, 虽然能用上些稍微方便的特殊语法, 大部分仍和 bash 相近. 这时候倒不如使用bash的语法, 保证代码的兼容性和可移植性.
+本文简单介绍如何">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义 zsh 自动补全功能初探">
+<meta property="og:url" content="http://yoursite.com/2014/03/17/2014-03-17-first-step-on-writing-zsh-completion-functions/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="zsh 已经不是什么新鲜事了, oh-my-zsh 相信很多人都已经在用了.
+但zsh 存在一个明显的问题, 它并不是什么开箱即用的工具, 需要大量配置, 也很难上手扩充新功能, 这点和vim非常相似.
+常用的 alias 和 shell script, 虽然能用上些稍微方便的特殊语法, 大部分仍和 bash 相近. 这时候倒不如使用bash的语法, 保证代码的兼容性和可移植性.
+本文简单介绍如何">
+<meta property="og:updated_time" content="2016-12-13T08:33:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自定义 zsh 自动补全功能初探">
+<meta name="twitter:description" content="zsh 已经不是什么新鲜事了, oh-my-zsh 相信很多人都已经在用了.
+但zsh 存在一个明显的问题, 它并不是什么开箱即用的工具, 需要大量配置, 也很难上手扩充新功能, 这点和vim非常相似.
+常用的 alias 和 shell script, 虽然能用上些稍微方便的特殊语法, 大部分仍和 bash 相近. 这时候倒不如使用bash的语法, 保证代码的兼容性和可移植性.
+本文简单介绍如何">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2014-03-17-first-step-on-writing-zsh-completion-functions" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/03/17/2014-03-17-first-step-on-writing-zsh-completion-functions/" class="article-date">
+  <time datetime="2014-03-16T18:43:53.000Z" itemprop="datePublished">2014-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/zsh/">zsh</a>►<a class="article-category-link" href="/categories/zsh/script/">script</a>►<a class="article-category-link" href="/categories/zsh/script/tutorial/">tutorial</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      自定义 zsh 自动补全功能初探
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>zsh 已经不是什么新鲜事了, <code>oh-my-zsh</code> 相信很多人都已经在用了.</p>
+<p>但<code>zsh</code> 存在一个明显的问题, 它并不是什么开箱即用的工具, 需要大量配置, 也很难上手扩充新功能, 这点和vim非常相似.</p>
+<p>常用的 alias 和 shell script, 虽然能用上些稍微方便的特殊语法, 大部分仍和 bash 相近. 这时候倒不如使用bash的语法, 保证代码的兼容性和可移植性.</p>
+<p>本文简单介绍如何编写zsh的补全插件, 以 Mac OS 的 launchctl 为例.</p>
+<pre><code>`launchctl` 是 Mac 用于管理系统运行, 类似于 linux 的 systemd, 用于管理 LaunchAgent 加载, 是 `launchd` 的前端.
+</code></pre><p>常用的 subcommand 有 unload, load, stop ,start 等等. 这里就只考虑 load 和 unload 补全功能扩充.</p>
+<h2 id="怎么开发脚本"><a href="#怎么开发脚本" class="headerlink" title="怎么开发脚本"></a>怎么开发脚本</h2><p>按作者的话说, 看文档是很难学会的. 因为很少涉及脚本编写本身, 仅罗列了所有的接口.</p>
+<h2 id="基本内容"><a href="#基本内容" class="headerlink" title="基本内容"></a>基本内容</h2><p>首先将脚本命名为 <code>_launchctl</code> , 放到任意目录下, 让将目录加入 fpath</p>
+<pre><code>oh-my-zsh 用户保存在 ~/.oh-my-zsh/plugins/launchctl/_launchctl.
+并在 zshrc 中声明 plugins=( launchctl )
+剩下的事情就交给 oh-my-zsh
+</code></pre><p>脚本头部加上以下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#compdef launchctl</span></div></pre></td></tr></table></figure>
+<p>第一行标记这个文件包含一个自动加载的函数.<br>本质上这是一个没有形如 <code>function () {}</code> 包裹着的函数体,<br>和可以直接通过 <code>source</code> 导入的配置文件和脚本是不同的.</p>
+<h2 id="subcommand-补全"><a href="#subcommand-补全" class="headerlink" title="subcommand 补全"></a>subcommand 补全</h2><p>subcommand 应该是子命令或者副命令的意思， 这里保留原文。</p>
+<pre><code>ps: 对于 gnu 风格的命令行工具, 很少有 subcommand , 这一章节并不是必要的.
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">local -a _1st_arguments</div><div class="line"></div><div class="line">_1st_arguments=(</div><div class="line">    &quot;load:Load configuration files and/or directories&quot;</div><div class="line">    &quot;unload:Unload configuration files and/or directories&quot;</div><div class="line">    &quot;start:Start specified job&quot;</div><div class="line">    &quot;stop:Stop specified job&quot;</div><div class="line">    &quot;help:This help output&quot;</div><div class="line">)</div><div class="line"></div><div class="line">local label_subcommand=&quot;launchctl subcommand&quot;</div><div class="line"></div><div class="line">if (( CURRENT == 2 )); then</div><div class="line">    _describe -t commands &quot;$label_subcommand&quot; _1st_arguments</div><div class="line">    return 0</div><div class="line">fi</div></pre></td></tr></table></figure>
+<p>这段代码还是比较好懂的, 补全所有的<code>subcommand</code>并给出提示信息.</p>
+<p>注意 <code>CURRENT</code> 这个变量, 它标记处于命令行的第几个单词</p>
+<pre><code>关于 CURRENT , 见 `man zshcompwid`
+</code></pre><p>在按下tab之前, 用户输入的文本为 <code>launchctl&lt;空格&gt;&lt;tab&gt;</code>, 第一个单词是主命令<code>launchctl</code>, 显然在这段脚本中, <code>CURRENT</code> 是一个大于2的整数.</p>
+<p>对于还存在更下一级 subcommand 的补全, 以此类推.</p>
+<h2 id="文件补全"><a href="#文件补全" class="headerlink" title="文件补全"></a>文件补全</h2><p><code>launchctl unload</code> 用于关闭一个正在运行的服务, 比如nginx, php-fpm等等, 显然这里需要补全的是一个文件路径, 对应一个位于 <code>~/Library/LaunchAgents/</code> 下的 <code>plist</code> 文件.</p>
+<p>首先假设已经实现了对应的工具函数 <code>_get_loaded_user_plists</code> , 这个函数将生成目前正在运行的plist文件列表</p>
+<p>以下是关键代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">local</span> expl</div><div class="line"></div><div class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$words</span>[2]"</span> <span class="keyword">in</span> </div><div class="line">    unload)</div><div class="line">        <span class="built_in">local</span> loaded_user_plists</div><div class="line">        loaded_user_plists=<span class="string">"<span class="variable">$(_get_loaded_user_plists)</span>"</span></div><div class="line">        _wanted loaded_user_plists expl <span class="string">'running jobs'</span> compadd <span class="_">-a</span> loaded_user_plists</div><div class="line">        ;;</div><div class="line"><span class="keyword">esac</span></div><div class="line"></div><div class="line"><span class="built_in">return</span> 1</div></pre></td></tr></table></figure>
+<p>可见对于简单参数的补全实现是很轻松的</p>
+<p>zsh 如果发现补全函数返回0, 会将输出作为补全内容作为候补内容输出到终端中去.</p>
+<p>因此我们只需要确定 subcommand 是我们所预期的<code>unload</code> , 将文件列表发送给用户就行了.</p>
+<p>这里用<code>case</code> 根据 subcommand 的不同, 选择对应的补全形式.</p>
+<p>首先注意 <code>$words</code> 这个变量, 通过打印该变量可以发现, 它是一个将用户已经输出的命令拆分的数组</p>
+<p>比如输入 <code>launchctl unload</code> , 那么对应的words将是 <code>( &#39;launchctl&#39; &#39;unload&#39; &#39;&#39; )</code>, 最后一位是一个空字符串.</p>
+<pre><code>严格地说, 这里拆分依据并不是空格
+如果你明白 $@ 和 $# 区别, 你就懂我啥意思了. 
+这里空间不够, 我就不写了 :)
+</code></pre><h2 id="调试脚本"><a href="#调试脚本" class="headerlink" title="调试脚本"></a>调试脚本</h2><p>开发过程中难免写错, 需要重复调试, 这里有两个小技巧.</p>
+<ol>
+<li>echo</li>
+</ol>
+<p>echo 当然是喜闻乐见的 debug 指令之一了.</p>
+<ol>
+<li>set -x </li>
+</ol>
+<p><code>set -x</code> 将开启zsh的 XTRACE 选项, 所有运行脚本背后的指令和参数都直接打印到屏幕, 俗称上帝视角.<br>如果发现不能正常执行, 那么只要运行 <code>set -x</code>, 手动输入命令后按tab. </p>
+<blockquote>
+<p>ps1: set +x 恢复正常模式.<br>ps2: 千万不要手残提前触发其他zsh的特性, 不然面对满屏的文本里就没啥心情继续下去了. 这里需要老老实实输入完整的命令, 在需要触发对应补全过程的地方按下tab触发补全.</p>
+</blockquote>
+<p>由于调试信息实在太多了, 运行几次之后可以把调试窗口关了, 或者将终端的buffer清空, 总而言之, 减少输出的log以快速定位问题.</p>
+<pre><code>至于更细节的内容以及相关api文档, 请看手册 `man zshcompsys`
+zsh 的~~破手册~~跟天书一样的文档也没打算解释清楚, 我能说的只有这么多了
+更多技术细节请自行深挖.
+</code></pre><p>Job done!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/03/17/2014-03-17-first-step-on-writing-zsh-completion-functions/" data-id="ciwn93wb30009s1yps2b1grq7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/03/23/2014-03-23-introduction-to-vim/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Vim, 经验之谈
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/03/07/2014-03-07-classmap-generating-by-composer/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">基于 composer 的classmap生成器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apple/">Apple</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Apple/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Apple/iOS/mobile/">mobile</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/async/">async</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/async/php-daemon/">php daemon</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/async/php-daemon/php/">php</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/async/php-daemon/php/network/">network</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java/sourcecode/">sourcecode</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java/sourcecode/nio/">nio</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/keyboard/">keyboard</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/keyboard/toy/">toy</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux-desktop-app-qq-archlinux/">linux-desktop, app, qq, archlinux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/web-server/">web server</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/php/tutorial/">tutorial</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/php/tutorial/book/">book</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/php-composer-classmap/">php composer classmap</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php-composer/">php, composer</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming-language/">programming language</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming-language/oop/">oop</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming-language/oop/编程语言/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/programming-language/oop/编程语言/面向对象/">面向对象</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell-environment-zshrc/">shell environment zshrc</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tutor/">tutor</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/tutor/vim/">vim</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/zsh/">zsh</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/zsh/script/">script</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/zsh/script/tutorial/">tutorial</a></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/13/new-post/">new post</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/13/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/25/2015-04-25-my-new-poker-2/">新的 poker 2 到手</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/24/2015-04-24-how-to-understand-object-oriented-programming/">如何理解面向对象编程</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/18/2015-04-18-routing-with-nginx-basic-rewrite-directives/">nginx 路由杂谈 - rewrite 指令与重定向</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -68,6 +68,14 @@ pagination_dir: page
 theme: apollo
 #theme: landscape
 
+menu:
+    Blog: /
+    Archive: /archives/
+    Weibo: http://weibo.com/hitsmaxft
+    GitHub: https://github.com/hitsmaxft
+    Rss: /atom.xml
+
+
 archive_generator:
     per_page: 0
     yearly: false

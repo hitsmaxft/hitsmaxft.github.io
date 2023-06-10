@@ -1,16 +1,22 @@
 ---
-title: 制作 rock960c 的 debian 11  系统镜像
+title: 制作 rock960c 的 debian 11  emmc 系统镜像
 date: 2023-04-02 20:02:04
 tags: sbc, debian
 ---
 
-rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂家已经不维护了（email咨询得知）， 不过还好他们邮件给了可以下载最新固件的地址，需要稍微处理以下就可以得到更新的 debian固件
+rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂家已经不维护了（email咨询得知）.
+
+不过还好他们邮件给了可以下载最新固件的地址 sd-card-images , 下载下来发现是 sd card 用的镜像, 所以需要这里说下怎么制作emmc 版本镜像
+
+单需要稍微处理以下就可以得到更新的 debian 固件
 
 * [板子官网](http://www.96boards.org/product/rock960/)
 
-## 通过二次刷写升级到更新的 debian 系统
+## 刷入默认的 emmc 镜像
 
-从这里下载最后一次更新的 rock960c 镜像 https://www.96boards.org/documentation/consumer/rock/downloads/debian.md.html
+从这里下载最更新的 rock960c emmc 镜像 https://www.96boards.org/documentation/consumer/rock/downloads/debian.md.html
+
+下载完, 先来重新刷新一下板子的 emmc 镜像. (如果已经刷好镜像, 这里就没必要继续, 直接跳到下个章节
 
 首先通过常规方式， 进入 maskroom 模式。
 
@@ -21,6 +27,9 @@ rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂
 以下是需要的配置的分区地址
 
 * 0x0 loader.bin -- 这个 loader 负责引导进入分区刷写模式，每次刷入系统都需要加上0x0 gpt.image -- 完整镜像，包含了 boot 等5个分区， 必须从 0 开始写入
+
+## 通过二次刷写, 对 emmc 进行系统升级
+
 
 从 https://sd-card-images.johang.se/boards/rock960.html 这里可以下载到 rock960 的更新版本 debian 镜像。
 

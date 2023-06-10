@@ -1,7 +1,7 @@
 ---
-title: make debian bullseye images for rock960c
-date: 2023-06-10 20:02:04
-tags: sbc
+title: 制作 rock960c 的 debian 11  系统镜像
+date: 2023-04-02 20:02:04
+tags: sbc, debian
 ---
 
 rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂家已经不维护了（email咨询得知）， 不过还好他们邮件给了可以下载最新固件的地址，需要稍微处理以下就可以得到更新的 debian固件
@@ -26,19 +26,24 @@ rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂
 
 > 这里只下载debian-bullseye-arm64-iey4ku.bin.gz , boot-rock960.bin.gz 不用下载
 
-通过执行 7z x debian-bullseye-arm64-iey4ku.bin.gz
+通过执行 `7z x debian-bullseye-arm64-iey4ku.bin.gz`, 解压后将得到 ext4.img， 这是Debian 的 rootfs 根目录分区
 
-解压后将得到 ext4.img， 这是Debian 的 rootfs 根目录分区
+从官方手册里 rootfs 的写入命令
 
-从官方手册里 rootfs 的写入命令是 rkdeveloptool wl 262144 rootfs.img ，这里 262144 是十进制， 换算成16进制就是 0x00040000
+```
+rkdeveloptool wl 262144 rootfs.img
+```
 
-再次进入 mask room 模式
+> 这里 262144 是十进制， 换算成16进制就是 0x00040000
 
-按以下地址刷入 rootfs 镜像文件
+再次进入 `mask room` 模式
 
-* 0x0 loader.bin -- loader 还是要有的0x00040000 ext4.img - 因为只是覆盖 rootfs ，需要写上正确的偏移地址
+按以下地址刷入 `rootfs` 镜像文件
 
-完成刷入之后， 重启得到一个全新版本的 debian 11
+* 0x0 loader.bin -- 每次更新`loader`都需要放在首位
+* 0x00040000 ext4.img - 因为只是覆盖 `rootfs` ，需要写上正确的偏移地址
+
+完成刷入之后， 重启得到一个全新版本的 debian 11.
 
 ## 接入网络安装更多包
 
@@ -63,7 +68,14 @@ password rock960
 ext4.img 刷入完毕，root 分区的可用容量仅2G， 而 rock960c 的 emmc 容量是 16G， 这里需要通过 resize2fs /dev/mmcblk1p5 命令完成根分区的自动扩容。 
 
 
-
 ## 附录
 
-* [https://github.com/hitsmaxft/rock960-debian-images/releases/tag/rock960c_debian_bullseye-arm64-iey4ku-pre1] (root password: iey4ku)
+成品镜像 root password: iey4ku
+
+[rock960c_debian_bullseye-arm64-iey4ku-pre1](https://github.com/hitsmaxft/rock960-debian-images/releases/tag/rock960c_debian_bullseye-arm64-iey4ku-pre1)
+
+github 项目地址
+
+https://github.com/hitsmaxft/rock960-debian-images
+
+

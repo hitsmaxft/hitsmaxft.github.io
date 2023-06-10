@@ -14,7 +14,7 @@ timezone: ''
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 #url: https://blog.bhe.ink
-url: https://hitsmaxft.github.io
+url: https://io.bhe.ink
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -109,4 +109,3 @@ deploy:
   repo: git@github.com:hitsmaxft/hitsmaxft.github.io.git
   branch: gh-pages
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
-

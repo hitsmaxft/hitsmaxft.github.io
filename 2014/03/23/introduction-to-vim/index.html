@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Vim, 经验之谈 · Bhe's Blog</title><meta name="description" content="Vim, 经验之谈 - Bhe Hongtyu"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://hitsmaxft.github.io/atom.xml" title="Bhe's Blog"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Bhe's Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/hitsmaxft" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/hitsmaxft" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Vim, 经验之谈</h1><div class="post-info">Mar 23, 2014</div><div class="post-content"><p>Vim, 老生常谈的话题了. </p>
+<blockquote>
+<p>the editor</p>
+</blockquote>
+<p>在程序员之间谈编辑器是一个敏感话题, 会有很多人跳出来挑起圣战, 还是蛮头疼的一件事情.</p>
+<p>从Vim开始, 是一种有别于IDE的编码方式, 但仅仅是方式, 就像是拿叉还是拿筷子, 取决于你吃西餐还是中餐.</p>
+<p>无论使用的是文本编辑器还是 IDE , 都是服务于编写源代码这么个目的. 它们之间的区别在于, 前者在编码中与环境互动, 后者则是提供一个既定的环境完成编程. 相同的是, 两者都会不断改善.</p>
+<p>过程有所不同, 但目的是相同的. 深究下去也就是比较赛百味和麦当劳的口味罢了.</p>
+<p>Vim 提供了两个基本的功能框架, 构成了其复杂的生态环境.</p>
+<p>首先是模式切换. </p>
+<p>功能繁多的键位操作, 基于 <code>Normal</code> 和 <code>Insert</code> 两种模式的交替进行. 正是<code>模式</code>这个特性, 使得vim有别于其他以组合键方式进行操作的编辑器(or IDE). 在<code>Normal</code>模式下进行文本操作, 在<code>Insert</code>模式下进行文本输入, 并且可以通过<code>:map</code>系列命令简化和扩充可用的操作.</p>
+<p>除了 hkjl asdcx 这些简单的移动和crud, vim 还支持按键序列的组合. </p>
+<ul>
+<li>删除一个单词? <code>de</code></li>
+<li>删掉10行? <code>d10j</code></li>
+<li>清空整个文件? <code>ggdG</code></li>
+</ul>
+<p>是不是有种玩街霸拳皇搓招的快感呢 XD</p>
+<p>还有基于文本对象(text-objects^[1])的操作, 比如 <code>yi(</code> 表示 <code>yank inner () block</code>,  按下 <code>p</code> , 那么屏幕上将复制一份()里面的文本. 如果换成 <code>ya(</code>, 则表示包含<code>(</code>整块文本.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(text) =&gt; (text)text</span><br><span class="line">[text] =&gt; [text]text</span><br></pre></td></tr></table></figure>
+
+<p>^[1]: 更多内容见 <code>:h text-objects</code></p>
+<p>此之外, 还有<code>command</code>和<code>visual</code>, 分别用于输入命令,和可视化文本选择.</p>
+<p>比如需要一个命令的输出, 比较<del>笨</del>常规的方法就是去shell里面执行再重定向到文件, 然后通过vim打开进行合并. 可是 vim 支持<code>!</code>直接执行shell命令, 再加上<code>r</code>命令重定向到当前文本就行了. 举个例子, 当前系统时间可以这么拿到.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:r!date</span><br></pre></td></tr></table></figure>
+
+<p>至于<code>visual mode</code>, 举个最简单例子吧, 要删除一段文本需要怎么操作? 按下<code>v</code>,<br>进入visual模式, 这时候通过hjkl移动, 经过的所有文本会处于高亮状态,<br>这时候把它们当成一个字符, 所有针对单个字符的操作都可以应用上去, 比如按下<code>d</code>,<br>那么这段文本就被删除掉了.</p>
+<p>但是如果需要插入文本咋办? 这时候就要使用强大的<code>blockwise-operators</code>, </p>
+<p>如果要删除每一行的第一个字母, 按下<code>&lt;CTRL-V&gt;</code>, 高亮需要删除的内容, 再按<code>d</code>删除.</p>
+<p>如果要在每一行的行首插入, 按下<code>&lt;CTRL-V&gt;</code>, 高亮内容, 再按<code>I</code>, 输入一段文字, 再按<code>&lt;Esc&gt;</code>, 这时候每一行都会插入对应的字符.<br>完整的操作是 <code>I&#123;string&#125;&lt;Esc&gt;</code>.</p>
+<p>这些操作在处理多行数组相当方面, 省去了写正则的麻烦.</p>
+<p>再提一个有趣的例子, 通过vim码字的时候, 常常遇到一个问题就是换行.<br>经常打了大段文字懒得敲回车. vim中有一个选项, 叫<code>textwidth</code>, 当文本超过一定字符,<br>会自动折行. 配合visual模式, 对高亮文本按下<code>gq</code>, 瞬间自动格式化完毕.</p>
+<pre><code>更多操作, 见 :h visual-operators
+</code></pre>
+<p>第二, <code>vim script</code></p>
+<p>前面提到的<code>command</code>模式, 就是vim脚本的交互式shell. vim丰富的扩展功能, 也就是<br>plugin , 一个又一个脚本, 放置在不同的目录中, 经过不同的顺序加载实现的.</p>
+<p>值得一提的是, vim 支持通过 python, lua 等语言的解释器, 编译的时候加上对应选项, 就可以在vim脚本中调用额外的python或者lua脚本, 通过这些语言的lib, 是的vim更加强大了.</p>
+<p>由于vimscript相当复杂, 这里就不介绍了, 顺便说说plugin的管理和推荐.</p>
+<p>常规的安装流程, 就是把脚本一股脑复制到 ~&#x2F;.vim 目录中去, 个个插件的 autload  plugin 目录下文件会混杂在一起, 管理复杂, 想删都删不了. </p>
+<p>这里推荐使用, <code>pathogen</code> 和 <code>vundle</code> 进行组合管理.</p>
+<p>pathgen和 vbundle 是两个类似的插件管理器, 区别在于 vbundle 支持配置自动去github下载脚本, 省了不少同步的麻烦. </p>
+<p>并非所有的vim插件都支持通过 github 下载, pathogen 就派上用场了, 虽然它只支持手动管理. 将插件所有内容解压到 <code>~/.vim/bundle/&#123;plugin name&#125;/</code>, pathogen 在vim启动过程中会自动加载所有的插件.</p>
+<p>这里附上我的配置文件内容.</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">version</span> &gt; <span class="number">703</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">g:pathogen_disabled</span> = [ </span><br><span class="line">            \,<span class="string">&quot;conque_term&quot;</span></span><br><span class="line">            \]</span><br><span class="line">    <span class="keyword">call</span> pathogen#runtime_append_all_bundles() </span><br><span class="line"></span><br><span class="line">    <span class="keyword">call</span> vundle#rc(<span class="string">&quot;~/.vbundle/&quot;</span>)</span><br><span class="line">    <span class="keyword">source</span> $HOME/.<span class="keyword">vim</span>/<span class="keyword">conf</span>.d/vundle.<span class="keyword">vim</span></span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>通过pathogen加载vundle和其他非github插件, 再通过vundle加载其他的插件.</p>
+<p>将vundle的 bundle 目录放置于 ~&#x2F;.vim 之外, 好处是可以直接将 整个 vim 目录软链到网盘目录里, 随时保持同步, 而 vundles 则手动更新.</p>
+<p>推荐下我自己在用vunle清单, 也就是上面的 <code>$HOME/.vim/conf.d/vundle.vim</code> 的内容.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&quot; 视觉系</span><br><span class="line">Bundle &#x27;Lokaltog/vim-powerline&#x27;</span><br><span class="line">Bundle &#x27;altercation/vim-colors-solarized&#x27;</span><br><span class="line"></span><br><span class="line">&quot; 文件搜索 编码转换</span><br><span class="line">Bundle &#x27;kien/ctrlp.vim&#x27;</span><br><span class="line">Bundle &#x27;mbbill/fencview&#x27;</span><br><span class="line">Bundle &#x27;rking/ag.vim&#x27;</span><br><span class="line"></span><br><span class="line">&quot; buffer, 目录, 任务, tag浏览</span><br><span class="line">Bundle &#x27;scrooloose/nerdtree&#x27;</span><br><span class="line">Bundle &#x27;fholgado/minibufexpl.vim&#x27;</span><br><span class="line">Bundle &#x27;majutsushi/tagbar&#x27;</span><br><span class="line">Bundle &#x27;vim-scripts/TaskList.vim&#x27;</span><br><span class="line"></span><br><span class="line">&quot; 代码补全, 生成</span><br><span class="line">Bundle &#x27;SirVer/ultisnips&#x27;</span><br><span class="line">Bundle &#x27;Shougo/neocomplete.vim&#x27;</span><br><span class="line">Bundle &#x27;scrooloose/nerdcommenter&#x27;</span><br><span class="line">Bundle &#x27;DoxygenToolkit.vim&#x27;</span><br><span class="line">Bundle &#x27;Rip-Rip/clang_complete&#x27;</span><br><span class="line"></span><br><span class="line">&quot; 语法检查, 调试</span><br><span class="line">Bundle &#x27;scrooloose/syntastic&#x27;</span><br><span class="line">Bundle &#x27;joonty/vdebug&#x27;</span><br><span class="line"></span><br><span class="line">&quot; 其他</span><br><span class="line">Bundle &#x27;msanders/cocoa.vim&#x27;</span><br><span class="line">Bundle &#x27;gmarik/vundle&#x27;</span><br><span class="line">Bundle &#x27;L9&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>总的来说, vim 学习成本比较高, 针对不同语言需要熟悉并定制, 才能拥有对应的功能.<br>我同时也用phpstorm, 对于那些觉得不错的功能, 会考虑在vim中寻找相同的功能的plugin.<br>语法检查, 补全这些有限支持也就够了, 重构功能也就是偶尔体验体验.毕竟, 这是用工具编码, 而不是工具教你如何写代码.</p>
+<p>写代码的时候, 开启终端, 打开vim, 调用一下shell.<br>只想浏览代码的时候, 我还是回开下 phpstorm , 配置好库和环境, 通过鼠标穿梭于文件之间. </p>
+<p>至于两者的差别, 呵呵. 物尽其所用罢了.</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/03/24/asynchronous-programming-with-phpdaemon/" class="prev">PREV</a><a href="/2014/03/17/first-step-on-writing-zsh-completion-functions/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2023 <a href="https://hitsmaxft.github.io">Bhe Hongtyu</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

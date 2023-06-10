@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://hitsmaxft.github.io/2015/04/24/how-to-understand-object-oriented-programming/</loc>
+    <loc>https://io.bhe.ink/2015/04/24/how-to-understand-object-oriented-programming/</loc>
     
     <lastmod>2023-06-10</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/2015/04/25/my-new-poker-2/</loc>
+    <loc>https://io.bhe.ink/2015/04/25/my-new-poker-2/</loc>
     
     <lastmod>2023-06-10</lastmod>
     
@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/2014/06/04/some-words-about-the-new-ios/</loc>
+    <loc>https://io.bhe.ink/2015/04/18/routing-with-nginx-basic-rewrite-directives/</loc>
     
     <lastmod>2023-06-10</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/2015/04/12/php-pro-work-with-weak-type/</loc>
+    <loc>https://io.bhe.ink/2014/06/04/some-words-about-the-new-ios/</loc>
     
     <lastmod>2023-06-10</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/2015/04/18/routing-with-nginx-basic-rewrite-directives/</loc>
+    <loc>https://io.bhe.ink/2015/04/12/php-pro-work-with-weak-type/</loc>
     
     <lastmod>2023-06-10</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/2014/03/23/introduction-to-vim/</loc>
+    <loc>https://io.bhe.ink/2014/06/15/a-vimers-kbc-poker2-review/</loc>
     
     <lastmod>2023-06-10</lastmod>
     
@@ -56,7 +56,7 @@
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/2014/03/24/asynchronous-programming-with-phpdaemon/</loc>
+    <loc>https://io.bhe.ink/2014/12/18/notes-about-apache-nio-client-source-code/</loc>
     
     <lastmod>2023-06-10</lastmod>
     
@@ -65,7 +65,7 @@
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/2014/06/15/a-vimers-kbc-poker2-review/</loc>
+    <loc>https://io.bhe.ink/2014/03/23/introduction-to-vim/</loc>
     
     <lastmod>2023-06-10</lastmod>
     
@@ -74,7 +74,7 @@
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/2014/12/18/notes-about-apache-nio-client-source-code/</loc>
+    <loc>https://io.bhe.ink/2014/03/24/asynchronous-programming-with-phpdaemon/</loc>
     
     <lastmod>2023-06-10</lastmod>
     
@@ -83,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/2013/08/03/longene-qq-on-archlinux/</loc>
+    <loc>https://io.bhe.ink/2014/03/07/classmap-generating-by-composer/</loc>
     
     <lastmod>2023-06-10</lastmod>
     
@@ -92,7 +92,7 @@
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/2013/08/04/composer-in-action/</loc>
+    <loc>https://io.bhe.ink/2014/03/17/first-step-on-writing-zsh-completion-functions/</loc>
     
     <lastmod>2023-06-10</lastmod>
     
@@ -101,7 +101,7 @@
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/2014/03/07/classmap-generating-by-composer/</loc>
+    <loc>https://io.bhe.ink/2013/08/03/longene-qq-on-archlinux/</loc>
     
     <lastmod>2023-06-10</lastmod>
     
@@ -110,7 +110,7 @@
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/2014/03/17/first-step-on-writing-zsh-completion-functions/</loc>
+    <loc>https://io.bhe.ink/2013/08/04/composer-in-action/</loc>
     
     <lastmod>2023-06-10</lastmod>
     
@@ -119,7 +119,7 @@
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/2013/07/01/zshrc-startup-files/</loc>
+    <loc>https://io.bhe.ink/2013/07/01/zshrc-startup-files/</loc>
     
     <lastmod>2023-06-10</lastmod>
     
@@ -129,7 +129,7 @@
   
 
   <url>
-    <loc>https://hitsmaxft.github.io/</loc>
+    <loc>https://io.bhe.ink/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -139,210 +139,210 @@
 
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/shell-environment-zshrc/</loc>
+    <loc>https://io.bhe.ink/categories/shell-environment-zshrc/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/linux-desktop-app-qq-archlinux/</loc>
+    <loc>https://io.bhe.ink/categories/linux-desktop-app-qq-archlinux/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/php-composer/</loc>
+    <loc>https://io.bhe.ink/categories/php-composer/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/php-composer-classmap/</loc>
+    <loc>https://io.bhe.ink/categories/php-composer-classmap/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/zsh/</loc>
+    <loc>https://io.bhe.ink/categories/zsh/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/tutor/</loc>
+    <loc>https://io.bhe.ink/categories/tutor/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/async/</loc>
+    <loc>https://io.bhe.ink/categories/async/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/keyboard/</loc>
+    <loc>https://io.bhe.ink/categories/keyboard/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/java/</loc>
+    <loc>https://io.bhe.ink/categories/java/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/Apple/</loc>
+    <loc>https://io.bhe.ink/categories/Apple/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/php/</loc>
+    <loc>https://io.bhe.ink/categories/php/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/nginx/</loc>
+    <loc>https://io.bhe.ink/categories/nginx/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/programming-language/</loc>
+    <loc>https://io.bhe.ink/categories/programming-language/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/zsh/script/</loc>
+    <loc>https://io.bhe.ink/categories/zsh/script/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/tutor/vim/</loc>
+    <loc>https://io.bhe.ink/categories/tutor/vim/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/async/php-daemon/</loc>
+    <loc>https://io.bhe.ink/categories/async/php-daemon/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/keyboard/toy/</loc>
+    <loc>https://io.bhe.ink/categories/keyboard/toy/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/java/sourcecode/</loc>
+    <loc>https://io.bhe.ink/categories/java/sourcecode/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/Apple/iOS/</loc>
+    <loc>https://io.bhe.ink/categories/Apple/iOS/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/php/tutorial/</loc>
+    <loc>https://io.bhe.ink/categories/php/tutorial/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/nginx/web-server/</loc>
+    <loc>https://io.bhe.ink/categories/nginx/web-server/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/programming-language/oop/</loc>
+    <loc>https://io.bhe.ink/categories/programming-language/oop/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/zsh/script/tutorial/</loc>
+    <loc>https://io.bhe.ink/categories/zsh/script/tutorial/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/async/php-daemon/php/</loc>
+    <loc>https://io.bhe.ink/categories/async/php-daemon/php/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/java/sourcecode/nio/</loc>
+    <loc>https://io.bhe.ink/categories/java/sourcecode/nio/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/Apple/iOS/mobile/</loc>
+    <loc>https://io.bhe.ink/categories/Apple/iOS/mobile/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/php/tutorial/book/</loc>
+    <loc>https://io.bhe.ink/categories/php/tutorial/book/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/programming-language/oop/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</loc>
+    <loc>https://io.bhe.ink/categories/programming-language/oop/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/async/php-daemon/php/network/</loc>
+    <loc>https://io.bhe.ink/categories/async/php-daemon/php/network/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hitsmaxft.github.io/categories/programming-language/oop/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</loc>
+    <loc>https://io.bhe.ink/categories/programming-language/oop/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</loc>
     <lastmod>2023-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

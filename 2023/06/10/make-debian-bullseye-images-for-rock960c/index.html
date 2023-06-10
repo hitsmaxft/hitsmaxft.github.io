@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> make debian bullseye images for rock960c · Bhe's Blog</title><meta name="description" content="make debian bullseye images for rock960c - Bhe Hongtyu"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://io.bhe.ink/atom.xml" title="Bhe's Blog"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Bhe's Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/hitsmaxft" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/hitsmaxft" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">make debian bullseye images for rock960c</h1><div class="post-info">Jun 10, 2023</div><div class="post-content"><p>rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂家已经不维护了（email咨询得知）， 不过还好他们邮件给了可以下载最新固件的地址，需要稍微处理以下就可以得到更新的 debian固件</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.96boards.org/product/rock960/">板子官网</a></li>
+</ul>
+<h2 id="通过二次刷写升级到更新的-debian-系统"><a href="#通过二次刷写升级到更新的-debian-系统" class="headerlink" title="通过二次刷写升级到更新的 debian 系统"></a>通过二次刷写升级到更新的 debian 系统</h2><p>从这里下载最后一次更新的 rock960c 镜像 <a target="_blank" rel="noopener" href="https://www.96boards.org/documentation/consumer/rock/downloads/debian.md.html">https://www.96boards.org/documentation/consumer/rock/downloads/debian.md.html</a></p>
+<p>首先通过常规方式， 进入 maskroom 模式。</p>
+<blockquote>
+<p>具体过程省略</p>
+</blockquote>
+<p>通过 <code>RKDevTool_Release_v2.86</code> 把最基本的 debian9 镜像写入 <code>emmc</code>， 完成基础版本的刷入。</p>
+<p>以下是需要的配置的分区地址</p>
+<ul>
+<li>0x0 loader.bin – 这个 loader 负责引导进入分区刷写模式，每次刷入系统都需要加上0x0 gpt.image – 完整镜像，包含了 boot 等5个分区， 必须从 0 开始写入</li>
+</ul>
+<p>从 <a target="_blank" rel="noopener" href="https://sd-card-images.johang.se/boards/rock960.html">https://sd-card-images.johang.se/boards/rock960.html</a> 这里可以下载到 rock960 的更新版本 debian 镜像。</p>
+<blockquote>
+<p>这里只下载debian-bullseye-arm64-iey4ku.bin.gz , boot-rock960.bin.gz 不用下载</p>
+</blockquote>
+<p>通过执行 7z x debian-bullseye-arm64-iey4ku.bin.gz</p>
+<p>解压后将得到 ext4.img， 这是Debian 的 rootfs 根目录分区</p>
+<p>从官方手册里 rootfs 的写入命令是 rkdeveloptool wl 262144 rootfs.img ，这里 262144 是十进制， 换算成16进制就是 0x00040000</p>
+<p>再次进入 mask room 模式</p>
+<p>按以下地址刷入 rootfs 镜像文件</p>
+<ul>
+<li>0x0 loader.bin – loader 还是要有的0x00040000 ext4.img - 因为只是覆盖 rootfs ，需要写上正确的偏移地址</li>
+</ul>
+<p>完成刷入之后， 重启得到一个全新版本的 debian 11</p>
+<h2 id="接入网络安装更多包"><a href="#接入网络安装更多包" class="headerlink" title="接入网络安装更多包"></a>接入网络安装更多包</h2><p>由于 sd-card-images 的镜像非常小， 这里需要先通过网络安装常用的 deb 包。</p>
+<p>我是通过usb 以太网转接器接入并安装 network-manager 得到无线接入能力。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install sudo iproutes apt-utils fdisk network-manager vim zsh screen</span><br></pre></td></tr></table></figure>
+
+<p>顺便加个新用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -G sudo -s /bin/sh rock960 </span><br><span class="line">password rock960</span><br></pre></td></tr></table></figure>
+
+<p>安装完 network-manager，通过 nmtui-connect 就可以通过 TUI 方便地连上无线了。 root 分区容量扩容</p>
+<p>ext4.img 刷入完毕，root 分区的可用容量仅2G， 而 rock960c 的 emmc 容量是 16G， 这里需要通过 resize2fs &#x2F;dev&#x2F;mmcblk1p5 命令完成根分区的自动扩容。 </p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><ul>
+<li>[<a target="_blank" rel="noopener" href="https://github.com/hitsmaxft/rock960-debian-images/releases/tag/rock960c_debian_bullseye-arm64-iey4ku-pre1]">https://github.com/hitsmaxft/rock960-debian-images/releases/tag/rock960c_debian_bullseye-arm64-iey4ku-pre1]</a> (root password: iey4ku)</li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2015/04/24/my-new-poker-2/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2023 <a href="https://io.bhe.ink">Bhe Hongtyu</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

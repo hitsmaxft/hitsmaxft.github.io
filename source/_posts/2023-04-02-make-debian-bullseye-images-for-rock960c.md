@@ -54,7 +54,7 @@ rkdeveloptool wl 262144 rootfs.img
 
 完成刷入之后， 重启得到一个全新版本的 debian 11.
 
-## 接入网络安装更多包
+## 接入网络并安装更多包
 
 由于 sd-card-images 的镜像非常小， 这里需要先通过网络安装常用的 deb 包。
 
@@ -75,6 +75,10 @@ password rock960
 安装完 network-manager，通过 nmtui-connect 就可以通过 TUI 方便地连上无线了。 root 分区容量扩容
 
 ext4.img 刷入完毕，root 分区的可用容量仅2G， 而 rock960c 的 emmc 容量是 16G， 这里需要通过 resize2fs /dev/mmcblk1p5 命令完成根分区的自动扩容。 
+
+
+> 就目前的进展而言, 这种安装方式并不是很方便, 后续有空再提供安装基础工具包的镜像
+> 在附录中有已经合并好的 EMMC 镜像. 后续发出制作教程.
 
 
 ## 附录

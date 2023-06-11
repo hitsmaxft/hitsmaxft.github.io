@@ -34,7 +34,7 @@
 <li>0x00040000 ext4.img - 因为只是覆盖 <code>rootfs</code> ，需要写上正确的偏移地址</li>
 </ul>
 <p>完成刷入之后， 重启得到一个全新版本的 debian 11.</p>
-<h2 id="接入网络安装更多包"><a href="#接入网络安装更多包" class="headerlink" title="接入网络安装更多包"></a>接入网络安装更多包</h2><p>由于 sd-card-images 的镜像非常小， 这里需要先通过网络安装常用的 deb 包。</p>
+<h2 id="接入网络并安装更多包"><a href="#接入网络并安装更多包" class="headerlink" title="接入网络并安装更多包"></a>接入网络并安装更多包</h2><p>由于 sd-card-images 的镜像非常小， 这里需要先通过网络安装常用的 deb 包。</p>
 <p>我是通过usb 以太网转接器接入并安装 network-manager 得到无线接入能力。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install sudo iproutes apt-utils fdisk network-manager vim zsh screen</span><br></pre></td></tr></table></figure>
 
@@ -43,6 +43,9 @@
 
 <p>安装完 network-manager，通过 nmtui-connect 就可以通过 TUI 方便地连上无线了。 root 分区容量扩容</p>
 <p>ext4.img 刷入完毕，root 分区的可用容量仅2G， 而 rock960c 的 emmc 容量是 16G， 这里需要通过 resize2fs &#x2F;dev&#x2F;mmcblk1p5 命令完成根分区的自动扩容。 </p>
+<blockquote>
+<p>就目前的进展而言, 这种安装方式并不是很方便, 后续有空再提供安装基础工具包的镜像<br>在附录中有已经合并好的 EMMC 镜像. 后续发出制作教程.</p>
+</blockquote>
 <h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>成品镜像 root password: iey4ku</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/hitsmaxft/rock960-debian-images/releases/tag/rock960c_debian_bullseye-arm64-iey4ku-pre1">rock960c_debian_bullseye-arm64-iey4ku-pre1</a></p>
 <p>github 项目地址</p>

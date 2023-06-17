@@ -7,15 +7,22 @@ date: 2023-06-17 14:10:38
 
 ## 前言
 
-由于前阵子 MacBookPro 重新格式化了, 于是用 `nix-darwin` 和 `home-manager` 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的
+由于前阵子 MacBookPro 重新格式化了, 于是用 `nix-darwin` 和 `home-manager` 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结
 
 
 ## 运行环境和工具
 
-> 安装 https://nixos.org/download.html
+nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 `类 Unix` 系统中使用, 作为系统自带包管理系统的补充.
+
+首先安装上基础的 nix 环境
+
+> 安装 `nix` 运行环境 https://github.com/NixOS/nix#installation
+> 
+> MacOS 用户可以选择进一步 https://github.com/LnL7/nix-darwin 启用系统级的 Nix 集成
+> 
+> 其他 Linux 发行版, 或者 `wsl2` 用户, 可以通过 `home-manager` , 管理当前用户 shell 环境中的环境变量和, 起到类似 `homebrew` 的效果
 
 安装完毕需要修改默认配置  `~/.config/nix/nix.conf`  启用 nix-comand 和 flakes
-
 ``
 ```
 experimental-features = nix-command flakes
@@ -48,14 +55,13 @@ nix eval --expr '1+1'
 
 由于 nix 是函数式语言, 首先需要熟悉它的核心概念 `表达式`
 
+## 函数式和表达式
 
-## nix 表达式
-
-一个 nix 表达式的组成部分
+首先看一下一个 nix 表达式的组成部分
 
 * `with`  引入命名空间部分
 * `let ... in` 变量声明部分
-* 表达式返回值部分
+* 表达式实际内容
 
 ```nix
 
@@ -72,18 +78,17 @@ in
 	
 ```
 
-with 语句可以在它之后的作用域中直接使用它的内部属性和方法, 这可以大大减少代码长度
+with 语句在当前表达式作用域 (`scope` ) 中直接使用它的内部属性/方法, 可以减少代码长度.
 
 ```
+/*改写前*/
 builtins.concatStringsSep "," (builtins.map (p : "v"+p) [ "1" "2" "3" ])
-
-```
-可以改写成.
-```
+/*改写后*/
 with builtins; concatStringsSep "," (map (p : "v"+p) [ "1" "2" "3" ])
 ```
 
-普通 set 变量也是可以用 `with`  导入当前 `scope` ;
+普通 set 变量也是可以用 `with`  导入当前 `scope` 
+
 ```
 let
    values = { a =1; b=2 ;};
@@ -99,7 +104,9 @@ nix-repl> let a = ["a"]; in (let b = ["b"]; in with lib; a ++ b )
 ```
 
 
-但复杂语法深度套娃, 最终结果会非常难读. 过度炫技不可取.
+> ! 但复杂语法深度套娃, 最终结果会非常难读.
+> 过度炫技不可取.
+
 
 ### 类型和集合
 
@@ -125,7 +132,7 @@ nix-repl> let a = ["a"]; in (let b = ["b"]; in with lib; a ++ b )
 
 > 在写 nix 的过程中, 我个人经常会感到对 集合语法上的不适应, 主要原因是它在语法上和其他语言存在差异. 大部分时候, 我总感觉如果 nix 使用 `,` 作为分隔符对其他语言的使用者来说会更容易习惯.
 > nix wiki 也提到, 在 `nix`  中 ';' 扮演了其他语言中 `,` 的角色. 所以在 nix 没有出现 `,` 是因为已经选择了 `;` 
->
+
 ```nix
 # 数组成员间不需要 `;` 隔开, 也不要习惯性地使用 `,`
 alist = [ 1, 2, 3 ]  ; 
@@ -138,11 +145,7 @@ aSet = {
  b = "strs";
  c = 1;
 };
-
-
-
-# 见 https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320542544
-
+# 更多例子见 https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320542544
 ```
 
 还有其他类型
@@ -205,22 +208,34 @@ in
 
 #### 命名参数风格
 
-nix 的`命名参数` 函数定义, 不难看出来就是把函数的传入参数变成一个 attribute set.
+首先举一个复杂的可变参数长度的例子
 
-> 所以等价于单参数的函数
-> 
-> 函数 `fun` 采用了`匿名参数`, 但使用效果和`命名参数`是一样的.
+```
+
+let func = {a, b, c, ...} : a+b+c in  func { a=1; b=2; c=3; d=4;}
+
+
+let func = {a, b, c, ...}@input : a+b+c+input.d; in  func { a=1; b=2; c=3; d=4;}
+
+```
+
+nix 的 `命名参数` 函数定义, 从文档里不难看出来, 类似于把函数的传入参数变成一个 attribute set.
+
+等价于单参数的函数的一个语法糖,以下举几个例子, 函数 `fun` 采用了`匿名参数`, 但使用效果和`命名参数`是一样的.
+
 > 
 > `let fun = p:  with p ; a+b ; in fun { a=1; b=2;}`
-> 
-> 等价于
-> 
-> `let fun = { a, b }: a+b ; in fun { a=1; b=2;}`
-> 
+> 等价于  `let fun = { a, b }: a+b ; in fun { a=1; b=2;}`
+>
+  `let fun = p:  with p ; a+b+p.c ; in fun { a=1; b=2; c=3;}`
+  `let fun = p:  with p ; a+b+c ; in fun { a=1; b=2; c=3;}`
+> 等价于  `let fun = { a, b }@kwargs : a+b+kwargs.c ; in fun { a=1; b=2; c=3; }`
 
-相比前面的例子,  命名参数支持可变参数.  
 
-* 可变参数 `func = {a, b, c, ...} : a+b+c 
+这里举例只是做对比, 既然有语法糖, 直接用比较爽.
+
+相比前面的例子,  使用语言内置命名参数, 比较方便地使用默认参数.
+
 * 默认参数 `func = {a, b, c? 3, ...} : a+b+c`
 
 
@@ -230,9 +245,13 @@ func = {a, b, c, ...} : a+b+c;   #可变参数列表
 func2 = {a, b, c?3 }: a+b+c;
 in 
 [ func{ a=1; b=2; c=3; } func2{ a=1; b=2; } ]
-
-
 ```
+
+总结一下, 命名形参的函数定义, 相对于匿名参数有以下好处: 
+
+* 防止多参数太长不可读
+* 参数默认值
+* 可变参数访问 `@xxx`
 
 > 更多例子见官方文档  https://nixos.org/guides/nix-pills/functions-and-imports.html#idm140737320477216
 

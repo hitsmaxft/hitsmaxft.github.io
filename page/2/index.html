@@ -1,2 +1,1215 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Bhe's Blog</title><meta name="description" content="A Blog Powered By Hexo"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://io.bhe.ink/atom.xml" title="Bhe's Blog"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Bhe's Blog" type="application/atom+xml">
-</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/hitsmaxft" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/hitsmaxft" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2014/03/22/introduction-to-vim/" class="post-title-link">Vim, 经验之谈</a></h2><div class="post-info">Mar 22, 2014</div><div class="post-content"></div><a href="/2014/03/22/introduction-to-vim/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2014/03/16/first-step-on-writing-zsh-completion-functions/" class="post-title-link">自定义 zsh 自动补全功能初探</a></h2><div class="post-info">Mar 16, 2014</div><div class="post-content"></div><a href="/2014/03/16/first-step-on-writing-zsh-completion-functions/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2014/03/07/classmap-generating-by-composer/" class="post-title-link">基于 composer 的classmap生成器</a></h2><div class="post-info">Mar 7, 2014</div><div class="post-content"></div><a href="/2014/03/07/classmap-generating-by-composer/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2013/08/04/composer-in-action/" class="post-title-link">Composer 实战</a></h2><div class="post-info">Aug 4, 2013</div><div class="post-content"></div><a href="/2013/08/04/composer-in-action/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2013/08/03/longene-qq-on-archlinux/" class="post-title-link">Archlinux Longene QQ 轻松上手</a></h2><div class="post-info">Aug 3, 2013</div><div class="post-content"></div><a href="/2013/08/03/longene-qq-on-archlinux/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2013/07/01/zshrc-startup-files/" class="post-title-link">Zshrc: Startup Files</a></h2><div class="post-info">Jul 1, 2013</div><div class="post-content"></div><a href="/2013/07/01/zshrc-startup-files/" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/" class="prev">PREV</a></div><div class="copyright"><p>© 2015 - 2023 <a href="https://io.bhe.ink">Bhe Hongtyu</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"io.bhe.ink","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Bhe&#39;s Blog">
+<meta property="og:url" content="https://io.bhe.ink/page/2/index.html">
+<meta property="og:site_name" content="Bhe&#39;s Blog">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Bhe Hongtyu">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://io.bhe.ink/page/2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Bhe's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Bhe's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bhe's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2014/03/22/introduction-to-vim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bhe Hongtyu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bhe's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/03/22/introduction-to-vim/" class="post-title-link" itemprop="url">Vim, 经验之谈</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-03-22 16:21:44" itemprop="dateCreated datePublished" datetime="2014-03-22T16:21:44+00:00">2014-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tutor/" itemprop="url" rel="index"><span itemprop="name">tutor</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tutor/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2014/03/22/introduction-to-vim/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/03/22/introduction-to-vim/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Vim, 老生常谈的话题了. </p>
+<blockquote>
+<p>the editor</p>
+</blockquote>
+<p>在程序员之间谈编辑器是一个敏感话题, 会有很多人跳出来挑起圣战, 还是蛮头疼的一件事情.</p>
+<p>从Vim开始, 是一种有别于IDE的编码方式, 但仅仅是方式, 就像是拿叉还是拿筷子, 取决于你吃西餐还是中餐.</p>
+<p>无论使用的是文本编辑器还是 IDE , 都是服务于编写源代码这么个目的. 它们之间的区别在于, 前者在编码中与环境互动, 后者则是提供一个既定的环境完成编程. 相同的是, 两者都会不断改善.</p>
+<p>过程有所不同, 但目的是相同的. 深究下去也就是比较赛百味和麦当劳的口味罢了.</p>
+<p>Vim 提供了两个基本的功能框架, 构成了其复杂的生态环境.</p>
+<p>首先是模式切换. </p>
+<p>功能繁多的键位操作, 基于 <code>Normal</code> 和 <code>Insert</code> 两种模式的交替进行. 正是<code>模式</code>这个特性, 使得vim有别于其他以组合键方式进行操作的编辑器(or IDE). 在<code>Normal</code>模式下进行文本操作, 在<code>Insert</code>模式下进行文本输入, 并且可以通过<code>:map</code>系列命令简化和扩充可用的操作.</p>
+<p>除了 hkjl asdcx 这些简单的移动和crud, vim 还支持按键序列的组合. </p>
+<ul>
+<li>删除一个单词? <code>de</code></li>
+<li>删掉10行? <code>d10j</code></li>
+<li>清空整个文件? <code>ggdG</code></li>
+</ul>
+<p>是不是有种玩街霸拳皇搓招的快感呢 XD</p>
+<p>还有基于文本对象(text-objects^[1])的操作, 比如 <code>yi(</code> 表示 <code>yank inner () block</code>,  按下 <code>p</code> , 那么屏幕上将复制一份()里面的文本. 如果换成 <code>ya(</code>, 则表示包含<code>(</code>整块文本.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(text) =&gt; (text)text</span><br><span class="line">[text] =&gt; [text]text</span><br></pre></td></tr></table></figure>
+
+<p>^[1]: 更多内容见 <code>:h text-objects</code></p>
+<p>此之外, 还有<code>command</code>和<code>visual</code>, 分别用于输入命令,和可视化文本选择.</p>
+<p>比如需要一个命令的输出, 比较<del>笨</del>常规的方法就是去shell里面执行再重定向到文件, 然后通过vim打开进行合并. 可是 vim 支持<code>!</code>直接执行shell命令, 再加上<code>r</code>命令重定向到当前文本就行了. 举个例子, 当前系统时间可以这么拿到.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:r!date</span><br></pre></td></tr></table></figure>
+
+<p>至于<code>visual mode</code>, 举个最简单例子吧, 要删除一段文本需要怎么操作? 按下<code>v</code>,<br>进入visual模式, 这时候通过hjkl移动, 经过的所有文本会处于高亮状态,<br>这时候把它们当成一个字符, 所有针对单个字符的操作都可以应用上去, 比如按下<code>d</code>,<br>那么这段文本就被删除掉了.</p>
+<p>但是如果需要插入文本咋办? 这时候就要使用强大的<code>blockwise-operators</code>, </p>
+<p>如果要删除每一行的第一个字母, 按下<code>&lt;CTRL-V&gt;</code>, 高亮需要删除的内容, 再按<code>d</code>删除.</p>
+<p>如果要在每一行的行首插入, 按下<code>&lt;CTRL-V&gt;</code>, 高亮内容, 再按<code>I</code>, 输入一段文字, 再按<code>&lt;Esc&gt;</code>, 这时候每一行都会插入对应的字符.<br>完整的操作是 <code>I&#123;string&#125;&lt;Esc&gt;</code>.</p>
+<p>这些操作在处理多行数组相当方面, 省去了写正则的麻烦.</p>
+<p>再提一个有趣的例子, 通过vim码字的时候, 常常遇到一个问题就是换行.<br>经常打了大段文字懒得敲回车. vim中有一个选项, 叫<code>textwidth</code>, 当文本超过一定字符,<br>会自动折行. 配合visual模式, 对高亮文本按下<code>gq</code>, 瞬间自动格式化完毕.</p>
+<pre><code>更多操作, 见 :h visual-operators
+</code></pre>
+<p>第二, <code>vim script</code></p>
+<p>前面提到的<code>command</code>模式, 就是vim脚本的交互式shell. vim丰富的扩展功能, 也就是<br>plugin , 一个又一个脚本, 放置在不同的目录中, 经过不同的顺序加载实现的.</p>
+<p>值得一提的是, vim 支持通过 python, lua 等语言的解释器, 编译的时候加上对应选项, 就可以在vim脚本中调用额外的python或者lua脚本, 通过这些语言的lib, 是的vim更加强大了.</p>
+<p>由于vimscript相当复杂, 这里就不介绍了, 顺便说说plugin的管理和推荐.</p>
+<p>常规的安装流程, 就是把脚本一股脑复制到 ~&#x2F;.vim 目录中去, 个个插件的 autload  plugin 目录下文件会混杂在一起, 管理复杂, 想删都删不了. </p>
+<p>这里推荐使用, <code>pathogen</code> 和 <code>vundle</code> 进行组合管理.</p>
+<p>pathgen和 vbundle 是两个类似的插件管理器, 区别在于 vbundle 支持配置自动去github下载脚本, 省了不少同步的麻烦. </p>
+<p>并非所有的vim插件都支持通过 github 下载, pathogen 就派上用场了, 虽然它只支持手动管理. 将插件所有内容解压到 <code>~/.vim/bundle/&#123;plugin name&#125;/</code>, pathogen 在vim启动过程中会自动加载所有的插件.</p>
+<p>这里附上我的配置文件内容.</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">version</span> &gt; <span class="number">703</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">g:pathogen_disabled</span> = [ </span><br><span class="line">            \,<span class="string">&quot;conque_term&quot;</span></span><br><span class="line">            \]</span><br><span class="line">    <span class="keyword">call</span> pathogen#runtime_append_all_bundles() </span><br><span class="line"></span><br><span class="line">    <span class="keyword">call</span> vundle#rc(<span class="string">&quot;~/.vbundle/&quot;</span>)</span><br><span class="line">    <span class="keyword">source</span> $HOME/.<span class="keyword">vim</span>/<span class="keyword">conf</span>.d/vundle.<span class="keyword">vim</span></span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>通过pathogen加载vundle和其他非github插件, 再通过vundle加载其他的插件.</p>
+<p>将vundle的 bundle 目录放置于 ~&#x2F;.vim 之外, 好处是可以直接将 整个 vim 目录软链到网盘目录里, 随时保持同步, 而 vundles 则手动更新.</p>
+<p>推荐下我自己在用vunle清单, 也就是上面的 <code>$HOME/.vim/conf.d/vundle.vim</code> 的内容.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&quot; 视觉系</span><br><span class="line">Bundle &#x27;Lokaltog/vim-powerline&#x27;</span><br><span class="line">Bundle &#x27;altercation/vim-colors-solarized&#x27;</span><br><span class="line"></span><br><span class="line">&quot; 文件搜索 编码转换</span><br><span class="line">Bundle &#x27;kien/ctrlp.vim&#x27;</span><br><span class="line">Bundle &#x27;mbbill/fencview&#x27;</span><br><span class="line">Bundle &#x27;rking/ag.vim&#x27;</span><br><span class="line"></span><br><span class="line">&quot; buffer, 目录, 任务, tag浏览</span><br><span class="line">Bundle &#x27;scrooloose/nerdtree&#x27;</span><br><span class="line">Bundle &#x27;fholgado/minibufexpl.vim&#x27;</span><br><span class="line">Bundle &#x27;majutsushi/tagbar&#x27;</span><br><span class="line">Bundle &#x27;vim-scripts/TaskList.vim&#x27;</span><br><span class="line"></span><br><span class="line">&quot; 代码补全, 生成</span><br><span class="line">Bundle &#x27;SirVer/ultisnips&#x27;</span><br><span class="line">Bundle &#x27;Shougo/neocomplete.vim&#x27;</span><br><span class="line">Bundle &#x27;scrooloose/nerdcommenter&#x27;</span><br><span class="line">Bundle &#x27;DoxygenToolkit.vim&#x27;</span><br><span class="line">Bundle &#x27;Rip-Rip/clang_complete&#x27;</span><br><span class="line"></span><br><span class="line">&quot; 语法检查, 调试</span><br><span class="line">Bundle &#x27;scrooloose/syntastic&#x27;</span><br><span class="line">Bundle &#x27;joonty/vdebug&#x27;</span><br><span class="line"></span><br><span class="line">&quot; 其他</span><br><span class="line">Bundle &#x27;msanders/cocoa.vim&#x27;</span><br><span class="line">Bundle &#x27;gmarik/vundle&#x27;</span><br><span class="line">Bundle &#x27;L9&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>总的来说, vim 学习成本比较高, 针对不同语言需要熟悉并定制, 才能拥有对应的功能.<br>我同时也用phpstorm, 对于那些觉得不错的功能, 会考虑在vim中寻找相同的功能的plugin.<br>语法检查, 补全这些有限支持也就够了, 重构功能也就是偶尔体验体验.毕竟, 这是用工具编码, 而不是工具教你如何写代码.</p>
+<p>写代码的时候, 开启终端, 打开vim, 调用一下shell.<br>只想浏览代码的时候, 我还是回开下 phpstorm , 配置好库和环境, 通过鼠标穿梭于文件之间. </p>
+<p>至于两者的差别, 呵呵. 物尽其所用罢了.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2014/03/16/first-step-on-writing-zsh-completion-functions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bhe Hongtyu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bhe's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/03/16/first-step-on-writing-zsh-completion-functions/" class="post-title-link" itemprop="url">自定义 zsh 自动补全功能初探</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-03-16 18:43:53" itemprop="dateCreated datePublished" datetime="2014-03-16T18:43:53+00:00">2014-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/zsh/" itemprop="url" rel="index"><span itemprop="name">zsh</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/zsh/script/" itemprop="url" rel="index"><span itemprop="name">script</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/zsh/script/tutorial/" itemprop="url" rel="index"><span itemprop="name">tutorial</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2014/03/16/first-step-on-writing-zsh-completion-functions/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/03/16/first-step-on-writing-zsh-completion-functions/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>zsh 已经不是什么新鲜事了, <code>oh-my-zsh</code> 相信很多人都已经在用了.</p>
+<p>但<code>zsh</code> 存在一个明显的问题, 它并不是什么开箱即用的工具, 需要大量配置, 也很难上手扩充新功能, 这点和vim非常相似.</p>
+<p>常用的 alias 和 shell script, 虽然能用上些稍微方便的特殊语法, 大部分仍和 bash 相近. 这时候倒不如使用bash的语法, 保证代码的兼容性和可移植性.</p>
+<p>本文简单介绍如何编写zsh的补全插件, 以 Mac OS 的 launchctl 为例.</p>
+<pre><code>`launchctl` 是 Mac 用于管理系统运行, 类似于 linux 的 systemd, 用于管理 LaunchAgent 加载, 是 `launchd` 的前端.
+</code></pre>
+<p>常用的 subcommand 有 unload, load, stop ,start 等等. 这里就只考虑 load 和 unload 补全功能扩充.</p>
+<h2 id="怎么开发脚本"><a href="#怎么开发脚本" class="headerlink" title="怎么开发脚本"></a>怎么开发脚本</h2><p>按作者的话说, 看文档是很难学会的. 因为很少涉及脚本编写本身, 仅罗列了所有的接口.</p>
+<h2 id="基本内容"><a href="#基本内容" class="headerlink" title="基本内容"></a>基本内容</h2><p>首先将脚本命名为 <code>_launchctl</code> , 放到任意目录下, 让将目录加入 fpath</p>
+<pre><code>oh-my-zsh 用户保存在 ~/.oh-my-zsh/plugins/launchctl/_launchctl.
+并在 zshrc 中声明 plugins=( launchctl )
+剩下的事情就交给 oh-my-zsh
+</code></pre>
+<p>脚本头部加上以下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#compdef launchctl</span></span><br></pre></td></tr></table></figure>
+
+<p>第一行标记这个文件包含一个自动加载的函数.<br>本质上这是一个没有形如 <code>function () &#123;&#125;</code> 包裹着的函数体,<br>和可以直接通过 <code>source</code> 导入的配置文件和脚本是不同的.</p>
+<h2 id="subcommand-补全"><a href="#subcommand-补全" class="headerlink" title="subcommand 补全"></a>subcommand 补全</h2><p>subcommand 应该是子命令或者副命令的意思， 这里保留原文。</p>
+<pre><code>ps: 对于 gnu 风格的命令行工具, 很少有 subcommand , 这一章节并不是必要的.
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">local -a _1st_arguments</span><br><span class="line"></span><br><span class="line">_1st_arguments=(</span><br><span class="line">    &quot;load:Load configuration files and/or directories&quot;</span><br><span class="line">    &quot;unload:Unload configuration files and/or directories&quot;</span><br><span class="line">    &quot;start:Start specified job&quot;</span><br><span class="line">    &quot;stop:Stop specified job&quot;</span><br><span class="line">    &quot;help:This help output&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">local label_subcommand=&quot;launchctl subcommand&quot;</span><br><span class="line"></span><br><span class="line">if (( CURRENT == 2 )); then</span><br><span class="line">    _describe -t commands &quot;$label_subcommand&quot; _1st_arguments</span><br><span class="line">    return 0</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>这段代码还是比较好懂的, 补全所有的<code>subcommand</code>并给出提示信息.</p>
+<p>注意 <code>CURRENT</code> 这个变量, 它标记处于命令行的第几个单词</p>
+<pre><code>关于 CURRENT , 见 `man zshcompwid`
+</code></pre>
+<p>在按下tab之前, 用户输入的文本为 <code>launchctl&lt;空格&gt;&lt;tab&gt;</code>, 第一个单词是主命令<code>launchctl</code>, 显然在这段脚本中, <code>CURRENT</code> 是一个大于2的整数.</p>
+<p>对于还存在更下一级 subcommand 的补全, 以此类推.</p>
+<h2 id="文件补全"><a href="#文件补全" class="headerlink" title="文件补全"></a>文件补全</h2><p><code>launchctl unload</code> 用于关闭一个正在运行的服务, 比如nginx, php-fpm等等, 显然这里需要补全的是一个文件路径, 对应一个位于 <code>~/Library/LaunchAgents/</code> 下的 <code>plist</code> 文件.</p>
+<p>首先假设已经实现了对应的工具函数 <code>_get_loaded_user_plists</code> , 这个函数将生成目前正在运行的plist文件列表</p>
+<p>以下是关键代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">local</span> expl</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;<span class="variable">$words</span>[2]&quot;</span> <span class="keyword">in</span> </span><br><span class="line">    unload)</span><br><span class="line">        <span class="built_in">local</span> loaded_user_plists</span><br><span class="line">        loaded_user_plists=<span class="string">&quot;<span class="subst">$(_get_loaded_user_plists)</span>&quot;</span></span><br><span class="line">        _wanted loaded_user_plists expl <span class="string">&#x27;running jobs&#x27;</span> compadd -a loaded_user_plists</span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">return</span> 1</span><br></pre></td></tr></table></figure>
+
+<p>可见对于简单参数的补全实现是很轻松的</p>
+<p>zsh 如果发现补全函数返回0, 会将输出作为补全内容作为候补内容输出到终端中去.</p>
+<p>因此我们只需要确定 subcommand 是我们所预期的<code>unload</code> , 将文件列表发送给用户就行了.</p>
+<p>这里用<code>case</code> 根据 subcommand 的不同, 选择对应的补全形式.</p>
+<p>首先注意 <code>$words</code> 这个变量, 通过打印该变量可以发现, 它是一个将用户已经输出的命令拆分的数组</p>
+<p>比如输入 <code>launchctl unload</code> , 那么对应的words将是 <code>( &#39;launchctl&#39; &#39;unload&#39; &#39;&#39; )</code>, 最后一位是一个空字符串.</p>
+<pre><code>严格地说, 这里拆分依据并不是空格
+如果你明白 $@ 和 $# 区别, 你就懂我啥意思了. 
+这里空间不够, 我就不写了 :)
+</code></pre>
+<h2 id="调试脚本"><a href="#调试脚本" class="headerlink" title="调试脚本"></a>调试脚本</h2><p>开发过程中难免写错, 需要重复调试, 这里有两个小技巧.</p>
+<ol>
+<li>echo</li>
+</ol>
+<p>echo 当然是喜闻乐见的 debug 指令之一了.</p>
+<ol start="2">
+<li>set -x</li>
+</ol>
+<p><code>set -x</code> 将开启zsh的 XTRACE 选项, 所有运行脚本背后的指令和参数都直接打印到屏幕, 俗称上帝视角.<br>如果发现不能正常执行, 那么只要运行 <code>set -x</code>, 手动输入命令后按tab. </p>
+<blockquote>
+<p>ps1: set +x 恢复正常模式.<br>ps2: 千万不要手残提前触发其他zsh的特性, 不然面对满屏的文本里就没啥心情继续下去了. 这里需要老老实实输入完整的命令, 在需要触发对应补全过程的地方按下tab触发补全.</p>
+</blockquote>
+<p>由于调试信息实在太多了, 运行几次之后可以把调试窗口关了, 或者将终端的buffer清空, 总而言之, 减少输出的log以快速定位问题.</p>
+<pre><code>至于更细节的内容以及相关api文档, 请看手册 `man zshcompsys`
+zsh 的~~破手册~~跟天书一样的文档也没打算解释清楚, 我能说的只有这么多了
+更多技术细节请自行深挖.
+</code></pre>
+<p>Job done!</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2014/03/07/classmap-generating-by-composer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bhe Hongtyu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bhe's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/03/07/classmap-generating-by-composer/" class="post-title-link" itemprop="url">基于 composer 的classmap生成器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-03-07 10:18:00" itemprop="dateCreated datePublished" datetime="2014-03-07T10:18:00+00:00">2014-03-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php-composer-classmap/" itemprop="url" rel="index"><span itemprop="name">php composer classmap</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2014/03/07/classmap-generating-by-composer/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/03/07/classmap-generating-by-composer/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>近期花了不少功夫在优化线上代码构建方案上, 过程中的一些心得会不定期更新.</p>
+<p>先前的做法是发布之后调用一个yii的扩展, 生成Classmap文件, 包含了类名和绝对路径的映射关系.</p>
+<p>这么做的好处自然是在 <code>autoload</code> 上最大限度地减轻消耗, 每个类加载 <code>autoloader</code> 仅仅需要检查一下 <code>classmap</code> , 剩下的工作交给 <code>apc</code> 就行了.</p>
+<p>最近在进行 <code>composer</code> 迁移的过程中, 发现composer其实自带了这么一个功能: <code>dump-autoload</code>, 而且生成的 ClassMap 文件在运行时通过路径拼接, 而不是用相对路径, 同样不会影响到  <code>apc</code> 的缓存功能.</p>
+<p>实现这个功能仅仅需要以下改动</p>
+<p>composer.json</p>
+<pre><code>&#123;
+      &quot;autoload&quot; : &#123;
+              &quot;classmap&quot; : [
+                          &quot;src/components&quot;,
+                          &quot;src/controller&quot;
+               ]
+      &#125;
+&#125;
+</code></pre>
+<p>spec文件中加入</p>
+<pre><code>BuildRequires: t-search-composer-cli
+/opt/tsearch/bin/composer dump-autoload
+</code></pre>
+<p>在应用初始化过程加入类似以下步骤</p>
+<pre><code>$classMap = require &quot;vendor/composer/autoload_classmap.php&quot;;
+Yii::$classMap  = array_merge( Yii::$classMap, $classMap);
+</code></pre>
+<p>对于已经用上composer的项目管理依赖的情况下, 这种做法自然不是需要的, composer 的 <code>install</code> 指定会自动完成 <code>classmap</code> 生成工作.</p>
+<p>但是如果不需要依赖 <code>composer</code> 进行依赖管理的情况下, 通过 <code>dump-autoload</code> 指令来提供可用的 classmap, 简单而又效果显著.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2013/08/04/composer-in-action/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bhe Hongtyu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bhe's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/08/04/composer-in-action/" class="post-title-link" itemprop="url">Composer 实战</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2013-08-04 00:09:00" itemprop="dateCreated datePublished" datetime="2013-08-04T00:09:00+00:00">2013-08-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php-composer/" itemprop="url" rel="index"><span itemprop="name">php, composer</span></a>
+                </span>
+            </span>
+
+          
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>Composer 是什么?</strong></p>
+<p>按官方文档</p>
+<blockquote>
+<p>Composer 是一个 PHP 的依赖管理工具. 它可以自动安装项目中声明依赖的库.</p>
+</blockquote>
+<p><strong>为什么要使用 composer , 而不是传统的 pear 等?</strong></p>
+<p>Compoesr 是一个类似于 ruby-rubygems, nodejs-npm, python-pip 的依赖管理工具. 相比起pear简单的安装功能, Composer 注重包之间的依赖关系, 每个项目可以独立管理自己的依赖, 而不是一股脑全部安装上. 另外也解决开源组件混乱的 autloader.</p>
+<p>当前的 php 框架社区中活跃成员(比如 Symfony, Slim, Laravel, 以及开发中的 Yii2) 纷纷支持 composer , 旺盛的生命力已经不是 pear 之类的老掉牙的社区方案可以比拟了.</p>
+<p>相对于 ruby, python, nodejs, php总算有了一个相对完善并且流行的包管理器.<br>目前社区和开发者之间的距离还比较大. pear, pyrus, composer 会继续并存下去, 给 php 开发者带来更多的麻烦.<br>长期而言, 打个你死我活, 最后只剩一个是符合开源社区的历史发展规律的 :)</p>
+<h2 id="简单上手"><a href="#简单上手" class="headerlink" title="简单上手"></a>简单上手</h2><p>安装具体步骤参考 <a target="_blank" rel="noopener" href="http://getcomposer.org/">http://getcomposer.org</a> , 简单运行一下命令</p>
+<pre><code>curl -sS https://getcomposer.org/installer | php
+</code></pre>
+<p>最新版本的 composer.phar 就下载到本地了.</p>
+<p>相比起 <code>npm</code> <code>pip</code> 等被大部分发行版内置或者仓库支持的包管理器, 这种自己手动下载方式相对不够友好, 毕竟 composer 的知名度暂时还追不上 pear 等老牌工具, 被周边社区还需要一定的时间.</p>
+<p>常用命令官方站点上有简(jian)洁(lou)的文档, </p>
+<pre><code>install
+search
+show
+update
+create-project
+</code></pre>
+<p>按前面的方式下载之后, 使用composer 需要用 <code>php composer.phar help</code> 这样丑陋的方式, 嫌麻烦可以手工移动到phar到 <code>$PATH</code> 对应的相关文件夹中去, 顺便改名为 composer 会顺眼一些.</p>
+<blockquote>
+<p>注意文件的可执行权限, (chmod +x composer)</p>
+</blockquote>
+<p>用法是比较简单的, 关键是发布者和用户注意用 composer.json 准确地描述相关的依赖和加载细节.</p>
+<h2 id="依赖入门"><a href="#依赖入门" class="headerlink" title="依赖入门"></a>依赖入门</h2><p>先给一份简单的例子</p>
+<ul>
+<li>一个简单的工具集, 版本号 1.0.0</li>
+<li>依赖 net&#x2F;http , 用来处理http请求, 而不是直接用 Curl</li>
+<li>开发模式下依赖 phpunit, 方便运行单元测试</li>
+<li>使用 psr-0 规范的加载方式, 源代码位于 src 目录中, 将 <code>Utils</code> 映射到该目录</li>
+</ul>
+<figure class="highlight json"><figcaption><span>composer.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;name&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;example/utils&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;description&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;utils&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;version&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;library&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;license&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;proprietary&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;authors&quot;</span> <span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;Mr Right&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;email&quot;</span> <span class="punctuation">:</span>  <span class="string">&quot;mr.right@taobao.com&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;autoload&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;psr-0&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;Utils\\&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;src/&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;require&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;net/http&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;*&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;require-dev&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;phpunit/phpunit&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;*&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>例子包含了一个包信息中常见字段, <code>require</code> 不一定需要, 但这是依赖管理的精华所在, 后续章节再仔细说明.</p>
+<blockquote>
+<p>刚开始可能对 composer.json 的语法不太熟悉, 可以通过 <code>composer validate</code> 检查自己书写风格是否符合规范</p>
+</blockquote>
+<h2 id="文件目录结构"><a href="#文件目录结构" class="headerlink" title="文件目录结构"></a>文件目录结构</h2><p>还是例子先行</p>
+<pre><code>trunk/
+    src/
+        Utils/
+            NetWork/
+                WangWangMsg.php
+    
+    composer.json
+    
+    phpunit.xml
+    
+    tests/
+        bootstrap.php
+        Utils/
+            Network/
+                WangWangMsgTest.php
+       
+</code></pre>
+<p>composer 提供了灵活 <code>autoload</code> 机制, 文件的摆放方式可以很灵活, 但过分奔放的 style 不是好事. 以上结构参考自 <code>Monolog</code>, 一个强大的日志工具, 也考虑到了phpunit的使用.</p>
+<blockquote>
+<p>推荐将 phpunit 也作为依赖之一加入 <code>require-dev</code> , 方便开发调试. 与 <code>require</code> 字段不同的是, 只有显式使用 <code>composer install --dev</code> 才会安装上 <code>require-dev</code> 的相关组件.</p>
+</blockquote>
+<p>对于用户而言, 使用第三方包, 最不希望的应该就是牵扯进 autoloader 的细节. 以往的 php 源码包都有自带autoloader 的毛病, 复杂的 autoloader 交织在一块往往给使用者造成麻烦. 相比之下 composer 使用统一的方案, 优雅地解决了这个难题. </p>
+<h3 id="autoloading-与-命名空间"><a href="#autoloading-与-命名空间" class="headerlink" title="autoloading 与 命名空间"></a>autoloading 与 命名空间</h3><p>composer 目前支持三种 autoloading 方式</p>
+<ul>
+<li><code>psr-0</code> 根据 psr-0 规范命名空间和文件路径进行类加载, 最佳实践方式.</li>
+<li><code>classmap</code> 生成类与文件的映射关系文件, 安装时自动扫描并生成.    </li>
+<li><code>file</code> 可以理解为预先加载指定文件, 每次请求中都会执行</li>
+</ul>
+<p>这里简单说说 psr-0, 参考 utils 这个包的配置文件</p>
+<figure class="highlight json"><figcaption><span>composer.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;autoload&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;psr-0&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;Utils\\&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;src/&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<p>在安装之后 composer 生的classmap 信息文件之一, <code>vendor/composer/autoload_namespaces.php</code> 中可以看到以下代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">array</span>(</span><br><span class="line">        <span class="string">&#x27;Utils\\&#x27;</span> =&gt; <span class="keyword">array</span>(<span class="variable">$baseDir</span> . <span class="string">&#x27;/src&#x27;</span>), <span class="comment">// HERE!</span></span><br><span class="line">        <span class="string">&#x27;Symfony\\Component\\Yaml\\&#x27;</span> =&gt; <span class="keyword">array</span>(<span class="variable">$vendorDir</span> . <span class="string">&#x27;/symfony/yaml&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;Net_&#x27;</span> =&gt; <span class="keyword">array</span>(<span class="variable">$vendorDir</span> . <span class="string">&#x27;/net/http/src&#x27;</span>),</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+
+<p>可见进行相关类的自动加载是, composer autoloader 通过查表和路径搜索的方式, 正确地找到类相关的代码.</p>
+<p>比如一下代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Utils\Network\WangWangMsg</span>();</span><br><span class="line">    <span class="comment">//or new Utils\Network_WangWangMsg();</span></span><br></pre></td></tr></table></figure>
+
+<p>实际运行时, 实际运行的逻辑类似于以下的伪代码</p>
+<figure class="highlight php"><figcaption><span>test.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="comment">//composer</span></span><br><span class="line">    <span class="variable">$baseDir</span> = <span class="variable">$root</span> . <span class="string">&#x27;vendor/example/utils&#x27;</span>;</span><br><span class="line">    <span class="keyword">include</span> <span class="variable">$baseDir</span> . <span class="string">&#x27;/src/Utils/Network/WangWangMsg.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Utils\Network\WangWangMsg</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="项目中使用-composer"><a href="#项目中使用-composer" class="headerlink" title="项目中使用 composer"></a>项目中使用 composer</h2><p>在 composer 设计理念中, 项目和包并不是两种割裂的定义, 所有的源代码都归属于对应的包, 包与包存在依赖关系.<br>虽然在实际业务开发中, 暂时没哪个项目如此纯粹, 但这并不影响 composer 的应用.</p>
+<p>以下是一个简单的搜索结果页应用如何书写 composer.json.</p>
+<figure class="highlight json"><figcaption><span>composer.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;repositories&quot;</span> <span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;packagist&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">false</span></span> <span class="comment">//禁用外部仓库</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="comment">// 引入内部代码仓库(svn)</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;svn&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;url&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;http://.../mido&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;branches-path&quot;</span> <span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;tags-path&quot;</span> <span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;require&quot;</span>  <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;mido/mido&quot;</span><span class="punctuation">:</span><span class="string">&quot;dev-trunk&quot;</span> <span class="comment">//使用 svn 中的 trunk 分支</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>运行 <code>composer install</code> 时, composer 预先扫描所有的 repositories, 将 require 字段中的包更新载入到 vendor 目录中去, 并生成相关缓存信息和自动加载代码.</p>
+<p>然后呢?</p>
+<p>在应用 bootstrap (对于大部分项目, index.php 可能是一个更加容易理解的名字)代码中加入以下代码</p>
+<figure class="highlight php"><figcaption><span>index.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">require</span> /path/to/root/vendor/autoload.php</span><br></pre></td></tr></table></figure>
+
+<p>接着项目代码中尽情使用吧, 毕竟自动加载类的细节都已经交给 autoloader 了.</p>
+<h2 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h2><p>这里介绍怎么使用 composer 作为 yii 1.x 的依赖管理工具. (注意, yii1.x 不符合 psr-0, 直接使用 composer 比较困难)</p>
+<p>安装好了依赖, 接下来讲解怎么处理利用代码. 这里先用yii自带的demo helloworld 作为例子.</p>
+<p>复制文件(yii&#x2F; 目录下存放最新的yii 1.x 代码):</p>
+<pre><code>cp -r yii/demos/helloworld ./
+cp -r yii/framework helloworld/protected/
+</code></pre>
+<p>目录结构如下:</p>
+<pre><code>helloworld/
+    index.php
+    protected/
+        composer.json //composer 配置信息
+        framework/  //yii 框架文件
+        vendor/     //composer安装依赖的位置
+</code></pre>
+<figure class="highlight json"><figcaption><span>composer.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;repositories&quot;</span>  <span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;composer&quot;</span>.</span><br><span class="line">            <span class="attr">&quot;url&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;http://packages.phundament.com&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    </span><br><span class="line">    <span class="attr">&quot;require&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;php&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;&gt;=5.3.12&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;yiiext/migrate-command&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;0.7.2&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;psr/log&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">&quot;autoload&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;classmap&quot;</span> <span class="punctuation">:</span> <span class="punctuation">[</span> <span class="string">&quot;framework/YiiBase.php&quot;</span><span class="punctuation">,</span> <span class="string">&quot;framework/yii.php&quot;</span> <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">&quot;config&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;vendor-dir&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;vendor&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>index.php 使用以下代码替代原来的 yii.php</p>
+<figure class="highlight php"><figcaption><span>composer.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">require</span> <span class="string">&quot;protected/vendor/autoload.php&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+<p>将 framework 和 composer.json 放在 protected 文件中, 方便通过 webserver 访问规则屏蔽代码文件. 文件结构可以根据实际需求做调整, 这对于 composer 来说都这可以正确找到代码.</p>
+<p>接下来 进入 protected 目录中 运行 composer install -vvv , 更新composer信息, 生成 classmap.</p>
+<pre><code>php -S 127.0.0.1:8080
+        
+</code></pre>
+<p>应用就跑起来了.</p>
+<h2 id="主搜索应用前端公共库-mido-改造实战"><a href="#主搜索应用前端公共库-mido-改造实战" class="headerlink" title="主搜索应用前端公共库 mido 改造实战"></a>主搜索应用前端公共库 mido 改造实战</h2><p>mido 是我们使用一个公共包, 负责了大部分引擎请求的细节, 在业务代码中屏蔽了请求, 解析等细节.</p>
+<p><strong>1. 规范svn路径</strong></p>
+<p>严格区分<code>trunk</code>, <code>tag</code>, <code>branches</code>. composer 对于svn的支持相对弱一些, branches 和 tag 都可以别名, 或者禁用, 但是 trunk 好像必须要有.</p>
+<p>目前 mido 只有 trunk 一个目录, 并没有严格按版本号发布, 所以项目的 <code>require</code> 字段填上 <code>&quot;mido/mido&quot; : &quot;dev-trunk&quot;</code> 就行了.</p>
+<pre><code>/trunk
+/branches/2.0.1-beta
+/tag/1.0.0
+</code></pre>
+<p><strong>2. 源代码命名空间处理1 : 用 \ 替换 _</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">     Mido_Exception -&gt; Mido\<span class="built_in">Exception</span></span><br></pre></td></tr></table></figure>
+
+<p>严格意义上说, 这并不是必须的. composer 支持 <code>A_B_C</code> 这种常规的写法, 在配置中写上 <code>&quot;Mido_&quot;:&quot;&quot;</code> 也行</p>
+<p><strong>3. 源代码命名空间处理2 : 命名空间导入</strong></p>
+<p><em>ps: 需要特别注意全局命名空间里的类名,包括不支持命名空间的库和扩展, 如ArrayAccess, Memcache</em></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">namespace</span> <span class="title class_">Mido</span>\<span class="title class_">Engine</span>;</span><br><span class="line">    <span class="keyword">use</span> <span class="title">Mido</span>\<span class="title">ComponentBase</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Kingso</span> <span class="title">extend</span> <span class="title">Base</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">namespace</span> <span class="title class_">Mido</span>\<span class="title class_">Engine</span>\<span class="title class_">Kingso</span>;</span><br><span class="line">    <span class="keyword">use</span> <span class="title">Mido</span>\<span class="title">ComponentBase</span>;</span><br><span class="line">    <span class="keyword">use</span> <span class="title">Mido</span>\<span class="title">Engine</span>\<span class="title">RequestBase</span>;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Request</span> <span class="title">extend</span> <span class="title">RequestBase</span> <span class="keyword">implements</span> \<span class="title">ArrayAccess</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>当然, 以根命名空间的方式书写代码也是可以的, 看团队如何制定代码规范.</p>
+<p><strong>3. 源代码命名空间处理: 保留关键词</strong></p>
+<p>前缀式命名类没有和保留关键字冲突的问题, 但改用命名空间时, 在当前域需要注意扩展和内置提供的全局class, 虽然丑了点, 但是结果是好…</p>
+<p>mido 中内置了部分常用的 helper, 比如以下的 ‘a.b.c’ 的多维数组访问 helper. 原来使用了 Array 这个关键字(呃, 因为 php 不关心大小写)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//old style</span></span><br><span class="line"><span class="title class_">Mido_Helper_Array</span>::<span class="title function_ invoke__">get</span>(<span class="variable">$items</span>, <span class="string">&#x27;items.title&#x27;</span>);</span><br><span class="line"><span class="comment">//new style</span></span><br><span class="line"><span class="title class_">Mido\Help\MArray</span>::<span class="title function_ invoke__">get</span>(<span class="variable">$items</span>, <span class="string">&#x27;items.title&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 组件别名配置更新格式</strong></p>
+<p>为了满足多个相同引擎单例组件的使用, 配置文件里定义了映射关系, 偷懒直接写上根命名空间.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//修改前</span></span><br><span class="line"><span class="string">&quot;kingso&quot;</span> =&gt; <span class="string">&quot;Mido_Engine_Kingso&quot;</span>,</span><br><span class="line"><span class="comment">//修改后</span></span><br><span class="line"><span class="string">&quot;kingso&quot;</span> =&gt; <span class="string">&quot;\\Mido\\Engine\\Kingso&quot;</span>,</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>嗯, 全部的迁移成本如上.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>好处</strong></p>
+<ul>
+<li>方便资源共享, 方便代码分发</li>
+<li>项目源代码结构清晰 </li>
+<li>自带autoloading机制, 简化加载流程</li>
+<li>社区类库支持强大</li>
+<li>与国际接轨, 高端大气上档次 :)</li>
+</ul>
+<p><strong>使用成本</strong></p>
+<ul>
+<li>独立执行文件, 暂时没有比较好的工具集成, 暂时没见那个发行版内置.</li>
+<li>对于频繁改动, 代码耦合严重的应用, 并没有明显成效.</li>
+<li>需要遵守目录结果规范</li>
+<li>支持还不够广泛, 许多第三包需要定制安装</li>
+</ul>
+<h2 id="附"><a href="#附" class="headerlink" title="附"></a>附</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://getcomposer.org/doc/articles/troubleshooting.md">troubleshooting.md</a></li>
+<li><a target="_blank" rel="noopener" href="http://nelm.io/blog/2011/12/composer-part-1-what-why">Composer: Part1 - What &amp; Why </a></li>
+</ul>
+<p><em>vim:ft&#x3D;markdown</em></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2013/08/03/longene-qq-on-archlinux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bhe Hongtyu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bhe's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/08/03/longene-qq-on-archlinux/" class="post-title-link" itemprop="url">Archlinux Longene QQ 轻松上手</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2013-08-03 01:04:00" itemprop="dateCreated datePublished" datetime="2013-08-03T01:04:00+00:00">2013-08-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux-desktop-app-qq-archlinux/" itemprop="url" rel="index"><span itemprop="name">linux-desktop, app, qq, archlinux</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2013/08/03/longene-qq-on-archlinux/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/08/03/longene-qq-on-archlinux/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="通过-Aur-安装相关包"><a href="#通过-Aur-安装相关包" class="headerlink" title="通过 Aur 安装相关包"></a>通过 Aur 安装相关包</h3><p>完整安装 longnen qq 需要以下几个包</p>
+<ul>
+<li><code>wineqq</code> 主要包, 包含完整的 longene 环境和 qq 2012</li>
+<li><code>opendesktop-fonts</code> 提供 odokai 字体, 用于中文字体显示, 不装可能导致方块字</li>
+<li><code>ttf-ms-fonts</code> 提供 arial 用于中文显示</li>
+</ul>
+<p>装上了就能跑了, 基本功能都没问题.</p>
+<h3 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h3><p><strong>英文半角符号显示错位</strong></p>
+<pre><code>字体问题, 未解决
+</code></pre>
+<p><strong>没有声音</strong></p>
+<p>需要安装声音相关的包, 64位系统装上第一个, 32位选择第二个.</p>
+<blockquote>
+<ul>
+<li>lib32-alsa-plugins </li>
+<li>alsa-plugins</li>
+</ul>
+</blockquote>
+<p>64 位系统需要启用 multi 仓库才能找到 lib32 相关包, 具体操作见 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/Multilib">wiki:multilib</a> </p>
+<p>简单说, 就是找到 <code>/etc/pacman.conf</code>, 找到以下文本, 取消注释(如果没有找到就手动加入)</p>
+<pre><code>[multilib]
+Include = /etc/pacman.d/mirrorlist
+</code></pre>
+<p><strong>fcitx无法输入</strong></p>
+<p>找到 <code>/opt/longene/qq2012/qq2012.sh</code>, 将其中的</p>
+<pre><code>export LANG=zh_CN.UTF-8
+</code></pre>
+<p>改为和当前系统一致的编码 (用 locale 命令查看), 比如我的是</p>
+<pre><code>export LANG=en_US.UTF-8
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2013/07/01/zshrc-startup-files/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bhe Hongtyu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bhe's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/07/01/zshrc-startup-files/" class="post-title-link" itemprop="url">Zshrc: Startup Files</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2013-07-01 22:54:00" itemprop="dateCreated datePublished" datetime="2013-07-01T22:54:00+00:00">2013-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shell-environment-zshrc/" itemprop="url" rel="index"><span itemprop="name">shell environment zshrc</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2013/07/01/zshrc-startup-files/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/07/01/zshrc-startup-files/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>shell 环境有必要保持一定的整洁性, 毕竟多台机器之间多少要做些配置环境上的同步.<br>本文简单讨论了 zsh 使用中配置文件规范性.</p>
+<p>zsh 的 man 手册中提到, zsh 的配置加载顺序如下</p>
+<p>最高优先级, 所有情况下都会加载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/zshenv</span><br><span class="line">$HOME/.zshenv</span><br></pre></td></tr></table></figure>
+
+<p>login shell 配置, 两组文件的区别在于, 中间存在着 zshrc 的加载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/etc/zprofile</span><br><span class="line">$HOME/.zprofile</span><br><span class="line"></span><br><span class="line">/etc/zlogin</span><br><span class="line">$HOME/.zlogin</span><br></pre></td></tr></table></figure>
+
+
+<p>交互shell配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/zshrc</span><br><span class="line">$HOME/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>三种配置文件的差异, 在于加载的时机不同.</p>
+<p><code>/etc</code> 目录下的配置文件会影响机器上的所有用户, 相比起 $HOME 配置文件, 加载顺序优先级比较高<br>但是除了系统管理员, 大部分情况下就一个人用的机器, 没多大关心的必要.<br> 平时除了偶尔切换到 root 下, 基本不会考虑多用户的情况. 这里就不过多涉及了.</p>
+<p><strong>env配置</strong></p>
+<p>顾名思义属于环境配置, 只要新启动的shell实例, 都会重新加载. 这就意味这个文件的内容会重复加载, 不适合加入需要依赖io等耗时的操作, 影响了shell的执行速度</p>
+<p>我通过这个配置文件, 区分不同机器, 比如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VIMID=&quot;hits-office&quot;</span><br></pre></td></tr></table></figure>
+
+<p>方便 vim 中可以根据<code>$VIM</code>加载工作环境下的特殊配置, 比如以 gbk 作为默认文件编码 :( .</p>
+<p><strong>login shell</strong></p>
+<p>部分发行版在这个配置文件中加入了<code>. $HOME/.zshrc</code> , 这种做法也意味着, 两者比较难区分.</p>
+<p><strong>zshrc</strong></p>
+<p>鉴于大部分人都是在交互式环境下使用 shell , 也就意味着这个文件是最常修改的配置文件, 比如著名的<code>oh-my-zsh</code>, 其入口文件便是<code>$HOME/.zshrc</code>. </p>
+<p>刚接触shell的人, 对于 login shell 和 interactive shell 常常傻傻分不清.<br>由于对与shell的定制和配置往往是增加 function, alias, 以及补全等等, 都是为了方便shell操作, 所以大多数情况下都是修改<code>zshrc</code>实现的.</p>
+<p>那么 <code>.zprofile</code> 是不是有点多余呢? 以下讨论 <code>.zprofile</code> 可以发挥作用的场景</p>
+<p>场景#1: <code>export A=abc</code> 定义全局常量</p>
+<p>仅仅在登入系统时执行一次, 某些需要调用<code>hostname</code>之类耗时的操作也可以放在这里, 不会因为重复执行而浪费 CPU 运算.</p>
+<p>场景#2: 初始化虚拟环境</p>
+<p>在安装 <code>rvm</code> 或者 <code>pythonbrew</code> 的情况, 需要在当前环境加载相对应的初始化脚本, 才能使用 <code>rvm use xxx</code>, <code>pythonbrew use xxx</code> 等方式修改当前 interceptor.</p>
+<figure class="highlight plaintext"><figcaption><span>~/.zprofile</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#load default profile config</span><br><span class="line">. $HOME/.profile</span><br><span class="line"></span><br><span class="line"># Load RVM into a shell session *as a function*</span><br><span class="line">[[ -s &quot;$HOME/.rvm/scripts/rvm&quot; ]] &amp;&amp; source &quot;$HOME/.rvm/scripts/rvm&quot;</span><br><span class="line"># Load pythonbrew into a shell session *as a function*</span><br><span class="line">[[ -s &quot;$HOME/.pythonbrew/etc/bashrc&quot; ]] &amp;&amp; source &quot;$HOME/.pythonbrew/etc/bashrc&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Bhe Hongtyu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hitsmaxft" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hitsmaxft" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hitsmaxft" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hitsmaxft" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bhe Hongtyu</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://bhehontyublogging.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+</body>
+</html>

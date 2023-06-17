@@ -63,7 +63,7 @@
 <blockquote>
 <p>在写 nix 的过程中, 我个人经常会感到对 集合语法上的不适应, 主要原因是它在语法上和其他语言存在差异. 大部分时候, 我总感觉如果 nix 使用 <code>,</code> 作为分隔符对其他语言的使用者来说会更容易习惯.<br>nix wiki 也提到, 在 <code>nix</code>  中 ‘;’ 扮演了其他语言中 <code>,</code> 的角色. 所以在 nix 没有出现 <code>,</code> 是因为已经选择了 <code>;</code> </p>
 </blockquote>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组成员间不需要 `;` 隔开, 也不要习惯性地使用 `,`</span></span><br><span class="line"><span class="attr">alist</span> = [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> ]  ; </span><br><span class="line"></span><br><span class="line"><span class="comment"># 见 https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320545296</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set 成员需要 `;` 分隔</span></span><br><span class="line"><span class="attr">aSet</span> = &#123;</span><br><span class="line"> <span class="attr">a</span> = [];</span><br><span class="line"> <span class="attr">b</span> = <span class="string">&quot;strs&quot;</span>;</span><br><span class="line"> <span class="attr">c</span> = <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment"># 更多例子见 https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320542544</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组成员间不需要 `;` 隔开, 也不要习惯性地使用 `,`</span></span><br><span class="line"><span class="attr">alist</span> = [ <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> ]  ; </span><br><span class="line"></span><br><span class="line"><span class="comment"># 见 https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320545296</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set 成员需要 `;` 分隔</span></span><br><span class="line"><span class="attr">aSet</span> = &#123;</span><br><span class="line"> <span class="attr">a</span> = [];</span><br><span class="line"> <span class="attr">b</span> = <span class="string">&quot;strs&quot;</span>;</span><br><span class="line"> <span class="attr">c</span> = <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment"># 更多例子见 https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320542544</span></span><br></pre></td></tr></table></figure>
 
 <p>还有其他类型</p>
 <ul>
@@ -72,7 +72,7 @@
 <li>URL 和 Path  也很重要, 但这块后面写包管理的时候再展开了.</li>
 </ul>
 <p>更多常见类型, 见官方 wiki , <a target="_blank" rel="noopener" href="http://www.binaryphile.com/nix/2018/07/22/nix-language-primer.html">http://www.binaryphile.com/nix/2018/07/22/nix-language-primer.html</a></p>
-<h3 id="函数基础"><a href="#函数基础" class="headerlink" title="函数基础"></a>函数基础</h3><h3 id="无名-x2F-匿名参数函数"><a href="#无名-x2F-匿名参数函数" class="headerlink" title="无名&#x2F;匿名参数函数"></a>无名&#x2F;匿名参数函数</h3><p>最基础的函数定义 (传统函数风格) , 使用匿名参数, 按顺序传入</p>
+<h3 id="函数基础"><a href="#函数基础" class="headerlink" title="函数基础"></a>函数基础</h3><h3 id="无名参数函数-nameless-parameter-function"><a href="#无名参数函数-nameless-parameter-function" class="headerlink" title="无名参数函数(nameless parameter function)"></a>无名参数函数(nameless parameter function)</h3><p>最基础的函数定义 (传统函数风格) ,  使用参数按顺序传入</p>
 <blockquote>
 <p>函数定义的风格写法有好几种, 个人建议定义函数使用第一种或者第二种<br>调用语法, 个人习惯第一种,  <code>()</code> 使用多了会导致语句不易读, 陷入了 LISP 语法的笑话</p>
 </blockquote>
@@ -93,7 +93,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">let func = &#123;a, b, c, ...&#125; : a+b+c in  func &#123; a=1; b=2; c=3; d=4;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let func = &#123;a, b, c, ...&#125;@input : a+b+c+input.d; in  func &#123; a=1; b=2; c=3; d=4;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>nix 的 <code>命名参数</code> 函数定义, 从文档里不难看出来, 类似于把函数的传入参数变成一个 attribute set.</p>
-<p>等价于单参数的函数的一个语法糖,以下举几个例子, 函数 <code>fun</code> 采用了<code>匿名参数</code>, 但使用效果和<code>命名参数</code>是一样的.</p>
+<p>等价于单参数的函数的一个语法糖,以下举几个例子, 函数 <code>fun</code> 采用了<code>无名参数</code>, 但使用效果和<code>命名参数</code>是一样的.</p>
 <blockquote>
 <p><code>let fun = p:  with p ; a+b ; in fun &#123; a=1; b=2;&#125;</code><br>等价于  <code>let fun = &#123; a, b &#125;: a+b ; in fun &#123; a=1; b=2;&#125;</code></p>
 </blockquote>
@@ -101,6 +101,14 @@
 <blockquote>
 <p>等价于  <code>let fun = &#123; a, b &#125;@kwargs : a+b+kwargs.c ; in fun &#123; a=1; b=2; c=3; &#125;</code></p>
 </blockquote>
+<p>这里再介绍配合命名参数很常用的 <code>inherit</code>  关键字.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//在其他语言中经常会看到类似以下语法, inherit 起到类似的功能</span><br><span class="line"></span><br><span class="line"> let a = &#123; a:1 , b:2&#125;</span><br><span class="line"> let b = &#123;</span><br><span class="line">    c:3;</span><br><span class="line">    **a</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>inherit</code> 关键字可以起到类似 <code>with</code> 的作用, 省掉了把同名参数写一遍的功夫</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let</span><br><span class="line">  fun = &#123; a, b &#125;: a+b;</span><br><span class="line">  attrs = &#123; a =1 ; b=2; &#125;;</span><br><span class="line">in fun &#123; inherit (attrs) a b;  &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>回到 <code>命名参数</code> 话题本身</p>
 <p>这里举例只是做对比, 既然有语法糖, 直接用比较爽.</p>
 <p>相比前面的例子,  使用语言内置命名参数, 比较方便地使用默认参数.</p>
 <ul>
@@ -111,7 +119,7 @@
 <p>总结一下, 命名形参的函数定义, 相对于匿名参数有以下好处: </p>
 <ul>
 <li>防止多参数太长不可读</li>
-<li>参数默认值</li>
+<li>参数支撑默认值</li>
 <li>可变参数访问 <code>@xxx</code></li>
 </ul>
 <blockquote>

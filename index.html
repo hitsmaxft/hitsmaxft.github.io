@@ -171,7 +171,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-06-17 14:10:38 / Modified: 12:20:37" itemprop="dateCreated datePublished" datetime="2023-06-17T14:10:38+00:00">2023-06-17</time>
+              <time title="Created: 2023-06-17 14:10:38 / Modified: 12:27:55" itemprop="dateCreated datePublished" datetime="2023-06-17T14:10:38+00:00">2023-06-17</time>
             </span>
 
           
@@ -201,30 +201,29 @@
       
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于前阵子 MacBookPro 重新格式化了, 于是用 <code>nix-darwin</code> 和 <code>home-manager</code> 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结</p>
 <h2 id="运行环境和工具"><a href="#运行环境和工具" class="headerlink" title="运行环境和工具"></a>运行环境和工具</h2><p>nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 <code>类 Unix</code> 系统中使用, 作为系统自带包管理系统的补充.</p>
-<p>首先安装上基础的 nix 环境</p>
+<p>首先需要安装基础的 nix 环境, </p>
 <blockquote>
-<p>安装 <code>nix</code> 运行环境 <a target="_blank" rel="noopener" href="https://github.com/NixOS/nix#installation">https://github.com/NixOS/nix#installation</a></p>
-<p>MacOS 用户可以选择进一步 <a target="_blank" rel="noopener" href="https://github.com/LnL7/nix-darwin">https://github.com/LnL7/nix-darwin</a> 启用系统级的 Nix 集成</p>
-<p>其他 Linux 发行版, 或者 <code>wsl2</code> 用户, 可以通过 <code>home-manager</code> , 管理当前用户 shell 环境中的环境变量和, 起到类似 <code>homebrew</code> 的效果</p>
+<p><code>nix</code> 安装手册 <a target="_blank" rel="noopener" href="https://github.com/NixOS/nix#installation">https://github.com/NixOS/nix#installation</a></p>
+<p>MacOS 用户可以选择安装 <a target="_blank" rel="noopener" href="https://github.com/LnL7/nix-darwin">https://github.com/LnL7/nix-darwin</a> , 启用系统级的 Nix 集成</p>
+<p>其他 Linux 发行版, 或者 <code>wsl2</code> 用户, 可以通过 <code>home-manager</code>, 管理当前 <code>Home</code> 目录下的 rc 文件和环境变量,<br>起到和 <code>homebrew</code> 等价的效果</p>
 </blockquote>
-<p>安装完毕需要修改默认配置  <code>~/.config/nix/nix.conf</code>  启用 nix-comand 和 flakes</p>
+<p>安装完毕需要修改默认配置  <code>~/.config/nix/nix.conf</code>  启用 nix-command 和 flakes</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">experimental-features = nix-command flakes</span><br><span class="line">allowed-users = root @staff</span><br><span class="line">trusted-users = root @staff</span><br></pre></td></tr></table></figure>
 
 <p>以下是可选部分, 使用国内镜像等</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">trusted-substituters = https://mirrors.ustc.edu.cn/nix-channels/store</span><br><span class="line">substituters = https://mirrors.ustc.edu.cn/nix-channels/store https://cache.nixos.org</span><br></pre></td></tr></table></figure>
 
-
-<p>运行 nix 脚本, 可以使用以下两种方式</p>
+<p>执行 nix 脚本, 有以下两种方式</p>
 <ul>
 <li><code>nix eval</code>  直接执行表达式,在测试函数的时候非常方便</li>
 <li><code>nix repl</code> import 文件执行看结果, 交互式 shell 方便<ul>
-<li>在表达式之前加 <code>:p</code> 可以禁用 lazy , 看到完整的结果</li>
+<li>在表达式之前加 <code>:p</code> 可以禁用 lazy eval, 看到最终结果</li>
 <li>执行 <code>:help</code> 可以看到更多例子</li>
 </ul>
 </li>
 </ul>
 <p>举个 <code>nix eval</code> 的简单例子, 可以用这种方式测试本文中的其他例子.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nix eval --expr &#x27;1+1&#x27;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nix eval --expr &#x27;1+1&#x27;</span><br><span class="line">nix eval --expr &#x27;[ 1 2 3 4]&#x27;</span><br></pre></td></tr></table></figure>
 
 <h2 id="从零熟悉-nix-lang-的基本元素"><a href="#从零熟悉-nix-lang-的基本元素" class="headerlink" title="从零熟悉 nix-lang 的基本元素"></a>从零熟悉 nix-lang 的基本元素</h2><p>由于 nix 是函数式语言, 首先需要熟悉它的核心概念 <code>表达式</code></p>
 <h2 id="函数式和表达式"><a href="#函数式和表达式" class="headerlink" title="函数式和表达式"></a>函数式和表达式</h2><p>首先看一下一个 nix 表达式的组成部分</p>
@@ -388,7 +387,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
               </span>
 
           
@@ -517,7 +516,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -604,7 +603,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -734,7 +733,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -918,7 +917,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1085,7 +1084,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1239,7 +1238,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1342,7 +1341,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1448,7 +1447,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:20:37" itemprop="dateModified" datetime="2023-06-17T12:20:37+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">

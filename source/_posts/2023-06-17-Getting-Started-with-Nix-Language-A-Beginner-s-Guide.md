@@ -23,7 +23,7 @@ nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装
 > 其他 Linux 发行版, 或者 `wsl2` 用户, 可以通过 `home-manager` , 管理当前用户 shell 环境中的环境变量和, 起到类似 `homebrew` 的效果
 
 安装完毕需要修改默认配置  `~/.config/nix/nix.conf`  启用 nix-comand 和 flakes
-``
+
 ```
 experimental-features = nix-command flakes
 allowed-users = root @staff

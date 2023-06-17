@@ -100,7 +100,16 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 #theme: landscape
-theme: apollo
+#theme: apollo
+theme: hexo-theme-next
+theme_config:
+  social:
+    GitHub: https://github.com/hitsmaxft || fab fa-github
+    Twitter: https://twitter.com/hitsmaxft|| fab fa-twitter
+  disqus:
+    enable: true
+    shortname: bhehontyublogging
+    count: true
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment

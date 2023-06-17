@@ -101,7 +101,7 @@ ignore:
 ## Themes: https://hexo.io/themes/
 #theme: landscape
 #theme: apollo
-theme: hexo-theme-next
+theme: next
 theme_config:
   social:
     GitHub: https://github.com/hitsmaxft || fab fa-github
@@ -110,6 +110,10 @@ theme_config:
     enable: true
     shortname: bhehontyublogging
     count: true
+  font:
+    enable: true
+    global:
+      size: 0.9
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment

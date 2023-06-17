@@ -295,3 +295,10 @@ nix 缺乏一个好的函数查找工具. 目前只能通过文档查找
 
 * `builtins.*` https://nixos.org/manual/nix/stable/language/builtins.html
 * `nixpkgs.lib.*`  https://nixos.org/manual/nixpkgs/stable/#sec-functions-library
+
+
+## 参考文章
+
+
+* 官方手册 https://nixos.org/manual/nix/stable/language/index.html
+* 

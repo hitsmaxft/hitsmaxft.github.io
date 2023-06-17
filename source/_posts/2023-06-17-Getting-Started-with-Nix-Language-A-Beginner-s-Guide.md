@@ -14,15 +14,16 @@ date: 2023-06-17 14:10:38
 
 nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 `类 Unix` 系统中使用, 作为系统自带包管理系统的补充.
 
-首先安装上基础的 nix 环境
+首先需要安装基础的 nix 环境, 
 
-> 安装 `nix` 运行环境 https://github.com/NixOS/nix#installation
+> `nix` 安装手册 https://github.com/NixOS/nix#installation
 > 
-> MacOS 用户可以选择进一步 https://github.com/LnL7/nix-darwin 启用系统级的 Nix 集成
+> MacOS 用户可以选择安装 https://github.com/LnL7/nix-darwin , 启用系统级的 Nix 集成
 > 
-> 其他 Linux 发行版, 或者 `wsl2` 用户, 可以通过 `home-manager` , 管理当前用户 shell 环境中的环境变量和, 起到类似 `homebrew` 的效果
+> 其他 Linux 发行版, 或者 `wsl2` 用户, 可以通过 `home-manager`, 管理当前 `Home` 目录下的 rc 文件和环境变量,
+> 起到和 `homebrew` 等价的效果
 
-安装完毕需要修改默认配置  `~/.config/nix/nix.conf`  启用 nix-comand 和 flakes
+安装完毕需要修改默认配置  `~/.config/nix/nix.conf`  启用 nix-command 和 flakes
 
 ```
 experimental-features = nix-command flakes
@@ -37,18 +38,18 @@ trusted-substituters = https://mirrors.ustc.edu.cn/nix-channels/store
 substituters = https://mirrors.ustc.edu.cn/nix-channels/store https://cache.nixos.org
 ```
 
-
-运行 nix 脚本, 可以使用以下两种方式
+执行 nix 脚本, 有以下两种方式
 
 * `nix eval`  直接执行表达式,在测试函数的时候非常方便
 * `nix repl` import 文件执行看结果, 交互式 shell 方便
-	* 在表达式之前加 `:p` 可以禁用 lazy , 看到完整的结果
+	* 在表达式之前加 `:p` 可以禁用 lazy eval, 看到最终结果
 	* 执行 `:help` 可以看到更多例子
 
 举个 `nix eval` 的简单例子, 可以用这种方式测试本文中的其他例子.
 
 ```shell
 nix eval --expr '1+1'
+nix eval --expr '[ 1 2 3 4]'
 ```
 
 ## 从零熟悉 nix-lang 的基本元素

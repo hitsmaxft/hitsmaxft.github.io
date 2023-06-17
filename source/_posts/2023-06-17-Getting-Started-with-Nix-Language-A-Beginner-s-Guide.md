@@ -229,24 +229,26 @@ let func = {a, b, c, ...}@args: a+b+c+args.d; in  func { a=1; b=2; c=3; d=4;}
 > `let fun = p:  with p ; a+b ; in fun { a=1; b=2;}`
 > 等价于  `let fun = { a, b }: a+b ; in fun { a=1; b=2;}`
 >
-  `let fun = p:  with p ; a+b+p.c ; in fun { a=1; b=2; c=3;}`
-  `let fun = p:  with p ; a+b+c ; in fun { a=1; b=2; c=3;}`
+> `let fun = p:  with p ; a+b+p.c ; in fun { a=1; b=2; c=3;}`
+> `let fun = p:  with p ; a+b+c ; in fun { a=1; b=2; c=3;}`
 > 等价于  `let fun = { a, b }@kwargs : a+b+kwargs.c ; in fun { a=1; b=2; c=3; }`
 
 可能由于大量同名赋值的存在, `nix` 还提供了 `inherit`  关键字, 简化了形参的代码书写.
 
 > `inherit` 关键字可以起到类似 `with` 的作用, 省掉了把同名参数写一遍的功夫
 
-```
+```nix
 let
   fun = { a, b }: a+b;
   attrs = { a =1 ; b=2; };
 in fun { 
 	inherit (attrs) a b;
 }
+```
 
-/*or*/
+ 还有另外的写法
 
+```nix
 let
   fun = { a, b }: a+b;
   b = 2;

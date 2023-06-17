@@ -135,7 +135,7 @@ nix-repl> let a = ["a"]; in (let b = ["b"]; in with lib; a ++ b )
 
 ```nix
 # 数组成员间不需要 `;` 隔开, 也不要习惯性地使用 `,`
-alist = [ 1, 2, 3 ]  ; 
+alist = [ 1 2 3 ]  ; 
 
 # 见 https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320545296
 

@@ -2,42 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://io.bhe.ink/2015/04/24/how-to-understand-object-oriented-programming/</loc>
-    
-    <lastmod>2023-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2015/04/24/my-new-poker-2/</loc>
-    
-    <lastmod>2023-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2023/04/02/make-debian-bullseye-images-for-rock960c/</loc>
-    
-    <lastmod>2023-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2023/06/17/Getting-Started-with-Nix-Language-A-Beginner-s-Guide/</loc>
-    
-    <lastmod>2023-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://io.bhe.ink/2013/07/01/zshrc-startup-files/</loc>
     
     <lastmod>2023-06-17</lastmod>
@@ -138,6 +102,42 @@
   
   <url>
     <loc>https://io.bhe.ink/2015/04/18/routing-with-nginx-basic-rewrite-directives/</loc>
+    
+    <lastmod>2023-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2015/04/24/how-to-understand-object-oriented-programming/</loc>
+    
+    <lastmod>2023-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2015/04/24/my-new-poker-2/</loc>
+    
+    <lastmod>2023-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2023/04/02/make-debian-bullseye-images-for-rock960c/</loc>
+    
+    <lastmod>2023-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2023/06/17/Getting-Started-with-Nix-Language-A-Beginner-s-Guide/</loc>
     
     <lastmod>2023-06-17</lastmod>
     

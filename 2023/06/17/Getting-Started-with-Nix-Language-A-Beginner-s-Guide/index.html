@@ -1,0 +1,118 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Nix 语言初学者上手指南 · Bhe's Blog</title><meta name="description" content="Nix 语言初学者上手指南 - Bhe Hongtyu"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://io.bhe.ink/atom.xml" title="Bhe's Blog"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Bhe's Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/hitsmaxft" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/hitsmaxft" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Nix 语言初学者上手指南</h1><div class="post-info">Jun 17, 2023</div><div class="post-content"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于前阵子 MacBookPro 重新格式化了, 于是用 <code>nix-darwin</code> 和 <code>home-manager</code> 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的</p>
+<h2 id="运行环境和工具"><a href="#运行环境和工具" class="headerlink" title="运行环境和工具"></a>运行环境和工具</h2><blockquote>
+<p>安装 <a target="_blank" rel="noopener" href="https://nixos.org/download.html">https://nixos.org/download.html</a></p>
+</blockquote>
+<p>安装完毕需要修改默认配置  <code>~/.config/nix/nix.conf</code>  启用 nix-comand 和 flakes</p>
+<p>&#96;&#96;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">experimental-features = nix-command flakes</span><br><span class="line">allowed-users = root @staff</span><br><span class="line">trusted-users = root @staff</span><br></pre></td></tr></table></figure>
+
+<p>以下是可选部分, 使用国内镜像等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">trusted-substituters = https://mirrors.ustc.edu.cn/nix-channels/store</span><br><span class="line">substituters = https://mirrors.ustc.edu.cn/nix-channels/store https://cache.nixos.org</span><br></pre></td></tr></table></figure>
+
+
+<p>运行 nix 脚本, 可以使用以下两种方式</p>
+<ul>
+<li><code>nix eval</code>  直接执行表达式,在测试函数的时候非常方便</li>
+<li><code>nix repl</code> import 文件执行看结果, 交互式 shell 方便<ul>
+<li>在表达式之前加 <code>:p</code> 可以禁用 lazy , 看到完整的结果</li>
+<li>执行 <code>:help</code> 可以看到更多例子</li>
+</ul>
+</li>
+</ul>
+<p>举个 <code>nix eval</code> 的简单例子, 可以用这种方式测试本文中的其他例子.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nix eval --expr &#x27;1+1&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="从零熟悉-nix-lang-的基本元素"><a href="#从零熟悉-nix-lang-的基本元素" class="headerlink" title="从零熟悉 nix-lang 的基本元素"></a>从零熟悉 nix-lang 的基本元素</h2><p>由于 nix 是函数式语言, 首先需要熟悉它的核心概念 <code>表达式</code></p>
+<h2 id="nix-表达式"><a href="#nix-表达式" class="headerlink" title="nix 表达式"></a>nix 表达式</h2><p>一个 nix 表达式的组成部分</p>
+<ul>
+<li><code>with</code>  引入命名空间部分</li>
+<li><code>let ... in</code> 变量声明部分</li>
+<li>表达式返回值部分</li>
+</ul>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">## with; 命名空间</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">import</span> &lt;nixpkgs&gt; &#123;&#125;;</span><br><span class="line"><span class="keyword">with</span> libs</span><br><span class="line"></span><br><span class="line"><span class="comment">## 定义变量和新函数; 每个语句以 `;` 结束</span></span><br><span class="line"><span class="keyword">let</span></span><br><span class="line">	<span class="attr">a</span> =<span class="number">1</span> ;</span><br><span class="line">	<span class="attr">join</span> = (strs: conatStringSep <span class="string">&quot;&quot;</span> strs);</span><br><span class="line"><span class="keyword">in</span></span><br><span class="line">	join [ <span class="string">&quot;a&quot;</span> <span class="string">&quot;b&quot;</span> <span class="string">&quot;c&quot;</span> ]  <span class="comment"># 表达式不需要 `;`` 结尾</span></span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+
+<p>with 语句可以在它之后的作用域中直接使用它的内部属性和方法, 这可以大大减少代码长度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">builtins.concatStringsSep &quot;,&quot; (builtins.map (p : &quot;v&quot;+p) [ &quot;1&quot; &quot;2&quot; &quot;3&quot; ])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以改写成.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">with builtins; concatStringsSep &quot;,&quot; (map (p : &quot;v&quot;+p) [ &quot;1&quot; &quot;2&quot; &quot;3&quot; ])</span><br></pre></td></tr></table></figure>
+
+<p>普通 set 变量也是可以用 <code>with</code>  导入当前 <code>scope</code> ;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let</span><br><span class="line">   values = &#123; a =1; b=2 ;&#125;;</span><br><span class="line">in</span><br><span class="line">   with values ; a+b</span><br></pre></td></tr></table></figure>
+
+<p>这几个元素可以在表达式的内部继续嵌套使用, 举一个嵌套表达式的例子</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nix-repl&gt; <span class="keyword">let</span> <span class="attr">a</span> = [<span class="string">&quot;a&quot;</span>]; <span class="keyword">in</span> (<span class="keyword">let</span> <span class="attr">b</span> = [<span class="string">&quot;b&quot;</span>]; <span class="keyword">in</span> <span class="keyword">with</span> lib; a ++ b )</span><br><span class="line">[ <span class="string">&quot;a&quot;</span> <span class="string">&quot;b&quot;</span> ]</span><br></pre></td></tr></table></figure>
+
+
+<p>但复杂语法深度套娃, 最终结果会非常难读. 过度炫技不可取.</p>
+<h3 id="类型和集合"><a href="#类型和集合" class="headerlink" title="类型和集合"></a>类型和集合</h3><h4 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h4><p>关于基础类型这里就不展开了, 基本的 <code>bool</code>, <code>int</code>, <code>string</code> 和大部分语言差异不大.</p>
+<blockquote>
+<p>见 <a target="_blank" rel="noopener" href="https://nixos.org/manual/nix/stable/language/values.html">https://nixos.org/manual/nix/stable/language/values.html</a></p>
+</blockquote>
+<h4 id="集合类型"><a href="#集合类型" class="headerlink" title="集合类型"></a>集合类型</h4><p>在 nix 里 集合类型主要需要了解 <code>lists</code> 和 <code>sets</code> ( <code>attribute set</code>)</p>
+<ul>
+<li>list : 数组类型</li>
+<li>set : 字典或者 map</li>
+</ul>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="string">&quot;one&quot;</span> <span class="string">&quot;two&quot;</span> <span class="string">&quot;three&quot;</span> ]</span><br><span class="line"></span><br><span class="line">&#123; <span class="attr">key1</span> = <span class="string">&quot;value1&quot;</span>; <span class="attr">key2</span> = <span class="string">&quot;value2&quot;</span>; &#125;</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>在写 nix 的过程中, 我个人经常会感到对 集合语法上的不适应, 主要原因是它在语法上和其他语言存在差异. 大部分时候, 我总感觉如果 nix 使用 <code>,</code> 作为分隔符对其他语言的使用者来说会更容易习惯.<br>nix wiki 也提到, 在 <code>nix</code>  中 ‘;’ 扮演了其他语言中 <code>,</code> 的角色. 所以在 nix 没有出现 <code>,</code> 是因为已经选择了 <code>;</code> </p>
+</blockquote>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组成员间不需要 `;` 隔开, 也不要习惯性地使用 `,`</span></span><br><span class="line"><span class="attr">alist</span> = [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> ]  ; </span><br><span class="line"></span><br><span class="line"><span class="comment"># 见 https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320545296</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set 成员需要 `;` 分隔</span></span><br><span class="line"><span class="attr">aSet</span> = &#123;</span><br><span class="line"> <span class="attr">a</span> = [];</span><br><span class="line"> <span class="attr">b</span> = <span class="string">&quot;strs&quot;</span>;</span><br><span class="line"> <span class="attr">c</span> = <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 见 https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320542544</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>还有其他类型</p>
+<ul>
+<li>string <a target="_blank" rel="noopener" href="https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320577792">https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320577792</a></li>
+<li>derivation <a target="_blank" rel="noopener" href="https://nixos.org/guides/nix-pills/our-first-derivation.html">https://nixos.org/guides/nix-pills/our-first-derivation.html</a> 关于 derivation , 需要很长的展开, 篇幅原因这里就先跳过了.</li>
+<li>URL 和 Path  也很重要, 但这块后面写包管理的时候再展开了.</li>
+</ul>
+<p>更多常见类型, 见官方 wiki , <a target="_blank" rel="noopener" href="http://www.binaryphile.com/nix/2018/07/22/nix-language-primer.html">http://www.binaryphile.com/nix/2018/07/22/nix-language-primer.html</a></p>
+<h3 id="函数基础"><a href="#函数基础" class="headerlink" title="函数基础"></a>函数基础</h3><h3 id="无名-x2F-匿名参数函数"><a href="#无名-x2F-匿名参数函数" class="headerlink" title="无名&#x2F;匿名参数函数"></a>无名&#x2F;匿名参数函数</h3><p>最基础的函数定义 (传统函数风格) , 使用匿名参数, 按顺序传入</p>
+<blockquote>
+<p>函数定义的风格写法有好几种, 个人建议定义函数使用第一种或者第二种<br>调用语法, 个人习惯第一种,  <code>()</code> 使用多了会导致语句不易读, 陷入了 LISP 语法的笑话</p>
+</blockquote>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span></span><br><span class="line">  <span class="attr">plus</span> = (a: b: a + b ); </span><br><span class="line">  <span class="attr">plus2</span> = a: b: a+b;</span><br><span class="line">  <span class="attr">plus3</span> = (a: (b: a+b));</span><br><span class="line">  <span class="attr">plus4</span> = a: (b: a+b);</span><br><span class="line"><span class="keyword">in</span>  (plus <span class="number">1</span> <span class="number">2</span>) + plus2 (<span class="number">1</span>) (<span class="number">2</span>)  + plus3(<span class="number">1</span>) <span class="number">2</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="number">9</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>作为函数式语言, 不难发现 nix 也是支持 curry 的.</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span></span><br><span class="line"> <span class="attr">plus</span> = a: b: a+b;</span><br><span class="line"> <span class="attr">plus1</span> = plus(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">in</span></span><br><span class="line"> plus1(plus1(<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>由于  <code>:</code> 后面的函数体是一个表达式, 因此可以加入 <code>let ... in</code>  定义中间变量.</p>
+</blockquote>
+<blockquote>
+<p>另外, 在中间语句中加入 with 也是很常见的, 大部分库代码或者包描述中都可以看到.</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let</span><br><span class="line">  values = &#123; c=2; &#125;;</span><br><span class="line">  plus1 = a: with values; let b=1; in a+b+c;</span><br><span class="line">in</span><br><span class="line">  plus1 2</span><br><span class="line"></span><br><span class="line">&gt;&gt; 3</span><br></pre></td></tr></table></figure>
+
+<h4 id="命名参数风格"><a href="#命名参数风格" class="headerlink" title="命名参数风格"></a>命名参数风格</h4><p>nix 的<code>命名参数</code> 函数定义, 不难看出来就是把函数的传入参数变成一个 attribute set.</p>
+<blockquote>
+<p>所以等价于单参数的函数</p>
+<p>函数 <code>fun</code> 采用了<code>匿名参数</code>, 但使用效果和<code>命名参数</code>是一样的.</p>
+<p><code>let fun = p:  with p ; a+b ; in fun &#123; a=1; b=2;&#125;</code></p>
+<p>等价于</p>
+<p><code>let fun = &#123; a, b &#125;: a+b ; in fun &#123; a=1; b=2;&#125;</code></p>
+</blockquote>
+<p>相比前面的例子,  命名参数支持可变参数.  </p>
+<ul>
+<li>可变参数 &#96;func &#x3D; {a, b, c, …} : a+b+c </li>
+<li>默认参数 <code>func = &#123;a, b, c? 3, ...&#125; : a+b+c</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">:p let</span><br><span class="line">func = &#123;a, b, c, ...&#125; : a+b+c;   #可变参数列表</span><br><span class="line">func2 = &#123;a, b, c?3 &#125;: a+b+c;</span><br><span class="line">in </span><br><span class="line">[ func&#123; a=1; b=2; c=3; &#125; func2&#123; a=1; b=2; &#125; ]</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>更多例子见官方文档  <a target="_blank" rel="noopener" href="https://nixos.org/guides/nix-pills/functions-and-imports.html#idm140737320477216">https://nixos.org/guides/nix-pills/functions-and-imports.html#idm140737320477216</a></p>
+</blockquote>
+<blockquote>
+<p>注意, 不能像 c 语言一样用方括号包裹表达式, 否则就变成了一个返回值为 set 的函数了.</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;a, b, c, ...&#125;: &#123;&#125;  #返回值是 set</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="函数手册"><a href="#函数手册" class="headerlink" title="函数手册"></a>函数手册</h3><p>nix 缺乏一个好的函数查找工具. 目前只能通过文档查找</p>
+<ul>
+<li><code>builtins.*</code> <a target="_blank" rel="noopener" href="https://nixos.org/manual/nix/stable/language/builtins.html">https://nixos.org/manual/nix/stable/language/builtins.html</a></li>
+<li><code>nixpkgs.lib.*</code>  <a target="_blank" rel="noopener" href="https://nixos.org/manual/nixpkgs/stable/#sec-functions-library">https://nixos.org/manual/nixpkgs/stable/#sec-functions-library</a></li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2023/04/02/make-debian-bullseye-images-for-rock960c/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2023 <a href="https://io.bhe.ink">Bhe Hongtyu</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

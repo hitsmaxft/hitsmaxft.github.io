@@ -13,7 +13,9 @@ https://io.bhe.ink/2015/04/18/routing-with-nginx-basic-rewrite-directives/
 https://io.bhe.ink/2015/04/24/how-to-understand-object-oriented-programming/
 https://io.bhe.ink/2015/04/24/my-new-poker-2/
 https://io.bhe.ink/2023/04/02/make-debian-bullseye-images-for-rock960c/
+https://io.bhe.ink/2023/06/17/Getting-Started-with-Nix-Language-A-Beginner-s-Guide/
 https://io.bhe.ink/
+https://io.bhe.ink/tags/nix-language/
 https://io.bhe.ink/tags/sbc-debian/
 https://io.bhe.ink/categories/shell-environment-zshrc/
 https://io.bhe.ink/categories/linux-desktop-app-qq-archlinux/

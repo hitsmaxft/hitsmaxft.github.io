@@ -28,7 +28,7 @@
 <meta property="og:description" content="前言由于前阵子 MacBookPro 重新格式化了, 于是用 nix-darwin 和 home-manager 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结 运行环境和工具nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 类 Unix 系统中使用, 作为系统自带包管理系统的补充. 首">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-17T14:10:38.000Z">
-<meta property="article:modified_time" content="2023-06-17T12:27:55.709Z">
+<meta property="article:modified_time" content="2023-06-17T12:36:34.884Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="nix, language">
 <meta name="twitter:card" content="summary">
@@ -176,7 +176,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-06-17 14:10:38 / Modified: 12:27:55" itemprop="dateCreated datePublished" datetime="2023-06-17T14:10:38+00:00">2023-06-17</time>
+              <time title="Created: 2023-06-17 14:10:38 / Modified: 12:36:34" itemprop="dateCreated datePublished" datetime="2023-06-17T14:10:38+00:00">2023-06-17</time>
             </span>
 
           
@@ -293,10 +293,13 @@
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let</span><br><span class="line">  values = &#123; c=2; &#125;;</span><br><span class="line">  plus1 = a: with values; let b=1; in a+b+c;</span><br><span class="line">in</span><br><span class="line">  plus1 2</span><br><span class="line"></span><br><span class="line">&gt;&gt; 3</span><br></pre></td></tr></table></figure>
 
-<h4 id="命名参数风格"><a href="#命名参数风格" class="headerlink" title="命名参数风格"></a>命名参数风格</h4><p>首先举一个复杂的可变参数长度的例子</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">let func = &#123;a, b, c, ...&#125; : a+b+c in  func &#123; a=1; b=2; c=3; d=4;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let func = &#123;a, b, c, ...&#125;@input : a+b+c+input.d; in  func &#123; a=1; b=2; c=3; d=4;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="命名参数函数"><a href="#命名参数函数" class="headerlink" title="命名参数函数"></a>命名参数函数</h4><p>首先举一个复杂的可变参数长度的例子开场:</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">func</span> = &#123;a, b, c, ...&#125; : a+b+c <span class="keyword">in</span>  func &#123; <span class="attr">a=1;</span> <span class="attr">b=2;</span> <span class="attr">c=3;</span> <span class="attr">d=4;&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>nix 的 <code>命名参数</code> 函数定义, 从文档里不难看出来, 类似于把函数的传入参数变成一个 attribute set.</p>
+<p>如果获取可变参数中的变量, 可以通过 <code>@</code> 引用的参数列表, 这里使用 args 作为变量名.</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">func</span> = &#123;a, b, c, ...&#125;@args: a+b+c+args.d; <span class="keyword">in</span>  func &#123; <span class="attr">a=1;</span> <span class="attr">b=2;</span> <span class="attr">c=3;</span> <span class="attr">d=4;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过nix 的 <code>命名参数</code> 函数定义可以看出来, 类似于把函数的传入参数变成一个 attribute set.</p>
 <p>等价于单参数的函数的一个语法糖,以下举几个例子, 函数 <code>fun</code> 采用了<code>无名参数</code>, 但使用效果和<code>命名参数</code>是一样的.</p>
 <blockquote>
 <p><code>let fun = p:  with p ; a+b ; in fun &#123; a=1; b=2;&#125;</code><br>等价于  <code>let fun = &#123; a, b &#125;: a+b ; in fun &#123; a=1; b=2;&#125;</code></p>
@@ -305,8 +308,10 @@
 <blockquote>
 <p>等价于  <code>let fun = &#123; a, b &#125;@kwargs : a+b+kwargs.c ; in fun &#123; a=1; b=2; c=3; &#125;</code></p>
 </blockquote>
-<p>这里再介绍配合命名参数很常用的 <code>inherit</code>  关键字.</p>
+<p>可能由于大量同名赋值的存在, <code>nix</code> 还提供了 <code>inherit</code>  关键字, 简化了形参的代码书写.</p>
+<blockquote>
 <p><code>inherit</code> 关键字可以起到类似 <code>with</code> 的作用, 省掉了把同名参数写一遍的功夫</p>
+</blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let</span><br><span class="line">  fun = &#123; a, b &#125;: a+b;</span><br><span class="line">  attrs = &#123; a =1 ; b=2; &#125;;</span><br><span class="line">in fun &#123; </span><br><span class="line">	inherit (attrs) a b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*or*/</span><br><span class="line"></span><br><span class="line">let</span><br><span class="line">  fun = &#123; a, b &#125;: a+b;</span><br><span class="line">  b = 2;</span><br><span class="line">in fun &#123; </span><br><span class="line">	a=2;</span><br><span class="line">	inherit b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
@@ -429,7 +434,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E5%92%8C%E5%B7%A5%E5%85%B7"><span class="nav-number">2.</span> <span class="nav-text">运行环境和工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E9%9B%B6%E7%86%9F%E6%82%89-nix-lang-%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0"><span class="nav-number">3.</span> <span class="nav-text">从零熟悉 nix-lang 的基本元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E5%92%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">函数式和表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E5%92%8C%E9%9B%86%E5%90%88"><span class="nav-number">4.1.</span> <span class="nav-text">类型和集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.1.</span> <span class="nav-text">基本类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">集合类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80"><span class="nav-number">4.2.</span> <span class="nav-text">函数基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E5%90%8D%E5%8F%82%E6%95%B0%E5%87%BD%E6%95%B0-nameless-parameter-function"><span class="nav-number">4.3.</span> <span class="nav-text">无名参数函数(nameless parameter function)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E5%8F%82%E6%95%B0%E9%A3%8E%E6%A0%BC"><span class="nav-number">4.3.1.</span> <span class="nav-text">命名参数风格</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%89%8B%E5%86%8C"><span class="nav-number">4.4.</span> <span class="nav-text">函数手册</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">5.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E5%92%8C%E5%B7%A5%E5%85%B7"><span class="nav-number">2.</span> <span class="nav-text">运行环境和工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E9%9B%B6%E7%86%9F%E6%82%89-nix-lang-%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0"><span class="nav-number">3.</span> <span class="nav-text">从零熟悉 nix-lang 的基本元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E5%92%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">函数式和表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E5%92%8C%E9%9B%86%E5%90%88"><span class="nav-number">4.1.</span> <span class="nav-text">类型和集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.1.</span> <span class="nav-text">基本类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">集合类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80"><span class="nav-number">4.2.</span> <span class="nav-text">函数基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E5%90%8D%E5%8F%82%E6%95%B0%E5%87%BD%E6%95%B0-nameless-parameter-function"><span class="nav-number">4.3.</span> <span class="nav-text">无名参数函数(nameless parameter function)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E5%8F%82%E6%95%B0%E5%87%BD%E6%95%B0"><span class="nav-number">4.3.1.</span> <span class="nav-text">命名参数函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%89%8B%E5%86%8C"><span class="nav-number">4.4.</span> <span class="nav-text">函数手册</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">5.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

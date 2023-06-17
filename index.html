@@ -171,7 +171,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-06-17 14:10:38 / Modified: 12:27:55" itemprop="dateCreated datePublished" datetime="2023-06-17T14:10:38+00:00">2023-06-17</time>
+              <time title="Created: 2023-06-17 14:10:38 / Modified: 12:36:34" itemprop="dateCreated datePublished" datetime="2023-06-17T14:10:38+00:00">2023-06-17</time>
             </span>
 
           
@@ -288,10 +288,13 @@
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let</span><br><span class="line">  values = &#123; c=2; &#125;;</span><br><span class="line">  plus1 = a: with values; let b=1; in a+b+c;</span><br><span class="line">in</span><br><span class="line">  plus1 2</span><br><span class="line"></span><br><span class="line">&gt;&gt; 3</span><br></pre></td></tr></table></figure>
 
-<h4 id="命名参数风格"><a href="#命名参数风格" class="headerlink" title="命名参数风格"></a>命名参数风格</h4><p>首先举一个复杂的可变参数长度的例子</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">let func = &#123;a, b, c, ...&#125; : a+b+c in  func &#123; a=1; b=2; c=3; d=4;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let func = &#123;a, b, c, ...&#125;@input : a+b+c+input.d; in  func &#123; a=1; b=2; c=3; d=4;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="命名参数函数"><a href="#命名参数函数" class="headerlink" title="命名参数函数"></a>命名参数函数</h4><p>首先举一个复杂的可变参数长度的例子开场:</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">func</span> = &#123;a, b, c, ...&#125; : a+b+c <span class="keyword">in</span>  func &#123; <span class="attr">a=1;</span> <span class="attr">b=2;</span> <span class="attr">c=3;</span> <span class="attr">d=4;&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>nix 的 <code>命名参数</code> 函数定义, 从文档里不难看出来, 类似于把函数的传入参数变成一个 attribute set.</p>
+<p>如果获取可变参数中的变量, 可以通过 <code>@</code> 引用的参数列表, 这里使用 args 作为变量名.</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">func</span> = &#123;a, b, c, ...&#125;@args: a+b+c+args.d; <span class="keyword">in</span>  func &#123; <span class="attr">a=1;</span> <span class="attr">b=2;</span> <span class="attr">c=3;</span> <span class="attr">d=4;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过nix 的 <code>命名参数</code> 函数定义可以看出来, 类似于把函数的传入参数变成一个 attribute set.</p>
 <p>等价于单参数的函数的一个语法糖,以下举几个例子, 函数 <code>fun</code> 采用了<code>无名参数</code>, 但使用效果和<code>命名参数</code>是一样的.</p>
 <blockquote>
 <p><code>let fun = p:  with p ; a+b ; in fun &#123; a=1; b=2;&#125;</code><br>等价于  <code>let fun = &#123; a, b &#125;: a+b ; in fun &#123; a=1; b=2;&#125;</code></p>
@@ -300,8 +303,10 @@
 <blockquote>
 <p>等价于  <code>let fun = &#123; a, b &#125;@kwargs : a+b+kwargs.c ; in fun &#123; a=1; b=2; c=3; &#125;</code></p>
 </blockquote>
-<p>这里再介绍配合命名参数很常用的 <code>inherit</code>  关键字.</p>
+<p>可能由于大量同名赋值的存在, <code>nix</code> 还提供了 <code>inherit</code>  关键字, 简化了形参的代码书写.</p>
+<blockquote>
 <p><code>inherit</code> 关键字可以起到类似 <code>with</code> 的作用, 省掉了把同名参数写一遍的功夫</p>
+</blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let</span><br><span class="line">  fun = &#123; a, b &#125;: a+b;</span><br><span class="line">  attrs = &#123; a =1 ; b=2; &#125;;</span><br><span class="line">in fun &#123; </span><br><span class="line">	inherit (attrs) a b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*or*/</span><br><span class="line"></span><br><span class="line">let</span><br><span class="line">  fun = &#123; a, b &#125;: a+b;</span><br><span class="line">  b = 2;</span><br><span class="line">in fun &#123; </span><br><span class="line">	a=2;</span><br><span class="line">	inherit b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
@@ -387,7 +392,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:36:34" itemprop="dateModified" datetime="2023-06-17T12:36:34+00:00">2023-06-17</time>
               </span>
 
           
@@ -516,7 +521,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:36:34" itemprop="dateModified" datetime="2023-06-17T12:36:34+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -603,7 +608,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:36:34" itemprop="dateModified" datetime="2023-06-17T12:36:34+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -733,7 +738,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:36:34" itemprop="dateModified" datetime="2023-06-17T12:36:34+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -917,7 +922,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:36:34" itemprop="dateModified" datetime="2023-06-17T12:36:34+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1084,7 +1089,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:36:34" itemprop="dateModified" datetime="2023-06-17T12:36:34+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1238,7 +1243,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:36:34" itemprop="dateModified" datetime="2023-06-17T12:36:34+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1341,7 +1346,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:36:34" itemprop="dateModified" datetime="2023-06-17T12:36:34+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1447,7 +1452,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-06-17 12:27:55" itemprop="dateModified" datetime="2023-06-17T12:27:55+00:00">2023-06-17</time>
+                <time title="Modified: 2023-06-17 12:36:34" itemprop="dateModified" datetime="2023-06-17T12:36:34+00:00">2023-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">

@@ -290,3 +290,9 @@ in
 }
 
 ```
+
+## 总结
+
+就此, 本文总结了大部分常见的 home-manager 配置管理技巧, 更多内容可以参考官方文档 https://nix-community.github.io/home-manager/index.html
+
+

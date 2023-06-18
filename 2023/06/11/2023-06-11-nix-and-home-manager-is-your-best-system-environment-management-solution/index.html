@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="使用 yadm 和 home-manager 协同维护系统配置 home-manager yadm 完成将配置文件同步到 github  安装 home-manager假设当前系统处于初始化状态, 这里首先更新 channel , 接着安装最新的 home-manager.  官方安装教程 https:&#x2F;&#x2F;nix-community.github.io&#x2F;home-manager&#x2F;index.htm">
+    <meta name="description" content="前言 由 chatgpt 生成…  在当今的技术领域，配置管理变得越来越重要。对于开发者和技术爱好者来说，保持一致的开发环境和工具配置是至关重要的。然而，传统的配置文件管理方式可能会导致配置分散、混乱和难以维护的问题。 幸运的是，有一个强大的工具可以帮助我们解决这些问题，那就是home-manager。Home-manager是一个基于Nix的工具，旨在帮助用户统一管理他们的配置文件，并通过声明性">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nix and home-manager, 最好的系统环境管理工具">
 <meta property="og:url" content="https://io.bhe.ink/2023/06/11/2023-06-11-nix-and-home-manager-is-your-best-system-environment-management-solution/index.html">
 <meta property="og:site_name" content="Bhe&#39;s Blog">
-<meta property="og:description" content="使用 yadm 和 home-manager 协同维护系统配置 home-manager yadm 完成将配置文件同步到 github  安装 home-manager假设当前系统处于初始化状态, 这里首先更新 channel , 接着安装最新的 home-manager.  官方安装教程 https:&#x2F;&#x2F;nix-community.github.io&#x2F;home-manager&#x2F;index.htm">
+<meta property="og:description" content="前言 由 chatgpt 生成…  在当今的技术领域，配置管理变得越来越重要。对于开发者和技术爱好者来说，保持一致的开发环境和工具配置是至关重要的。然而，传统的配置文件管理方式可能会导致配置分散、混乱和难以维护的问题。 幸运的是，有一个强大的工具可以帮助我们解决这些问题，那就是home-manager。Home-manager是一个基于Nix的工具，旨在帮助用户统一管理他们的配置文件，并通过声明性">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-11T11:07:26.000Z">
-<meta property="article:modified_time" content="2023-06-18T12:57:39.537Z">
+<meta property="article:modified_time" content="2023-06-18T13:01:28.483Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="nix, dotfiles">
 <meta name="twitter:card" content="summary">
@@ -109,7 +109,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-yadm-%E5%92%8C-home-manager-%E5%8D%8F%E5%90%8C%E7%BB%B4%E6%8A%A4%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">使用 yadm 和 home-manager 协同维护系统配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-home-manager"><span class="nav-number">2.</span> <span class="nav-text">安装 home-manager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-yadm-%E5%B0%86%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5%E5%88%B0-github"><span class="nav-number">3.</span> <span class="nav-text">通过 yadm 将配置文件同步到 github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#home-program-%E5%A3%B0%E6%98%8E%E5%BC%8F%E7%AE%A1%E7%90%86shell-%E7%8E%AF%E5%A2%83"><span class="nav-number">4.</span> <span class="nav-text">home.program: 声明式管理shell 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%AD%E8%BA%AB%E5%BC%80%E5%A7%8B-%E9%80%9A%E8%BF%87-nix-%E7%AE%A1%E7%90%86-zsh-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">热身开始, 通过 nix 管理 zsh 配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%90%86-bash-%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">管理 bash 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%90%86-vim-%E9%85%8D%E7%BD%AE"><span class="nav-number">4.3.</span> <span class="nav-text">管理 vim 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-import-%E7%AE%A1%E7%90%86%E8%87%AA%E5%AE%9A%E4%B9%89-program"><span class="nav-number">4.4.</span> <span class="nav-text">通过 import 管理自定义 program</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-overlay-%E5%A2%9E%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%E5%92%8C%E5%BA%94%E7%94%A8%E5%8C%85"><span class="nav-number">5.</span> <span class="nav-text">通过 overlay 增加自定义函数和应用包</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-yadm-%E5%92%8C-home-manager-%E5%8D%8F%E5%90%8C%E7%BB%B4%E6%8A%A4%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">使用 yadm 和 home-manager 协同维护系统配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-home-manager"><span class="nav-number">3.</span> <span class="nav-text">安装 home-manager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-yadm-%E5%B0%86%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5%E5%88%B0-github"><span class="nav-number">4.</span> <span class="nav-text">通过 yadm 将配置文件同步到 github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#home-program-%E5%A3%B0%E6%98%8E%E5%BC%8F%E7%AE%A1%E7%90%86shell-%E7%8E%AF%E5%A2%83"><span class="nav-number">5.</span> <span class="nav-text">home.program: 声明式管理shell 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%AD%E8%BA%AB%E5%BC%80%E5%A7%8B-%E9%80%9A%E8%BF%87-nix-%E7%AE%A1%E7%90%86-zsh-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">热身开始, 通过 nix 管理 zsh 配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%90%86-bash-%E9%85%8D%E7%BD%AE"><span class="nav-number">5.2.</span> <span class="nav-text">管理 bash 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%90%86-vim-%E9%85%8D%E7%BD%AE"><span class="nav-number">5.3.</span> <span class="nav-text">管理 vim 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-import-%E7%AE%A1%E7%90%86%E8%87%AA%E5%AE%9A%E4%B9%89-program"><span class="nav-number">5.4.</span> <span class="nav-text">通过 import 管理自定义 program</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-overlay-%E5%A2%9E%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%E5%92%8C%E5%BA%94%E7%94%A8%E5%8C%85"><span class="nav-number">6.</span> <span class="nav-text">通过 overlay 增加自定义函数和应用包</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -202,7 +202,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 12:57:39" itemprop="dateModified" datetime="2023-06-18T12:57:39+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 13:01:28" itemprop="dateModified" datetime="2023-06-18T13:01:28+00:00">2023-06-18</time>
     </span>
 
   
@@ -228,8 +228,14 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="使用-yadm-和-home-manager-协同维护系统配置"><a href="#使用-yadm-和-home-manager-协同维护系统配置" class="headerlink" title="使用 yadm 和 home-manager 协同维护系统配置"></a>使用 yadm 和 home-manager 协同维护系统配置</h2><ul>
-<li><code>home-manager</code></li>
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>由 chatgpt 生成…</p>
+</blockquote>
+<p>在当今的技术领域，配置管理变得越来越重要。对于开发者和技术爱好者来说，保持一致的开发环境和工具配置是至关重要的。然而，传统的配置文件管理方式可能会导致配置分散、混乱和难以维护的问题。</p>
+<p>幸运的是，有一个强大的工具可以帮助我们解决这些问题，那就是home-manager。Home-manager是一个基于Nix的工具，旨在帮助用户统一管理他们的配置文件，并通过声明性的方式进行配置。</p>
+<p>本文将介绍如何安装home-manager以及使用它来管理一些常见的配置文件，例如zsh、bash和vim。我们将探索如何使用home-manager的内置功能和插件来简化配置文件的管理，并介绍如何定制和贡献新的配置。</p>
+<h2 id="使用-yadm-和-home-manager-协同维护系统配置"><a href="#使用-yadm-和-home-manager-协同维护系统配置" class="headerlink" title="使用 yadm 和 home-manager 协同维护系统配置"></a>使用 yadm 和 home-manager 协同维护系统配置</h2><ul>
+<li><code>home-manager</code> 声明式, 函数式, 面向终态的用户配置管理方案</li>
 <li><code>yadm</code> 完成将配置文件同步到 github</li>
 </ul>
 <h2 id="安装-home-manager"><a href="#安装-home-manager" class="headerlink" title="安装 home-manager"></a>安装 home-manager</h2><p>假设当前系统处于初始化状态, 这里首先更新 channel , 接着安装最新的 home-manager.</p>

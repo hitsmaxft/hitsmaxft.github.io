@@ -195,7 +195,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 12:49:16" itemprop="dateModified" datetime="2023-06-18T12:49:16+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 12:57:39" itemprop="dateModified" datetime="2023-06-18T12:57:39+00:00">2023-06-18</time>
     </span>
 
   
@@ -255,7 +255,7 @@
 <li><code>let ... in</code> 变量声明部分</li>
 <li>表达式实际内容</li>
 </ul>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">## with; 命名空间</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">import</span> &lt;nixpkgs&gt; &#123;&#125;;</span><br><span class="line"><span class="keyword">with</span> libs</span><br><span class="line"></span><br><span class="line"><span class="comment">## 定义变量和新函数; 每个语句以 `;` 结束</span></span><br><span class="line"><span class="keyword">let</span></span><br><span class="line">	<span class="attr">a</span> =<span class="number">1</span> ;</span><br><span class="line">	<span class="attr">join</span> = (strs: conatStringSep <span class="string">&quot;&quot;</span> strs);</span><br><span class="line"><span class="keyword">in</span></span><br><span class="line">	join [ <span class="string">&quot;a&quot;</span> <span class="string">&quot;b&quot;</span> <span class="string">&quot;c&quot;</span> ]  <span class="comment"># 表达式不需要 `;`` 结尾</span></span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">## with; 命名空间</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">import</span> &lt;nixpkgs&gt; &#123;&#125;;</span><br><span class="line"><span class="keyword">with</span> libs;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 定义变量和新函数; 每个语句以 `;` 结束</span></span><br><span class="line"><span class="keyword">let</span></span><br><span class="line">	<span class="attr">a</span> =<span class="number">1</span> ;</span><br><span class="line">	<span class="attr">join</span> = (strs: conatStringSep <span class="string">&quot;&quot;</span> strs);</span><br><span class="line"><span class="keyword">in</span></span><br><span class="line">	join [ <span class="string">&quot;a&quot;</span> <span class="string">&quot;b&quot;</span> <span class="string">&quot;c&quot;</span> ]  <span class="comment"># 表达式不需要 `;`` 结尾</span></span><br><span class="line">	</span><br></pre></td></tr></table></figure>
 
 <p>with 语句在当前表达式作用域 (<code>scope</code> ) 中直接使用它的内部属性&#x2F;方法, 可以减少代码长度.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*改写前*/</span><br><span class="line">builtins.concatStringsSep &quot;,&quot; (builtins.map (p : &quot;v&quot;+p) [ &quot;1&quot; &quot;2&quot; &quot;3&quot; ])</span><br><span class="line">/*改写后*/</span><br><span class="line">with builtins; concatStringsSep &quot;,&quot; (map (p : &quot;v&quot;+p) [ &quot;1&quot; &quot;2&quot; &quot;3&quot; ])</span><br></pre></td></tr></table></figure>
@@ -264,7 +264,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let</span><br><span class="line">   values = &#123; a =1; b=2 ;&#125;;</span><br><span class="line">in</span><br><span class="line">   with values ; a+b</span><br></pre></td></tr></table></figure>
 
 <p>这几个元素可以在表达式的内部继续嵌套使用, 举一个嵌套表达式的例子</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nix-repl&gt; <span class="keyword">let</span> <span class="attr">a</span> = [<span class="string">&quot;a&quot;</span>]; <span class="keyword">in</span> (<span class="keyword">let</span> <span class="attr">b</span> = [<span class="string">&quot;b&quot;</span>]; <span class="keyword">in</span> <span class="keyword">with</span> lib; a ++ b )</span><br><span class="line">[ <span class="string">&quot;a&quot;</span> <span class="string">&quot;b&quot;</span> ]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nix-repl&gt; let a = [&quot;a&quot;]; in (let b = [&quot;b&quot;]; in with lib; a ++ b )</span><br><span class="line">[ &quot;a&quot; &quot;b&quot; ]</span><br></pre></td></tr></table></figure>
 
 
 <blockquote>
@@ -427,7 +427,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 12:49:16" itemprop="dateModified" datetime="2023-06-18T12:49:16+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 12:57:39" itemprop="dateModified" datetime="2023-06-18T12:57:39+00:00">2023-06-18</time>
     </span>
 
   
@@ -603,7 +603,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 12:49:16" itemprop="dateModified" datetime="2023-06-18T12:49:16+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 12:57:39" itemprop="dateModified" datetime="2023-06-18T12:57:39+00:00">2023-06-18</time>
     </span>
 
   
@@ -743,7 +743,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 12:49:16" itemprop="dateModified" datetime="2023-06-18T12:49:16+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 12:57:39" itemprop="dateModified" datetime="2023-06-18T12:57:39+00:00">2023-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -841,7 +841,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 12:49:16" itemprop="dateModified" datetime="2023-06-18T12:49:16+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 12:57:39" itemprop="dateModified" datetime="2023-06-18T12:57:39+00:00">2023-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -982,7 +982,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 12:49:16" itemprop="dateModified" datetime="2023-06-18T12:49:16+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 12:57:39" itemprop="dateModified" datetime="2023-06-18T12:57:39+00:00">2023-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1177,7 +1177,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 12:49:16" itemprop="dateModified" datetime="2023-06-18T12:49:16+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 12:57:39" itemprop="dateModified" datetime="2023-06-18T12:57:39+00:00">2023-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1355,7 +1355,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 12:49:16" itemprop="dateModified" datetime="2023-06-18T12:49:16+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 12:57:39" itemprop="dateModified" datetime="2023-06-18T12:57:39+00:00">2023-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1520,7 +1520,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 12:49:16" itemprop="dateModified" datetime="2023-06-18T12:49:16+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 12:57:39" itemprop="dateModified" datetime="2023-06-18T12:57:39+00:00">2023-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1634,7 +1634,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 12:49:16" itemprop="dateModified" datetime="2023-06-18T12:49:16+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 12:57:39" itemprop="dateModified" datetime="2023-06-18T12:57:39+00:00">2023-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

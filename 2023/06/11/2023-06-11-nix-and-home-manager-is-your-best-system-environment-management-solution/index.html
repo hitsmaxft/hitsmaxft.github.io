@@ -27,7 +27,7 @@
 <meta property="og:description" content="前言 由 chatgpt 生成…  在当今的技术领域，配置管理变得越来越重要。对于开发者和技术爱好者来说，保持一致的开发环境和工具配置是至关重要的。然而，传统的配置文件管理方式可能会导致配置分散、混乱和难以维护的问题。 幸运的是，有一个强大的工具可以帮助我们解决这些问题，那就是home-manager。Home-manager是一个基于Nix的工具，旨在帮助用户统一管理他们的配置文件，并通过声明性">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-11T11:07:26.000Z">
-<meta property="article:modified_time" content="2023-06-18T13:14:03.657Z">
+<meta property="article:modified_time" content="2023-06-18T13:18:46.394Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="nix, dotfiles">
 <meta name="twitter:card" content="summary">
@@ -202,7 +202,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 13:14:03" itemprop="dateModified" datetime="2023-06-18T13:14:03+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 13:18:46" itemprop="dateModified" datetime="2023-06-18T13:18:46+00:00">2023-06-18</time>
     </span>
 
   
@@ -234,7 +234,8 @@
 <p>在当今的技术领域，配置管理变得越来越重要。对于开发者和技术爱好者来说，保持一致的开发环境和工具配置是至关重要的。然而，传统的配置文件管理方式可能会导致配置分散、混乱和难以维护的问题。</p>
 <p>幸运的是，有一个强大的工具可以帮助我们解决这些问题，那就是home-manager。Home-manager是一个基于Nix的工具，旨在帮助用户统一管理他们的配置文件，并通过声明性的方式进行配置。</p>
 <p>本文将介绍如何安装home-manager以及使用它来管理一些常见的配置文件，例如zsh、bash和vim。我们将探索如何使用home-manager的内置功能和插件来简化配置文件的管理，并介绍如何定制和贡献新的配置。</p>
-<h2 id="使用-yadm-和-home-manager-协同维护系统配置"><a href="#使用-yadm-和-home-manager-协同维护系统配置" class="headerlink" title="使用 yadm 和 home-manager 协同维护系统配置"></a>使用 yadm 和 home-manager 协同维护系统配置</h2><ul>
+<h2 id="使用-yadm-和-home-manager-协同维护系统配置"><a href="#使用-yadm-和-home-manager-协同维护系统配置" class="headerlink" title="使用 yadm 和 home-manager 协同维护系统配置"></a>使用 yadm 和 home-manager 协同维护系统配置</h2><p>接下来的内容中, 主要围绕两个工具的使用.</p>
+<ul>
 <li><code>home-manager</code> 声明式, 函数式, 面向终态的用户配置管理方案</li>
 <li><code>yadm</code> 完成将配置文件同步到 github</li>
 </ul>
@@ -327,6 +328,13 @@
 <figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;pkgs, ...&#125; : &#123;</span><br><span class="line"></span><br><span class="line">  nixpkgs.<span class="attr">overlays</span> = [ </span><br><span class="line">    (<span class="built_in">import</span> ./overlays/default.nix)</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  home.<span class="attr">packages</span> = [</span><br><span class="line">	vim-darwin</span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>就此, 本文总结了大部分常见的 home-manager 配置管理技巧, 更多内容可以参考官方文档 <a target="_blank" rel="noopener" href="https://nix-community.github.io/home-manager/index.html">https://nix-community.github.io/home-manager/index.html</a></p>
+<p>相对于手动管理配置文件, 采用 home-manager 有以下几个优点</p>
+<ul>
+<li>声明式配置 - 使用 home-manager，可以使用 Nix 表达式以声明性的方式定义配置。这样可以实现版本控制、可复现性和易分享的配置。</li>
+<li>集中化管理</li>
+<li>模块化, 可复用 - home-manager 以模块化的方式处理配置，允许您根据需要启用或禁用特定的组件或程序。它还提供了许多预配置的程序，可以直接使用或根据需求进行自定义。</li>
+<li>支持版本管理 - 由于 home-manager 的配置存储在像 Git 这样的版本控制系统中，您可以轻松跟踪更改、还原到以前的版本，并与他人合作。这在管理 shell 配置时提供了额外的安全性和灵活性</li>
+</ul>
 
     </div>
 

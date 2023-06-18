@@ -75,9 +75,9 @@ home-manager 可以用于替代 `stow` 和 `homebrew` , 通过在 `~/.nix-profil
 `home.programs` 内置了大量 常用 shell 命令的配置, 通过这些配置项, 一方面自动化往当前 home.nix 中增加 `nix` package, 同时还能生成对应的配置文件, 替代手动管理配置文件.
 
 解决了配置文件分散在各个目录和文件下的脏乱差现场, 现在配置文件都托管给了 nix  通过 `home-manager`  进行集中化管理, 同时
+社区中大量已经贡献进来的 programs 配置项不仅可以直接使用, 后面会介绍如何通过 `import` 定制已有的 `program`. 
 
-> 社区中大量已经贡献进来的 programs 配置项不仅可以直接使用, 后面会介绍如何通过 `import` 定制已有的 `program` .
-> 当然可以也新增自己的 program 实现, 最后贡献给 `home-manager` 社区.
+ > 当然可以也新增自己的 program 实现, 最后贡献给 `home-manager` 社区.
 
 接下来章节中, 首先介绍一些常见场景下的 `home-manager` 使用案例
 
@@ -91,7 +91,7 @@ home-manager 可以用于替代 `stow` 和 `homebrew` , 通过在 `~/.nix-profil
 
 随着 shell 的配置项的代码量不断膨胀, 
 
-通过 `home-manager`, 
+接下来将介绍如何通过 `home-manager` 的 `programs.zsh` 配置项, 声明式管理 zsh 的所有配置文件.
 
 以下是一个 `zsh` 的配置实例, 内置了一部分常用的 `zsh` 特性.
 
@@ -101,7 +101,11 @@ home-manager 可以用于替代 `stow` 和 `homebrew` , 通过在 `~/.nix-profil
 * `.zshrc`  加入自定义选项
 	* `initExtraFirst`  这部分脚本会在 .zshrc 最前面, 先于 `oh-my-zsh` 和其他脚本
 	* `initExtra` 这部分脚本优先级低于其他的
-	* TODO
+	* `initExtraBeforeCompInit` 这部分脚本将在 zsh插件 加载之前执行
+
+
+> 具体实现见 https://github.com/nix-community/home-manager/blob/master/modules/programs/zsh.nix
+> zshrc 配置项大致的优先级为  initExtraFirst >  initExtraBeforeCompInit > plugsin > ohmyzsh > initExtra
 
 ```nix
 {pkg, ...} : 

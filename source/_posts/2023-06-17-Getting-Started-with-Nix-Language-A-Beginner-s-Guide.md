@@ -68,7 +68,7 @@ nix eval --expr '[ 1 2 3 4]'
 
 ## with; 命名空间
 with import <nixpkgs> {};
-with libs
+with libs;
 
 ## 定义变量和新函数; 每个语句以 `;` 结束
 let
@@ -99,7 +99,7 @@ in
 
 这几个元素可以在表达式的内部继续嵌套使用, 举一个嵌套表达式的例子
 
-```nix
+```
 nix-repl> let a = ["a"]; in (let b = ["b"]; in with lib; a ++ b )
 [ "a" "b" ]
 ```

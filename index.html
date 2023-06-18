@@ -195,7 +195,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 13:03:07" itemprop="dateModified" datetime="2023-06-18T13:03:07+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 13:14:03" itemprop="dateModified" datetime="2023-06-18T13:14:03+00:00">2023-06-18</time>
     </span>
 
   
@@ -427,7 +427,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 13:03:07" itemprop="dateModified" datetime="2023-06-18T13:03:07+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 13:14:03" itemprop="dateModified" datetime="2023-06-18T13:14:03+00:00">2023-06-18</time>
     </span>
 
   
@@ -489,9 +489,9 @@
 <h2 id="home-program-声明式管理shell-环境"><a href="#home-program-声明式管理shell-环境" class="headerlink" title="home.program: 声明式管理shell 环境"></a>home.program: 声明式管理shell 环境</h2><p>home-manager 可以用于替代 <code>stow</code> 和 <code>homebrew</code> , 通过在 <code>~/.nix-profile/bin</code> 下加入软链等, 方便地管理当前环境中的各种工具.</p>
 <p>对于经常需要修改开发环境的开发者</p>
 <p><code>home.programs</code> 内置了大量 常用 shell 命令的配置, 通过这些配置项, 一方面自动化往当前 home.nix 中增加 <code>nix</code> package, 同时还能生成对应的配置文件, 替代手动管理配置文件.</p>
-<p>解决了配置文件分散在各个目录和文件下的脏乱差现场, 现在配置文件都托管给了 nix  通过 <code>home-manager</code>  进行集中化管理, 同时</p>
+<p>解决了配置文件分散在各个目录和文件下的脏乱差现场, 现在配置文件都托管给了 nix  通过 <code>home-manager</code>  进行集中化管理, 同时<br>社区中大量已经贡献进来的 programs 配置项不仅可以直接使用, 后面会介绍如何通过 <code>import</code> 定制已有的 <code>program</code>. </p>
 <blockquote>
-<p>社区中大量已经贡献进来的 programs 配置项不仅可以直接使用, 后面会介绍如何通过 <code>import</code> 定制已有的 <code>program</code> .<br>当然可以也新增自己的 program 实现, 最后贡献给 <code>home-manager</code> 社区.</p>
+<p>当然可以也新增自己的 program 实现, 最后贡献给 <code>home-manager</code> 社区.</p>
 </blockquote>
 <p>接下来章节中, 首先介绍一些常见场景下的 <code>home-manager</code> 使用案例</p>
 <ul>
@@ -501,7 +501,7 @@
 </ul>
 <h3 id="热身开始-通过-nix-管理-zsh-配置文件"><a href="#热身开始-通过-nix-管理-zsh-配置文件" class="headerlink" title="热身开始, 通过 nix 管理 zsh 配置文件"></a>热身开始, 通过 nix 管理 zsh 配置文件</h3><p>过去配置 zsh, 一般是通过修改 <code>.zshrc</code> <code>.zprofile</code> 和 <code>.zshenv</code> 这些文件, 如果需要同步到不同机器, 可以借助 <code>yadm</code> 同步到 <code>github</code> .</p>
 <p>随着 shell 的配置项的代码量不断膨胀, </p>
-<p>通过 <code>home-manager</code>, </p>
+<p>接下来将介绍如何通过 <code>home-manager</code> 的 <code>programs.zsh</code> 配置项, 声明式管理 zsh 的所有配置文件.</p>
 <p>以下是一个 <code>zsh</code> 的配置实例, 内置了一部分常用的 <code>zsh</code> 特性.</p>
 <ul>
 <li>内置 <code>oh-my-zsh</code> , 启用 <code>vi-mode</code>  和  <code>jump</code> 插件</li>
@@ -512,10 +512,13 @@
 <li><code>.zshrc</code>  加入自定义选项<ul>
 <li><code>initExtraFirst</code>  这部分脚本会在 .zshrc 最前面, 先于 <code>oh-my-zsh</code> 和其他脚本</li>
 <li><code>initExtra</code> 这部分脚本优先级低于其他的</li>
-<li>TODO</li>
+<li><code>initExtraBeforeCompInit</code> 这部分脚本将在 zsh插件 加载之前执行</li>
 </ul>
 </li>
 </ul>
+<blockquote>
+<p>具体实现见 <a target="_blank" rel="noopener" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/zsh.nix">https://github.com/nix-community/home-manager/blob/master/modules/programs/zsh.nix</a><br>zshrc 配置项大致的优先级为  initExtraFirst &gt;  initExtraBeforeCompInit &gt; plugsin &gt; ohmyzsh &gt; initExtra</p>
+</blockquote>
 <figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;pkg, ...&#125; : </span><br><span class="line">&#123;</span><br><span class="line">	home.<span class="attr">programs</span> = &#123;</span><br><span class="line">		<span class="attr">zsh</span> = &#123;</span><br><span class="line">			<span class="attr">enable</span> = <span class="literal">true</span>;</span><br><span class="line">			<span class="attr">oh-my-zsh</span> = &#123;</span><br><span class="line">				<span class="attr">enable</span> = <span class="literal">true</span>;</span><br><span class="line">				<span class="attr">plugins</span> = [</span><br><span class="line">					<span class="string">&quot;vi-mode&quot;</span></span><br><span class="line">					<span class="string">&quot;jump&quot;</span></span><br><span class="line">				]</span><br><span class="line">				</span><br><span class="line">			&#125;;</span><br><span class="line">			</span><br><span class="line">			<span class="attr">envExtra</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="string">if [ -e <span class="char escape_">&#x27;&#x27;$</span>&#123;HOME&#125;/.nix-profile/etc/profile.d/nix.sh ]; then . <span class="char escape_">&#x27;&#x27;$</span>HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">			&#x27;&#x27;</span>;</span><br><span class="line">			<span class="attr">initExtraFirst</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="string">			&#x27;&#x27;</span>;</span><br><span class="line">			<span class="attr">initExtra</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="string">			&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="管理-bash-配置"><a href="#管理-bash-配置" class="headerlink" title="管理 bash 配置"></a>管理 bash 配置</h3><p>接下来是一个 <code>bash</code> 的配置实例.</p>
@@ -612,7 +615,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 13:03:07" itemprop="dateModified" datetime="2023-06-18T13:03:07+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 13:14:03" itemprop="dateModified" datetime="2023-06-18T13:14:03+00:00">2023-06-18</time>
     </span>
 
   
@@ -752,7 +755,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 13:03:07" itemprop="dateModified" datetime="2023-06-18T13:03:07+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 13:14:03" itemprop="dateModified" datetime="2023-06-18T13:14:03+00:00">2023-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -850,7 +853,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 13:03:07" itemprop="dateModified" datetime="2023-06-18T13:03:07+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 13:14:03" itemprop="dateModified" datetime="2023-06-18T13:14:03+00:00">2023-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -991,7 +994,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 13:03:07" itemprop="dateModified" datetime="2023-06-18T13:03:07+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 13:14:03" itemprop="dateModified" datetime="2023-06-18T13:14:03+00:00">2023-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1186,7 +1189,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 13:03:07" itemprop="dateModified" datetime="2023-06-18T13:03:07+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 13:14:03" itemprop="dateModified" datetime="2023-06-18T13:14:03+00:00">2023-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1364,7 +1367,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 13:03:07" itemprop="dateModified" datetime="2023-06-18T13:03:07+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 13:14:03" itemprop="dateModified" datetime="2023-06-18T13:14:03+00:00">2023-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1529,7 +1532,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 13:03:07" itemprop="dateModified" datetime="2023-06-18T13:03:07+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 13:14:03" itemprop="dateModified" datetime="2023-06-18T13:14:03+00:00">2023-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1643,7 +1646,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-18 13:03:07" itemprop="dateModified" datetime="2023-06-18T13:03:07+00:00">2023-06-18</time>
+      <time title="Modified: 2023-06-18 13:14:03" itemprop="dateModified" datetime="2023-06-18T13:14:03+00:00">2023-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

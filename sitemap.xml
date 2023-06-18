@@ -2,42 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://io.bhe.ink/2013/07/01/zshrc-startup-files/</loc>
-    
-    <lastmod>2023-06-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2013/08/03/longene-qq-on-archlinux/</loc>
-    
-    <lastmod>2023-06-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2013/08/04/composer-in-action/</loc>
-    
-    <lastmod>2023-06-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2014/03/07/classmap-generating-by-composer/</loc>
-    
-    <lastmod>2023-06-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://io.bhe.ink/2014/03/16/first-step-on-writing-zsh-completion-functions/</loc>
     
     <lastmod>2023-06-18</lastmod>
@@ -147,6 +111,42 @@
   
   <url>
     <loc>https://io.bhe.ink/2023/06/17/Getting-Started-with-Nix-Language-A-Beginner-s-Guide/</loc>
+    
+    <lastmod>2023-06-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2013/07/01/zshrc-startup-files/</loc>
+    
+    <lastmod>2023-06-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2013/08/03/longene-qq-on-archlinux/</loc>
+    
+    <lastmod>2023-06-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2013/08/04/composer-in-action/</loc>
+    
+    <lastmod>2023-06-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2014/03/07/classmap-generating-by-composer/</loc>
     
     <lastmod>2023-06-18</lastmod>
     

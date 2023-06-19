@@ -304,4 +304,4 @@ nix 缺乏一个好的函数查找工具. 目前只能通过文档查找
 
 
 * 官方手册 https://nixos.org/manual/nix/stable/language/index.html
-* 
+* nix-language-primer http://www.binaryphile.com/nix/2018/07/22/nix-language-primer.html 

@@ -137,7 +137,7 @@ theme_config:
     only_pageview: false
   index_with_subtitle: true
   # see https://search.google.com/search-console/ownership?resource_id=https%3A%2F%2Fio.bhe.ink%2F
-  google-site-verification: uLR4tiR7G944Hw8MS8h3bqSW0xN_C1OlwZwhiWplfWI
+  google_site_verification: uLR4tiR7G944Hw8MS8h3bqSW0xN_C1OlwZwhiWplfWI
   baidu_site_verification: codeva-idh14paPwc
   back2top:
     enable: true

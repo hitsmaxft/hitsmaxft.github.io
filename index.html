@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="Bhe&#39;s Blog">
@@ -116,7 +116,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -195,7 +195,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
     </span>
 
   
@@ -231,10 +231,13 @@
 <p>其他 Linux 发行版, 或者 <code>wsl2</code> 用户, 可以通过 <code>home-manager</code>, 管理当前 <code>Home</code> 目录下的 rc 文件和环境变量,<br>起到和 <code>homebrew</code> 等价的效果</p>
 </blockquote>
 <p>安装完毕需要修改默认配置  <code>~/.config/nix/nix.conf</code>  启用 nix-command 和 flakes</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">experimental-features = nix-command flakes</span><br><span class="line">allowed-users = root @staff</span><br><span class="line">trusted-users = root @staff</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">experimental-features &#x3D; nix-command flakes
+allowed-users &#x3D; root @staff
+trusted-users &#x3D; root @staff</code></pre>
 
 <p>以下是可选部分, 使用国内镜像等</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">trusted-substituters = https://mirrors.ustc.edu.cn/nix-channels/store</span><br><span class="line">substituters = https://mirrors.ustc.edu.cn/nix-channels/store https://cache.nixos.org</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">trusted-substituters &#x3D; https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;nix-channels&#x2F;store
+substituters &#x3D; https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;nix-channels&#x2F;store https:&#x2F;&#x2F;cache.nixos.org</code></pre>
 
 <p>执行 nix 脚本, 有以下两种方式</p>
 <ul>
@@ -246,7 +249,8 @@
 </li>
 </ul>
 <p>举个 <code>nix eval</code> 的简单例子, 可以用这种方式测试本文中的其他例子.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nix eval --expr &#x27;1+1&#x27;</span><br><span class="line">nix eval --expr &#x27;[ 1 2 3 4]&#x27;</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">nix eval --expr &#39;1+1&#39;
+nix eval --expr &#39;[ 1 2 3 4]&#39;</code></pre>
 
 <h2 id="从零熟悉-nix-lang-的基本元素"><a href="#从零熟悉-nix-lang-的基本元素" class="headerlink" title="从零熟悉 nix-lang 的基本元素"></a>从零熟悉 nix-lang 的基本元素</h2><p>由于 nix 是函数式语言, 首先需要熟悉它的核心概念 <code>表达式</code></p>
 <h2 id="函数式和表达式"><a href="#函数式和表达式" class="headerlink" title="函数式和表达式"></a>函数式和表达式</h2><p>首先看一下一个 nix 表达式的组成部分</p>
@@ -255,16 +259,34 @@
 <li><code>let ... in</code> 变量声明部分</li>
 <li>表达式实际内容</li>
 </ul>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">## with; 命名空间</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">import</span> &lt;nixpkgs&gt; &#123;&#125;;</span><br><span class="line"><span class="keyword">with</span> libs;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 定义变量和新函数; 每个语句以 `;` 结束</span></span><br><span class="line"><span class="keyword">let</span></span><br><span class="line">	<span class="attr">a</span> =<span class="number">1</span> ;</span><br><span class="line">	<span class="attr">join</span> = (strs: conatStringSep <span class="string">&quot;&quot;</span> strs);</span><br><span class="line"><span class="keyword">in</span></span><br><span class="line">	join [ <span class="string">&quot;a&quot;</span> <span class="string">&quot;b&quot;</span> <span class="string">&quot;c&quot;</span> ]  <span class="comment"># 表达式不需要 `;`` 结尾</span></span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">
+## with; 命名空间
+with import &lt;nixpkgs&gt; &#123;&#125;;
+with libs;
+
+## 定义变量和新函数; 每个语句以 &#96;;&#96; 结束
+let
+	a &#x3D;1 ;
+	join &#x3D; (strs: conatStringSep &quot;&quot; strs);
+in
+	join [ &quot;a&quot; &quot;b&quot; &quot;c&quot; ]  # 表达式不需要 &#96;;&#96;&#96; 结尾
+	</code></pre>
 
 <p>with 语句在当前表达式作用域 (<code>scope</code> ) 中直接使用它的内部属性&#x2F;方法, 可以减少代码长度.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*改写前*/</span><br><span class="line">builtins.concatStringsSep &quot;,&quot; (builtins.map (p : &quot;v&quot;+p) [ &quot;1&quot; &quot;2&quot; &quot;3&quot; ])</span><br><span class="line">/*改写后*/</span><br><span class="line">with builtins; concatStringsSep &quot;,&quot; (map (p : &quot;v&quot;+p) [ &quot;1&quot; &quot;2&quot; &quot;3&quot; ])</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">&#x2F;*改写前*&#x2F;
+builtins.concatStringsSep &quot;,&quot; (builtins.map (p : &quot;v&quot;+p) [ &quot;1&quot; &quot;2&quot; &quot;3&quot; ])
+&#x2F;*改写后*&#x2F;
+with builtins; concatStringsSep &quot;,&quot; (map (p : &quot;v&quot;+p) [ &quot;1&quot; &quot;2&quot; &quot;3&quot; ])</code></pre>
 
 <p>普通 set 变量也是可以用 <code>with</code>  导入当前 <code>scope</code> </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let</span><br><span class="line">   values = &#123; a =1; b=2 ;&#125;;</span><br><span class="line">in</span><br><span class="line">   with values ; a+b</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">let
+   values &#x3D; &#123; a &#x3D;1; b&#x3D;2 ;&#125;;
+in
+   with values ; a+b</code></pre>
 
 <p>这几个元素可以在表达式的内部继续嵌套使用, 举一个嵌套表达式的例子</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nix-repl&gt; let a = [&quot;a&quot;]; in (let b = [&quot;b&quot;]; in with lib; a ++ b )</span><br><span class="line">[ &quot;a&quot; &quot;b&quot; ]</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">nix-repl&gt; let a &#x3D; [&quot;a&quot;]; in (let b &#x3D; [&quot;b&quot;]; in with lib; a ++ b )
+[ &quot;a&quot; &quot;b&quot; ]</code></pre>
 
 
 <blockquote>
@@ -279,13 +301,26 @@
 <li>list : 数组类型</li>
 <li>set : 字典或者 map</li>
 </ul>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="string">&quot;one&quot;</span> <span class="string">&quot;two&quot;</span> <span class="string">&quot;three&quot;</span> ]</span><br><span class="line"></span><br><span class="line">&#123; <span class="attr">key1</span> = <span class="string">&quot;value1&quot;</span>; <span class="attr">key2</span> = <span class="string">&quot;value2&quot;</span>; &#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">[ &quot;one&quot; &quot;two&quot; &quot;three&quot; ]
+
+&#123; key1 &#x3D; &quot;value1&quot;; key2 &#x3D; &quot;value2&quot;; &#125;</code></pre>
 
 
 <blockquote>
 <p>在写 nix 的过程中, 我个人经常会感到对 集合语法上的不适应, 主要原因是它在语法上和其他语言存在差异. 大部分时候, 我总感觉如果 nix 使用 <code>,</code> 作为分隔符对其他语言的使用者来说会更容易习惯.<br>nix wiki 也提到, 在 <code>nix</code>  中 ‘;’ 扮演了其他语言中 <code>,</code> 的角色. 所以在 nix 没有出现 <code>,</code> 是因为已经选择了 <code>;</code> </p>
 </blockquote>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组成员间不需要 `;` 隔开, 也不要习惯性地使用 `,`</span></span><br><span class="line"><span class="attr">alist</span> = [ <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> ]  ; </span><br><span class="line"></span><br><span class="line"><span class="comment"># 见 https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320545296</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set 成员需要 `;` 分隔</span></span><br><span class="line"><span class="attr">aSet</span> = &#123;</span><br><span class="line"> <span class="attr">a</span> = [];</span><br><span class="line"> <span class="attr">b</span> = <span class="string">&quot;strs&quot;</span>;</span><br><span class="line"> <span class="attr">c</span> = <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment"># 更多例子见 https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320542544</span></span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix"># 数组成员间不需要 &#96;;&#96; 隔开, 也不要习惯性地使用 &#96;,&#96;
+alist &#x3D; [ 1 2 3 ]  ; 
+
+# 见 https:&#x2F;&#x2F;nixos.org&#x2F;guides&#x2F;nix-pills&#x2F;basics-of-language.html#idm140737320545296
+
+# set 成员需要 &#96;;&#96; 分隔
+aSet &#x3D; &#123;
+ a &#x3D; [];
+ b &#x3D; &quot;strs&quot;;
+ c &#x3D; 1;
+&#125;;
+# 更多例子见 https:&#x2F;&#x2F;nixos.org&#x2F;guides&#x2F;nix-pills&#x2F;basics-of-language.html#idm140737320542544</code></pre>
 
 <p>还有其他类型</p>
 <ul>
@@ -298,10 +333,22 @@
 <blockquote>
 <p>函数定义的风格写法有好几种, 个人建议定义函数使用第一种或者第二种<br>调用语法, 个人习惯第一种,  <code>()</code> 使用多了会导致语句不易读, 陷入了 LISP 语法的笑话</p>
 </blockquote>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span></span><br><span class="line">  <span class="attr">plus</span> = (a: b: a + b ); </span><br><span class="line">  <span class="attr">plus2</span> = a: b: a+b;</span><br><span class="line">  <span class="attr">plus3</span> = (a: (b: a+b));</span><br><span class="line">  <span class="attr">plus4</span> = a: (b: a+b);</span><br><span class="line"><span class="keyword">in</span>  (plus <span class="number">1</span> <span class="number">2</span>) + plus2 (<span class="number">1</span>) (<span class="number">2</span>)  + plus3(<span class="number">1</span>) <span class="number">2</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="number">9</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">let
+  plus &#x3D; (a: b: a + b ); 
+  plus2 &#x3D; a: b: a+b;
+  plus3 &#x3D; (a: (b: a+b));
+  plus4 &#x3D; a: (b: a+b);
+in  (plus 1 2) + plus2 (1) (2)  + plus3(1) 2
+#&gt;&gt; 9</code></pre>
 
 <p>作为函数式语言, 不难发现 nix 也是支持 curry 的.</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span></span><br><span class="line"> <span class="attr">plus</span> = a: b: a+b;</span><br><span class="line"> <span class="attr">plus1</span> = plus(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">in</span></span><br><span class="line"> plus1(plus1(<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">let
+ plus &#x3D; a: b: a+b;
+ plus1 &#x3D; plus(1);
+in
+ plus1(plus1(2))
+
+#&gt;&gt; 4</code></pre>
 
 <blockquote>
 <p>由于  <code>:</code> 后面的函数体是一个表达式, 因此可以加入 <code>let ... in</code>  定义中间变量.</p>
@@ -309,24 +356,40 @@
 <blockquote>
 <p>另外, 在中间语句中加入 with 也是很常见的, 大部分库代码或者包描述中都可以看到.</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let</span><br><span class="line">  values = &#123; c=2; &#125;;</span><br><span class="line">  plus1 = a: with values; let b=1; in a+b+c;</span><br><span class="line">in</span><br><span class="line">  plus1 2</span><br><span class="line"></span><br><span class="line">&gt;&gt; 3</span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">let
+  values &#x3D; &#123; c&#x3D;2; &#125;;
+  plus1 &#x3D; a: with values; let b&#x3D;1; in a+b+c;
+in
+  plus1 2
+
+#&gt;&gt; 3</code></pre>
 
 <p>好了, 表达式函数的特性, nix 和其他语言的差异不是很明显, 唯一特别的就是在其他语言中, 一般我们只会看到 <code>&#123;param1, ...&#125; : expr</code> 这样的 函数定义.</p>
 <p>比如 这段 scala 代码. </p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> my.param1;</span><br><span class="line"><span class="keyword">import</span> my.param2;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myFunction</span></span>(param1: <span class="type">Int</span>, param2: <span class="type">Int</span>): <span class="type">Int</span> = &#123;</span><br><span class="line">  <span class="keyword">val</span> a = param1 * param2</span><br><span class="line">  param1 + param2 + a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>而 nix 的实现往往比较紧凑</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myFunction = &#123;param1, param2&#125; : with my; let a = param1*param2 inparam1 + param2 + a </span><br></pre></td></tr></table></figure>
+<pre class="language-scala" data-language="scala"><code class="language-scala">
+import my;
+def myFunction(param1: Int, param2: Int): Int &#x3D; &#123;
+  val a &#x3D; my.param3 * my.param4
+  param1 + param2 + a
+&#125;</code></pre>
+<p>通过 nix 的书写,往往比较紧凑</p>
+<pre class="language-nix" data-language="nix"><code class="language-nix">&#123;
+  myFunction &#x3D; &#123;param1, param2&#125;:
+    with my;
+    let a &#x3D; param3 * param4;
+    in param1 + param2 + a 
+&#125;</code></pre>
 
-<p>在 nix 中, <code>let ... in expr</code> 和 <code>import ...; expr</code> 这两个前后缀语法导致函数阅读次序和其他语言略有不同, 需要熟悉一段时间.</p>
-<h4 id="命名参数函数"><a href="#命名参数函数" class="headerlink" title="命名参数函数"></a>命名参数函数</h4><p>前面介绍了 <code>nix</code> 中无名参数风格的函数, 类似于 c 或者 <code>java</code> 中的普通函数,<br>但动态语言中很受欢迎的命名函数特性, nix 也同样做了支持.</p>
+<p>在 nix 中, <code>let ... in expr</code> 和 <code>import ...; expr</code>  和函数签名挤成一堆,  与其他语言略有不同, 需要熟悉一段时间.</p>
+<h4 id="命名参数函数"><a href="#命名参数函数" class="headerlink" title="命名参数函数"></a>命名参数函数</h4><p>前面介绍了 <code>nix</code> 中无名参数风格的函数, 类似于 c 或者 <code>java</code> 中的普通函数,<br>接下来介绍在动态语言中很受欢迎的命名函数特性, nix 也同样做了支持.</p>
 <blockquote>
 <p>相比于<code>无名参数</code>, <code>命名参数</code> 的调用代码可读性更强, 同时方便后期维护, 不会出现一旦修改签名需要大量重构代码的痛苦.</p>
 </blockquote>
 <p>首先举一个复杂的可变参数长度的例子开场:</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">func</span> = &#123;a, b, c, ...&#125; : a+b+c <span class="keyword">in</span>  func &#123; <span class="attr">a=1;</span> <span class="attr">b=2;</span> <span class="attr">c=3;</span> <span class="attr">d=4;&#125;</span></span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">let func &#x3D; &#123;a, b, c, ...&#125; : a+b+c in  func &#123; a&#x3D;1; b&#x3D;2; c&#x3D;3; d&#x3D;4;&#125;</code></pre>
 
 <p>如果获取可变参数中的变量, 可以通过 <code>@</code> 引用的参数列表, 这里使用 args 作为变量名.</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">func</span> = &#123;a, b, c, ...&#125;@args: a+b+c+args.d; <span class="keyword">in</span>  func &#123; <span class="attr">a=1;</span> <span class="attr">b=2;</span> <span class="attr">c=3;</span> <span class="attr">d=4;&#125;</span></span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">let func &#x3D; &#123;a, b, c, ...&#125;@args: a+b+c+args.d; in  func &#123; a&#x3D;1; b&#x3D;2; c&#x3D;3; d&#x3D;4;&#125;</code></pre>
 
 <p>通过nix 的 <code>命名参数</code> 函数定义可以看出来, 类似于把函数的传入参数变成一个 attribute set.</p>
 <p>等价于单参数的函数的一个语法糖,以下举几个例子, 函数 <code>fun</code> 采用了<code>无名参数</code>, 但使用效果和<code>命名参数</code>是一样的.</p>
@@ -338,10 +401,22 @@
 <blockquote>
 <p><code>inherit</code> 关键字可以起到类似 <code>with</code> 的作用, 省掉了把同名参数写一遍的功夫</p>
 </blockquote>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span></span><br><span class="line">  <span class="attr">fun</span> = &#123; a, b &#125;: a+b;</span><br><span class="line">  <span class="attr">attrs</span> = &#123; <span class="attr">a</span> =<span class="number">1</span> ; <span class="attr">b=2;</span> &#125;;</span><br><span class="line"><span class="keyword">in</span> fun &#123; </span><br><span class="line">	<span class="keyword">inherit</span> (attrs) a b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">let
+  fun &#x3D; &#123; a, b &#125;: a+b;
+  attrs &#x3D; &#123; a &#x3D;1 ; b&#x3D;2; &#125;;
+in fun &#123; 
+	inherit (attrs) a b;
+&#125;</code></pre>
 
 <p> 还有另外的写法</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span></span><br><span class="line">  <span class="attr">fun</span> = &#123; a, b &#125;: a+b;</span><br><span class="line">  <span class="attr">b</span> = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">in</span> fun &#123; </span><br><span class="line">	<span class="attr">a=2;</span></span><br><span class="line">	<span class="keyword">inherit</span> b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">let
+  fun &#x3D; &#123; a, b &#125;: a+b;
+  b &#x3D; 2;
+in fun &#123; 
+	a&#x3D;2;
+	inherit b;
+&#125;
+</code></pre>
 
 <p>回到 <code>命名参数</code> 话题本身</p>
 <p>这里举例只是做对比, 既然有语法糖, 直接用比较爽.</p>
@@ -349,7 +424,11 @@
 <ul>
 <li>默认参数 <code>func = &#123;a, b, c? 3, ...&#125; : a+b+c</code></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:p let</span><br><span class="line">func = &#123;a, b, c, ...&#125; : a+b+c;   #可变参数列表</span><br><span class="line">func2 = &#123;a, b, c?3 &#125;: a+b+c;</span><br><span class="line">in </span><br><span class="line">[ func&#123; a=1; b=2; c=3; &#125; func2&#123; a=1; b=2; &#125; ]</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">:p let
+func &#x3D; &#123;a, b, c, ...&#125; : a+b+c;   #可变参数列表
+func2 &#x3D; &#123;a, b, c?3 &#125;: a+b+c;
+in 
+[ func&#123; a&#x3D;1; b&#x3D;2; c&#x3D;3; &#125; func2&#123; a&#x3D;1; b&#x3D;2; &#125; ]</code></pre>
 
 <p>总结一下, 命名形参的函数定义, 相对于匿名参数有以下好处: </p>
 <ul>
@@ -363,7 +442,7 @@
 <blockquote>
 <p>注意, 不能像 c 语言一样用方括号包裹表达式, 否则就变成了一个返回值为 set 的函数了.</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;a, b, c, ...&#125;: &#123;&#125;  #返回值是 set</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">&#123;a, b, c, ...&#125;: &#123;&#125;  #返回值是 set</code></pre>
 
 <h3 id="函数手册"><a href="#函数手册" class="headerlink" title="函数手册"></a>函数手册</h3><p>nix 缺乏一个好的函数查找工具. 目前只能通过文档查找</p>
 <ul>
@@ -436,7 +515,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
     </span>
 
   
@@ -469,16 +548,19 @@
 <p>在当今的技术领域，配置管理变得越来越重要。对于开发者和技术爱好者来说，保持一致的开发环境和工具配置是至关重要的。然而，传统的配置文件管理方式可能会导致配置分散、混乱和难以维护的问题。</p>
 <p>幸运的是，有一个强大的工具可以帮助我们解决这些问题，那就是home-manager。Home-manager是一个基于Nix的工具，旨在帮助用户统一管理他们的配置文件，并通过声明性的方式进行配置。</p>
 <p>本文将介绍如何安装home-manager以及使用它来管理一些常见的配置文件，例如zsh、bash和vim。我们将探索如何使用home-manager的内置功能和插件来简化配置文件的管理，并介绍如何定制和贡献新的配置。</p>
-<h2 id="使用-yadm-和-home-manager-协同维护系统配置"><a href="#使用-yadm-和-home-manager-协同维护系统配置" class="headerlink" title="使用 yadm 和 home-manager 协同维护系统配置"></a>使用 yadm 和 home-manager 协同维护系统配置</h2><p>接下来的内容中, 主要围绕两个工具的使用.</p>
+<p>接下来的内容中, 主要围绕两个工具的使用.</p>
 <ul>
 <li><code>home-manager</code> 声明式, 函数式, 面向终态的用户配置管理方案</li>
-<li><code>yadm</code> 完成将配置文件同步到 github</li>
+<li>通过 <code>yadm</code> 完成将配置文件同步到 github</li>
 </ul>
 <h2 id="安装-home-manager"><a href="#安装-home-manager" class="headerlink" title="安装 home-manager"></a>安装 home-manager</h2><p>假设当前系统处于初始化状态, 这里首先更新 channel , 接着安装最新的 home-manager.</p>
 <blockquote>
 <p>官方安装教程 <a target="_blank" rel="noopener" href="https://nix-community.github.io/home-manager/index.html#sec-install-standalone">https://nix-community.github.io/home-manager/index.html#sec-install-standalone</a><br>可选的方式还有通过 flake 加载.</p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager </span><br><span class="line">nix-channel --update</span><br><span class="line"></span><br><span class="line">nix-shell &#x27;&lt;home-manager&gt;&#x27; -A install</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">nix-channel --add https:&#x2F;&#x2F;github.com&#x2F;nix-community&#x2F;home-manager&#x2F;archive&#x2F;master.tar.gz home-manager 
+nix-channel --update
+
+nix-shell &#39;&lt;home-manager&gt;&#39; -A install</code></pre>
 
 <p>安装完毕, home-manager 会自动生成一个最小化配置在 <code>~/.config/home-manager/home.nix</code>  这个文件中. 这里 home-manager 的可以告一段落</p>
 <blockquote>
@@ -488,10 +570,14 @@
 <blockquote>
 <p>假设我们的 dotfiles 将上传到 <code>$GIT_USER</code> 这个用户名下的 <code>dotfiles</code> 仓库.<br>那么 github 全路径为 <code>git@github.com:$&#123;GIT_USER&#125;/dotfiles.git</code></p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yadm init</span><br><span class="line">yadm add ~/.config/home-manager/home.nix</span><br><span class="line">yadm commit -m <span class="string">&#x27;add home.nix&#x27;</span></span><br><span class="line">yadm remote add origin git@github.com:<span class="variable">$&#123;GIT_USER&#125;</span>/dotfiles.git</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">yadm init
+yadm add ~&#x2F;.config&#x2F;home-manager&#x2F;home.nix
+yadm commit -m &#39;add home.nix&#39;
+yadm remote add origin git@github.com:$&#123;GIT_USER&#125;&#x2F;dotfiles.git
+</code></pre>
 
 <p>如果仓库中没有任何内容, 这是应该直接推送到 <code>master</code> 分支, (或者 main )</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yadm push -u origin master</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">yadm push -u origin master</code></pre>
 
 <blockquote>
 <p>假设你已经有现成的 dotfiles, 可以直接执行 <code>yadm clone git@github.com:$&#123;GIT_USER&#125;/dotfiles.git</code> 一步初始化</p>
@@ -529,21 +615,105 @@
 <blockquote>
 <p>具体实现见 <a target="_blank" rel="noopener" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/zsh.nix">https://github.com/nix-community/home-manager/blob/master/modules/programs/zsh.nix</a><br>zshrc 配置项大致的优先级为  initExtraFirst &gt;  initExtraBeforeCompInit &gt; plugsin &gt; ohmyzsh &gt; initExtra</p>
 </blockquote>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;pkg, ...&#125; : </span><br><span class="line">&#123;</span><br><span class="line">	home.<span class="attr">programs</span> = &#123;</span><br><span class="line">		<span class="attr">zsh</span> = &#123;</span><br><span class="line">			<span class="attr">enable</span> = <span class="literal">true</span>;</span><br><span class="line">			<span class="attr">oh-my-zsh</span> = &#123;</span><br><span class="line">				<span class="attr">enable</span> = <span class="literal">true</span>;</span><br><span class="line">				<span class="attr">plugins</span> = [</span><br><span class="line">					<span class="string">&quot;vi-mode&quot;</span></span><br><span class="line">					<span class="string">&quot;jump&quot;</span></span><br><span class="line">				]</span><br><span class="line">				</span><br><span class="line">			&#125;;</span><br><span class="line">			</span><br><span class="line">			<span class="attr">envExtra</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="string">if [ -e <span class="char escape_">&#x27;&#x27;$</span>&#123;HOME&#125;/.nix-profile/etc/profile.d/nix.sh ]; then . <span class="char escape_">&#x27;&#x27;$</span>HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">			&#x27;&#x27;</span>;</span><br><span class="line">			<span class="attr">initExtraFirst</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="string">			&#x27;&#x27;</span>;</span><br><span class="line">			<span class="attr">initExtra</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="string">			&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">&#123;pkg, ...&#125; : 
+&#123;
+	home.programs &#x3D; &#123;
+		zsh &#x3D; &#123;
+			enable &#x3D; true;
+			oh-my-zsh &#x3D; &#123;
+				enable &#x3D; true;
+				plugins &#x3D; [
+					&quot;vi-mode&quot;
+					&quot;jump&quot;
+				]
+				
+			&#125;;
+			
+			envExtra &#x3D; &#39;&#39;
+if [ -e &#39;&#39;$&#123;HOME&#125;&#x2F;.nix-profile&#x2F;etc&#x2F;profile.d&#x2F;nix.sh ]; then . &#39;&#39;$HOME&#x2F;.nix-profile&#x2F;etc&#x2F;profile.d&#x2F;nix.sh; fi # added by Nix installer
+
+			&#39;&#39;;
+			initExtraFirst &#x3D; &#39;&#39;
+			&#39;&#39;;
+			initExtra &#x3D; &#39;&#39;
+			&#39;&#39;;
+
+
+		&#125;;
+	&#125;;
+&#125;</code></pre>
 
 <h3 id="管理-bash-配置"><a href="#管理-bash-配置" class="headerlink" title="管理 bash 配置"></a>管理 bash 配置</h3><p>接下来是一个 <code>bash</code> 的配置实例.</p>
 <p>给 bash 内置了<code>补全</code>功能和 <code>starship</code> (类似 p10k 的 zsh 提示符主题, rust 实现, 需要预先在 packages 中安装)</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	home.<span class="attr">packages</span> = [</span><br><span class="line"></span><br><span class="line">		starship</span><br><span class="line">	];</span><br><span class="line">    <span class="attr">programs</span> = &#123;</span><br><span class="line">    <span class="attr">bash</span> = &#123;</span><br><span class="line">        <span class="attr">enable</span> = <span class="literal">true</span>;</span><br><span class="line">        <span class="attr">enableCompletion</span> = <span class="literal">true</span>;</span><br><span class="line">        <span class="attr">initExtra</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="string">          eval &quot;$(starship init bash)&quot;</span></span><br><span class="line"><span class="string">          &#x27;&#x27;</span>;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">&#123;
+	home.packages &#x3D; [
+
+		starship
+	];
+    programs &#x3D; &#123;
+    bash &#x3D; &#123;
+        enable &#x3D; true;
+        enableCompletion &#x3D; true;
+        initExtra &#x3D; &#39;&#39;
+          eval &quot;$(starship init bash)&quot;
+          &#39;&#39;;
+      &#125;;
+    &#125;;
+&#125;</code></pre>
 
 <p>在 <code>.bashrc</code> 中, 可以看到最终效果为:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [[ ! -v BASH_COMPLETION_VERSINFO ]]; <span class="keyword">then</span></span><br><span class="line">  . <span class="string">&quot;/nix/store/*******-bash-completion-2.11/etc/profile.d/bash_completion.sh&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># init starship prompt</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(starship init bash)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">if [[ ! -v BASH_COMPLETION_VERSINFO ]]; then
+  . &quot;&#x2F;nix&#x2F;store&#x2F;*******-bash-completion-2.11&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot;
+fi
+
+# init starship prompt
+eval &quot;$(starship init bash)&quot;</code></pre>
 
 
 <h3 id="管理-vim-配置"><a href="#管理-vim-配置" class="headerlink" title="管理 vim 配置"></a>管理 vim 配置</h3><h3 id="通过-import-管理自定义-program"><a href="#通过-import-管理自定义-program" class="headerlink" title="通过 import 管理自定义 program"></a>通过 <code>import</code> 管理自定义 <code>program</code></h3><p>假设已经开发了一个名叫 <code>xxx</code> 的 program, 放在了 <code>home-manager/modules</code> 配置目录下.</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#~/.config/home-manager/modules/xx.nix</span></span><br><span class="line">&#123; config, lib, ... &#125;:</span><br><span class="line"><span class="keyword">let</span></span><br><span class="line">  <span class="attr">cfg</span> = config.programs.xxx;</span><br><span class="line"><span class="keyword">in</span> &#123;</span><br><span class="line">  options.programs.<span class="attr">xxx</span> = &#123;</span><br><span class="line">    <span class="attr">enable</span> = lib.mkEnableOption <span class="string">&quot;xxx&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attr">settings</span> = lib.mkOption &#123;</span><br><span class="line">      <span class="attr">default</span> = &#123; &#125;;</span><br><span class="line">      <span class="attr">type</span> = lib.types.attrsOf lib.types.str;</span><br><span class="line">      <span class="attr">example</span> = lib.literalExpression <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="string">        &#123;</span></span><br><span class="line"><span class="string">          XXX_LOADED = &quot;yes&quot;;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#x27;&#x27;</span>;</span><br><span class="line">      <span class="attr">description</span> = lib.mdDoc</span><br><span class="line">        <span class="string">&quot;XXX config&quot;</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="attr">config</span> = lib.mkIf cfg.enable &#123;</span><br><span class="line">    <span class="attr">home</span> = &#123;</span><br><span class="line">      <span class="attr">sessionVariables</span> = cfg.settings;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">#~&#x2F;.config&#x2F;home-manager&#x2F;modules&#x2F;xx.nix
+&#123; config, lib, ... &#125;:
+let
+  cfg &#x3D; config.programs.xxx;
+in &#123;
+  options.programs.xxx &#x3D; &#123;
+    enable &#x3D; lib.mkEnableOption &quot;xxx&quot;;
+
+    settings &#x3D; lib.mkOption &#123;
+      default &#x3D; &#123; &#125;;
+      type &#x3D; lib.types.attrsOf lib.types.str;
+      example &#x3D; lib.literalExpression &#39;&#39;
+        &#123;
+          XXX_LOADED &#x3D; &quot;yes&quot;;
+        &#125;
+      &#39;&#39;;
+      description &#x3D; lib.mdDoc
+        &quot;XXX config&quot;;
+    &#125;;
+  &#125;;
+  config &#x3D; lib.mkIf cfg.enable &#123;
+    home &#x3D; &#123;
+      sessionVariables &#x3D; cfg.settings;
+    &#125;;
+  &#125;;
+&#125;</code></pre>
 
 <p>接下来需要在 home.nix 中通过 <code>import</code> 导入 <code>xxx</code></p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># home.nix</span></span><br><span class="line">&#123;&#125;:</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">imports</span> = [ ./modules/xxx.nix ];</span><br><span class="line"></span><br><span class="line">  <span class="attr">programs</span> = &#123;</span><br><span class="line">    <span class="attr">sd</span> = &#123;</span><br><span class="line">        <span class="attr">enable</span> = <span class="literal">true</span>;</span><br><span class="line">        <span class="attr">settings</span> = &#123;</span><br><span class="line">          <span class="attr">XXX_LOADED</span> = <span class="string">&quot;yes&quot;</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix"># home.nix
+&#123;&#125;:
+&#123;
+  imports &#x3D; [ .&#x2F;modules&#x2F;xxx.nix ];
+
+  programs &#x3D; &#123;
+    sd &#x3D; &#123;
+        enable &#x3D; true;
+        settings &#x3D; &#123;
+          XXX_LOADED &#x3D; &quot;yes&quot;;
+        &#125;;
+    &#125;;
+
+  &#125;;
+&#125;</code></pre>
 
 
 <h2 id="通过-overlay-增加自定义函数和应用包"><a href="#通过-overlay-增加自定义函数和应用包" class="headerlink" title="通过 overlay 增加自定义函数和应用包"></a>通过 overlay 增加自定义函数和应用包</h2><p>这里举一个例子, 往 <code>&lt;nixpkgs&gt;</code> 中新增 <code>vim-darwin</code> 包.</p>
@@ -552,15 +722,52 @@
 <li>开启 darwin 特性, vim 和 mac 剪贴板交互需要开启该编译选项</li>
 <li>内置两个基础插件</li>
 </ul>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ~/.config/home-manager/overlays/default.nix</span></span><br><span class="line"></span><br><span class="line">final: prev: </span><br><span class="line"><span class="keyword">let</span></span><br><span class="line">	<span class="attr">pkgs</span> = prev</span><br><span class="line"><span class="keyword">in</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">vim-darwin</span> =  pkgs.vim-full.customize &#123;</span><br><span class="line">      vimrcConfig.packages.<span class="attr">default</span> = &#123;</span><br><span class="line">        <span class="attr">gui</span> = <span class="literal">true</span>;</span><br><span class="line">        <span class="attr">darwin</span> = <span class="literal">true</span>;</span><br><span class="line">        <span class="attr">start</span> = [</span><br><span class="line">          pkgs.vimPlugins.vim-nix</span><br><span class="line">          pkgs.vimPlugins.vim-plug</span><br><span class="line">        ];</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix"># ~&#x2F;.config&#x2F;home-manager&#x2F;overlays&#x2F;default.nix
+
+final: prev: 
+let
+	pkgs &#x3D; prev;
+in
+&#123;
+    vim-darwin &#x3D;  pkgs.vim-full.customize &#123;
+      vimrcConfig.packages.default &#x3D; &#123;
+        gui &#x3D; true;
+        darwin &#x3D; true;
+        start &#x3D; [
+          pkgs.vimPlugins.vim-nix
+          pkgs.vimPlugins.vim-plug
+        ];
+      &#125;;
+    &#125;;
+&#125;</code></pre>
 
 <p>完成上面的基础 <code>overlays</code> 脚本, 接下来需要在 home-manager 中引用.</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  ~/.config/home-manager/home.nix</span></span><br><span class="line"></span><br><span class="line">&#123;pkgs, ...&#125; : &#123;</span><br><span class="line"></span><br><span class="line">  nixpkgs.<span class="attr">overlays</span> = [ </span><br><span class="line">    (<span class="built_in">import</span> ./overlays/default.nix)</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">#  ~&#x2F;.config&#x2F;home-manager&#x2F;home.nix
+
+&#123;pkgs, ...&#125; : &#123;
+
+  nixpkgs.overlays &#x3D; [ 
+    (import .&#x2F;overlays&#x2F;default.nix)
+  ];
+
+&#125;</code></pre>
 
 
 <p>再次运行 <code>home-manager switch</code> 完成 <code>overlays</code> 加载</p>
 <p>最后, 再次修改 <code>home.nix</code> 的 <code>home.pacakges</code> 完成 <code>vim-darwin</code> 的安装</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;pkgs, ...&#125; : &#123;</span><br><span class="line"></span><br><span class="line">  nixpkgs.<span class="attr">overlays</span> = [ </span><br><span class="line">    (<span class="built_in">import</span> ./overlays/default.nix)</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  home.<span class="attr">packages</span> = [</span><br><span class="line">	vim-darwin</span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">
+&#123;pkgs, ...&#125; : &#123;
+
+  nixpkgs.overlays &#x3D; [ 
+    (import .&#x2F;overlays&#x2F;default.nix)
+  ];
+
+  home.packages &#x3D; [
+	vim-darwin
+  ]
+
+&#125;
+</code></pre>
 
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>就此, 本文总结了大部分常见的 home-manager 配置管理技巧, 更多内容可以参考官方文档 <a target="_blank" rel="noopener" href="https://nix-community.github.io/home-manager/index.html">https://nix-community.github.io/home-manager/index.html</a></p>
 <p>相对于手动管理配置文件, 采用 home-manager 有以下几个优点</p>
@@ -632,7 +839,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
     </span>
 
   
@@ -682,7 +889,7 @@
 </blockquote>
 <p>通过执行 <code>7z x debian-bullseye-arm64-iey4ku.bin.gz</code>, 解压后将得到 ext4.img， 这是Debian 的 rootfs 根目录分区</p>
 <p>从官方手册里 rootfs 的写入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rkdeveloptool wl 262144 rootfs.img</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">rkdeveloptool wl 262144 rootfs.img</code></pre>
 
 <blockquote>
 <p>这里 262144 是十进制， 换算成16进制就是 0x00040000</p>
@@ -696,10 +903,11 @@
 <p>完成刷入之后， 重启得到一个全新版本的 debian 11.</p>
 <h2 id="接入网络并安装更多包"><a href="#接入网络并安装更多包" class="headerlink" title="接入网络并安装更多包"></a>接入网络并安装更多包</h2><p>由于 sd-card-images 的镜像非常小， 这里需要先通过网络安装常用的 deb 包。</p>
 <p>我是通过usb 以太网转接器接入并安装 network-manager 得到无线接入能力。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install sudo iproutes apt-utils fdisk network-manager vim zsh screen</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">apt install sudo iproutes apt-utils fdisk network-manager vim zsh screen</code></pre>
 
 <p>顺便加个新用户</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -G sudo -s /bin/sh rock960 </span><br><span class="line">password rock960</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">useradd -m -G sudo -s &#x2F;bin&#x2F;sh rock960 
+password rock960</code></pre>
 
 <p>安装完 network-manager，通过 nmtui-connect 就可以通过 TUI 方便地连上无线了。 root 分区容量扩容</p>
 <p>ext4.img 刷入完毕，root 分区的可用容量仅2G， 而 rock960c 的 emmc 容量是 16G， 这里需要通过 resize2fs &#x2F;dev&#x2F;mmcblk1p5 命令完成根分区的自动扩容。 </p>
@@ -711,104 +919,6 @@
 <p>github 项目地址</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/hitsmaxft/rock960-debian-images">https://github.com/hitsmaxft/rock960-debian-images</a></p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2015/04/24/my-new-poker-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Bhe Hongtyu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bhe's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bhe's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2015/04/24/my-new-poker-2/" class="post-title-link" itemprop="url">新的 poker 2 到手</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-04-24 16:11:51" itemprop="dateCreated datePublished" datetime="2015-04-24T16:11:51+00:00">2015-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/keyboard/" itemprop="url" rel="index"><span itemprop="name">keyboard</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2015/04/24/my-new-poker-2/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/04/24/my-new-poker-2/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
       
     </div>
 
@@ -870,7 +980,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -925,7 +1035,8 @@
 <li>特定结构的数据</li>
 <li>针对数据定义的行为</li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span>&#125; A;</span><br><span class="line"><span class="type">void</span> function <span class="title function_">act</span><span class="params">(A a)</span>;</span><br></pre></td></tr></table></figure>
+<pre class="language-c" data-language="c"><code class="language-c">struct &#123;&#125; A;
+void function act(A a);</code></pre>
 
 <p>实话说，这样的编程手段对于解决问题本身已经够用了。</p>
 <p>但对于现代化的软件工程项目，为了更好地解决开发效率与开发成本等问题，<br>我们需要引入一种更加有效的描述方式。使得开发任务更加顺畅， 开发成本能够有效降低。</p>
@@ -937,10 +1048,15 @@
 <p>这个东西从实现上，仅仅是个手法而已，和上文所提到的结构体和函数的接合可以达到同样的目的。<br>现代化的编程语言，正是通过这样的变换手法，优化编程的模型而提高生产力的。</p>
 <p>使用面向对象方式编程的开发者，关注的是某一个对象，它所具备的行为（method）。</p>
 <p>好吧，因为类型的扩散，我们还是得考虑多种类型之间的交互， 和前面说的 <code>函数 + 结构体</code> 的方式，<br>差别并不大。<br>为了优化这中情况，程序员能做到的无非就是简化传入参数中的类型，尽量使用平坦的数据类型.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Name</span> n = <span class="keyword">new</span> <span class="title class_">Name</span>(<span class="string">&quot;John&quot;</span>);</span><br><span class="line"><span class="title class_">Person</span> p = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">p.<span class="title function_">setName</span>(n);</span><br><span class="line">p.<span class="title function_">sayName</span>();</span><br></pre></td></tr></table></figure>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript">Name n &#x3D; new Name(&quot;John&quot;);
+Person p &#x3D; new Person();
+p.setName(n);
+p.sayName();</code></pre>
 
 <p>上面的这个例子里， 我们倾向于认为 <code>Name</code> 是一个简单的类型， 而 <code>Person</code> 则是一种具有复杂行为的<br>高级类型。<br>但是，也正是面向对象语言提供的便捷手段，可以通过 <code>封装</code> 手段解决这个问题。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//JhonPerson extends Person</span></span><br><span class="line"><span class="title class_">Person</span> jp = <span class="keyword">new</span> <span class="title class_">JhonPerson</span>();</span><br><span class="line">jp.<span class="title function_">sayName</span>();</span><br></pre></td></tr></table></figure>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript">&#x2F;&#x2F;JhonPerson extends Person
+Person jp &#x3D; new JhonPerson();
+jp.sayName();</code></pre>
 
 <p>面向对象的本质在于 <code>消息传递</code>, <code>方法调用</code> 不过是类 <code>java</code> 语言中的一种实现。<br>为了简化开发任务， 通过扩展组合等手段， 可以轻易地将复杂行为封装到新类型中，但是提供了相同的接口。</p>
 <p>这个例子中， 我们可以体验到面向对象编程中的封装和多态.<br>封装重用了数据， 而多态重用了行为.</p>
@@ -1011,7 +1127,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1055,7 +1171,21 @@
 <p>在书写 nginx 路由规则的时候， 得保证规则配置的规范， 否则维护起来成本很高。<br>本文简要地讨论了在 rewrite 模块的基础实现的简单路由规则，并解释了常用指令的使用细节。</p>
 </blockquote>
 <h2 id="rewrite-与-location"><a href="#rewrite-与-location" class="headerlink" title="rewrite 与 location"></a>rewrite 与 location</h2><p>首先，这是一个不完整 nginx 虚拟主机配置:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">service &#123;</span><br><span class="line">    root /service/http;</span><br><span class="line">    index index.php;</span><br><span class="line"></span><br><span class="line">    rewrite ^/api/(.*)+ /index.php?app=api&amp;method=$1 break;</span><br><span class="line">    rewrite ^/index.php/(.*)+ /old_api_warning.html break;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        return 200 &quot;index&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location = /index.php &#123;</span><br><span class="line">        return 200 &quot;index.php&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">service &#123;
+    root &#x2F;service&#x2F;http;
+    index index.php;
+
+    rewrite ^&#x2F;api&#x2F;(.*)+ &#x2F;index.php?app&#x3D;api&amp;method&#x3D;$1 break;
+    rewrite ^&#x2F;index.php&#x2F;(.*)+ &#x2F;old_api_warning.html break;
+
+    location &#x2F; &#123;
+        return 200 &quot;index&quot;;
+    &#125;
+
+    location &#x3D; &#x2F;index.php &#123;
+        return 200 &quot;index.php&quot;;
+    &#125;
+&#125;</code></pre>
 
 
 <p>上面的例子中， 指定的类型可以分为两种。</p>
@@ -1071,12 +1201,22 @@
 </ol>
 <p>而对于 rewrite 系列指令和 location 指令的安排， 在书写配置的时候， 应该先定义好 location ， 因为 location 是和 nginx 和后端服务沟通的桥梁。<br>再根据 location 的需要， 使用 rewrite 将各种各样用户输入的 url 正确地映射到 对应 locaton ， 由 location 中的 proxy 指令转发给后端。</p>
 <p>比如一个常规的 php 站点，有以下类似的 location 配置。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 静态资源</span><br><span class="line">location /assets &#123;</span><br><span class="line">    root /service/http/assets/;</span><br><span class="line">&#125;</span><br><span class="line"># 入口 php 脚本 位置</span><br><span class="line">location /index.php &#123;</span><br><span class="line">    root /service/http/phpsrc/webroot/;</span><br><span class="line">       # ... 若干 fast-cgi 代理规则</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none"># 静态资源
+location &#x2F;assets &#123;
+    root &#x2F;service&#x2F;http&#x2F;assets&#x2F;;
+&#125;
+# 入口 php 脚本 位置
+location &#x2F;index.php &#123;
+    root &#x2F;service&#x2F;http&#x2F;phpsrc&#x2F;webroot&#x2F;;
+       # ... 若干 fast-cgi 代理规则
+&#125;</code></pre>
 
 <pre><code>注意， 这份配置省略了不必要的指令，能够满足大部分的 php 应用的需要。
 </code></pre>
 <p>有时候，为了优化 url 的展示，或者兼容旧应用的 url 规则， 只是这么简单的两条 location 配置自然是不够用的。这时候我们可以通过 <code>rewrite</code> 规则进行弥补。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rewrite /index.html$ /app/page-default; //兼容旧 url</span><br><span class="line"></span><br><span class="line">rewrite /app/page-(.*) /index.php?app=api&amp;page=$1 break;</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">rewrite &#x2F;index.html$ &#x2F;app&#x2F;page-default; &#x2F;&#x2F;兼容旧 url
+
+rewrite &#x2F;app&#x2F;page-(.*) &#x2F;index.php?app&#x3D;api&amp;page&#x3D;$1 break;</code></pre>
 
 <p>请注意这两条 <code>rewrite</code> 规则区别的在最后一个 <code>flag</code> 参数 <code>break</code></p>
 <pre><code> 可用的 flag 参数还有 `permanent`, `redirect`, `last` 等， 后面分析它们之间的差别。
@@ -1100,11 +1240,31 @@
 <p>stops processing the current set of <code>ngx_http_rewrite_module</code> directives and starts a search for a new location matching the changed URI</p>
 </blockquote>
 <p>如果是在 <code>server</code> 的顶级部分， 那么它们的作用是相同， 跳过剩下的 rewrite 指定， 进入 location 匹配。<br>如果 rewrite 是在 <code>server</code> 区块顶级 if 内部， 和直接放在 server 下级的  rewrite 行为是一致的。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    rewrite /error1.html /error.html break;</span><br><span class="line">    rewrite /error2.html /error.html last;</span><br><span class="line"></span><br><span class="line">    if ( $arg_version = &quot;1.1&quot; ) &#123;</span><br><span class="line">        rewrite /error3.html /error.html break;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location = error.html &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">server &#123;
+    rewrite &#x2F;error1.html &#x2F;error.html break;
+    rewrite &#x2F;error2.html &#x2F;error.html last;
+
+    if ( $arg_version &#x3D; &quot;1.1&quot; ) &#123;
+        rewrite &#x2F;error3.html &#x2F;error.html break;
+    &#125;
+
+    location &#x3D; error.html &#123;
+    &#125;
+&#125;</code></pre>
 
 <p>以上的 rewrite 的跳转行为是相同的， 进入 location 匹配流程。</p>
 <p>而两者的区别， 在于当 rewrite 指令存在于 <code>location</code> 区块中时, 见例子</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">location = index.php &#123;</span><br><span class="line">    if ( $arg_q  = &quot;&quot; ) &#123;</span><br><span class="line">        rewrite /index.php /error.html last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">location = error.html &#123;</span><br><span class="line">    if ( $arg_test ~= &quot;&quot; ) &#123;</span><br><span class="line">        rewrite /error.html /error-test.html break;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">location &#x3D; index.php &#123;
+    if ( $arg_q  &#x3D; &quot;&quot; ) &#123;
+        rewrite &#x2F;index.php &#x2F;error.html last;
+    &#125;
+&#125;
+location &#x3D; error.html &#123;
+    if ( $arg_test ~&#x3D; &quot;&quot; ) &#123;
+        rewrite &#x2F;error.html &#x2F;error-test.html break;
+    &#125;
+&#125;
+</code></pre>
 
 <p>第一个 location , 如果 <code>q</code> 参数为空， 那么将展示错误页面。</p>
 <p>第二个 location ， 如果 <code>test</code> 参数不为空， 通过 rewrite 规则，使用另外一个 error-test.html,<br>但 location 不变</p>
@@ -1121,12 +1281,29 @@
 <p><code>locaton = error.html</code></p>
 <p>所以一般情况下， 使用 <code>break</code> 指令会相对安全， 不会造成循环重定向。</p>
 <p>比如：</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> = error.html &#123;</span><br><span class="line">    <span class="attribute">rewrite</span> /<span class="literal">error</span>.html /<span class="literal">error</span>.html  <span class="literal">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">if</span> (<span class="variable">$arg_q</span> = <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">        <span class="attribute">return</span> <span class="number">404</span> <span class="string">&quot;not q&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">fastcgi_pass</span> <span class="number">127.0.0.1:9000</span>;</span><br><span class="line">    <span class="comment">#其他 fastcgi 配置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> = error.html &#123;</span><br><span class="line">    <span class="attribute">rewrite</span> /<span class="literal">error</span>.html /<span class="literal">error</span>.html <span class="literal">last</span>;</span><br><span class="line">    <span class="attribute">fastcgi_pass</span> <span class="number">127.0.0.1:9000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-nginx" data-language="nginx"><code class="language-nginx">location &#x3D; error.html &#123;
+    rewrite &#x2F;error.html &#x2F;error.html  break;
+
+    if ($arg_q &#x3D; &quot;&quot;) &#123;
+        return 404 &quot;not q&quot;;
+    &#125;
+
+    fastcgi_pass 127.0.0.1:9000;
+    #其他 fastcgi 配置
+&#125;</code></pre>
+<pre class="language-nginx" data-language="nginx"><code class="language-nginx">location &#x3D; error.html &#123;
+    rewrite &#x2F;error.html &#x2F;error.html last;
+    fastcgi_pass 127.0.0.1:9000;
+&#125;</code></pre>
 
 <p>第一个例子，完成了 rewrite 指令之后，break 指令使得后续的其他 rewrite 规则失效, 接着进行 proxy.<br>第二个例子会导致不断地进行 location 匹配， 最终导致 nginx 返回 500.</p>
 <p>返回结果是这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 500 Internal Server Error</span><br><span class="line">Server: nginx/1.6.3</span><br><span class="line">Date: Sat, 18 Apr 2015 12:10:49 GMT</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 192</span><br><span class="line">Connection: close</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">HTTP&#x2F;1.1 500 Internal Server Error
+Server: nginx&#x2F;1.6.3
+Date: Sat, 18 Apr 2015 12:10:49 GMT
+Content-Type: text&#x2F;html
+Content-Length: 192
+Connection: close</code></pre>
 
 <pre><code>注：nginx 会记录同一条 rewrite 规则的执行次数，如果超过10次，将自动触发 500 进行自我保护。
 </code></pre>
@@ -1140,7 +1317,16 @@
 并不代表支持过度使用 rewrite 指令。
 </code></pre>
 <h2 id="return-指令的应用"><a href="#return-指令的应用" class="headerlink" title="return 指令的应用"></a>return 指令的应用</h2><p>在 <code>rewrite</code> 模块中， 有一条非常有用的指令 <code>return</code>, 用于直接返回客户端指定的状态码。<br>甚至支持指定文本内容和url， 相比起使用 <code>rewrite</code> 指令302进行曲线救国，要简便地多。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">location = /index.php &#123;</span><br><span class="line">  if ( $arg_q = &quot;&quot; ) &#123;</span><br><span class="line">    return 302 /page_not_found.html;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  if ( $arg_id = &quot;&quot; ) &#123;</span><br><span class="line">    return 404 &quot;page not found&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">  return 200 &quot;hello&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">location &#x3D; &#x2F;index.php &#123;
+  if ( $arg_q &#x3D; &quot;&quot; ) &#123;
+    return 302 &#x2F;page_not_found.html;
+  &#125;
+
+  if ( $arg_id &#x3D; &quot;&quot; ) &#123;
+    return 404 &quot;page not found&quot;;
+  &#125;
+  return 200 &quot;hello&quot;;
+&#125;</code></pre>
 
 <p>对于常规的基于 url 提供服务的应用， 基础的 rewrite 指令配合已经足够完成大部分任务。</p>
 <p>下一篇文章再聊聊基于条件，变量和更加复杂的上下文, 完成进行路由规则匹配.</p>
@@ -1206,7 +1392,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1258,7 +1444,12 @@
 </ul>
 <p>优点 1 就不多说了， 用的人都知道。基础的 <code>function</code> 和 <code>class</code> 语法都极其相似。<br>优点 3 涉及的话题很多，暂时不进行展开, 这里重点聊下 php 中的弱类型.</p>
 <h2 id="php-和-类型"><a href="#php-和-类型" class="headerlink" title="php 和 类型"></a>php 和 类型</h2><p>先看一组普通的 PHP 语句：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;&#125;; <span class="comment">//定义一个简单的 class A</span></span><br><span class="line"><span class="variable">$a</span> = <span class="number">1</span>;</span><br><span class="line"><span class="variable">$a</span> = <span class="number">1.1</span>;</span><br><span class="line"><span class="variable">$a</span> = <span class="string">&quot;A&quot;</span>;</span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> <span class="variable">$a</span>(); <span class="comment">//类的名字都是直接计算出来的</span></span><br><span class="line"><span class="variable">$a</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;; <span class="comment">//你没看错， 这是匿名函数， php 中叫闭包。</span></span><br></pre></td></tr></table></figure>
+<pre class="language-php" data-language="php"><code class="language-php">class A&#123;&#125;; &#x2F;&#x2F;定义一个简单的 class A
+$a &#x3D; 1;
+$a &#x3D; 1.1;
+$a &#x3D; &quot;A&quot;;
+$a &#x3D; new $a(); &#x2F;&#x2F;类的名字都是直接计算出来的
+$a &#x3D; function() &#123; return 1; &#125;; &#x2F;&#x2F;你没看错， 这是匿名函数， php 中叫闭包。</code></pre>
 
 <p>从上可以看到的 php 语句的两个重要特点</p>
 <ul>
@@ -1267,7 +1458,15 @@
 </ul>
 <p>这一点让 php 开发者写代码的时候非常轻松。很多东西都不需要考虑。这也就是为什么 php 容易上手。</p>
 <p>接下来是一个基础的函数定义代码:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">someFunc</span>(<span class="params"> <span class="variable">$a</span> = <span class="number">1</span></span>) </span>&#123; <span class="comment">//一个带默认值的参数 $a</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$a</span> === <span class="number">2</span> || <span class="variable">$a</span> === <span class="number">1</span>) &#123; <span class="comment">// int 类型的严格判断</span></span><br><span class="line">		<span class="keyword">return</span>  <span class="variable">$a</span>+<span class="number">1</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="title function_ invoke__">is_array</span>(<span class="variable">$a</span>)&amp;&amp; <span class="keyword">isset</span>(<span class="variable">$a</span>[<span class="number">0</span>]) ) &#123; <span class="comment">// 数组类型</span></span><br><span class="line">		<span class="keyword">return</span> <span class="variable">$a</span>[<span class="number">0</span>];</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&quot;<span class="subst">$a</span> is unknown&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<pre class="language-php" data-language="php"><code class="language-php">function someFunc( $a &#x3D; 1) &#123; &#x2F;&#x2F;一个带默认值的参数 $a
+	if ($a &#x3D;&#x3D;&#x3D; 2 || $a &#x3D;&#x3D;&#x3D; 1) &#123; &#x2F;&#x2F; int 类型的严格判断
+		return  $a+1;
+	&#125; else if (is_array($a)&amp;&amp; isset($a[0]) ) &#123; &#x2F;&#x2F; 数组类型
+		return $a[0];
+	&#125; else &#123;
+                return &quot;$a is unknown&quot;;
+        &#125;
+&#125;;</code></pre>
 <p>这里我们看到， php 的弱类型不仅体现在语句上， 函数的定义的参数和返回值也是没有类型的。 对于 php 而言， 返回值是 <code>int</code> 或者 <code>void</code> （在 php 里应该认为是 null） 类型， 在函数定义中没有区别，参数也是。</p>
 <pre><code>所以用 php 写出无法维护的代码是轻而易举的事情。
 </code></pre>
@@ -1296,7 +1495,13 @@
 <p>在 php 中， 数组和字典（或者说hashmap）, 是混合存在的， 都叫 array。 这个混杂的类型，在处理 key 为数组的hash 数据时，很容易埋下 bug。</p>
 <p>相比之下，javascript 还是严格地划分了 array 和 object 之间的区别。</p>
 <h3 id="使用-array-模拟-struct"><a href="#使用-array-模拟-struct" class="headerlink" title="使用 array 模拟 struct"></a>使用 array 模拟 struct</h3><p>在实际使用中， 针对需要返回复杂结果，但又不需要进行面向对象的包装时，习惯使用 array 做为返回值， 作为 <code>struct</code> 的替代用法.</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">someFunc2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">array</span>( <span class="string">&quot;a&quot;</span> =&gt; <span class="number">1</span>, <span class="string">&quot;b&quot;</span> =&gt;<span class="number">2</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = <span class="title function_ invoke__">someFunc2</span>(); </span><br><span class="line"><span class="variable">$b</span> = <span class="variable">$a</span>[<span class="string">&quot;a&quot;</span>];</span><br></pre></td></tr></table></figure>
+<pre class="language-php" data-language="php"><code class="language-php">
+function someFunc2() &#123;
+	return array( &quot;a&quot; &#x3D;&gt; 1, &quot;b&quot; &#x3D;&gt;2 );
+&#125;
+
+$a &#x3D; someFunc2(); 
+$b &#x3D; $a[&quot;a&quot;];</code></pre>
 
 <p>或者使用 array 做为参数， 避免函数的参数过多带来的麻烦。相对于使用 call_user_func 模拟函数调用要更加自然方便。</p>
 <p><code>$c = someFunc3( array( &quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; 2));</code></p>
@@ -1306,7 +1511,7 @@
 <pre><code>当然，这不过是当年从 perl 遗传下来的。
 </code></pre>
 <p>那么这个 <code>$</code> 符号， 除了必须写上，还有什么实际用途吗？</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$a</span> is b&quot;</span>;</span><br></pre></td></tr></table></figure>
+<pre class="language-php" data-language="php"><code class="language-php">echo &quot;$a is b&quot;;</code></pre>
 
 <p>哦, 原来如此。<code>$</code> 在输出字符串的过程中用于定位字符串中的变量，在输出的过程中会替换为实际的变量内容。</p>
 <pre><code>对于 php 而言， “” 风格的字符串意味着需要进行变量的替换， 而 ‘’ 则说明直接输出内容就行了。
@@ -1384,7 +1589,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1444,7 +1649,13 @@
 <p><strong><code>org.apache.http.nio.conn.NHttpClientConnectionManager</code></strong></p>
 <p>负责接管 client 提交的http请求</p>
 <p>关于接受请求的方法签名如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;NHttpClientConnection&gt; <span class="title function_">requestConnection</span><span class="params">(</span></span><br><span class="line"><span class="params">        HttpRoute route,</span></span><br><span class="line"><span class="params">        Object state,</span></span><br><span class="line"><span class="params">        <span class="type">long</span> connectTimeout,</span></span><br><span class="line"><span class="params">        <span class="type">long</span> connectionRequestTimeout,</span></span><br><span class="line"><span class="params">        TimeUnit timeUnit,</span></span><br><span class="line"><span class="params">        FutureCallback&lt;NHttpClientConnection&gt; callback)</span>;</span><br></pre></td></tr></table></figure>
+<pre class="language-java" data-language="java"><code class="language-java">Future&lt;NHttpClientConnection&gt; requestConnection(
+        HttpRoute route,
+        Object state,
+        long connectTimeout,
+        long connectionRequestTimeout,
+        TimeUnit timeUnit,
+        FutureCallback&lt;NHttpClientConnection&gt; callback);</code></pre>
 
 <ul>
 <li><p>HttpRoute 和请求的 ip 相关, 有一个相关的参数 MaxRequestPerRoute, 意思就是对同一个主机发起的最大连接数</p>
@@ -1549,7 +1760,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1594,13 +1805,11 @@
 <p>这两天用下来感觉还不错. 手感不错, 相对于笔记本的巧克力键盘稍微键程大了一点点, 熟悉之后也没什么不舒服的.</p>
 <p>回到键位的配置上吧, 第一个碰上的问题就是 <code>esc</code> 键, 问题在于 <code>~</code>.</p>
 <p>现在要按 <code>shift+fn+esc</code>, 稍微有点困难. 绑定到 <code>pn+esc</code> , 总算稍微方便点.<br>理论上最好的键位应该 shift+esc 贴近原来的使用习惯, 毕竟 <code>`</code> 很少用上.</p>
-<p>bash 的 <code>` `</code> 反正可以用 <code>$()</code> 替代. 另外通过disp改右 ctrl 为 <code>~</code>, 但是感觉用着比较别扭.</p>
+<p>bash 的 <code>`</code> 反正可以用 <code>$()</code> 替代. 另外通过disp改右 ctrl 为 <code>~</code>, 但是感觉用着比较别扭.</p>
 <p>第二问题就是熟悉 fx 改成fn+数字. 平时倒没啥问题, 就是 kwin 的一些快捷键多少会用上 fx 键, 比如 alt+f2. 或者ide里的一些调试工具, fx 还是挺常用的, 用的时候总要稍稍翻译一下.</p>
 <p>And, 方向键, 虽玩游戏喜欢用 wasd, 但是用 fn+wasd 操作方向键的方式, 需要适应一下. 通常第一反应还是右手去按右下的按键. 虽然是一个很简单的操作, 着实是成了习惯成自然了.</p>
 <p>买的时候附送了6个无刻彩色键帽, 我换掉了 <code>fn</code> <code>win</code> <code>pn</code>, 平时操作的时候比较视觉上方便定位.</p>
 <p>毕竟是拿来干活的工具, 暂时没太折腾.</p>
-<p>附照</p>
-<p><img src="http://ww4.sinaimg.cn/large/77930e11gw1era4l06e8kj20dw0ad75n.jpg" alt="kbc poker2"></p>
 
       
     </div>
@@ -1663,7 +1872,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1736,6 +1945,131 @@
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2014/03/23/asynchronous-programming-with-phpdaemon/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bhe Hongtyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bhe's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bhe's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2014/03/23/asynchronous-programming-with-phpdaemon/" class="post-title-link" itemprop="url">PHPDaemon 异步编程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-03-23 19:39:27" itemprop="dateCreated datePublished" datetime="2014-03-23T19:39:27+00:00">2014-03-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/async/" itemprop="url" rel="index"><span itemprop="name">async</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/async/php-daemon/" itemprop="url" rel="index"><span itemprop="name">php daemon</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/async/php-daemon/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/async/php-daemon/php/network/" itemprop="url" rel="index"><span itemprop="name">network</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2014/03/23/asynchronous-programming-with-phpdaemon/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/03/23/asynchronous-programming-with-phpdaemon/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>phpdaemon, 基于异步网络请求的应用服务框架</p>
+<p>一直以来, php给人的印象就是一个单进程同步的编程语言, 其魅力在于简单, 直观,<br>学习成本低, 容易上手, 所以市场占有率很高.</p>
+<p>流行的php模式, 从几年前的 apache + mod-php, 到今天的nginx + php-fpm,<br>在php编程层面上都是一直的.<br>开发者的开发的代码都是居于”php进程会同步执行所有的代码逻辑之后退出并释放”<br>这么一种假设, 不用考虑多线程的锁问题, 大多数情况下也不用考虑内存泄露.<br>虽然实际情况下, php进程受上层管理界面的影响, 并不是像 cli<br>模式那样执行一次并退出, 但对开发者而言, 其中细节可以忽略.</p>
+<p>回到 <code>phpdaemon</code> 本身吧,<br>phpdaemon是一个在event和eio两个pecl扩展之上开发的异步网络框架, 类似于 python<br>中的 tornado , 它采用的单进程单线程异步IO的网络模型,<br>可用于开发异步非阻塞的应用.</p>
+<p>前面说 phpdaemon 是单进程单线程的网络模式, 严’意义上讲是指它的worker. phpdaemon<br>以 master + workers 方式运行, master只负责分发任务, 在worker<br>进程才进行请求内容的处理工作.</p>
+<p>在 phpdaemon 中, 一个进程中会启用多个服务实例,  每个实例对应一个 appinstance.<br>开发者将不同的处理逻辑封装成为不同的 app, 在异步调度中各司其职.</p>
+<p>master 在接受到请求之后, 向 AppResolver 发起查询, Resolve 根据上下文,<br>返回一个对应的应用实例名称. 比如需要返回一个静态文件, 那么可以返回一个<br>FileReader 实例, 实例的Request 方法中完成异步并向客户端输出文件内容.<br>而最常见的任务是返回一个动态页面的内容, 这种类型的任务, 在 phpdaemon 中抽象为<br>HttpRequest 类型.   一个常规cms中的前端和后台界面,<br>可以分装成两个不同的appInstance, 在resolver实现对应的判断逻辑,<br>正确路由到对应的appInstance上, 然后再决定发起哪一个 Request 类型.</p>
+<p>这种关系有点像 MVC 框架中的C. 大部分php web 框架的 controller<br>中会包含多个action, 在 phpdaemon 中, <code>PHPDaemon\Core\AppInstance</code><br>可以认为是controller, 而action则对应着 client\Request.</p>
+<p>为什么这里要分成 AppInstance 和 Request 两种类型呢?<br>这里涉及到并发环境中的内存管理问题. 常规的php应用是同步的, 从来不考虑这个问题.<br>一个实例最终会被释放, 多个请求之间并没有共享关系. 但是在phpdaemon中,<br>并不是这么回事. worker进程一段时间内一直驻留内存, 需要管理每次请求中用到的资源. </p>
+<p>服务器的配置是不变的, 可以常驻内存. 对下层接口的调用结果, 不同任务之间是独立的,<br>所以任务完毕后应该释放掉.   </p>
+<p>所以, 在并发环境下, AppInstance 不断生成新的 Request<br>对象处理任务并存储在队列当中, 而 Request 在进行网络请求的时,<br>会交出cpu并进入休眠, 等待io事件将自己唤醒. 当 Request 完成任务并返回结果,<br>AppInstance 将结果返回, 并将该 Request 实例从内存中释放.</p>
+<p>上文提到的 Request , 并不是一般认为的 网络请求, 而是对应负责处理网络请求的<br>Service. 那么应用的网络请求又是如何发起的呢?</p>
+<p>这里先解释下 phpdaemon 中的 pool 和 connection.</p>
+<p>Connection, 顾名思义, 就是php代码中发起的异步网络请求, 比如常见的 curl.<br>在异步请求中, 应用发起很多网络请求, 通过事件进行调度.<br>所以同一时间存在多个网络请求, 只不过有的是活跃状态, 有的挂起等待后端返回.<br>存储和管理这些 Connection 的负责人, 就是 Pool. 这就是常说的连接池.</p>
+<p>Java语言中的连接池, 一般通过多线程实现的. 而 PhpDaemon 中的连接池,<br>则是在libevent上实现的单进程单线程异步连接池.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1782,6 +2116,8 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   

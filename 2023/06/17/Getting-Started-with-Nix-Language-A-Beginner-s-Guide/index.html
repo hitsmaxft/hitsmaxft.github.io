@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="前言由于前阵子 MacBookPro 重新格式化了, 于是用 nix-darwin 和 home-manager 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结 运行环境和工具nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 类 Unix 系统中使用, 作为系统自带包管理系统的补充. 首">
 <meta property="og:type" content="article">
@@ -27,7 +27,7 @@
 <meta property="og:description" content="前言由于前阵子 MacBookPro 重新格式化了, 于是用 nix-darwin 和 home-manager 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结 运行环境和工具nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 类 Unix 系统中使用, 作为系统自带包管理系统的补充. 首">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-17T14:10:38.000Z">
-<meta property="article:modified_time" content="2023-06-24T03:18:44.627Z">
+<meta property="article:modified_time" content="2023-06-24T11:46:36.271Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="nix, language">
 <meta name="twitter:card" content="summary">
@@ -122,7 +122,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -202,7 +202,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
     </span>
 
   
@@ -237,10 +237,13 @@
 <p>其他 Linux 发行版, 或者 <code>wsl2</code> 用户, 可以通过 <code>home-manager</code>, 管理当前 <code>Home</code> 目录下的 rc 文件和环境变量,<br>起到和 <code>homebrew</code> 等价的效果</p>
 </blockquote>
 <p>安装完毕需要修改默认配置  <code>~/.config/nix/nix.conf</code>  启用 nix-command 和 flakes</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">experimental-features = nix-command flakes</span><br><span class="line">allowed-users = root @staff</span><br><span class="line">trusted-users = root @staff</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">experimental-features &#x3D; nix-command flakes
+allowed-users &#x3D; root @staff
+trusted-users &#x3D; root @staff</code></pre>
 
 <p>以下是可选部分, 使用国内镜像等</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">trusted-substituters = https://mirrors.ustc.edu.cn/nix-channels/store</span><br><span class="line">substituters = https://mirrors.ustc.edu.cn/nix-channels/store https://cache.nixos.org</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">trusted-substituters &#x3D; https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;nix-channels&#x2F;store
+substituters &#x3D; https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;nix-channels&#x2F;store https:&#x2F;&#x2F;cache.nixos.org</code></pre>
 
 <p>执行 nix 脚本, 有以下两种方式</p>
 <ul>
@@ -252,7 +255,8 @@
 </li>
 </ul>
 <p>举个 <code>nix eval</code> 的简单例子, 可以用这种方式测试本文中的其他例子.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nix eval --expr &#x27;1+1&#x27;</span><br><span class="line">nix eval --expr &#x27;[ 1 2 3 4]&#x27;</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">nix eval --expr &#39;1+1&#39;
+nix eval --expr &#39;[ 1 2 3 4]&#39;</code></pre>
 
 <h2 id="从零熟悉-nix-lang-的基本元素"><a href="#从零熟悉-nix-lang-的基本元素" class="headerlink" title="从零熟悉 nix-lang 的基本元素"></a>从零熟悉 nix-lang 的基本元素</h2><p>由于 nix 是函数式语言, 首先需要熟悉它的核心概念 <code>表达式</code></p>
 <h2 id="函数式和表达式"><a href="#函数式和表达式" class="headerlink" title="函数式和表达式"></a>函数式和表达式</h2><p>首先看一下一个 nix 表达式的组成部分</p>
@@ -261,16 +265,34 @@
 <li><code>let ... in</code> 变量声明部分</li>
 <li>表达式实际内容</li>
 </ul>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">## with; 命名空间</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">import</span> &lt;nixpkgs&gt; &#123;&#125;;</span><br><span class="line"><span class="keyword">with</span> libs;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 定义变量和新函数; 每个语句以 `;` 结束</span></span><br><span class="line"><span class="keyword">let</span></span><br><span class="line">	<span class="attr">a</span> =<span class="number">1</span> ;</span><br><span class="line">	<span class="attr">join</span> = (strs: conatStringSep <span class="string">&quot;&quot;</span> strs);</span><br><span class="line"><span class="keyword">in</span></span><br><span class="line">	join [ <span class="string">&quot;a&quot;</span> <span class="string">&quot;b&quot;</span> <span class="string">&quot;c&quot;</span> ]  <span class="comment"># 表达式不需要 `;`` 结尾</span></span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">
+## with; 命名空间
+with import &lt;nixpkgs&gt; &#123;&#125;;
+with libs;
+
+## 定义变量和新函数; 每个语句以 &#96;;&#96; 结束
+let
+	a &#x3D;1 ;
+	join &#x3D; (strs: conatStringSep &quot;&quot; strs);
+in
+	join [ &quot;a&quot; &quot;b&quot; &quot;c&quot; ]  # 表达式不需要 &#96;;&#96;&#96; 结尾
+	</code></pre>
 
 <p>with 语句在当前表达式作用域 (<code>scope</code> ) 中直接使用它的内部属性&#x2F;方法, 可以减少代码长度.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*改写前*/</span><br><span class="line">builtins.concatStringsSep &quot;,&quot; (builtins.map (p : &quot;v&quot;+p) [ &quot;1&quot; &quot;2&quot; &quot;3&quot; ])</span><br><span class="line">/*改写后*/</span><br><span class="line">with builtins; concatStringsSep &quot;,&quot; (map (p : &quot;v&quot;+p) [ &quot;1&quot; &quot;2&quot; &quot;3&quot; ])</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">&#x2F;*改写前*&#x2F;
+builtins.concatStringsSep &quot;,&quot; (builtins.map (p : &quot;v&quot;+p) [ &quot;1&quot; &quot;2&quot; &quot;3&quot; ])
+&#x2F;*改写后*&#x2F;
+with builtins; concatStringsSep &quot;,&quot; (map (p : &quot;v&quot;+p) [ &quot;1&quot; &quot;2&quot; &quot;3&quot; ])</code></pre>
 
 <p>普通 set 变量也是可以用 <code>with</code>  导入当前 <code>scope</code> </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let</span><br><span class="line">   values = &#123; a =1; b=2 ;&#125;;</span><br><span class="line">in</span><br><span class="line">   with values ; a+b</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">let
+   values &#x3D; &#123; a &#x3D;1; b&#x3D;2 ;&#125;;
+in
+   with values ; a+b</code></pre>
 
 <p>这几个元素可以在表达式的内部继续嵌套使用, 举一个嵌套表达式的例子</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nix-repl&gt; let a = [&quot;a&quot;]; in (let b = [&quot;b&quot;]; in with lib; a ++ b )</span><br><span class="line">[ &quot;a&quot; &quot;b&quot; ]</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">nix-repl&gt; let a &#x3D; [&quot;a&quot;]; in (let b &#x3D; [&quot;b&quot;]; in with lib; a ++ b )
+[ &quot;a&quot; &quot;b&quot; ]</code></pre>
 
 
 <blockquote>
@@ -285,13 +307,26 @@
 <li>list : 数组类型</li>
 <li>set : 字典或者 map</li>
 </ul>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="string">&quot;one&quot;</span> <span class="string">&quot;two&quot;</span> <span class="string">&quot;three&quot;</span> ]</span><br><span class="line"></span><br><span class="line">&#123; <span class="attr">key1</span> = <span class="string">&quot;value1&quot;</span>; <span class="attr">key2</span> = <span class="string">&quot;value2&quot;</span>; &#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">[ &quot;one&quot; &quot;two&quot; &quot;three&quot; ]
+
+&#123; key1 &#x3D; &quot;value1&quot;; key2 &#x3D; &quot;value2&quot;; &#125;</code></pre>
 
 
 <blockquote>
 <p>在写 nix 的过程中, 我个人经常会感到对 集合语法上的不适应, 主要原因是它在语法上和其他语言存在差异. 大部分时候, 我总感觉如果 nix 使用 <code>,</code> 作为分隔符对其他语言的使用者来说会更容易习惯.<br>nix wiki 也提到, 在 <code>nix</code>  中 ‘;’ 扮演了其他语言中 <code>,</code> 的角色. 所以在 nix 没有出现 <code>,</code> 是因为已经选择了 <code>;</code> </p>
 </blockquote>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组成员间不需要 `;` 隔开, 也不要习惯性地使用 `,`</span></span><br><span class="line"><span class="attr">alist</span> = [ <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> ]  ; </span><br><span class="line"></span><br><span class="line"><span class="comment"># 见 https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320545296</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set 成员需要 `;` 分隔</span></span><br><span class="line"><span class="attr">aSet</span> = &#123;</span><br><span class="line"> <span class="attr">a</span> = [];</span><br><span class="line"> <span class="attr">b</span> = <span class="string">&quot;strs&quot;</span>;</span><br><span class="line"> <span class="attr">c</span> = <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment"># 更多例子见 https://nixos.org/guides/nix-pills/basics-of-language.html#idm140737320542544</span></span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix"># 数组成员间不需要 &#96;;&#96; 隔开, 也不要习惯性地使用 &#96;,&#96;
+alist &#x3D; [ 1 2 3 ]  ; 
+
+# 见 https:&#x2F;&#x2F;nixos.org&#x2F;guides&#x2F;nix-pills&#x2F;basics-of-language.html#idm140737320545296
+
+# set 成员需要 &#96;;&#96; 分隔
+aSet &#x3D; &#123;
+ a &#x3D; [];
+ b &#x3D; &quot;strs&quot;;
+ c &#x3D; 1;
+&#125;;
+# 更多例子见 https:&#x2F;&#x2F;nixos.org&#x2F;guides&#x2F;nix-pills&#x2F;basics-of-language.html#idm140737320542544</code></pre>
 
 <p>还有其他类型</p>
 <ul>
@@ -304,10 +339,22 @@
 <blockquote>
 <p>函数定义的风格写法有好几种, 个人建议定义函数使用第一种或者第二种<br>调用语法, 个人习惯第一种,  <code>()</code> 使用多了会导致语句不易读, 陷入了 LISP 语法的笑话</p>
 </blockquote>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span></span><br><span class="line">  <span class="attr">plus</span> = (a: b: a + b ); </span><br><span class="line">  <span class="attr">plus2</span> = a: b: a+b;</span><br><span class="line">  <span class="attr">plus3</span> = (a: (b: a+b));</span><br><span class="line">  <span class="attr">plus4</span> = a: (b: a+b);</span><br><span class="line"><span class="keyword">in</span>  (plus <span class="number">1</span> <span class="number">2</span>) + plus2 (<span class="number">1</span>) (<span class="number">2</span>)  + plus3(<span class="number">1</span>) <span class="number">2</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="number">9</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">let
+  plus &#x3D; (a: b: a + b ); 
+  plus2 &#x3D; a: b: a+b;
+  plus3 &#x3D; (a: (b: a+b));
+  plus4 &#x3D; a: (b: a+b);
+in  (plus 1 2) + plus2 (1) (2)  + plus3(1) 2
+#&gt;&gt; 9</code></pre>
 
 <p>作为函数式语言, 不难发现 nix 也是支持 curry 的.</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span></span><br><span class="line"> <span class="attr">plus</span> = a: b: a+b;</span><br><span class="line"> <span class="attr">plus1</span> = plus(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">in</span></span><br><span class="line"> plus1(plus1(<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">let
+ plus &#x3D; a: b: a+b;
+ plus1 &#x3D; plus(1);
+in
+ plus1(plus1(2))
+
+#&gt;&gt; 4</code></pre>
 
 <blockquote>
 <p>由于  <code>:</code> 后面的函数体是一个表达式, 因此可以加入 <code>let ... in</code>  定义中间变量.</p>
@@ -315,24 +362,40 @@
 <blockquote>
 <p>另外, 在中间语句中加入 with 也是很常见的, 大部分库代码或者包描述中都可以看到.</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let</span><br><span class="line">  values = &#123; c=2; &#125;;</span><br><span class="line">  plus1 = a: with values; let b=1; in a+b+c;</span><br><span class="line">in</span><br><span class="line">  plus1 2</span><br><span class="line"></span><br><span class="line">&gt;&gt; 3</span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">let
+  values &#x3D; &#123; c&#x3D;2; &#125;;
+  plus1 &#x3D; a: with values; let b&#x3D;1; in a+b+c;
+in
+  plus1 2
+
+#&gt;&gt; 3</code></pre>
 
 <p>好了, 表达式函数的特性, nix 和其他语言的差异不是很明显, 唯一特别的就是在其他语言中, 一般我们只会看到 <code>&#123;param1, ...&#125; : expr</code> 这样的 函数定义.</p>
 <p>比如 这段 scala 代码. </p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> my.param1;</span><br><span class="line"><span class="keyword">import</span> my.param2;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myFunction</span></span>(param1: <span class="type">Int</span>, param2: <span class="type">Int</span>): <span class="type">Int</span> = &#123;</span><br><span class="line">  <span class="keyword">val</span> a = param1 * param2</span><br><span class="line">  param1 + param2 + a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>而 nix 的实现往往比较紧凑</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myFunction = &#123;param1, param2&#125; : with my; let a = param1*param2 inparam1 + param2 + a </span><br></pre></td></tr></table></figure>
+<pre class="language-scala" data-language="scala"><code class="language-scala">
+import my;
+def myFunction(param1: Int, param2: Int): Int &#x3D; &#123;
+  val a &#x3D; my.param3 * my.param4
+  param1 + param2 + a
+&#125;</code></pre>
+<p>通过 nix 的书写,往往比较紧凑</p>
+<pre class="language-nix" data-language="nix"><code class="language-nix">&#123;
+  myFunction &#x3D; &#123;param1, param2&#125;:
+    with my;
+    let a &#x3D; param3 * param4;
+    in param1 + param2 + a 
+&#125;</code></pre>
 
-<p>在 nix 中, <code>let ... in expr</code> 和 <code>import ...; expr</code> 这两个前后缀语法导致函数阅读次序和其他语言略有不同, 需要熟悉一段时间.</p>
-<h4 id="命名参数函数"><a href="#命名参数函数" class="headerlink" title="命名参数函数"></a>命名参数函数</h4><p>前面介绍了 <code>nix</code> 中无名参数风格的函数, 类似于 c 或者 <code>java</code> 中的普通函数,<br>但动态语言中很受欢迎的命名函数特性, nix 也同样做了支持.</p>
+<p>在 nix 中, <code>let ... in expr</code> 和 <code>import ...; expr</code>  和函数签名挤成一堆,  与其他语言略有不同, 需要熟悉一段时间.</p>
+<h4 id="命名参数函数"><a href="#命名参数函数" class="headerlink" title="命名参数函数"></a>命名参数函数</h4><p>前面介绍了 <code>nix</code> 中无名参数风格的函数, 类似于 c 或者 <code>java</code> 中的普通函数,<br>接下来介绍在动态语言中很受欢迎的命名函数特性, nix 也同样做了支持.</p>
 <blockquote>
 <p>相比于<code>无名参数</code>, <code>命名参数</code> 的调用代码可读性更强, 同时方便后期维护, 不会出现一旦修改签名需要大量重构代码的痛苦.</p>
 </blockquote>
 <p>首先举一个复杂的可变参数长度的例子开场:</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">func</span> = &#123;a, b, c, ...&#125; : a+b+c <span class="keyword">in</span>  func &#123; <span class="attr">a=1;</span> <span class="attr">b=2;</span> <span class="attr">c=3;</span> <span class="attr">d=4;&#125;</span></span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">let func &#x3D; &#123;a, b, c, ...&#125; : a+b+c in  func &#123; a&#x3D;1; b&#x3D;2; c&#x3D;3; d&#x3D;4;&#125;</code></pre>
 
 <p>如果获取可变参数中的变量, 可以通过 <code>@</code> 引用的参数列表, 这里使用 args 作为变量名.</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">func</span> = &#123;a, b, c, ...&#125;@args: a+b+c+args.d; <span class="keyword">in</span>  func &#123; <span class="attr">a=1;</span> <span class="attr">b=2;</span> <span class="attr">c=3;</span> <span class="attr">d=4;&#125;</span></span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">let func &#x3D; &#123;a, b, c, ...&#125;@args: a+b+c+args.d; in  func &#123; a&#x3D;1; b&#x3D;2; c&#x3D;3; d&#x3D;4;&#125;</code></pre>
 
 <p>通过nix 的 <code>命名参数</code> 函数定义可以看出来, 类似于把函数的传入参数变成一个 attribute set.</p>
 <p>等价于单参数的函数的一个语法糖,以下举几个例子, 函数 <code>fun</code> 采用了<code>无名参数</code>, 但使用效果和<code>命名参数</code>是一样的.</p>
@@ -344,10 +407,22 @@
 <blockquote>
 <p><code>inherit</code> 关键字可以起到类似 <code>with</code> 的作用, 省掉了把同名参数写一遍的功夫</p>
 </blockquote>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span></span><br><span class="line">  <span class="attr">fun</span> = &#123; a, b &#125;: a+b;</span><br><span class="line">  <span class="attr">attrs</span> = &#123; <span class="attr">a</span> =<span class="number">1</span> ; <span class="attr">b=2;</span> &#125;;</span><br><span class="line"><span class="keyword">in</span> fun &#123; </span><br><span class="line">	<span class="keyword">inherit</span> (attrs) a b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">let
+  fun &#x3D; &#123; a, b &#125;: a+b;
+  attrs &#x3D; &#123; a &#x3D;1 ; b&#x3D;2; &#125;;
+in fun &#123; 
+	inherit (attrs) a b;
+&#125;</code></pre>
 
 <p> 还有另外的写法</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span></span><br><span class="line">  <span class="attr">fun</span> = &#123; a, b &#125;: a+b;</span><br><span class="line">  <span class="attr">b</span> = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">in</span> fun &#123; </span><br><span class="line">	<span class="attr">a=2;</span></span><br><span class="line">	<span class="keyword">inherit</span> b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-nix" data-language="nix"><code class="language-nix">let
+  fun &#x3D; &#123; a, b &#125;: a+b;
+  b &#x3D; 2;
+in fun &#123; 
+	a&#x3D;2;
+	inherit b;
+&#125;
+</code></pre>
 
 <p>回到 <code>命名参数</code> 话题本身</p>
 <p>这里举例只是做对比, 既然有语法糖, 直接用比较爽.</p>
@@ -355,7 +430,11 @@
 <ul>
 <li>默认参数 <code>func = &#123;a, b, c? 3, ...&#125; : a+b+c</code></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:p let</span><br><span class="line">func = &#123;a, b, c, ...&#125; : a+b+c;   #可变参数列表</span><br><span class="line">func2 = &#123;a, b, c?3 &#125;: a+b+c;</span><br><span class="line">in </span><br><span class="line">[ func&#123; a=1; b=2; c=3; &#125; func2&#123; a=1; b=2; &#125; ]</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">:p let
+func &#x3D; &#123;a, b, c, ...&#125; : a+b+c;   #可变参数列表
+func2 &#x3D; &#123;a, b, c?3 &#125;: a+b+c;
+in 
+[ func&#123; a&#x3D;1; b&#x3D;2; c&#x3D;3; &#125; func2&#123; a&#x3D;1; b&#x3D;2; &#125; ]</code></pre>
 
 <p>总结一下, 命名形参的函数定义, 相对于匿名参数有以下好处: </p>
 <ul>
@@ -369,7 +448,7 @@
 <blockquote>
 <p>注意, 不能像 c 语言一样用方括号包裹表达式, 否则就变成了一个返回值为 set 的函数了.</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;a, b, c, ...&#125;: &#123;&#125;  #返回值是 set</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">&#123;a, b, c, ...&#125;: &#123;&#125;  #返回值是 set</code></pre>
 
 <h3 id="函数手册"><a href="#函数手册" class="headerlink" title="函数手册"></a>函数手册</h3><p>nix 缺乏一个好的函数查找工具. 目前只能通过文档查找</p>
 <ul>
@@ -459,6 +538,8 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   

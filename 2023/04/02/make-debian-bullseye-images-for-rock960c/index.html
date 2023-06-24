@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂家已经不维护了（email咨询得知）. 不过还好他们邮件给了可以下载最新固件的地址 sd-card-images , 下载下来发现是 sd card 用的镜像, 所以需要这里说下怎么制作emmc 版本镜像 单需要稍微处理以下就可以得到更新的 debian 固件  板子官网  刷入默认的 emmc 镜像从这里下载">
 <meta property="og:type" content="article">
@@ -27,7 +27,7 @@
 <meta property="og:description" content="rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂家已经不维护了（email咨询得知）. 不过还好他们邮件给了可以下载最新固件的地址 sd-card-images , 下载下来发现是 sd card 用的镜像, 所以需要这里说下怎么制作emmc 版本镜像 单需要稍微处理以下就可以得到更新的 debian 固件  板子官网  刷入默认的 emmc 镜像从这里下载">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-04-02T20:02:04.000Z">
-<meta property="article:modified_time" content="2023-06-24T03:18:44.627Z">
+<meta property="article:modified_time" content="2023-06-24T11:46:36.271Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="sbc, debian">
 <meta name="twitter:card" content="summary">
@@ -122,7 +122,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -202,7 +202,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
     </span>
 
   
@@ -251,7 +251,7 @@
 </blockquote>
 <p>通过执行 <code>7z x debian-bullseye-arm64-iey4ku.bin.gz</code>, 解压后将得到 ext4.img， 这是Debian 的 rootfs 根目录分区</p>
 <p>从官方手册里 rootfs 的写入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rkdeveloptool wl 262144 rootfs.img</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">rkdeveloptool wl 262144 rootfs.img</code></pre>
 
 <blockquote>
 <p>这里 262144 是十进制， 换算成16进制就是 0x00040000</p>
@@ -265,10 +265,11 @@
 <p>完成刷入之后， 重启得到一个全新版本的 debian 11.</p>
 <h2 id="接入网络并安装更多包"><a href="#接入网络并安装更多包" class="headerlink" title="接入网络并安装更多包"></a>接入网络并安装更多包</h2><p>由于 sd-card-images 的镜像非常小， 这里需要先通过网络安装常用的 deb 包。</p>
 <p>我是通过usb 以太网转接器接入并安装 network-manager 得到无线接入能力。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install sudo iproutes apt-utils fdisk network-manager vim zsh screen</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">apt install sudo iproutes apt-utils fdisk network-manager vim zsh screen</code></pre>
 
 <p>顺便加个新用户</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -G sudo -s /bin/sh rock960 </span><br><span class="line">password rock960</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">useradd -m -G sudo -s &#x2F;bin&#x2F;sh rock960 
+password rock960</code></pre>
 
 <p>安装完 network-manager，通过 nmtui-connect 就可以通过 TUI 方便地连上无线了。 root 分区容量扩容</p>
 <p>ext4.img 刷入完毕，root 分区的可用容量仅2G， 而 rock960c 的 emmc 容量是 16G， 这里需要通过 resize2fs &#x2F;dev&#x2F;mmcblk1p5 命令完成根分区的自动扩容。 </p>
@@ -295,8 +296,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2015/04/24/my-new-poker-2/" rel="prev" title="新的 poker 2 到手">
-                  <i class="fa fa-chevron-left"></i> 新的 poker 2 到手
+                <a href="/2015/04/24/how-to-understand-object-oriented-programming/" rel="prev" title="如何理解面向对象编程">
+                  <i class="fa fa-chevron-left"></i> 如何理解面向对象编程
                 </a>
             </div>
             <div class="post-nav-item">
@@ -361,6 +362,8 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   

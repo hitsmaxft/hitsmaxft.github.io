@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="为什么 php 这么流行php 的流行已经不用再提及了， 那么， php 具有哪些优点使得它如此流行呢？  接近 c(&lt;5.2) 和 java (~&gt;5.3.8) 的语法 弱类型， 编码成本极低 特定任务所需的基础库完备  优点 1 就不多说了， 用的人都知道。基础的 function 和 class 语法都极其相似。优点 3 涉及的话题很多，暂时不进行展开, 这里重点聊下 php 中">
 <meta property="og:type" content="article">
@@ -27,7 +27,7 @@
 <meta property="og:description" content="为什么 php 这么流行php 的流行已经不用再提及了， 那么， php 具有哪些优点使得它如此流行呢？  接近 c(&lt;5.2) 和 java (~&gt;5.3.8) 的语法 弱类型， 编码成本极低 特定任务所需的基础库完备  优点 1 就不多说了， 用的人都知道。基础的 function 和 class 语法都极其相似。优点 3 涉及的话题很多，暂时不进行展开, 这里重点聊下 php 中">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2015-04-11T16:19:44.000Z">
-<meta property="article:modified_time" content="2023-06-24T03:18:44.627Z">
+<meta property="article:modified_time" content="2023-06-24T11:46:36.271Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta name="twitter:card" content="summary">
 
@@ -121,7 +121,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -201,7 +201,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -252,7 +252,12 @@
 </ul>
 <p>优点 1 就不多说了， 用的人都知道。基础的 <code>function</code> 和 <code>class</code> 语法都极其相似。<br>优点 3 涉及的话题很多，暂时不进行展开, 这里重点聊下 php 中的弱类型.</p>
 <h2 id="php-和-类型"><a href="#php-和-类型" class="headerlink" title="php 和 类型"></a>php 和 类型</h2><p>先看一组普通的 PHP 语句：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;&#125;; <span class="comment">//定义一个简单的 class A</span></span><br><span class="line"><span class="variable">$a</span> = <span class="number">1</span>;</span><br><span class="line"><span class="variable">$a</span> = <span class="number">1.1</span>;</span><br><span class="line"><span class="variable">$a</span> = <span class="string">&quot;A&quot;</span>;</span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> <span class="variable">$a</span>(); <span class="comment">//类的名字都是直接计算出来的</span></span><br><span class="line"><span class="variable">$a</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;; <span class="comment">//你没看错， 这是匿名函数， php 中叫闭包。</span></span><br></pre></td></tr></table></figure>
+<pre class="language-php" data-language="php"><code class="language-php">class A&#123;&#125;; &#x2F;&#x2F;定义一个简单的 class A
+$a &#x3D; 1;
+$a &#x3D; 1.1;
+$a &#x3D; &quot;A&quot;;
+$a &#x3D; new $a(); &#x2F;&#x2F;类的名字都是直接计算出来的
+$a &#x3D; function() &#123; return 1; &#125;; &#x2F;&#x2F;你没看错， 这是匿名函数， php 中叫闭包。</code></pre>
 
 <p>从上可以看到的 php 语句的两个重要特点</p>
 <ul>
@@ -261,7 +266,15 @@
 </ul>
 <p>这一点让 php 开发者写代码的时候非常轻松。很多东西都不需要考虑。这也就是为什么 php 容易上手。</p>
 <p>接下来是一个基础的函数定义代码:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">someFunc</span>(<span class="params"> <span class="variable">$a</span> = <span class="number">1</span></span>) </span>&#123; <span class="comment">//一个带默认值的参数 $a</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$a</span> === <span class="number">2</span> || <span class="variable">$a</span> === <span class="number">1</span>) &#123; <span class="comment">// int 类型的严格判断</span></span><br><span class="line">		<span class="keyword">return</span>  <span class="variable">$a</span>+<span class="number">1</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="title function_ invoke__">is_array</span>(<span class="variable">$a</span>)&amp;&amp; <span class="keyword">isset</span>(<span class="variable">$a</span>[<span class="number">0</span>]) ) &#123; <span class="comment">// 数组类型</span></span><br><span class="line">		<span class="keyword">return</span> <span class="variable">$a</span>[<span class="number">0</span>];</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&quot;<span class="subst">$a</span> is unknown&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<pre class="language-php" data-language="php"><code class="language-php">function someFunc( $a &#x3D; 1) &#123; &#x2F;&#x2F;一个带默认值的参数 $a
+	if ($a &#x3D;&#x3D;&#x3D; 2 || $a &#x3D;&#x3D;&#x3D; 1) &#123; &#x2F;&#x2F; int 类型的严格判断
+		return  $a+1;
+	&#125; else if (is_array($a)&amp;&amp; isset($a[0]) ) &#123; &#x2F;&#x2F; 数组类型
+		return $a[0];
+	&#125; else &#123;
+                return &quot;$a is unknown&quot;;
+        &#125;
+&#125;;</code></pre>
 <p>这里我们看到， php 的弱类型不仅体现在语句上， 函数的定义的参数和返回值也是没有类型的。 对于 php 而言， 返回值是 <code>int</code> 或者 <code>void</code> （在 php 里应该认为是 null） 类型， 在函数定义中没有区别，参数也是。</p>
 <pre><code>所以用 php 写出无法维护的代码是轻而易举的事情。
 </code></pre>
@@ -290,7 +303,13 @@
 <p>在 php 中， 数组和字典（或者说hashmap）, 是混合存在的， 都叫 array。 这个混杂的类型，在处理 key 为数组的hash 数据时，很容易埋下 bug。</p>
 <p>相比之下，javascript 还是严格地划分了 array 和 object 之间的区别。</p>
 <h3 id="使用-array-模拟-struct"><a href="#使用-array-模拟-struct" class="headerlink" title="使用 array 模拟 struct"></a>使用 array 模拟 struct</h3><p>在实际使用中， 针对需要返回复杂结果，但又不需要进行面向对象的包装时，习惯使用 array 做为返回值， 作为 <code>struct</code> 的替代用法.</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">someFunc2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">array</span>( <span class="string">&quot;a&quot;</span> =&gt; <span class="number">1</span>, <span class="string">&quot;b&quot;</span> =&gt;<span class="number">2</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = <span class="title function_ invoke__">someFunc2</span>(); </span><br><span class="line"><span class="variable">$b</span> = <span class="variable">$a</span>[<span class="string">&quot;a&quot;</span>];</span><br></pre></td></tr></table></figure>
+<pre class="language-php" data-language="php"><code class="language-php">
+function someFunc2() &#123;
+	return array( &quot;a&quot; &#x3D;&gt; 1, &quot;b&quot; &#x3D;&gt;2 );
+&#125;
+
+$a &#x3D; someFunc2(); 
+$b &#x3D; $a[&quot;a&quot;];</code></pre>
 
 <p>或者使用 array 做为参数， 避免函数的参数过多带来的麻烦。相对于使用 call_user_func 模拟函数调用要更加自然方便。</p>
 <p><code>$c = someFunc3( array( &quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; 2));</code></p>
@@ -300,7 +319,7 @@
 <pre><code>当然，这不过是当年从 perl 遗传下来的。
 </code></pre>
 <p>那么这个 <code>$</code> 符号， 除了必须写上，还有什么实际用途吗？</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$a</span> is b&quot;</span>;</span><br></pre></td></tr></table></figure>
+<pre class="language-php" data-language="php"><code class="language-php">echo &quot;$a is b&quot;;</code></pre>
 
 <p>哦, 原来如此。<code>$</code> 在输出字符串的过程中用于定位字符串中的变量，在输出的过程中会替换为实际的变量内容。</p>
 <pre><code>对于 php 而言， “” 风格的字符串意味着需要进行变量的替换， 而 ‘’ 则说明直接输出内容就行了。
@@ -395,6 +414,8 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   

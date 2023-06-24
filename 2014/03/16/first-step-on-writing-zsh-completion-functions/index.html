@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="zsh 已经不是什么新鲜事了, oh-my-zsh 相信很多人都已经在用了. 但zsh 存在一个明显的问题, 它并不是什么开箱即用的工具, 需要大量配置, 也很难上手扩充新功能, 这点和vim非常相似. 常用的 alias 和 shell script, 虽然能用上些稍微方便的特殊语法, 大部分仍和 bash 相近. 这时候倒不如使用bash的语法, 保证代码的兼容性和可移植性. 本文简单介绍如何">
 <meta property="og:type" content="article">
@@ -27,7 +27,7 @@
 <meta property="og:description" content="zsh 已经不是什么新鲜事了, oh-my-zsh 相信很多人都已经在用了. 但zsh 存在一个明显的问题, 它并不是什么开箱即用的工具, 需要大量配置, 也很难上手扩充新功能, 这点和vim非常相似. 常用的 alias 和 shell script, 虽然能用上些稍微方便的特殊语法, 大部分仍和 bash 相近. 这时候倒不如使用bash的语法, 保证代码的兼容性和可移植性. 本文简单介绍如何">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2014-03-16T18:43:53.000Z">
-<meta property="article:modified_time" content="2023-06-24T03:18:44.627Z">
+<meta property="article:modified_time" content="2023-06-24T11:46:36.271Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta name="twitter:card" content="summary">
 
@@ -121,7 +121,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -201,7 +201,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -258,13 +258,28 @@
 剩下的事情就交给 oh-my-zsh
 </code></pre>
 <p>脚本头部加上以下内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#compdef launchctl</span></span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">#compdef launchctl</code></pre>
 
 <p>第一行标记这个文件包含一个自动加载的函数.<br>本质上这是一个没有形如 <code>function () &#123;&#125;</code> 包裹着的函数体,<br>和可以直接通过 <code>source</code> 导入的配置文件和脚本是不同的.</p>
 <h2 id="subcommand-补全"><a href="#subcommand-补全" class="headerlink" title="subcommand 补全"></a>subcommand 补全</h2><p>subcommand 应该是子命令或者副命令的意思， 这里保留原文。</p>
 <pre><code>ps: 对于 gnu 风格的命令行工具, 很少有 subcommand , 这一章节并不是必要的.
 </code></pre>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">local -a _1st_arguments</span><br><span class="line"></span><br><span class="line">_1st_arguments=(</span><br><span class="line">    &quot;load:Load configuration files and/or directories&quot;</span><br><span class="line">    &quot;unload:Unload configuration files and/or directories&quot;</span><br><span class="line">    &quot;start:Start specified job&quot;</span><br><span class="line">    &quot;stop:Stop specified job&quot;</span><br><span class="line">    &quot;help:This help output&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">local label_subcommand=&quot;launchctl subcommand&quot;</span><br><span class="line"></span><br><span class="line">if (( CURRENT == 2 )); then</span><br><span class="line">    _describe -t commands &quot;$label_subcommand&quot; _1st_arguments</span><br><span class="line">    return 0</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">local -a _1st_arguments
+
+_1st_arguments&#x3D;(
+    &quot;load:Load configuration files and&#x2F;or directories&quot;
+    &quot;unload:Unload configuration files and&#x2F;or directories&quot;
+    &quot;start:Start specified job&quot;
+    &quot;stop:Stop specified job&quot;
+    &quot;help:This help output&quot;
+)
+
+local label_subcommand&#x3D;&quot;launchctl subcommand&quot;
+
+if (( CURRENT &#x3D;&#x3D; 2 )); then
+    _describe -t commands &quot;$label_subcommand&quot; _1st_arguments
+    return 0
+fi</code></pre>
 
 <p>这段代码还是比较好懂的, 补全所有的<code>subcommand</code>并给出提示信息.</p>
 <p>注意 <code>CURRENT</code> 这个变量, 它标记处于命令行的第几个单词</p>
@@ -275,7 +290,18 @@
 <h2 id="文件补全"><a href="#文件补全" class="headerlink" title="文件补全"></a>文件补全</h2><p><code>launchctl unload</code> 用于关闭一个正在运行的服务, 比如nginx, php-fpm等等, 显然这里需要补全的是一个文件路径, 对应一个位于 <code>~/Library/LaunchAgents/</code> 下的 <code>plist</code> 文件.</p>
 <p>首先假设已经实现了对应的工具函数 <code>_get_loaded_user_plists</code> , 这个函数将生成目前正在运行的plist文件列表</p>
 <p>以下是关键代码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">local</span> expl</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;<span class="variable">$words</span>[2]&quot;</span> <span class="keyword">in</span> </span><br><span class="line">    unload)</span><br><span class="line">        <span class="built_in">local</span> loaded_user_plists</span><br><span class="line">        loaded_user_plists=<span class="string">&quot;<span class="subst">$(_get_loaded_user_plists)</span>&quot;</span></span><br><span class="line">        _wanted loaded_user_plists expl <span class="string">&#x27;running jobs&#x27;</span> compadd -a loaded_user_plists</span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">return</span> 1</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">
+local expl
+
+case &quot;$words[2]&quot; in 
+    unload)
+        local loaded_user_plists
+        loaded_user_plists&#x3D;&quot;$(_get_loaded_user_plists)&quot;
+        _wanted loaded_user_plists expl &#39;running jobs&#39; compadd -a loaded_user_plists
+        ;;
+esac
+
+return 1</code></pre>
 
 <p>可见对于简单参数的补全实现是很轻松的</p>
 <p>zsh 如果发现补全函数返回0, 会将输出作为补全内容作为候补内容输出到终端中去.</p>
@@ -384,6 +410,8 @@ zsh 的~~破手册~~跟天书一样的文档也没打算解释清楚, 我能说�
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   

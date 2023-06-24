@@ -17,17 +17,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="shell 环境有必要保持一定的整洁性, 毕竟多台机器之间多少要做些配置环境上的同步.本文简单讨论了 zsh 使用中配置文件规范性. zsh 的 man 手册中提到, zsh 的配置加载顺序如下 最高优先级, 所有情况下都会加载 12&#x2F;etc&#x2F;zshenv$HOME&#x2F;.zshenv  login shell 配置, 两组文件的区别在于, 中间存在着 zshrc 的加载 12345&#x2F;etc&#x2F;zpro">
+    <meta name="description" content="shell 环境有必要保持一定的整洁性, 毕竟多台机器之间多少要做些配置环境上的同步.本文简单讨论了 zsh 使用中配置文件规范性. zsh 的 man 手册中提到, zsh 的配置加载顺序如下 最高优先级, 所有情况下都会加载 &#x2F;etc&#x2F;zshenv $HOME&#x2F;.zshenv  login shell 配置, 两组文件的区别在于, 中间存在着 zshrc 的加载">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Zshrc: Startup Files">
 <meta property="og:url" content="https://io.bhe.ink/2013/07/01/zshrc-startup-files/index.html">
 <meta property="og:site_name" content="Bhe&#39;s Blog">
-<meta property="og:description" content="shell 环境有必要保持一定的整洁性, 毕竟多台机器之间多少要做些配置环境上的同步.本文简单讨论了 zsh 使用中配置文件规范性. zsh 的 man 手册中提到, zsh 的配置加载顺序如下 最高优先级, 所有情况下都会加载 12&#x2F;etc&#x2F;zshenv$HOME&#x2F;.zshenv  login shell 配置, 两组文件的区别在于, 中间存在着 zshrc 的加载 12345&#x2F;etc&#x2F;zpro">
+<meta property="og:description" content="shell 环境有必要保持一定的整洁性, 毕竟多台机器之间多少要做些配置环境上的同步.本文简单讨论了 zsh 使用中配置文件规范性. zsh 的 man 手册中提到, zsh 的配置加载顺序如下 最高优先级, 所有情况下都会加载 &#x2F;etc&#x2F;zshenv $HOME&#x2F;.zshenv  login shell 配置, 两组文件的区别在于, 中间存在着 zshrc 的加载">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2013-07-01T22:54:00.000Z">
-<meta property="article:modified_time" content="2023-06-24T03:18:44.623Z">
+<meta property="article:modified_time" content="2023-06-24T11:46:36.267Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta name="twitter:card" content="summary">
 
@@ -120,7 +120,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -200,7 +200,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 11:46:36" itemprop="dateModified" datetime="2023-06-24T11:46:36+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -238,21 +238,27 @@
     <div class="post-body" itemprop="articleBody"><p>shell 环境有必要保持一定的整洁性, 毕竟多台机器之间多少要做些配置环境上的同步.<br>本文简单讨论了 zsh 使用中配置文件规范性.</p>
 <p>zsh 的 man 手册中提到, zsh 的配置加载顺序如下</p>
 <p>最高优先级, 所有情况下都会加载</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/zshenv</span><br><span class="line">$HOME/.zshenv</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">&#x2F;etc&#x2F;zshenv
+$HOME&#x2F;.zshenv</code></pre>
 
 <p>login shell 配置, 两组文件的区别在于, 中间存在着 zshrc 的加载</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/etc/zprofile</span><br><span class="line">$HOME/.zprofile</span><br><span class="line"></span><br><span class="line">/etc/zlogin</span><br><span class="line">$HOME/.zlogin</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">&#x2F;etc&#x2F;zprofile
+$HOME&#x2F;.zprofile
+
+&#x2F;etc&#x2F;zlogin
+$HOME&#x2F;.zlogin</code></pre>
 
 
 <p>交互shell配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/zshrc</span><br><span class="line">$HOME/.zshrc</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">&#x2F;etc&#x2F;zshrc
+$HOME&#x2F;.zshrc</code></pre>
 
 <p>三种配置文件的差异, 在于加载的时机不同.</p>
 <p><code>/etc</code> 目录下的配置文件会影响机器上的所有用户, 相比起 $HOME 配置文件, 加载顺序优先级比较高<br>但是除了系统管理员, 大部分情况下就一个人用的机器, 没多大关心的必要.<br> 平时除了偶尔切换到 root 下, 基本不会考虑多用户的情况. 这里就不过多涉及了.</p>
 <p><strong>env配置</strong></p>
 <p>顾名思义属于环境配置, 只要新启动的shell实例, 都会重新加载. 这就意味这个文件的内容会重复加载, 不适合加入需要依赖io等耗时的操作, 影响了shell的执行速度</p>
 <p>我通过这个配置文件, 区分不同机器, 比如</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VIMID=&quot;hits-office&quot;</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">VIMID&#x3D;&quot;hits-office&quot;</code></pre>
 
 <p>方便 vim 中可以根据<code>$VIM</code>加载工作环境下的特殊配置, 比如以 gbk 作为默认文件编码 :( .</p>
 <p><strong>login shell</strong></p>
@@ -265,7 +271,15 @@
 <p>仅仅在登入系统时执行一次, 某些需要调用<code>hostname</code>之类耗时的操作也可以放在这里, 不会因为重复执行而浪费 CPU 运算.</p>
 <p>场景#2: 初始化虚拟环境</p>
 <p>在安装 <code>rvm</code> 或者 <code>pythonbrew</code> 的情况, 需要在当前环境加载相对应的初始化脚本, 才能使用 <code>rvm use xxx</code>, <code>pythonbrew use xxx</code> 等方式修改当前 interceptor.</p>
-<figure class="highlight plaintext"><figcaption><span>~/.zprofile</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#load default profile config</span><br><span class="line">. $HOME/.profile</span><br><span class="line"></span><br><span class="line"># Load RVM into a shell session *as a function*</span><br><span class="line">[[ -s &quot;$HOME/.rvm/scripts/rvm&quot; ]] &amp;&amp; source &quot;$HOME/.rvm/scripts/rvm&quot;</span><br><span class="line"># Load pythonbrew into a shell session *as a function*</span><br><span class="line">[[ -s &quot;$HOME/.pythonbrew/etc/bashrc&quot; ]] &amp;&amp; source &quot;$HOME/.pythonbrew/etc/bashrc&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none" data-line="" data-line-offset="0"><div class="caption"><span>~/.zprofile</span></div><code class="language-none">
+#load default profile config
+. $HOME&#x2F;.profile
+
+# Load RVM into a shell session *as a function*
+[[ -s &quot;$HOME&#x2F;.rvm&#x2F;scripts&#x2F;rvm&quot; ]] &amp;&amp; source &quot;$HOME&#x2F;.rvm&#x2F;scripts&#x2F;rvm&quot;
+# Load pythonbrew into a shell session *as a function*
+[[ -s &quot;$HOME&#x2F;.pythonbrew&#x2F;etc&#x2F;bashrc&quot; ]] &amp;&amp; source &quot;$HOME&#x2F;.pythonbrew&#x2F;etc&#x2F;bashrc&quot;
+</code></pre>
 
     </div>
 
@@ -342,6 +356,8 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   

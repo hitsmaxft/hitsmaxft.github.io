@@ -117,7 +117,7 @@ theme_config:
       size: 0.9
     posts:
       external: true
-      family: LXGW wenkai, Lato, PingFang SC, Microsoft YaHei, sans-serif 
+      family: LXGW wenkai,LXGW WenKai Lite, Lato, PingFang SC, Microsoft YaHei, sans-serif 
 
   google_analytics:
     tracking_id: UA-42604344-1
@@ -140,4 +140,7 @@ deploy:
   repo: git@github.com:hitsmaxft/hitsmaxft.github.io.git
   branch: gh-pages
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
+filter:
+  bheWebFontFilter: scripts/webfont.filter.js
+
 

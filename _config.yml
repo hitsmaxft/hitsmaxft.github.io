@@ -155,6 +155,14 @@ theme_config:
 ## automatically generate sitemap
 sitemap:
   path: sitemap.xml
+  tag: false
+  category: false
+
+robotstxt:
+  useragent: "*"
+  allow:
+  - /
+  sitemap: https://io.bhe.ink/sitemap.xml
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment

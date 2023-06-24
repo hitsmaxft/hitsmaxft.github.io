@@ -3,7 +3,8 @@ layout: post
 title: "自定义 zsh 自动补全功能初探"
 date: 2014-03-17 02:43:53 +0800
 comments: true
-categories: [zsh, script, tutorial]
+categories: [ shell ]
+tags: [zsh, script, tutorial]
 ---
 
 zsh 已经不是什么新鲜事了, `oh-my-zsh` 相信很多人都已经在用了.

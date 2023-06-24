@@ -1,7 +1,11 @@
 ---
 title: 制作 rock960c 的 debian 11  emmc 系统镜像
 date: 2023-04-02 20:02:04
-tags: sbc, debian
+categories:
+- embed linux
+tags: 
+- sbc
+- debian
 ---
 
 rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂家已经不维护了（email咨询得知）.

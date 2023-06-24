@@ -1,6 +1,9 @@
 ---
 title: Nix 语言初学者上手指南
-tags: nix, language
+tags:
+  - nix
+  - programming language
+category: [ nix]
 date: 2023-06-17 14:10:38
 ---
 

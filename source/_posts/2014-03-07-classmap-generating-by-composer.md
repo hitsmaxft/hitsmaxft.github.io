@@ -3,7 +3,8 @@ layout: post
 title: "基于 composer 的classmap生成器"
 date: 2014-03-07 10:18
 comments: true
-categories: php composer classmap
+categories: [php]
+tags: php composer
 ---
 
 近期花了不少功夫在优化线上代码构建方案上, 过程中的一些心得会不定期更新.

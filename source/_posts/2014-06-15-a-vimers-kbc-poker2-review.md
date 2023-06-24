@@ -3,9 +3,9 @@ layout: post
 title: "vimer入手 KBC poker2 数天的感想"
 date: 2014-06-15 23:04:53 +0800
 comments: true
-categories: 
+categories: [devices, keyboard]
+tags: 
 - keyboard
-- toy
 ---
 
 买来平时写代码用的, archlinux+kde+vim下开发 php 主要应用, 偶尔用用phpstorm和pycharm 看看其他不经常维护的项目.

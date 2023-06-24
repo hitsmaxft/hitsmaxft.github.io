@@ -3,8 +3,8 @@ layout: post
 title: "如何理解面向对象编程"
 date: 2015-04-24 23:00:27 +0800
 comments: true
-categories:
-- programming language
+categories: [programming, PL]
+tags:
 - oop
 - 编程语言
 - 面向对象

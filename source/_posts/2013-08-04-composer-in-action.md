@@ -3,7 +3,8 @@ layout: post
 title: "Composer 实战"
 date: 2013-08-04 00:09
 comments: false
-categories: php, composer
+tags: composer
+categories: php
 ---
 **Composer 是什么?**
 

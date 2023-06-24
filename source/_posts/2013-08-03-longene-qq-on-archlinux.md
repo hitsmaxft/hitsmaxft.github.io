@@ -3,7 +3,7 @@ layout: post
 title: "Archlinux Longene QQ 轻松上手"
 date: 2013-08-03 01:04
 comments: true
-categories: linux-desktop, app, qq, archlinux
+tags: [linux-desktop, app, qq, archlinux]
 ---
 ### 通过 Aur 安装相关包
 

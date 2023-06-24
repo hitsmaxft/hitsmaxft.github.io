@@ -3,7 +3,8 @@ layout: post
 title: "Zshrc: Startup Files"
 date: 2013-07-01 22:54
 comments: true
-categories: shell environment zshrc
+categories: [shell]
+tags: [shell environment zshrc]
 ---
 
 shell 环境有必要保持一定的整洁性, 毕竟多台机器之间多少要做些配置环境上的同步.

@@ -1,6 +1,9 @@
 ---
 title: nix and home-manager, 最好的系统环境管理工具
-tags: nix, dotfiles
+categories: shell
+tags:
+  - nix
+  - shell
 date: 2023-06-11 11:07:26
 ---
 

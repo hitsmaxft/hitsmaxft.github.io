@@ -3,7 +3,9 @@ layout: post
 title: "Vim, 经验之谈"
 date: 2014-03-23 00:21:44 +0800
 comments: true
-categories: [tutor, vim]
+
+categories: [vim]
+tags: [tutor, vim]
 ---
 
 Vim, 老生常谈的话题了. 

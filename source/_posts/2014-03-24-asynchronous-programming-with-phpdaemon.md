@@ -3,7 +3,8 @@ layout: post
 title: "PHPDaemon 异步编程"
 date: 2014-03-24 03:39:27 +0800
 comments: true
-categories: 
+categories: [programming language,php]
+tags: 
 - async
 - php daemon
 - php

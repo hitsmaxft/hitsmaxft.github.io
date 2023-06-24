@@ -175,9 +175,7 @@ let
   plus3 = (a: (b: a+b));
   plus4 = a: (b: a+b);
 in  (plus 1 2) + plus2 (1) (2)  + plus3(1) 2
-
->> 9
-
+#>> 9
 ```
 
 作为函数式语言, 不难发现 nix 也是支持 curry 的.
@@ -189,7 +187,7 @@ let
 in
  plus1(plus1(2))
 
->> 4
+#>> 4
 ```
 
 >由于  `:` 后面的函数体是一个表达式, 因此可以加入 `let ... in`  定义中间变量.
@@ -197,14 +195,14 @@ in
 >另外, 在中间语句中加入 with 也是很常见的, 大部分库代码或者包描述中都可以看到.
 
 
-```
+```nix
 let
   values = { c=2; };
   plus1 = a: with values; let b=1; in a+b+c;
 in
   plus1 2
 
->> 3
+#>> 3
 ```
 
 好了, 表达式函数的特性, nix 和其他语言的差异不是很明显, 唯一特别的就是在其他语言中, 一般我们只会看到 ` {param1, ...} : expr ` 这样的 函数定义.
@@ -220,13 +218,15 @@ def myFunction(param1: Int, param2: Int): Int = {
   param1 + param2 + a
 }
 ```
-而 nix 的实现往往比较紧凑
+通过 nix 的书写,往往比较紧凑
 
 ```
-myFunction = {param1, param2} : with my; let a = param1*param2 inparam1 + param2 + a 
+myFunction = {param1, param2}:
+  with my;
+  let a = param1*param2; in param1 + param2 + a 
 ```
 
-在 nix 中, `let ... in expr` 和 `import ...; expr` 这两个前后缀语法导致函数阅读次序和其他语言略有不同, 需要熟悉一段时间.
+在 nix 中, `let ... in expr` 和 `import ...; expr`  和函数签名挤成一堆,  与其他语言略有不同, 需要熟悉一段时间.
 
 #### 命名参数函数
 
@@ -261,6 +261,7 @@ let func = {a, b, c, ...}@args: a+b+c+args.d; in  func { a=1; b=2; c=3; d=4;}
 可能由于大量同名赋值的存在, `nix` 还提供了 `inherit`  关键字, 简化了形参的代码书写.
 
 > `inherit` 关键字可以起到类似 `with` 的作用, 省掉了把同名参数写一遍的功夫
+
 
 ```nix
 let

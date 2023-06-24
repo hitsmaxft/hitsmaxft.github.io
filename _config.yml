@@ -129,6 +129,10 @@ theme_config:
   github_banner:
     enable: true
     permalink: https://github.com/hitsmaxft
+  codeblock:
+    theme:
+      light: obsidian
+      dark: obsidian
 
 # automatically generate sitemap
 sitemap:

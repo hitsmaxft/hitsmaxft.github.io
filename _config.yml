@@ -4,16 +4,15 @@
 
 # Site
 title: Bhe's Blog
-subtitle: ''
+subtitle: 'Bhe's Blog'
 description: ''
 keywords:
 author: Bhe Hongtyu
-language: en
+language: zh_CN
 timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-#url: https://blog.bhe.ink
 url: https://io.bhe.ink
 permalink: :year/:month/:day/:title/
 permalink_defaults:

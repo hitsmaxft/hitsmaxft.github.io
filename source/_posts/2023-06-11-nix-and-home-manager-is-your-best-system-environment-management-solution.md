@@ -1,9 +1,10 @@
 ---
 title: nix and home-manager, 最好的系统环境管理工具
-categories: shell
+categories: nix
 tags:
   - nix
   - shell
+  - home-manager
 date: 2023-06-11 11:07:26
 ---
 

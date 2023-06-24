@@ -141,6 +141,7 @@ deploy:
   branch: gh-pages
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
 filter:
+  # web font filter for wenkai
   bheWebFontFilter: scripts/webfont.filter.js
 
 

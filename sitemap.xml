@@ -2,6 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://io.bhe.ink/2014/03/16/first-step-on-writing-zsh-completion-functions/</loc>
+    
+    <lastmod>2023-06-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2014/03/22/introduction-to-vim/</loc>
+    
+    <lastmod>2023-06-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2014/03/23/asynchronous-programming-with-phpdaemon/</loc>
+    
+    <lastmod>2023-06-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2014/06/15/a-vimers-kbc-poker2-review/</loc>
+    
+    <lastmod>2023-06-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://io.bhe.ink/2014/12/18/notes-about-apache-nio-client-source-code/</loc>
     
     <lastmod>2023-06-24</lastmod>
@@ -120,42 +156,6 @@
   
   <url>
     <loc>https://io.bhe.ink/2014/03/07/classmap-generating-by-composer/</loc>
-    
-    <lastmod>2023-06-24</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2014/03/16/first-step-on-writing-zsh-completion-functions/</loc>
-    
-    <lastmod>2023-06-24</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2014/03/22/introduction-to-vim/</loc>
-    
-    <lastmod>2023-06-24</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2014/03/23/asynchronous-programming-with-phpdaemon/</loc>
-    
-    <lastmod>2023-06-24</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2014/06/15/a-vimers-kbc-poker2-review/</loc>
     
     <lastmod>2023-06-24</lastmod>
     
@@ -397,6 +397,13 @@
   </url>
   
   <url>
+    <loc>https://io.bhe.ink/tags/home-manager/</loc>
+    <lastmod>2023-06-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://io.bhe.ink/tags/programming-language/</loc>
     <lastmod>2023-06-24</lastmod>
     <changefreq>weekly</changefreq>
@@ -469,14 +476,14 @@
   </url>
   
   <url>
-    <loc>https://io.bhe.ink/categories/devices/keyboard/</loc>
+    <loc>https://io.bhe.ink/categories/nix/</loc>
     <lastmod>2023-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://io.bhe.ink/categories/nix/</loc>
+    <loc>https://io.bhe.ink/categories/devices/keyboard/</loc>
     <lastmod>2023-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

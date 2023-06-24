@@ -163,6 +163,10 @@ robotstxt:
   allow:
   - /
   sitemap: https://io.bhe.ink/sitemap.xml
+feed:
+  type: rss2
+  path: rss2.xml
+  limit: 20
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment

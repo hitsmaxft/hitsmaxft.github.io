@@ -124,17 +124,19 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
+          <a href="/categories/">
         <span class="site-state-item-count">14</span>
-        <span class="site-state-item-name">categories</span>
+        <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">32</span>
-        <span class="site-state-item-name">tags</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
@@ -203,7 +205,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 12:31:16" itemprop="dateModified" datetime="2023-06-24T12:31:16+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 12:31:47" itemprop="dateModified" datetime="2023-06-24T12:31:47+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -496,6 +498,339 @@ in
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2023/06/11/nix-and-home-manager-is-your-best-system-environment-management-solution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bhe Hongtyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bhe's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bhe's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/06/11/nix-and-home-manager-is-your-best-system-environment-management-solution/" class="post-title-link" itemprop="url">nix and home-manager, 最好的系统环境管理工具</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-06-11 11:07:26" itemprop="dateCreated datePublished" datetime="2023-06-11T11:07:26+00:00">2023-06-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-06-24 12:31:47" itemprop="dateModified" datetime="2023-06-24T12:31:47+00:00">2023-06-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/shell/" itemprop="url" rel="index"><span itemprop="name">shell</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2023/06/11/nix-and-home-manager-is-your-best-system-environment-management-solution/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/06/11/nix-and-home-manager-is-your-best-system-environment-management-solution/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>由 chatgpt 生成…</p>
+</blockquote>
+<p>在当今的技术领域，配置管理变得越来越重要。对于开发者和技术爱好者来说，保持一致的开发环境和工具配置是至关重要的。然而，传统的配置文件管理方式可能会导致配置分散、混乱和难以维护的问题。</p>
+<p>幸运的是，有一个强大的工具可以帮助我们解决这些问题，那就是home-manager。Home-manager是一个基于Nix的工具，旨在帮助用户统一管理他们的配置文件，并通过声明性的方式进行配置。</p>
+<p>本文将介绍如何安装home-manager以及使用它来管理一些常见的配置文件，例如zsh、bash和vim。我们将探索如何使用home-manager的内置功能和插件来简化配置文件的管理，并介绍如何定制和贡献新的配置。</p>
+<p>接下来的内容中, 主要围绕两个工具的使用.</p>
+<ul>
+<li><code>home-manager</code> 声明式, 函数式, 面向终态的用户配置管理方案</li>
+<li>通过 <code>yadm</code> 完成将配置文件同步到 github</li>
+</ul>
+<h2 id="安装-home-manager"><a href="#安装-home-manager" class="headerlink" title="安装 home-manager"></a>安装 home-manager</h2><p>假设当前系统处于初始化状态, 这里首先更新 channel , 接着安装最新的 home-manager.</p>
+<blockquote>
+<p>官方安装教程 <a target="_blank" rel="noopener" href="https://nix-community.github.io/home-manager/index.html#sec-install-standalone">https://nix-community.github.io/home-manager/index.html#sec-install-standalone</a><br>可选的方式还有通过 flake 加载.</p>
+</blockquote>
+<pre class="language-bash" data-language="bash"><code class="language-bash">nix-channel --add https:&#x2F;&#x2F;github.com&#x2F;nix-community&#x2F;home-manager&#x2F;archive&#x2F;master.tar.gz home-manager 
+nix-channel --update
+
+nix-shell &#39;&lt;home-manager&gt;&#39; -A install</code></pre>
+
+<p>安装完毕, home-manager 会自动生成一个最小化配置在 <code>~/.config/home-manager/home.nix</code>  这个文件中. 这里 home-manager 的可以告一段落</p>
+<blockquote>
+<p>官方文档中会提及修改 <code>.profile</code> 等操作. 这部分会在 <code>program</code> 段落中进行.</p>
+</blockquote>
+<h2 id="通过-yadm-将配置文件同步到-github"><a href="#通过-yadm-将配置文件同步到-github" class="headerlink" title="通过 yadm 将配置文件同步到 github"></a>通过 yadm 将配置文件同步到 github</h2><p>在通过 nix-shell 载入 yadm 和相关软件, 通过执行 <code>nix-shell -p pkg1 pkg2</code> , 可以快速得到临时环境</p>
+<blockquote>
+<p>假设我们的 dotfiles 将上传到 <code>$GIT_USER</code> 这个用户名下的 <code>dotfiles</code> 仓库.<br>那么 github 全路径为 <code>git@github.com:$&#123;GIT_USER&#125;/dotfiles.git</code></p>
+</blockquote>
+<pre class="language-bash" data-language="bash"><code class="language-bash">yadm init
+yadm add ~&#x2F;.config&#x2F;home-manager&#x2F;home.nix
+yadm commit -m &#39;add home.nix&#39;
+yadm remote add origin git@github.com:$&#123;GIT_USER&#125;&#x2F;dotfiles.git
+</code></pre>
+
+<p>如果仓库中没有任何内容, 这是应该直接推送到 <code>master</code> 分支, (或者 main )</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">yadm push -u origin master</code></pre>
+
+<blockquote>
+<p>假设你已经有现成的 dotfiles, 可以直接执行 <code>yadm clone git@github.com:$&#123;GIT_USER&#125;/dotfiles.git</code> 一步初始化</p>
+</blockquote>
+<h2 id="home-program-声明式管理shell-环境"><a href="#home-program-声明式管理shell-环境" class="headerlink" title="home.program: 声明式管理shell 环境"></a>home.program: 声明式管理shell 环境</h2><p>home-manager 可以用于替代 <code>stow</code> 和 <code>homebrew</code> , 通过在 <code>~/.nix-profile/bin</code> 下加入软链等, 方便地管理当前环境中的各种工具.</p>
+<p>对于经常需要修改开发环境的开发者</p>
+<p><code>home.programs</code> 内置了大量 常用 shell 命令的配置, 通过这些配置项, 一方面自动化往当前 home.nix 中增加 <code>nix</code> package, 同时还能生成对应的配置文件, 替代手动管理配置文件.</p>
+<p>解决了配置文件分散在各个目录和文件下的脏乱差现场, 现在配置文件都托管给了 nix  通过 <code>home-manager</code>  进行集中化管理, 同时<br>社区中大量已经贡献进来的 programs 配置项不仅可以直接使用, 后面会介绍如何通过 <code>import</code> 定制已有的 <code>program</code>. </p>
+<blockquote>
+<p>当然可以也新增自己的 program 实现, 最后贡献给 <code>home-manager</code> 社区.</p>
+</blockquote>
+<p>接下来章节中, 首先介绍一些常见场景下的 <code>home-manager</code> 使用案例</p>
+<ul>
+<li>zsh</li>
+<li>bash</li>
+<li>vim</li>
+</ul>
+<h3 id="热身开始-通过-nix-管理-zsh-配置文件"><a href="#热身开始-通过-nix-管理-zsh-配置文件" class="headerlink" title="热身开始, 通过 nix 管理 zsh 配置文件"></a>热身开始, 通过 nix 管理 zsh 配置文件</h3><p>过去配置 zsh, 一般是通过修改 <code>.zshrc</code> <code>.zprofile</code> 和 <code>.zshenv</code> 这些文件, 如果需要同步到不同机器, 可以借助 <code>yadm</code> 同步到 <code>github</code> .</p>
+<p>随着 shell 的配置项的代码量不断膨胀, </p>
+<p>接下来将介绍如何通过 <code>home-manager</code> 的 <code>programs.zsh</code> 配置项, 声明式管理 zsh 的所有配置文件.</p>
+<p>以下是一个 <code>zsh</code> 的配置实例, 内置了一部分常用的 <code>zsh</code> 特性.</p>
+<ul>
+<li>内置 <code>oh-my-zsh</code> , 启用 <code>vi-mode</code>  和  <code>jump</code> 插件</li>
+<li><code>.zshenv</code> 加入 nix 环境变量 (这就是前面安装 nix 环境中跳过的部分)<ul>
+<li><code>envExtra</code></li>
+</ul>
+</li>
+<li><code>.zshrc</code>  加入自定义选项<ul>
+<li><code>initExtraFirst</code>  这部分脚本会在 .zshrc 最前面, 先于 <code>oh-my-zsh</code> 和其他脚本</li>
+<li><code>initExtra</code> 这部分脚本优先级低于其他的</li>
+<li><code>initExtraBeforeCompInit</code> 这部分脚本将在 zsh插件 加载之前执行</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>具体实现见 <a target="_blank" rel="noopener" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/zsh.nix">https://github.com/nix-community/home-manager/blob/master/modules/programs/zsh.nix</a><br>zshrc 配置项大致的优先级为  initExtraFirst &gt;  initExtraBeforeCompInit &gt; plugsin &gt; ohmyzsh &gt; initExtra</p>
+</blockquote>
+<pre class="language-nix" data-language="nix"><code class="language-nix">&#123;pkg, ...&#125; : 
+&#123;
+	home.programs &#x3D; &#123;
+		zsh &#x3D; &#123;
+			enable &#x3D; true;
+			oh-my-zsh &#x3D; &#123;
+				enable &#x3D; true;
+				plugins &#x3D; [
+					&quot;vi-mode&quot;
+					&quot;jump&quot;
+				]
+				
+			&#125;;
+			
+			envExtra &#x3D; &#39;&#39;
+if [ -e &#39;&#39;$&#123;HOME&#125;&#x2F;.nix-profile&#x2F;etc&#x2F;profile.d&#x2F;nix.sh ]; then . &#39;&#39;$HOME&#x2F;.nix-profile&#x2F;etc&#x2F;profile.d&#x2F;nix.sh; fi # added by Nix installer
+
+			&#39;&#39;;
+			initExtraFirst &#x3D; &#39;&#39;
+			&#39;&#39;;
+			initExtra &#x3D; &#39;&#39;
+			&#39;&#39;;
+
+
+		&#125;;
+	&#125;;
+&#125;</code></pre>
+
+<h3 id="管理-bash-配置"><a href="#管理-bash-配置" class="headerlink" title="管理 bash 配置"></a>管理 bash 配置</h3><p>接下来是一个 <code>bash</code> 的配置实例.</p>
+<p>给 bash 内置了<code>补全</code>功能和 <code>starship</code> (类似 p10k 的 zsh 提示符主题, rust 实现, 需要预先在 packages 中安装)</p>
+<pre class="language-nix" data-language="nix"><code class="language-nix">&#123;
+	home.packages &#x3D; [
+
+		starship
+	];
+    programs &#x3D; &#123;
+    bash &#x3D; &#123;
+        enable &#x3D; true;
+        enableCompletion &#x3D; true;
+        initExtra &#x3D; &#39;&#39;
+          eval &quot;$(starship init bash)&quot;
+          &#39;&#39;;
+      &#125;;
+    &#125;;
+&#125;</code></pre>
+
+<p>在 <code>.bashrc</code> 中, 可以看到最终效果为:</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">if [[ ! -v BASH_COMPLETION_VERSINFO ]]; then
+  . &quot;&#x2F;nix&#x2F;store&#x2F;*******-bash-completion-2.11&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot;
+fi
+
+# init starship prompt
+eval &quot;$(starship init bash)&quot;</code></pre>
+
+
+<h3 id="管理-vim-配置"><a href="#管理-vim-配置" class="headerlink" title="管理 vim 配置"></a>管理 vim 配置</h3><h3 id="通过-import-管理自定义-program"><a href="#通过-import-管理自定义-program" class="headerlink" title="通过 import 管理自定义 program"></a>通过 <code>import</code> 管理自定义 <code>program</code></h3><p>假设已经开发了一个名叫 <code>xxx</code> 的 program, 放在了 <code>home-manager/modules</code> 配置目录下.</p>
+<pre class="language-nix" data-language="nix"><code class="language-nix">#~&#x2F;.config&#x2F;home-manager&#x2F;modules&#x2F;xx.nix
+&#123; config, lib, ... &#125;:
+let
+  cfg &#x3D; config.programs.xxx;
+in &#123;
+  options.programs.xxx &#x3D; &#123;
+    enable &#x3D; lib.mkEnableOption &quot;xxx&quot;;
+
+    settings &#x3D; lib.mkOption &#123;
+      default &#x3D; &#123; &#125;;
+      type &#x3D; lib.types.attrsOf lib.types.str;
+      example &#x3D; lib.literalExpression &#39;&#39;
+        &#123;
+          XXX_LOADED &#x3D; &quot;yes&quot;;
+        &#125;
+      &#39;&#39;;
+      description &#x3D; lib.mdDoc
+        &quot;XXX config&quot;;
+    &#125;;
+  &#125;;
+  config &#x3D; lib.mkIf cfg.enable &#123;
+    home &#x3D; &#123;
+      sessionVariables &#x3D; cfg.settings;
+    &#125;;
+  &#125;;
+&#125;</code></pre>
+
+<p>接下来需要在 home.nix 中通过 <code>import</code> 导入 <code>xxx</code></p>
+<pre class="language-nix" data-language="nix"><code class="language-nix"># home.nix
+&#123;&#125;:
+&#123;
+  imports &#x3D; [ .&#x2F;modules&#x2F;xxx.nix ];
+
+  programs &#x3D; &#123;
+    sd &#x3D; &#123;
+        enable &#x3D; true;
+        settings &#x3D; &#123;
+          XXX_LOADED &#x3D; &quot;yes&quot;;
+        &#125;;
+    &#125;;
+
+  &#125;;
+&#125;</code></pre>
+
+
+<h2 id="通过-overlay-增加自定义函数和应用包"><a href="#通过-overlay-增加自定义函数和应用包" class="headerlink" title="通过 overlay 增加自定义函数和应用包"></a>通过 overlay 增加自定义函数和应用包</h2><p>这里举一个例子, 往 <code>&lt;nixpkgs&gt;</code> 中新增 <code>vim-darwin</code> 包.</p>
+<ul>
+<li>关闭 GUI </li>
+<li>开启 darwin 特性, vim 和 mac 剪贴板交互需要开启该编译选项</li>
+<li>内置两个基础插件</li>
+</ul>
+<pre class="language-nix" data-language="nix"><code class="language-nix"># ~&#x2F;.config&#x2F;home-manager&#x2F;overlays&#x2F;default.nix
+
+final: prev: 
+let
+	pkgs &#x3D; prev;
+in
+&#123;
+    vim-darwin &#x3D;  pkgs.vim-full.customize &#123;
+      vimrcConfig.packages.default &#x3D; &#123;
+        gui &#x3D; true;
+        darwin &#x3D; true;
+        start &#x3D; [
+          pkgs.vimPlugins.vim-nix
+          pkgs.vimPlugins.vim-plug
+        ];
+      &#125;;
+    &#125;;
+&#125;</code></pre>
+
+<p>完成上面的基础 <code>overlays</code> 脚本, 接下来需要在 home-manager 中引用.</p>
+<pre class="language-nix" data-language="nix"><code class="language-nix">#  ~&#x2F;.config&#x2F;home-manager&#x2F;home.nix
+
+&#123;pkgs, ...&#125; : &#123;
+
+  nixpkgs.overlays &#x3D; [ 
+    (import .&#x2F;overlays&#x2F;default.nix)
+  ];
+
+&#125;</code></pre>
+
+
+<p>再次运行 <code>home-manager switch</code> 完成 <code>overlays</code> 加载</p>
+<p>最后, 再次修改 <code>home.nix</code> 的 <code>home.pacakges</code> 完成 <code>vim-darwin</code> 的安装</p>
+<pre class="language-nix" data-language="nix"><code class="language-nix">
+&#123;pkgs, ...&#125; : &#123;
+
+  nixpkgs.overlays &#x3D; [ 
+    (import .&#x2F;overlays&#x2F;default.nix)
+  ];
+
+  home.packages &#x3D; [
+	vim-darwin
+  ]
+
+&#125;
+</code></pre>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>就此, 本文总结了大部分常见的 home-manager 配置管理技巧, 更多内容可以参考官方文档 <a target="_blank" rel="noopener" href="https://nix-community.github.io/home-manager/index.html">https://nix-community.github.io/home-manager/index.html</a></p>
+<p>相对于手动管理配置文件, 采用 home-manager 有以下几个优点</p>
+<ul>
+<li>声明式配置 - 使用 home-manager，可以使用 Nix 表达式以声明性的方式定义配置。这样可以实现版本控制、可复现性和易分享的配置。</li>
+<li>集中化管理 - home-manager 提供了一种集中管理您的 shell 环境配置的方法，而不是将配置文件分散在不同的目录和文件中。这样可以更容易地维护和更新配置。</li>
+<li>模块化, 可复用 - home-manager 以模块化的方式处理配置，允许您根据需要启用或禁用特定的组件或程序。它还提供了许多预配置的程序，可以直接使用或根据需求进行自定义。</li>
+<li>支持版本管理 - 由于 home-manager 的配置存储在像 Git 这样的版本控制系统中，您可以轻松跟踪更改、还原到以前的版本，并与他人合作。这在管理 shell 配置时提供了额外的安全性和灵活性</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2023/04/02/make-debian-bullseye-images-for-rock960c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -532,7 +867,7 @@ in
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 12:31:16" itemprop="dateModified" datetime="2023-06-24T12:31:16+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 12:31:47" itemprop="dateModified" datetime="2023-06-24T12:31:47+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -682,7 +1017,7 @@ password rock960</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 12:31:16" itemprop="dateModified" datetime="2023-06-24T12:31:16+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 12:31:47" itemprop="dateModified" datetime="2023-06-24T12:31:47+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -821,7 +1156,7 @@ jp.sayName();</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 12:31:16" itemprop="dateModified" datetime="2023-06-24T12:31:16+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 12:31:47" itemprop="dateModified" datetime="2023-06-24T12:31:47+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1082,7 +1417,7 @@ Connection: close</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 12:31:16" itemprop="dateModified" datetime="2023-06-24T12:31:16+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 12:31:47" itemprop="dateModified" datetime="2023-06-24T12:31:47+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1275,7 +1610,7 @@ $b &#x3D; $a[&quot;a&quot;];</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 12:31:16" itemprop="dateModified" datetime="2023-06-24T12:31:16+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 12:31:47" itemprop="dateModified" datetime="2023-06-24T12:31:47+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1442,7 +1777,7 @@ $b &#x3D; $a[&quot;a&quot;];</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 12:31:16" itemprop="dateModified" datetime="2023-06-24T12:31:16+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 12:31:47" itemprop="dateModified" datetime="2023-06-24T12:31:47+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1554,7 +1889,7 @@ $b &#x3D; $a[&quot;a&quot;];</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 12:31:16" itemprop="dateModified" datetime="2023-06-24T12:31:16+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 12:31:47" itemprop="dateModified" datetime="2023-06-24T12:31:47+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1667,7 +2002,7 @@ $b &#x3D; $a[&quot;a&quot;];</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 12:31:16" itemprop="dateModified" datetime="2023-06-24T12:31:16+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 12:31:47" itemprop="dateModified" datetime="2023-06-24T12:31:47+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1722,199 +2057,6 @@ $b &#x3D; $a[&quot;a&quot;];</code></pre>
 <p>这里先解释下 phpdaemon 中的 pool 和 connection.</p>
 <p>Connection, 顾名思义, 就是php代码中发起的异步网络请求, 比如常见的 curl.<br>在异步请求中, 应用发起很多网络请求, 通过事件进行调度.<br>所以同一时间存在多个网络请求, 只不过有的是活跃状态, 有的挂起等待后端返回.<br>存储和管理这些 Connection 的负责人, 就是 Pool. 这就是常说的连接池.</p>
 <p>Java语言中的连接池, 一般通过多线程实现的. 而 PhpDaemon 中的连接池,<br>则是在libevent上实现的单进程单线程异步连接池.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2014/03/22/introduction-to-vim/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Bhe Hongtyu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bhe's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bhe's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2014/03/22/introduction-to-vim/" class="post-title-link" itemprop="url">Vim, 经验之谈</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-03-22 16:21:44" itemprop="dateCreated datePublished" datetime="2014-03-22T16:21:44+00:00">2014-03-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 12:31:16" itemprop="dateModified" datetime="2023-06-24T12:31:16+00:00">2023-06-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2014/03/22/introduction-to-vim/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/03/22/introduction-to-vim/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Vim, 老生常谈的话题了. </p>
-<blockquote>
-<p>the editor</p>
-</blockquote>
-<p>在程序员之间谈编辑器是一个敏感话题, 会有很多人跳出来挑起圣战, 还是蛮头疼的一件事情.</p>
-<p>从Vim开始, 是一种有别于IDE的编码方式, 但仅仅是方式, 就像是拿叉还是拿筷子, 取决于你吃西餐还是中餐.</p>
-<p>无论使用的是文本编辑器还是 IDE , 都是服务于编写源代码这么个目的. 它们之间的区别在于, 前者在编码中与环境互动, 后者则是提供一个既定的环境完成编程. 相同的是, 两者都会不断改善.</p>
-<p>过程有所不同, 但目的是相同的. 深究下去也就是比较赛百味和麦当劳的口味罢了.</p>
-<p>Vim 提供了两个基本的功能框架, 构成了其复杂的生态环境.</p>
-<p>首先是模式切换. </p>
-<p>功能繁多的键位操作, 基于 <code>Normal</code> 和 <code>Insert</code> 两种模式的交替进行. 正是<code>模式</code>这个特性, 使得vim有别于其他以组合键方式进行操作的编辑器(or IDE). 在<code>Normal</code>模式下进行文本操作, 在<code>Insert</code>模式下进行文本输入, 并且可以通过<code>:map</code>系列命令简化和扩充可用的操作.</p>
-<p>除了 hkjl asdcx 这些简单的移动和crud, vim 还支持按键序列的组合. </p>
-<ul>
-<li>删除一个单词? <code>de</code></li>
-<li>删掉10行? <code>d10j</code></li>
-<li>清空整个文件? <code>ggdG</code></li>
-</ul>
-<p>是不是有种玩街霸拳皇搓招的快感呢 XD</p>
-<p>还有基于文本对象(text-objects^[1])的操作, 比如 <code>yi(</code> 表示 <code>yank inner () block</code>,  按下 <code>p</code> , 那么屏幕上将复制一份()里面的文本. 如果换成 <code>ya(</code>, 则表示包含<code>(</code>整块文本.</p>
-<pre class="language-none"><code class="language-none">(text) &#x3D;&gt; (text)text
-[text] &#x3D;&gt; [text]text</code></pre>
-
-<p>^[1]: 更多内容见 <code>:h text-objects</code></p>
-<p>此之外, 还有<code>command</code>和<code>visual</code>, 分别用于输入命令,和可视化文本选择.</p>
-<p>比如需要一个命令的输出, 比较<del>笨</del>常规的方法就是去shell里面执行再重定向到文件, 然后通过vim打开进行合并. 可是 vim 支持<code>!</code>直接执行shell命令, 再加上<code>r</code>命令重定向到当前文本就行了. 举个例子, 当前系统时间可以这么拿到.</p>
-<pre class="language-none"><code class="language-none">:r!date</code></pre>
-
-<p>至于<code>visual mode</code>, 举个最简单例子吧, 要删除一段文本需要怎么操作? 按下<code>v</code>,<br>进入visual模式, 这时候通过hjkl移动, 经过的所有文本会处于高亮状态,<br>这时候把它们当成一个字符, 所有针对单个字符的操作都可以应用上去, 比如按下<code>d</code>,<br>那么这段文本就被删除掉了.</p>
-<p>但是如果需要插入文本咋办? 这时候就要使用强大的<code>blockwise-operators</code>, </p>
-<p>如果要删除每一行的第一个字母, 按下<code>&lt;CTRL-V&gt;</code>, 高亮需要删除的内容, 再按<code>d</code>删除.</p>
-<p>如果要在每一行的行首插入, 按下<code>&lt;CTRL-V&gt;</code>, 高亮内容, 再按<code>I</code>, 输入一段文字, 再按<code>&lt;Esc&gt;</code>, 这时候每一行都会插入对应的字符.<br>完整的操作是 <code>I&#123;string&#125;&lt;Esc&gt;</code>.</p>
-<p>这些操作在处理多行数组相当方面, 省去了写正则的麻烦.</p>
-<p>再提一个有趣的例子, 通过vim码字的时候, 常常遇到一个问题就是换行.<br>经常打了大段文字懒得敲回车. vim中有一个选项, 叫<code>textwidth</code>, 当文本超过一定字符,<br>会自动折行. 配合visual模式, 对高亮文本按下<code>gq</code>, 瞬间自动格式化完毕.</p>
-<pre><code>更多操作, 见 :h visual-operators
-</code></pre>
-<p>第二, <code>vim script</code></p>
-<p>前面提到的<code>command</code>模式, 就是vim脚本的交互式shell. vim丰富的扩展功能, 也就是<br>plugin , 一个又一个脚本, 放置在不同的目录中, 经过不同的顺序加载实现的.</p>
-<p>值得一提的是, vim 支持通过 python, lua 等语言的解释器, 编译的时候加上对应选项, 就可以在vim脚本中调用额外的python或者lua脚本, 通过这些语言的lib, 是的vim更加强大了.</p>
-<p>由于vimscript相当复杂, 这里就不介绍了, 顺便说说plugin的管理和推荐.</p>
-<p>常规的安装流程, 就是把脚本一股脑复制到 ~&#x2F;.vim 目录中去, 个个插件的 autload  plugin 目录下文件会混杂在一起, 管理复杂, 想删都删不了. </p>
-<p>这里推荐使用, <code>pathogen</code> 和 <code>vundle</code> 进行组合管理.</p>
-<p>pathgen和 vbundle 是两个类似的插件管理器, 区别在于 vbundle 支持配置自动去github下载脚本, 省了不少同步的麻烦. </p>
-<p>并非所有的vim插件都支持通过 github 下载, pathogen 就派上用场了, 虽然它只支持手动管理. 将插件所有内容解压到 <code>~/.vim/bundle/&#123;plugin name&#125;/</code>, pathogen 在vim启动过程中会自动加载所有的插件.</p>
-<p>这里附上我的配置文件内容.</p>
-<pre class="language-vim" data-language="vim"><code class="language-vim">
-if version &gt; 703
-
-    let g:pathogen_disabled &#x3D; [ 
-            \,&quot;conque_term&quot;
-            \]
-    call pathogen#runtime_append_all_bundles() 
-
-    call vundle#rc(&quot;~&#x2F;.vbundle&#x2F;&quot;)
-    source $HOME&#x2F;.vim&#x2F;conf.d&#x2F;vundle.vim
-endif
-</code></pre>
-
-<p>通过pathogen加载vundle和其他非github插件, 再通过vundle加载其他的插件.</p>
-<p>将vundle的 bundle 目录放置于 ~&#x2F;.vim 之外, 好处是可以直接将 整个 vim 目录软链到网盘目录里, 随时保持同步, 而 vundles 则手动更新.</p>
-<p>推荐下我自己在用vunle清单, 也就是上面的 <code>$HOME/.vim/conf.d/vundle.vim</code> 的内容.</p>
-<pre class="language-none"><code class="language-none">&quot; 视觉系
-Bundle &#39;Lokaltog&#x2F;vim-powerline&#39;
-Bundle &#39;altercation&#x2F;vim-colors-solarized&#39;
-
-&quot; 文件搜索 编码转换
-Bundle &#39;kien&#x2F;ctrlp.vim&#39;
-Bundle &#39;mbbill&#x2F;fencview&#39;
-Bundle &#39;rking&#x2F;ag.vim&#39;
-
-&quot; buffer, 目录, 任务, tag浏览
-Bundle &#39;scrooloose&#x2F;nerdtree&#39;
-Bundle &#39;fholgado&#x2F;minibufexpl.vim&#39;
-Bundle &#39;majutsushi&#x2F;tagbar&#39;
-Bundle &#39;vim-scripts&#x2F;TaskList.vim&#39;
-
-&quot; 代码补全, 生成
-Bundle &#39;SirVer&#x2F;ultisnips&#39;
-Bundle &#39;Shougo&#x2F;neocomplete.vim&#39;
-Bundle &#39;scrooloose&#x2F;nerdcommenter&#39;
-Bundle &#39;DoxygenToolkit.vim&#39;
-Bundle &#39;Rip-Rip&#x2F;clang_complete&#39;
-
-&quot; 语法检查, 调试
-Bundle &#39;scrooloose&#x2F;syntastic&#39;
-Bundle &#39;joonty&#x2F;vdebug&#39;
-
-&quot; 其他
-Bundle &#39;msanders&#x2F;cocoa.vim&#39;
-Bundle &#39;gmarik&#x2F;vundle&#39;
-Bundle &#39;L9&#39;
-</code></pre>
-
-<p>总的来说, vim 学习成本比较高, 针对不同语言需要熟悉并定制, 才能拥有对应的功能.<br>我同时也用phpstorm, 对于那些觉得不错的功能, 会考虑在vim中寻找相同的功能的plugin.<br>语法检查, 补全这些有限支持也就够了, 重构功能也就是偶尔体验体验.毕竟, 这是用工具编码, 而不是工具教你如何写代码.</p>
-<p>写代码的时候, 开启终端, 打开vim, 调用一下shell.<br>只想浏览代码的时候, 我还是回开下 phpstorm , 配置好库和环境, 通过鼠标穿梭于文件之间. </p>
-<p>至于两者的差别, 呵呵. 物尽其所用罢了.</p>
 
       
     </div>

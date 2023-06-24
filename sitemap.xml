@@ -128,7 +128,34 @@
   </url>
   
   <url>
+    <loc>https://io.bhe.ink/2023/06/11/nix-and-home-manager-is-your-best-system-environment-management-solution/</loc>
+    
+    <lastmod>2023-06-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://io.bhe.ink/2023/06/17/Getting-Started-with-Nix-Language-A-Beginner-s-Guide/</loc>
+    
+    <lastmod>2023-06-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/categories/index.html</loc>
+    
+    <lastmod>2023-06-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/tags/index.html</loc>
     
     <lastmod>2023-06-24</lastmod>
     
@@ -363,6 +390,13 @@
   </url>
   
   <url>
+    <loc>https://io.bhe.ink/tags/shell/</loc>
+    <lastmod>2023-06-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://io.bhe.ink/tags/programming-language/</loc>
     <lastmod>2023-06-24</lastmod>
     <changefreq>weekly</changefreq>
@@ -435,14 +469,14 @@
   </url>
   
   <url>
-    <loc>https://io.bhe.ink/categories/nix/</loc>
+    <loc>https://io.bhe.ink/categories/devices/keyboard/</loc>
     <lastmod>2023-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://io.bhe.ink/categories/devices/keyboard/</loc>
+    <loc>https://io.bhe.ink/categories/nix/</loc>
     <lastmod>2023-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

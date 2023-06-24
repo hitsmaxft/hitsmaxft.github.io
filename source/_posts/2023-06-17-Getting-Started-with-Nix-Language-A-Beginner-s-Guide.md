@@ -28,7 +28,8 @@ nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装
 
 安装完毕需要修改默认配置  `~/.config/nix/nix.conf`  启用 nix-command 和 flakes
 
-> 我的本机环境是 `mac` , 这里授权了 `staff` 组的用户使用 nix. 对于其他环境, 可以改成 `sudoers` 或者其他组名.
+> 我的本机环境是 `mac` , 这里授权了 `staff` 组的用户使用 nix (否则在访问 nix-daemon 的时候报没有权限之类的错误)
+> 对于其他环境, 可以改成 `sudoers` 或者其他组名.
 
 ```
 experimental-features = nix-command flakes

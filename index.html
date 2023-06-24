@@ -195,7 +195,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 02:45:37" itemprop="dateModified" datetime="2023-06-24T02:45:37+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
     </span>
 
   
@@ -311,7 +311,18 @@
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let</span><br><span class="line">  values = &#123; c=2; &#125;;</span><br><span class="line">  plus1 = a: with values; let b=1; in a+b+c;</span><br><span class="line">in</span><br><span class="line">  plus1 2</span><br><span class="line"></span><br><span class="line">&gt;&gt; 3</span><br></pre></td></tr></table></figure>
 
-<h4 id="命名参数函数"><a href="#命名参数函数" class="headerlink" title="命名参数函数"></a>命名参数函数</h4><p>首先举一个复杂的可变参数长度的例子开场:</p>
+<p>好了, 表达式函数的特性, nix 和其他语言的差异不是很明显, 唯一特别的就是在其他语言中, 一般我们只会看到 <code>&#123;param1, ...&#125; : expr</code> 这样的 函数定义.</p>
+<p>比如 这段 scala 代码. </p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> my.param1;</span><br><span class="line"><span class="keyword">import</span> my.param2;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myFunction</span></span>(param1: <span class="type">Int</span>, param2: <span class="type">Int</span>): <span class="type">Int</span> = &#123;</span><br><span class="line">  <span class="keyword">val</span> a = param1 * param2</span><br><span class="line">  param1 + param2 + a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而 nix 的实现往往比较紧凑</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myFunction = &#123;param1, param2&#125; : with my; let a = param1*param2 inparam1 + param2 + a </span><br></pre></td></tr></table></figure>
+
+<p>在 nix 中, <code>let ... in expr</code> 和 <code>import ...; expr</code> 这两个前后缀语法导致函数阅读次序和其他语言略有不同, 需要熟悉一段时间.</p>
+<h4 id="命名参数函数"><a href="#命名参数函数" class="headerlink" title="命名参数函数"></a>命名参数函数</h4><p>前面介绍了 <code>nix</code> 中无名参数风格的函数, 类似于 c 或者 <code>java</code> 中的普通函数,<br>但动态语言中很受欢迎的命名函数特性, nix 也同样做了支持.</p>
+<blockquote>
+<p>相比于<code>无名参数</code>, <code>命名参数</code> 的调用代码可读性更强, 同时方便后期维护, 不会出现一旦修改签名需要大量重构代码的痛苦.</p>
+</blockquote>
+<p>首先举一个复杂的可变参数长度的例子开场:</p>
 <figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">func</span> = &#123;a, b, c, ...&#125; : a+b+c <span class="keyword">in</span>  func &#123; <span class="attr">a=1;</span> <span class="attr">b=2;</span> <span class="attr">c=3;</span> <span class="attr">d=4;&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>如果获取可变参数中的变量, 可以通过 <code>@</code> 引用的参数列表, 这里使用 args 作为变量名.</p>
@@ -331,7 +342,6 @@
 
 <p> 还有另外的写法</p>
 <figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span></span><br><span class="line">  <span class="attr">fun</span> = &#123; a, b &#125;: a+b;</span><br><span class="line">  <span class="attr">b</span> = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">in</span> fun &#123; </span><br><span class="line">	<span class="attr">a=2;</span></span><br><span class="line">	<span class="keyword">inherit</span> b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 
 <p>回到 <code>命名参数</code> 话题本身</p>
 <p>这里举例只是做对比, 既然有语法糖, 直接用比较爽.</p>
@@ -354,7 +364,6 @@
 <p>注意, 不能像 c 语言一样用方括号包裹表达式, 否则就变成了一个返回值为 set 的函数了.</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;a, b, c, ...&#125;: &#123;&#125;  #返回值是 set</span><br></pre></td></tr></table></figure>
-
 
 <h3 id="函数手册"><a href="#函数手册" class="headerlink" title="函数手册"></a>函数手册</h3><p>nix 缺乏一个好的函数查找工具. 目前只能通过文档查找</p>
 <ul>
@@ -427,7 +436,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 02:45:37" itemprop="dateModified" datetime="2023-06-24T02:45:37+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
     </span>
 
   
@@ -623,7 +632,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 02:45:37" itemprop="dateModified" datetime="2023-06-24T02:45:37+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
     </span>
 
   
@@ -763,7 +772,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 02:45:37" itemprop="dateModified" datetime="2023-06-24T02:45:37+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -861,7 +870,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 02:45:37" itemprop="dateModified" datetime="2023-06-24T02:45:37+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1002,7 +1011,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 02:45:37" itemprop="dateModified" datetime="2023-06-24T02:45:37+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1197,7 +1206,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 02:45:37" itemprop="dateModified" datetime="2023-06-24T02:45:37+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1375,7 +1384,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 02:45:37" itemprop="dateModified" datetime="2023-06-24T02:45:37+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1540,7 +1549,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 02:45:37" itemprop="dateModified" datetime="2023-06-24T02:45:37+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1654,7 +1663,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-24 02:45:37" itemprop="dateModified" datetime="2023-06-24T02:45:37+00:00">2023-06-24</time>
+      <time title="Modified: 2023-06-24 03:18:44" itemprop="dateModified" datetime="2023-06-24T03:18:44+00:00">2023-06-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

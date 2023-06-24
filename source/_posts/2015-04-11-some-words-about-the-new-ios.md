@@ -3,7 +3,7 @@ layout: post
 title: "新 iOS 杂谈"
 date: 2014-06-04 15:28:44 +0800
 comments: true
-category: [devices, Apple]
+category: [etc]
 tags:
 - Apple
 - iOS

@@ -3,7 +3,7 @@ layout: post
 title: "Apache nio client 源码阅读笔记"
 date: 2014-12-18 15:34:29 +0800
 comments: true
-category: [ programming language, java ]
+category: [ programming, java ]
 tags: 
 - java
 - nio

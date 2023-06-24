@@ -22,7 +22,7 @@ phpdaemon, 基于异步网络请求的应用服务框架
 虽然实际情况下, php进程受上层管理界面的影响, 并不是像 cli
 模式那样执行一次并退出, 但对开发者而言, 其中细节可以忽略.
 
-回到 phpdaemon 本身吧,
+回到 `phpdaemon` 本身吧,
 phpdaemon是一个在event和eio两个pecl扩展之上开发的异步网络框架, 类似于 python
 中的 tornado , 它采用的单进程单线程异步IO的网络模型,
 可用于开发异步非阻塞的应用.

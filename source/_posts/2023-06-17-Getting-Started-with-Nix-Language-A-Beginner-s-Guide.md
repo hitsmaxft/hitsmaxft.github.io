@@ -210,20 +210,22 @@ in
 
 比如 这段 scala 代码. 
 ```scala
-import my.param1;
-import my.param2;
 
+import my;
 def myFunction(param1: Int, param2: Int): Int = {
-  val a = param1 * param2
+  val a = my.param3 * my.param4
   param1 + param2 + a
 }
 ```
 通过 nix 的书写,往往比较紧凑
 
-```
-myFunction = {param1, param2}:
-  with my;
-  let a = param1*param2; in param1 + param2 + a 
+```nix
+{
+  myFunction = {param1, param2}:
+    with my;
+    let a = param3 * param4;
+    in param1 + param2 + a 
+}
 ```
 
 在 nix 中, `let ... in expr` 和 `import ...; expr`  和函数签名挤成一堆,  与其他语言略有不同, 需要熟悉一段时间.
@@ -231,7 +233,7 @@ myFunction = {param1, param2}:
 #### 命名参数函数
 
 前面介绍了 `nix` 中无名参数风格的函数, 类似于 c 或者 `java` 中的普通函数, 
-但动态语言中很受欢迎的命名函数特性, nix 也同样做了支持.
+接下来介绍在动态语言中很受欢迎的命名函数特性, nix 也同样做了支持.
 
 > 相比于`无名参数`, `命名参数` 的调用代码可读性更强, 同时方便后期维护, 不会出现一旦修改签名需要大量重构代码的痛苦.
 

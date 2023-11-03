@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.0.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -22,15 +22,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="总算来谈下这个烂大街的话题了。 面向对象一般会谈继承封装多态，但列举一门理论具备什么特征并不能帮助程序员合理地应用这门理论。 在传统面向数据和过程的编程方式中， 我们关心的东西有  特定结构的数据 针对数据定义的行为  struct &amp;#123;&amp;#125; A; void function act(A a);  实话说，这样的编程手段对于解决问题本身已经够用了。 但对于现代化的软件工程项目，为了">
+    <meta name="description" content="总算来谈下这个烂大街的话题了。 面向对象一般会谈继承封装多态，但列举一门理论具备什么特征并不能帮助程序员合理地应用这门理论。 在传统面向数据和过程的编程方式中， 我们关心的东西有  特定结构的数据 针对数据定义的行为  12struct &#123;&#125; A;void function act(A a);  实话说，这样的编程手段对于解决问题本身已经够用了。 但对于现代化的软件工程项目，为">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何理解面向对象编程">
 <meta property="og:url" content="https://io.bhe.ink/2015/04/24/how-to-understand-object-oriented-programming/index.html">
 <meta property="og:site_name" content="Bhe&#39;s Blog">
-<meta property="og:description" content="总算来谈下这个烂大街的话题了。 面向对象一般会谈继承封装多态，但列举一门理论具备什么特征并不能帮助程序员合理地应用这门理论。 在传统面向数据和过程的编程方式中， 我们关心的东西有  特定结构的数据 针对数据定义的行为  struct &amp;#123;&amp;#125; A; void function act(A a);  实话说，这样的编程手段对于解决问题本身已经够用了。 但对于现代化的软件工程项目，为了">
+<meta property="og:description" content="总算来谈下这个烂大街的话题了。 面向对象一般会谈继承封装多态，但列举一门理论具备什么特征并不能帮助程序员合理地应用这门理论。 在传统面向数据和过程的编程方式中， 我们关心的东西有  特定结构的数据 针对数据定义的行为  12struct &#123;&#125; A;void function act(A a);  实话说，这样的编程手段对于解决问题本身已经够用了。 但对于现代化的软件工程项目，为">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2015-04-24T15:00:27.000Z">
-<meta property="article:modified_time" content="2023-10-13T04:25:36.342Z">
+<meta property="article:modified_time" content="2023-11-03T12:10:19.687Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="oop">
 <meta property="article:tag" content="编程语言">
@@ -216,7 +216,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-13 04:25:36" itemprop="dateModified" datetime="2023-10-13T04:25:36+00:00">2023-10-13</time>
+      <time title="Modified: 2023-11-03 12:10:19" itemprop="dateModified" datetime="2023-11-03T12:10:19+00:00">2023-11-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -262,8 +262,7 @@
 <li>特定结构的数据</li>
 <li>针对数据定义的行为</li>
 </ul>
-<pre class="language-c" data-language="c"><code class="language-c">struct &#123;&#125; A;
-void function act(A a);</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span>&#125; A;</span><br><span class="line"><span class="type">void</span> function <span class="title function_">act</span><span class="params">(A a)</span>;</span><br></pre></td></tr></table></figure>
 
 <p>实话说，这样的编程手段对于解决问题本身已经够用了。</p>
 <p>但对于现代化的软件工程项目，为了更好地解决开发效率与开发成本等问题，<br>我们需要引入一种更加有效的描述方式。使得开发任务更加顺畅， 开发成本能够有效降低。</p>
@@ -275,15 +274,10 @@ void function act(A a);</code></pre>
 <p>这个东西从实现上，仅仅是个手法而已，和上文所提到的结构体和函数的接合可以达到同样的目的。<br>现代化的编程语言，正是通过这样的变换手法，优化编程的模型而提高生产力的。</p>
 <p>使用面向对象方式编程的开发者，关注的是某一个对象，它所具备的行为（method）。</p>
 <p>好吧，因为类型的扩散，我们还是得考虑多种类型之间的交互， 和前面说的 <code>函数 + 结构体</code> 的方式，<br>差别并不大。<br>为了优化这中情况，程序员能做到的无非就是简化传入参数中的类型，尽量使用平坦的数据类型.</p>
-<pre class="language-javascript" data-language="javascript"><code class="language-javascript">Name n &#x3D; new Name(&quot;John&quot;);
-Person p &#x3D; new Person();
-p.setName(n);
-p.sayName();</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Name</span> n = <span class="keyword">new</span> <span class="title class_">Name</span>(<span class="string">&quot;John&quot;</span>);</span><br><span class="line"><span class="title class_">Person</span> p = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">p.<span class="title function_">setName</span>(n);</span><br><span class="line">p.<span class="title function_">sayName</span>();</span><br></pre></td></tr></table></figure>
 
 <p>上面的这个例子里， 我们倾向于认为 <code>Name</code> 是一个简单的类型， 而 <code>Person</code> 则是一种具有复杂行为的<br>高级类型。<br>但是，也正是面向对象语言提供的便捷手段，可以通过 <code>封装</code> 手段解决这个问题。</p>
-<pre class="language-javascript" data-language="javascript"><code class="language-javascript">&#x2F;&#x2F;JhonPerson extends Person
-Person jp &#x3D; new JhonPerson();
-jp.sayName();</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//JhonPerson extends Person</span></span><br><span class="line"><span class="title class_">Person</span> jp = <span class="keyword">new</span> <span class="title class_">JhonPerson</span>();</span><br><span class="line">jp.<span class="title function_">sayName</span>();</span><br></pre></td></tr></table></figure>
 
 <p>面向对象的本质在于 <code>消息传递</code>, <code>方法调用</code> 不过是类 <code>java</code> 语言中的一种实现。<br>为了简化开发任务， 通过扩展组合等手段， 可以轻易地将复杂行为封装到新类型中，但是提供了相同的接口。</p>
 <p>这个例子中， 我们可以体验到面向对象编程中的封装和多态.<br>封装重用了数据， 而多态重用了行为.</p>

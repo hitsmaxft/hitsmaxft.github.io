@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.0.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -208,7 +208,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-13 04:25:36" itemprop="dateModified" datetime="2023-10-13T04:25:36+00:00">2023-10-13</time>
+      <time title="Modified: 2023-11-03 12:10:19" itemprop="dateModified" datetime="2023-11-03T12:10:19+00:00">2023-11-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -263,13 +263,12 @@
 </ul>
 <p>是不是有种玩街霸拳皇搓招的快感呢 XD</p>
 <p>还有基于文本对象(text-objects^[1])的操作, 比如 <code>yi(</code> 表示 <code>yank inner () block</code>,  按下 <code>p</code> , 那么屏幕上将复制一份()里面的文本. 如果换成 <code>ya(</code>, 则表示包含<code>(</code>整块文本.</p>
-<pre class="language-none"><code class="language-none">(text) &#x3D;&gt; (text)text
-[text] &#x3D;&gt; [text]text</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(text) =&gt; (text)text</span><br><span class="line">[text] =&gt; [text]text</span><br></pre></td></tr></table></figure>
 
 <p>^[1]: 更多内容见 <code>:h text-objects</code></p>
 <p>此之外, 还有<code>command</code>和<code>visual</code>, 分别用于输入命令,和可视化文本选择.</p>
 <p>比如需要一个命令的输出, 比较<del>笨</del>常规的方法就是去shell里面执行再重定向到文件, 然后通过vim打开进行合并. 可是 vim 支持<code>!</code>直接执行shell命令, 再加上<code>r</code>命令重定向到当前文本就行了. 举个例子, 当前系统时间可以这么拿到.</p>
-<pre class="language-none"><code class="language-none">:r!date</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:r!date</span><br></pre></td></tr></table></figure>
 
 <p>至于<code>visual mode</code>, 举个最简单例子吧, 要删除一段文本需要怎么操作? 按下<code>v</code>,<br>进入visual模式, 这时候通过hjkl移动, 经过的所有文本会处于高亮状态,<br>这时候把它们当成一个字符, 所有针对单个字符的操作都可以应用上去, 比如按下<code>d</code>,<br>那么这段文本就被删除掉了.</p>
 <p>但是如果需要插入文本咋办? 这时候就要使用强大的<code>blockwise-operators</code>, </p>
@@ -288,53 +287,12 @@
 <p>pathgen和 vbundle 是两个类似的插件管理器, 区别在于 vbundle 支持配置自动去github下载脚本, 省了不少同步的麻烦. </p>
 <p>并非所有的vim插件都支持通过 github 下载, pathogen 就派上用场了, 虽然它只支持手动管理. 将插件所有内容解压到 <code>~/.vim/bundle/&#123;plugin name&#125;/</code>, pathogen 在vim启动过程中会自动加载所有的插件.</p>
 <p>这里附上我的配置文件内容.</p>
-<pre class="language-vim" data-language="vim"><code class="language-vim">
-if version &gt; 703
-
-    let g:pathogen_disabled &#x3D; [ 
-            \,&quot;conque_term&quot;
-            \]
-    call pathogen#runtime_append_all_bundles() 
-
-    call vundle#rc(&quot;~&#x2F;.vbundle&#x2F;&quot;)
-    source $HOME&#x2F;.vim&#x2F;conf.d&#x2F;vundle.vim
-endif
-</code></pre>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">version</span> &gt; <span class="number">703</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">g:pathogen_disabled</span> = [ </span><br><span class="line">            \,<span class="string">&quot;conque_term&quot;</span></span><br><span class="line">            \]</span><br><span class="line">    <span class="keyword">call</span> pathogen#runtime_append_all_bundles() </span><br><span class="line"></span><br><span class="line">    <span class="keyword">call</span> vundle#rc(<span class="string">&quot;~/.vbundle/&quot;</span>)</span><br><span class="line">    <span class="keyword">source</span> $HOME/.<span class="keyword">vim</span>/<span class="keyword">conf</span>.d/vundle.<span class="keyword">vim</span></span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>通过pathogen加载vundle和其他非github插件, 再通过vundle加载其他的插件.</p>
 <p>将vundle的 bundle 目录放置于 ~&#x2F;.vim 之外, 好处是可以直接将 整个 vim 目录软链到网盘目录里, 随时保持同步, 而 vundles 则手动更新.</p>
 <p>推荐下我自己在用vunle清单, 也就是上面的 <code>$HOME/.vim/conf.d/vundle.vim</code> 的内容.</p>
-<pre class="language-none"><code class="language-none">&quot; 视觉系
-Bundle &#39;Lokaltog&#x2F;vim-powerline&#39;
-Bundle &#39;altercation&#x2F;vim-colors-solarized&#39;
-
-&quot; 文件搜索 编码转换
-Bundle &#39;kien&#x2F;ctrlp.vim&#39;
-Bundle &#39;mbbill&#x2F;fencview&#39;
-Bundle &#39;rking&#x2F;ag.vim&#39;
-
-&quot; buffer, 目录, 任务, tag浏览
-Bundle &#39;scrooloose&#x2F;nerdtree&#39;
-Bundle &#39;fholgado&#x2F;minibufexpl.vim&#39;
-Bundle &#39;majutsushi&#x2F;tagbar&#39;
-Bundle &#39;vim-scripts&#x2F;TaskList.vim&#39;
-
-&quot; 代码补全, 生成
-Bundle &#39;SirVer&#x2F;ultisnips&#39;
-Bundle &#39;Shougo&#x2F;neocomplete.vim&#39;
-Bundle &#39;scrooloose&#x2F;nerdcommenter&#39;
-Bundle &#39;DoxygenToolkit.vim&#39;
-Bundle &#39;Rip-Rip&#x2F;clang_complete&#39;
-
-&quot; 语法检查, 调试
-Bundle &#39;scrooloose&#x2F;syntastic&#39;
-Bundle &#39;joonty&#x2F;vdebug&#39;
-
-&quot; 其他
-Bundle &#39;msanders&#x2F;cocoa.vim&#39;
-Bundle &#39;gmarik&#x2F;vundle&#39;
-Bundle &#39;L9&#39;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&quot; 视觉系</span><br><span class="line">Bundle &#x27;Lokaltog/vim-powerline&#x27;</span><br><span class="line">Bundle &#x27;altercation/vim-colors-solarized&#x27;</span><br><span class="line"></span><br><span class="line">&quot; 文件搜索 编码转换</span><br><span class="line">Bundle &#x27;kien/ctrlp.vim&#x27;</span><br><span class="line">Bundle &#x27;mbbill/fencview&#x27;</span><br><span class="line">Bundle &#x27;rking/ag.vim&#x27;</span><br><span class="line"></span><br><span class="line">&quot; buffer, 目录, 任务, tag浏览</span><br><span class="line">Bundle &#x27;scrooloose/nerdtree&#x27;</span><br><span class="line">Bundle &#x27;fholgado/minibufexpl.vim&#x27;</span><br><span class="line">Bundle &#x27;majutsushi/tagbar&#x27;</span><br><span class="line">Bundle &#x27;vim-scripts/TaskList.vim&#x27;</span><br><span class="line"></span><br><span class="line">&quot; 代码补全, 生成</span><br><span class="line">Bundle &#x27;SirVer/ultisnips&#x27;</span><br><span class="line">Bundle &#x27;Shougo/neocomplete.vim&#x27;</span><br><span class="line">Bundle &#x27;scrooloose/nerdcommenter&#x27;</span><br><span class="line">Bundle &#x27;DoxygenToolkit.vim&#x27;</span><br><span class="line">Bundle &#x27;Rip-Rip/clang_complete&#x27;</span><br><span class="line"></span><br><span class="line">&quot; 语法检查, 调试</span><br><span class="line">Bundle &#x27;scrooloose/syntastic&#x27;</span><br><span class="line">Bundle &#x27;joonty/vdebug&#x27;</span><br><span class="line"></span><br><span class="line">&quot; 其他</span><br><span class="line">Bundle &#x27;msanders/cocoa.vim&#x27;</span><br><span class="line">Bundle &#x27;gmarik/vundle&#x27;</span><br><span class="line">Bundle &#x27;L9&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>总的来说, vim 学习成本比较高, 针对不同语言需要熟悉并定制, 才能拥有对应的功能.<br>我同时也用phpstorm, 对于那些觉得不错的功能, 会考虑在vim中寻找相同的功能的plugin.<br>语法检查, 补全这些有限支持也就够了, 重构功能也就是偶尔体验体验.毕竟, 这是用工具编码, 而不是工具教你如何写代码.</p>
 <p>写代码的时候, 开启终端, 打开vim, 调用一下shell.<br>只想浏览代码的时候, 我还是回开下 phpstorm , 配置好库和环境, 通过鼠标穿梭于文件之间. </p>
@@ -401,7 +359,7 @@ Bundle &#39;L9&#39;
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-13 04:25:36" itemprop="dateModified" datetime="2023-10-13T04:25:36+00:00">2023-10-13</time>
+      <time title="Modified: 2023-11-03 12:10:19" itemprop="dateModified" datetime="2023-11-03T12:10:19+00:00">2023-11-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -451,28 +409,13 @@ Bundle &#39;L9&#39;
 剩下的事情就交给 oh-my-zsh
 </code></pre>
 <p>脚本头部加上以下内容</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash">#compdef launchctl</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#compdef launchctl</span></span><br></pre></td></tr></table></figure>
 
 <p>第一行标记这个文件包含一个自动加载的函数.<br>本质上这是一个没有形如 <code>function () &#123;&#125;</code> 包裹着的函数体,<br>和可以直接通过 <code>source</code> 导入的配置文件和脚本是不同的.</p>
 <h2 id="subcommand-补全"><a href="#subcommand-补全" class="headerlink" title="subcommand 补全"></a>subcommand 补全</h2><p>subcommand 应该是子命令或者副命令的意思， 这里保留原文。</p>
 <pre><code>ps: 对于 gnu 风格的命令行工具, 很少有 subcommand , 这一章节并不是必要的.
 </code></pre>
-<pre class="language-none"><code class="language-none">local -a _1st_arguments
-
-_1st_arguments&#x3D;(
-    &quot;load:Load configuration files and&#x2F;or directories&quot;
-    &quot;unload:Unload configuration files and&#x2F;or directories&quot;
-    &quot;start:Start specified job&quot;
-    &quot;stop:Stop specified job&quot;
-    &quot;help:This help output&quot;
-)
-
-local label_subcommand&#x3D;&quot;launchctl subcommand&quot;
-
-if (( CURRENT &#x3D;&#x3D; 2 )); then
-    _describe -t commands &quot;$label_subcommand&quot; _1st_arguments
-    return 0
-fi</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">local -a _1st_arguments</span><br><span class="line"></span><br><span class="line">_1st_arguments=(</span><br><span class="line">    &quot;load:Load configuration files and/or directories&quot;</span><br><span class="line">    &quot;unload:Unload configuration files and/or directories&quot;</span><br><span class="line">    &quot;start:Start specified job&quot;</span><br><span class="line">    &quot;stop:Stop specified job&quot;</span><br><span class="line">    &quot;help:This help output&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">local label_subcommand=&quot;launchctl subcommand&quot;</span><br><span class="line"></span><br><span class="line">if (( CURRENT == 2 )); then</span><br><span class="line">    _describe -t commands &quot;$label_subcommand&quot; _1st_arguments</span><br><span class="line">    return 0</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
 <p>这段代码还是比较好懂的, 补全所有的<code>subcommand</code>并给出提示信息.</p>
 <p>注意 <code>CURRENT</code> 这个变量, 它标记处于命令行的第几个单词</p>
@@ -483,18 +426,7 @@ fi</code></pre>
 <h2 id="文件补全"><a href="#文件补全" class="headerlink" title="文件补全"></a>文件补全</h2><p><code>launchctl unload</code> 用于关闭一个正在运行的服务, 比如nginx, php-fpm等等, 显然这里需要补全的是一个文件路径, 对应一个位于 <code>~/Library/LaunchAgents/</code> 下的 <code>plist</code> 文件.</p>
 <p>首先假设已经实现了对应的工具函数 <code>_get_loaded_user_plists</code> , 这个函数将生成目前正在运行的plist文件列表</p>
 <p>以下是关键代码</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash">
-local expl
-
-case &quot;$words[2]&quot; in 
-    unload)
-        local loaded_user_plists
-        loaded_user_plists&#x3D;&quot;$(_get_loaded_user_plists)&quot;
-        _wanted loaded_user_plists expl &#39;running jobs&#39; compadd -a loaded_user_plists
-        ;;
-esac
-
-return 1</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">local</span> expl</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;<span class="variable">$words</span>[2]&quot;</span> <span class="keyword">in</span> </span><br><span class="line">    unload)</span><br><span class="line">        <span class="built_in">local</span> loaded_user_plists</span><br><span class="line">        loaded_user_plists=<span class="string">&quot;<span class="subst">$(_get_loaded_user_plists)</span>&quot;</span></span><br><span class="line">        _wanted loaded_user_plists expl <span class="string">&#x27;running jobs&#x27;</span> compadd -a loaded_user_plists</span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">return</span> 1</span><br></pre></td></tr></table></figure>
 
 <p>可见对于简单参数的补全实现是很轻松的</p>
 <p>zsh 如果发现补全函数返回0, 会将输出作为补全内容作为候补内容输出到终端中去.</p>
@@ -586,7 +518,7 @@ zsh 的~~破手册~~跟天书一样的文档也没打算解释清楚, 我能说�
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-13 04:25:36" itemprop="dateModified" datetime="2023-10-13T04:25:36+00:00">2023-10-13</time>
+      <time title="Modified: 2023-11-03 12:10:19" itemprop="dateModified" datetime="2023-11-03T12:10:19+00:00">2023-11-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -709,7 +641,7 @@ Yii::$classMap  = array_merge( Yii::$classMap, $classMap);
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-13 04:25:36" itemprop="dateModified" datetime="2023-10-13T04:25:36+00:00">2023-10-13</time>
+      <time title="Modified: 2023-11-03 12:10:19" itemprop="dateModified" datetime="2023-11-03T12:10:19+00:00">2023-11-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -766,30 +698,7 @@ create-project
 <li>开发模式下依赖 phpunit, 方便运行单元测试</li>
 <li>使用 psr-0 规范的加载方式, 源代码位于 src 目录中, 将 <code>Utils</code> 映射到该目录</li>
 </ul>
-<pre class="language-json" data-language="json" data-line="" data-line-offset="0"><div class="caption"><span>composer.json</span></div><code class="language-json">&#123;
-    &quot;name&quot; : &quot;example&#x2F;utils&quot;,
-        &quot;description&quot; : &quot;utils&quot;,
-        &quot;version&quot; : &quot;1.0.0&quot;,
-        &quot;type&quot; : &quot;library&quot;,
-        &quot;license&quot; : &quot;proprietary&quot;,
-        &quot;authors&quot; : [
-        &#123;
-            &quot;name&quot; : &quot;Mr Right&quot;,
-            &quot;email&quot; :  &quot;mr.right@taobao.com&quot;
-        &#125;
-    ],
-        &quot;autoload&quot; : &#123;
-            &quot;psr-0&quot; : &#123;
-                &quot;Utils\\&quot; : &quot;src&#x2F;&quot;
-            &#125;
-        &#125;,
-        &quot;require&quot; : &#123;
-            &quot;net&#x2F;http&quot; : &quot;*&quot;
-        &#125;,
-        &quot;require-dev&quot; : &#123;
-            &quot;phpunit&#x2F;phpunit&quot; : &quot;*&quot;
-        &#125;
-&#125;</code></pre>
+<figure class="highlight json"><figcaption><span>composer.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;name&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;example/utils&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;description&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;utils&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;version&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;library&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;license&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;proprietary&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;authors&quot;</span> <span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;Mr Right&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;email&quot;</span> <span class="punctuation">:</span>  <span class="string">&quot;mr.right@taobao.com&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;autoload&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;psr-0&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;Utils\\&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;src/&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;require&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;net/http&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;*&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;require-dev&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;phpunit/phpunit&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;*&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>例子包含了一个包信息中常见字段, <code>require</code> 不一定需要, 但这是依赖管理的精华所在, 后续章节再仔细说明.</p>
 <blockquote>
@@ -825,59 +734,26 @@ create-project
 <li><code>file</code> 可以理解为预先加载指定文件, 每次请求中都会执行</li>
 </ul>
 <p>这里简单说说 psr-0, 参考 utils 这个包的配置文件</p>
-<pre class="language-json" data-language="json" data-line="" data-line-offset="0"><div class="caption"><span>composer.json</span></div><code class="language-json">&quot;autoload&quot; : &#123;
-    &quot;psr-0&quot; : &#123;
-        &quot;Utils\\&quot; : &quot;src&#x2F;&quot;
-    &#125;
-&#125;,</code></pre>
+<figure class="highlight json"><figcaption><span>composer.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;autoload&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;psr-0&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;Utils\\&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;src/&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
 
 <p>在安装之后 composer 生的classmap 信息文件之一, <code>vendor/composer/autoload_namespaces.php</code> 中可以看到以下代码</p>
-<pre class="language-php" data-language="php" data-line="" data-line-offset="0"><code class="language-php">&lt;?php
-    return array(
-        &#39;Utils\\&#39; &#x3D;&gt; array($baseDir . &#39;&#x2F;src&#39;), &#x2F;&#x2F; HERE!
-        &#39;Symfony\\Component\\Yaml\\&#39; &#x3D;&gt; array($vendorDir . &#39;&#x2F;symfony&#x2F;yaml&#39;),
-        &#39;Net_&#39; &#x3D;&gt; array($vendorDir . &#39;&#x2F;net&#x2F;http&#x2F;src&#39;),
-    );</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">array</span>(</span><br><span class="line">        <span class="string">&#x27;Utils\\&#x27;</span> =&gt; <span class="keyword">array</span>(<span class="variable">$baseDir</span> . <span class="string">&#x27;/src&#x27;</span>), <span class="comment">// HERE!</span></span><br><span class="line">        <span class="string">&#x27;Symfony\\Component\\Yaml\\&#x27;</span> =&gt; <span class="keyword">array</span>(<span class="variable">$vendorDir</span> . <span class="string">&#x27;/symfony/yaml&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;Net_&#x27;</span> =&gt; <span class="keyword">array</span>(<span class="variable">$vendorDir</span> . <span class="string">&#x27;/net/http/src&#x27;</span>),</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
 
 <p>可见进行相关类的自动加载是, composer autoloader 通过查表和路径搜索的方式, 正确地找到类相关的代码.</p>
 <p>比如一下代码</p>
-<pre class="language-php" data-language="php" data-line="" data-line-offset="0"><code class="language-php">&lt;?php
-    new Utils\Network\WangWangMsg();
-    &#x2F;&#x2F;or new Utils\Network_WangWangMsg();</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Utils\Network\WangWangMsg</span>();</span><br><span class="line">    <span class="comment">//or new Utils\Network_WangWangMsg();</span></span><br></pre></td></tr></table></figure>
 
 <p>实际运行时, 实际运行的逻辑类似于以下的伪代码</p>
-<pre class="language-php" data-language="php" data-line="" data-line-offset="0"><div class="caption"><span>test.php</span></div><code class="language-php">&lt;?php
-    &#x2F;&#x2F;composer
-    $baseDir &#x3D; $root . &#39;vendor&#x2F;example&#x2F;utils&#39;;
-    include $baseDir . &#39;&#x2F;src&#x2F;Utils&#x2F;Network&#x2F;WangWangMsg.php&#39;;
-
-    new Utils\Network\WangWangMsg();</code></pre>
+<figure class="highlight php"><figcaption><span>test.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="comment">//composer</span></span><br><span class="line">    <span class="variable">$baseDir</span> = <span class="variable">$root</span> . <span class="string">&#x27;vendor/example/utils&#x27;</span>;</span><br><span class="line">    <span class="keyword">include</span> <span class="variable">$baseDir</span> . <span class="string">&#x27;/src/Utils/Network/WangWangMsg.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Utils\Network\WangWangMsg</span>();</span><br></pre></td></tr></table></figure>
 
 <h2 id="项目中使用-composer"><a href="#项目中使用-composer" class="headerlink" title="项目中使用 composer"></a>项目中使用 composer</h2><p>在 composer 设计理念中, 项目和包并不是两种割裂的定义, 所有的源代码都归属于对应的包, 包与包存在依赖关系.<br>虽然在实际业务开发中, 暂时没哪个项目如此纯粹, 但这并不影响 composer 的应用.</p>
 <p>以下是一个简单的搜索结果页应用如何书写 composer.json.</p>
-<pre class="language-json" data-language="json" data-line="" data-line-offset="0"><div class="caption"><span>composer.json</span></div><code class="language-json">&#123;
-    &quot;repositories&quot; : [
-        &#123;
-        &quot;packagist&quot;:false &#x2F;&#x2F;禁用外部仓库
-        &#125;,
-        &#123;
-            &#x2F;&#x2F; 引入内部代码仓库(svn)
-            &quot;type&quot; : &quot;svn&quot;,
-            &quot;url&quot; : &quot;http:&#x2F;&#x2F;...&#x2F;mido&quot;,
-            &quot;branches-path&quot; : false,
-            &quot;tags-path&quot; : false
-        &#125;
-    ],
-    &quot;require&quot;  : &#123;
-        &quot;mido&#x2F;mido&quot;:&quot;dev-trunk&quot; &#x2F;&#x2F;使用 svn 中的 trunk 分支
-    &#125;
-&#125;</code></pre>
+<figure class="highlight json"><figcaption><span>composer.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;repositories&quot;</span> <span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;packagist&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">false</span></span> <span class="comment">//禁用外部仓库</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="comment">// 引入内部代码仓库(svn)</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;svn&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;url&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;http://.../mido&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;branches-path&quot;</span> <span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;tags-path&quot;</span> <span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;require&quot;</span>  <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;mido/mido&quot;</span><span class="punctuation">:</span><span class="string">&quot;dev-trunk&quot;</span> <span class="comment">//使用 svn 中的 trunk 分支</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>运行 <code>composer install</code> 时, composer 预先扫描所有的 repositories, 将 require 字段中的包更新载入到 vendor 目录中去, 并生成相关缓存信息和自动加载代码.</p>
 <p>然后呢?</p>
 <p>在应用 bootstrap (对于大部分项目, index.php 可能是一个更加容易理解的名字)代码中加入以下代码</p>
-<pre class="language-php" data-language="php" data-line="" data-line-offset="0"><div class="caption"><span>index.php</span></div><code class="language-php">&lt;?php
-    require &#x2F;path&#x2F;to&#x2F;root&#x2F;vendor&#x2F;autoload.php</code></pre>
+<figure class="highlight php"><figcaption><span>index.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">require</span> /path/to/root/vendor/autoload.php</span><br></pre></td></tr></table></figure>
 
 <p>接着项目代码中尽情使用吧, 毕竟自动加载类的细节都已经交给 autoloader 了.</p>
 <h2 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h2><p>这里介绍怎么使用 composer 作为 yii 1.x 的依赖管理工具. (注意, yii1.x 不符合 psr-0, 直接使用 composer 比较困难)</p>
@@ -894,32 +770,10 @@ cp -r yii/framework helloworld/protected/
         framework/  //yii 框架文件
         vendor/     //composer安装依赖的位置
 </code></pre>
-<pre class="language-json" data-language="json" data-line="" data-line-offset="0"><div class="caption"><span>composer.json</span></div><code class="language-json">&#123;
-    &quot;repositories&quot;  : [
-        &#123;
-            &quot;type&quot; : &quot;composer&quot;.
-            &quot;url&quot; : &quot;http:&#x2F;&#x2F;packages.phundament.com&quot;
-        &#125;
-    ],
-    
-    &quot;require&quot; : &#123;
-        &quot;php&quot; : &quot;&gt;&#x3D;5.3.12&quot;,
-        &quot;yiiext&#x2F;migrate-command&quot; : &quot;0.7.2&quot;,
-        &quot;psr&#x2F;log&quot; : &quot;1.0.0&quot;,
-    &#125;,
-
-    &quot;autoload&quot; : &#123;
-        &quot;classmap&quot; : [ &quot;framework&#x2F;YiiBase.php&quot;, &quot;framework&#x2F;yii.php&quot; ]
-    &#125;,
-
-    &quot;config&quot; : &#123;
-        &quot;vendor-dir&quot; : &quot;vendor&quot;
-    &#125;
-&#125;</code></pre>
+<figure class="highlight json"><figcaption><span>composer.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;repositories&quot;</span>  <span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;composer&quot;</span>.</span><br><span class="line">            <span class="attr">&quot;url&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;http://packages.phundament.com&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    </span><br><span class="line">    <span class="attr">&quot;require&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;php&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;&gt;=5.3.12&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;yiiext/migrate-command&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;0.7.2&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;psr/log&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">&quot;autoload&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;classmap&quot;</span> <span class="punctuation">:</span> <span class="punctuation">[</span> <span class="string">&quot;framework/YiiBase.php&quot;</span><span class="punctuation">,</span> <span class="string">&quot;framework/yii.php&quot;</span> <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">&quot;config&quot;</span> <span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;vendor-dir&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;vendor&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>index.php 使用以下代码替代原来的 yii.php</p>
-<pre class="language-php" data-language="php" data-line="" data-line-offset="0"><div class="caption"><span>composer.json</span></div><code class="language-php">&lt;?php
-    require &quot;protected&#x2F;vendor&#x2F;autoload.php&quot;;</code></pre>
+<figure class="highlight php"><figcaption><span>composer.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">require</span> <span class="string">&quot;protected/vendor/autoload.php&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 
 <p>将 framework 和 composer.json 放在 protected 文件中, 方便通过 webserver 访问规则屏蔽代码文件. 文件结构可以根据实际需求做调整, 这对于 composer 来说都这可以正确找到代码.</p>
@@ -937,42 +791,21 @@ cp -r yii/framework helloworld/protected/
 /tag/1.0.0
 </code></pre>
 <p><strong>2. 源代码命名空间处理1 : 用 \ 替换 _</strong></p>
-<pre class="language-php" data-language="php" data-line="" data-line-offset="0"><code class="language-php">&lt;?php
-     Mido_Exception -&gt; Mido\Exception</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">     Mido_Exception -&gt; Mido\<span class="built_in">Exception</span></span><br></pre></td></tr></table></figure>
 
 <p>严格意义上说, 这并不是必须的. composer 支持 <code>A_B_C</code> 这种常规的写法, 在配置中写上 <code>&quot;Mido_&quot;:&quot;&quot;</code> 也行</p>
 <p><strong>3. 源代码命名空间处理2 : 命名空间导入</strong></p>
 <p><em>ps: 需要特别注意全局命名空间里的类名,包括不支持命名空间的库和扩展, 如ArrayAccess, Memcache</em></p>
-<pre class="language-php" data-language="php" data-line="" data-line-offset="0"><code class="language-php">&lt;?php
-    namespace Mido\Engine;
-    use Mido\ComponentBase;
-    
-    class Kingso extend Base &#123;&#125;
-
-    namespace Mido\Engine\Kingso;
-    use Mido\ComponentBase;
-    use Mido\Engine\RequestBase;
-
-    class Request extend RequestBase implements \ArrayAccess &#123;&#125;</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">namespace</span> <span class="title class_">Mido</span>\<span class="title class_">Engine</span>;</span><br><span class="line">    <span class="keyword">use</span> <span class="title">Mido</span>\<span class="title">ComponentBase</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Kingso</span> <span class="title">extend</span> <span class="title">Base</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">namespace</span> <span class="title class_">Mido</span>\<span class="title class_">Engine</span>\<span class="title class_">Kingso</span>;</span><br><span class="line">    <span class="keyword">use</span> <span class="title">Mido</span>\<span class="title">ComponentBase</span>;</span><br><span class="line">    <span class="keyword">use</span> <span class="title">Mido</span>\<span class="title">Engine</span>\<span class="title">RequestBase</span>;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Request</span> <span class="title">extend</span> <span class="title">RequestBase</span> <span class="keyword">implements</span> \<span class="title">ArrayAccess</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
 <p>当然, 以根命名空间的方式书写代码也是可以的, 看团队如何制定代码规范.</p>
 <p><strong>3. 源代码命名空间处理: 保留关键词</strong></p>
 <p>前缀式命名类没有和保留关键字冲突的问题, 但改用命名空间时, 在当前域需要注意扩展和内置提供的全局class, 虽然丑了点, 但是结果是好…</p>
 <p>mido 中内置了部分常用的 helper, 比如以下的 ‘a.b.c’ 的多维数组访问 helper. 原来使用了 Array 这个关键字(呃, 因为 php 不关心大小写)</p>
-<pre class="language-php" data-language="php" data-line="" data-line-offset="0"><code class="language-php">&lt;?php
-&#x2F;&#x2F;old style
-Mido_Helper_Array::get($items, &#39;items.title&#39;);
-&#x2F;&#x2F;new style
-Mido\Help\MArray::get($items, &#39;items.title&#39;);
-</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//old style</span></span><br><span class="line"><span class="title class_">Mido_Helper_Array</span>::<span class="title function_ invoke__">get</span>(<span class="variable">$items</span>, <span class="string">&#x27;items.title&#x27;</span>);</span><br><span class="line"><span class="comment">//new style</span></span><br><span class="line"><span class="title class_">Mido\Help\MArray</span>::<span class="title function_ invoke__">get</span>(<span class="variable">$items</span>, <span class="string">&#x27;items.title&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p><strong>4. 组件别名配置更新格式</strong></p>
 <p>为了满足多个相同引擎单例组件的使用, 配置文件里定义了映射关系, 偷懒直接写上根命名空间.</p>
-<pre class="language-php" data-language="php" data-line="" data-line-offset="0"><code class="language-php">&lt;?php
-&#x2F;&#x2F;修改前
-&quot;kingso&quot; &#x3D;&gt; &quot;Mido_Engine_Kingso&quot;,
-&#x2F;&#x2F;修改后
-&quot;kingso&quot; &#x3D;&gt; &quot;\\Mido\\Engine\\Kingso&quot;,
-</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//修改前</span></span><br><span class="line"><span class="string">&quot;kingso&quot;</span> =&gt; <span class="string">&quot;Mido_Engine_Kingso&quot;</span>,</span><br><span class="line"><span class="comment">//修改后</span></span><br><span class="line"><span class="string">&quot;kingso&quot;</span> =&gt; <span class="string">&quot;\\Mido\\Engine\\Kingso&quot;</span>,</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>嗯, 全部的迁移成本如上.</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>好处</strong></p>
@@ -1057,7 +890,7 @@ Mido\Help\MArray::get($items, &#39;items.title&#39;);
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-13 04:25:36" itemprop="dateModified" datetime="2023-10-13T04:25:36+00:00">2023-10-13</time>
+      <time title="Modified: 2023-11-03 12:10:19" itemprop="dateModified" datetime="2023-11-03T12:10:19+00:00">2023-11-03</time>
     </span>
 
   
@@ -1176,7 +1009,7 @@ Include = /etc/pacman.d/mirrorlist
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-13 04:25:36" itemprop="dateModified" datetime="2023-10-13T04:25:36+00:00">2023-10-13</time>
+      <time title="Modified: 2023-11-03 12:10:19" itemprop="dateModified" datetime="2023-11-03T12:10:19+00:00">2023-11-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1215,27 +1048,21 @@ Include = /etc/pacman.d/mirrorlist
           <p>shell 环境有必要保持一定的整洁性, 毕竟多台机器之间多少要做些配置环境上的同步.<br>本文简单讨论了 zsh 使用中配置文件规范性.</p>
 <p>zsh 的 man 手册中提到, zsh 的配置加载顺序如下</p>
 <p>最高优先级, 所有情况下都会加载</p>
-<pre class="language-none"><code class="language-none">&#x2F;etc&#x2F;zshenv
-$HOME&#x2F;.zshenv</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/zshenv</span><br><span class="line">$HOME/.zshenv</span><br></pre></td></tr></table></figure>
 
 <p>login shell 配置, 两组文件的区别在于, 中间存在着 zshrc 的加载</p>
-<pre class="language-none"><code class="language-none">&#x2F;etc&#x2F;zprofile
-$HOME&#x2F;.zprofile
-
-&#x2F;etc&#x2F;zlogin
-$HOME&#x2F;.zlogin</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/etc/zprofile</span><br><span class="line">$HOME/.zprofile</span><br><span class="line"></span><br><span class="line">/etc/zlogin</span><br><span class="line">$HOME/.zlogin</span><br></pre></td></tr></table></figure>
 
 
 <p>交互shell配置</p>
-<pre class="language-none"><code class="language-none">&#x2F;etc&#x2F;zshrc
-$HOME&#x2F;.zshrc</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/zshrc</span><br><span class="line">$HOME/.zshrc</span><br></pre></td></tr></table></figure>
 
 <p>三种配置文件的差异, 在于加载的时机不同.</p>
 <p><code>/etc</code> 目录下的配置文件会影响机器上的所有用户, 相比起 $HOME 配置文件, 加载顺序优先级比较高<br>但是除了系统管理员, 大部分情况下就一个人用的机器, 没多大关心的必要.<br> 平时除了偶尔切换到 root 下, 基本不会考虑多用户的情况. 这里就不过多涉及了.</p>
 <p><strong>env配置</strong></p>
 <p>顾名思义属于环境配置, 只要新启动的shell实例, 都会重新加载. 这就意味这个文件的内容会重复加载, 不适合加入需要依赖io等耗时的操作, 影响了shell的执行速度</p>
 <p>我通过这个配置文件, 区分不同机器, 比如</p>
-<pre class="language-none"><code class="language-none">VIMID&#x3D;&quot;hits-office&quot;</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VIMID=&quot;hits-office&quot;</span><br></pre></td></tr></table></figure>
 
 <p>方便 vim 中可以根据<code>$VIM</code>加载工作环境下的特殊配置, 比如以 gbk 作为默认文件编码 :( .</p>
 <p><strong>login shell</strong></p>
@@ -1248,15 +1075,7 @@ $HOME&#x2F;.zshrc</code></pre>
 <p>仅仅在登入系统时执行一次, 某些需要调用<code>hostname</code>之类耗时的操作也可以放在这里, 不会因为重复执行而浪费 CPU 运算.</p>
 <p>场景#2: 初始化虚拟环境</p>
 <p>在安装 <code>rvm</code> 或者 <code>pythonbrew</code> 的情况, 需要在当前环境加载相对应的初始化脚本, 才能使用 <code>rvm use xxx</code>, <code>pythonbrew use xxx</code> 等方式修改当前 interceptor.</p>
-<pre class="language-none" data-line="" data-line-offset="0"><div class="caption"><span>~/.zprofile</span></div><code class="language-none">
-#load default profile config
-. $HOME&#x2F;.profile
-
-# Load RVM into a shell session *as a function*
-[[ -s &quot;$HOME&#x2F;.rvm&#x2F;scripts&#x2F;rvm&quot; ]] &amp;&amp; source &quot;$HOME&#x2F;.rvm&#x2F;scripts&#x2F;rvm&quot;
-# Load pythonbrew into a shell session *as a function*
-[[ -s &quot;$HOME&#x2F;.pythonbrew&#x2F;etc&#x2F;bashrc&quot; ]] &amp;&amp; source &quot;$HOME&#x2F;.pythonbrew&#x2F;etc&#x2F;bashrc&quot;
-</code></pre>
+<figure class="highlight plaintext"><figcaption><span>~/.zprofile</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#load default profile config</span><br><span class="line">. $HOME/.profile</span><br><span class="line"></span><br><span class="line"># Load RVM into a shell session *as a function*</span><br><span class="line">[[ -s &quot;$HOME/.rvm/scripts/rvm&quot; ]] &amp;&amp; source &quot;$HOME/.rvm/scripts/rvm&quot;</span><br><span class="line"># Load pythonbrew into a shell session *as a function*</span><br><span class="line">[[ -s &quot;$HOME/.pythonbrew/etc/bashrc&quot; ]] &amp;&amp; source &quot;$HOME/.pythonbrew/etc/bashrc&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
       
     </div>

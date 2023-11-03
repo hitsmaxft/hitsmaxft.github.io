@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.0.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -30,7 +30,7 @@
 <meta property="og:description" content="前言 由 chatgpt 生成…  在当今的技术领域，配置管理变得越来越重要。对于开发者和技术爱好者来说，保持一致的开发环境和工具配置是至关重要的。然而，传统的配置文件管理方式可能会导致配置分散、混乱和难以维护的问题。 幸运的是，有一个强大的工具可以帮助我们解决这些问题，那就是home-manager。Home-manager是一个基于Nix的工具，旨在帮助用户统一管理他们的配置文件，并通过声明性">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-11T11:07:26.000Z">
-<meta property="article:modified_time" content="2023-10-13T04:25:36.342Z">
+<meta property="article:modified_time" content="2023-11-03T12:10:19.687Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="nix">
 <meta property="article:tag" content="shell">
@@ -217,7 +217,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-13 04:25:36" itemprop="dateModified" datetime="2023-10-13T04:25:36+00:00">2023-10-13</time>
+      <time title="Modified: 2023-11-03 12:10:19" itemprop="dateModified" datetime="2023-11-03T12:10:19+00:00">2023-11-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -267,10 +267,7 @@
 <blockquote>
 <p>官方安装教程 <a target="_blank" rel="noopener" href="https://nix-community.github.io/home-manager/index.html#sec-install-standalone">https://nix-community.github.io/home-manager/index.html#sec-install-standalone</a><br>可选的方式还有通过 flake 加载.</p>
 </blockquote>
-<pre class="language-bash" data-language="bash"><code class="language-bash">nix-channel --add https:&#x2F;&#x2F;github.com&#x2F;nix-community&#x2F;home-manager&#x2F;archive&#x2F;master.tar.gz home-manager 
-nix-channel --update
-
-nix-shell &#39;&lt;home-manager&gt;&#39; -A install</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager </span><br><span class="line">nix-channel --update</span><br><span class="line"></span><br><span class="line">nix-shell &#x27;&lt;home-manager&gt;&#x27; -A install</span><br></pre></td></tr></table></figure>
 
 <p>安装完毕, home-manager 会自动生成一个最小化配置在 <code>~/.config/home-manager/home.nix</code>  这个文件中. 这里 home-manager 的可以告一段落</p>
 <blockquote>
@@ -280,14 +277,10 @@ nix-shell &#39;&lt;home-manager&gt;&#39; -A install</code></pre>
 <blockquote>
 <p>假设我们的 dotfiles 将上传到 <code>$GIT_USER</code> 这个用户名下的 <code>dotfiles</code> 仓库.<br>那么 github 全路径为 <code>git@github.com:$&#123;GIT_USER&#125;/dotfiles.git</code></p>
 </blockquote>
-<pre class="language-bash" data-language="bash"><code class="language-bash">yadm init
-yadm add ~&#x2F;.config&#x2F;home-manager&#x2F;home.nix
-yadm commit -m &#39;add home.nix&#39;
-yadm remote add origin git@github.com:$&#123;GIT_USER&#125;&#x2F;dotfiles.git
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yadm init</span><br><span class="line">yadm add ~/.config/home-manager/home.nix</span><br><span class="line">yadm commit -m <span class="string">&#x27;add home.nix&#x27;</span></span><br><span class="line">yadm remote add origin git@github.com:<span class="variable">$&#123;GIT_USER&#125;</span>/dotfiles.git</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>如果仓库中没有任何内容, 这是应该直接推送到 <code>master</code> 分支, (或者 main )</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash">yadm push -u origin master</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yadm push -u origin master</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>假设你已经有现成的 dotfiles, 可以直接执行 <code>yadm clone git@github.com:$&#123;GIT_USER&#125;/dotfiles.git</code> 一步初始化</p>
@@ -325,105 +318,21 @@ yadm remote add origin git@github.com:$&#123;GIT_USER&#125;&#x2F;dotfiles.git
 <blockquote>
 <p>具体实现见 <a target="_blank" rel="noopener" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/zsh.nix">https://github.com/nix-community/home-manager/blob/master/modules/programs/zsh.nix</a><br>zshrc 配置项大致的优先级为  initExtraFirst &gt;  initExtraBeforeCompInit &gt; plugsin &gt; ohmyzsh &gt; initExtra</p>
 </blockquote>
-<pre class="language-nix" data-language="nix"><code class="language-nix">&#123;pkg, ...&#125; : 
-&#123;
-	home.programs &#x3D; &#123;
-		zsh &#x3D; &#123;
-			enable &#x3D; true;
-			oh-my-zsh &#x3D; &#123;
-				enable &#x3D; true;
-				plugins &#x3D; [
-					&quot;vi-mode&quot;
-					&quot;jump&quot;
-				]
-				
-			&#125;;
-			
-			envExtra &#x3D; &#39;&#39;
-if [ -e &#39;&#39;$&#123;HOME&#125;&#x2F;.nix-profile&#x2F;etc&#x2F;profile.d&#x2F;nix.sh ]; then . &#39;&#39;$HOME&#x2F;.nix-profile&#x2F;etc&#x2F;profile.d&#x2F;nix.sh; fi # added by Nix installer
-
-			&#39;&#39;;
-			initExtraFirst &#x3D; &#39;&#39;
-			&#39;&#39;;
-			initExtra &#x3D; &#39;&#39;
-			&#39;&#39;;
-
-
-		&#125;;
-	&#125;;
-&#125;</code></pre>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;pkg, ...&#125; : </span><br><span class="line">&#123;</span><br><span class="line">	home.<span class="attr">programs</span> = &#123;</span><br><span class="line">		<span class="attr">zsh</span> = &#123;</span><br><span class="line">			<span class="attr">enable</span> = <span class="literal">true</span>;</span><br><span class="line">			<span class="attr">oh-my-zsh</span> = &#123;</span><br><span class="line">				<span class="attr">enable</span> = <span class="literal">true</span>;</span><br><span class="line">				<span class="attr">plugins</span> = [</span><br><span class="line">					<span class="string">&quot;vi-mode&quot;</span></span><br><span class="line">					<span class="string">&quot;jump&quot;</span></span><br><span class="line">				]</span><br><span class="line">				</span><br><span class="line">			&#125;;</span><br><span class="line">			</span><br><span class="line">			<span class="attr">envExtra</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="string">if [ -e <span class="char escape_">&#x27;&#x27;$</span>&#123;HOME&#125;/.nix-profile/etc/profile.d/nix.sh ]; then . <span class="char escape_">&#x27;&#x27;$</span>HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">			&#x27;&#x27;</span>;</span><br><span class="line">			<span class="attr">initExtraFirst</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="string">			&#x27;&#x27;</span>;</span><br><span class="line">			<span class="attr">initExtra</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="string">			&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="管理-bash-配置"><a href="#管理-bash-配置" class="headerlink" title="管理 bash 配置"></a>管理 bash 配置</h3><p>接下来是一个 <code>bash</code> 的配置实例.</p>
 <p>给 bash 内置了<code>补全</code>功能和 <code>starship</code> (类似 p10k 的 zsh 提示符主题, rust 实现, 需要预先在 packages 中安装)</p>
-<pre class="language-nix" data-language="nix"><code class="language-nix">&#123;
-	home.packages &#x3D; [
-
-		starship
-	];
-    programs &#x3D; &#123;
-    bash &#x3D; &#123;
-        enable &#x3D; true;
-        enableCompletion &#x3D; true;
-        initExtra &#x3D; &#39;&#39;
-          eval &quot;$(starship init bash)&quot;
-          &#39;&#39;;
-      &#125;;
-    &#125;;
-&#125;</code></pre>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	home.<span class="attr">packages</span> = [</span><br><span class="line"></span><br><span class="line">		starship</span><br><span class="line">	];</span><br><span class="line">    <span class="attr">programs</span> = &#123;</span><br><span class="line">    <span class="attr">bash</span> = &#123;</span><br><span class="line">        <span class="attr">enable</span> = <span class="literal">true</span>;</span><br><span class="line">        <span class="attr">enableCompletion</span> = <span class="literal">true</span>;</span><br><span class="line">        <span class="attr">initExtra</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="string">          eval &quot;$(starship init bash)&quot;</span></span><br><span class="line"><span class="string">          &#x27;&#x27;</span>;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在 <code>.bashrc</code> 中, 可以看到最终效果为:</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash">if [[ ! -v BASH_COMPLETION_VERSINFO ]]; then
-  . &quot;&#x2F;nix&#x2F;store&#x2F;*******-bash-completion-2.11&#x2F;etc&#x2F;profile.d&#x2F;bash_completion.sh&quot;
-fi
-
-# init starship prompt
-eval &quot;$(starship init bash)&quot;</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [[ ! -v BASH_COMPLETION_VERSINFO ]]; <span class="keyword">then</span></span><br><span class="line">  . <span class="string">&quot;/nix/store/*******-bash-completion-2.11/etc/profile.d/bash_completion.sh&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># init starship prompt</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(starship init bash)</span>&quot;</span></span><br></pre></td></tr></table></figure>
 
 
 <h3 id="管理-vim-配置"><a href="#管理-vim-配置" class="headerlink" title="管理 vim 配置"></a>管理 vim 配置</h3><h3 id="通过-import-管理自定义-program"><a href="#通过-import-管理自定义-program" class="headerlink" title="通过 import 管理自定义 program"></a>通过 <code>import</code> 管理自定义 <code>program</code></h3><p>假设已经开发了一个名叫 <code>xxx</code> 的 program, 放在了 <code>home-manager/modules</code> 配置目录下.</p>
-<pre class="language-nix" data-language="nix"><code class="language-nix">#~&#x2F;.config&#x2F;home-manager&#x2F;modules&#x2F;xx.nix
-&#123; config, lib, ... &#125;:
-let
-  cfg &#x3D; config.programs.xxx;
-in &#123;
-  options.programs.xxx &#x3D; &#123;
-    enable &#x3D; lib.mkEnableOption &quot;xxx&quot;;
-
-    settings &#x3D; lib.mkOption &#123;
-      default &#x3D; &#123; &#125;;
-      type &#x3D; lib.types.attrsOf lib.types.str;
-      example &#x3D; lib.literalExpression &#39;&#39;
-        &#123;
-          XXX_LOADED &#x3D; &quot;yes&quot;;
-        &#125;
-      &#39;&#39;;
-      description &#x3D; lib.mdDoc
-        &quot;XXX config&quot;;
-    &#125;;
-  &#125;;
-  config &#x3D; lib.mkIf cfg.enable &#123;
-    home &#x3D; &#123;
-      sessionVariables &#x3D; cfg.settings;
-    &#125;;
-  &#125;;
-&#125;</code></pre>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#~/.config/home-manager/modules/xx.nix</span></span><br><span class="line">&#123; config, lib, ... &#125;:</span><br><span class="line"><span class="keyword">let</span></span><br><span class="line">  <span class="attr">cfg</span> = config.programs.xxx;</span><br><span class="line"><span class="keyword">in</span> &#123;</span><br><span class="line">  options.programs.<span class="attr">xxx</span> = &#123;</span><br><span class="line">    <span class="attr">enable</span> = lib.mkEnableOption <span class="string">&quot;xxx&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attr">settings</span> = lib.mkOption &#123;</span><br><span class="line">      <span class="attr">default</span> = &#123; &#125;;</span><br><span class="line">      <span class="attr">type</span> = lib.types.attrsOf lib.types.str;</span><br><span class="line">      <span class="attr">example</span> = lib.literalExpression <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="string">        &#123;</span></span><br><span class="line"><span class="string">          XXX_LOADED = &quot;yes&quot;;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#x27;&#x27;</span>;</span><br><span class="line">      <span class="attr">description</span> = lib.mdDoc</span><br><span class="line">        <span class="string">&quot;XXX config&quot;</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="attr">config</span> = lib.mkIf cfg.enable &#123;</span><br><span class="line">    <span class="attr">home</span> = &#123;</span><br><span class="line">      <span class="attr">sessionVariables</span> = cfg.settings;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>接下来需要在 home.nix 中通过 <code>import</code> 导入 <code>xxx</code></p>
-<pre class="language-nix" data-language="nix"><code class="language-nix"># home.nix
-&#123;&#125;:
-&#123;
-  imports &#x3D; [ .&#x2F;modules&#x2F;xxx.nix ];
-
-  programs &#x3D; &#123;
-    sd &#x3D; &#123;
-        enable &#x3D; true;
-        settings &#x3D; &#123;
-          XXX_LOADED &#x3D; &quot;yes&quot;;
-        &#125;;
-    &#125;;
-
-  &#125;;
-&#125;</code></pre>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># home.nix</span></span><br><span class="line">&#123;&#125;:</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">imports</span> = [ ./modules/xxx.nix ];</span><br><span class="line"></span><br><span class="line">  <span class="attr">programs</span> = &#123;</span><br><span class="line">    <span class="attr">sd</span> = &#123;</span><br><span class="line">        <span class="attr">enable</span> = <span class="literal">true</span>;</span><br><span class="line">        <span class="attr">settings</span> = &#123;</span><br><span class="line">          <span class="attr">XXX_LOADED</span> = <span class="string">&quot;yes&quot;</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="通过-overlay-增加自定义函数和应用包"><a href="#通过-overlay-增加自定义函数和应用包" class="headerlink" title="通过 overlay 增加自定义函数和应用包"></a>通过 overlay 增加自定义函数和应用包</h2><p>这里举一个例子, 往 <code>&lt;nixpkgs&gt;</code> 中新增 <code>vim-darwin</code> 包.</p>
@@ -432,52 +341,15 @@ in &#123;
 <li>开启 darwin 特性, vim 和 mac 剪贴板交互需要开启该编译选项</li>
 <li>内置两个基础插件</li>
 </ul>
-<pre class="language-nix" data-language="nix"><code class="language-nix"># ~&#x2F;.config&#x2F;home-manager&#x2F;overlays&#x2F;default.nix
-
-final: prev: 
-let
-	pkgs &#x3D; prev;
-in
-&#123;
-    vim-darwin &#x3D;  pkgs.vim-full.customize &#123;
-      vimrcConfig.packages.default &#x3D; &#123;
-        gui &#x3D; true;
-        darwin &#x3D; true;
-        start &#x3D; [
-          pkgs.vimPlugins.vim-nix
-          pkgs.vimPlugins.vim-plug
-        ];
-      &#125;;
-    &#125;;
-&#125;</code></pre>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ~/.config/home-manager/overlays/default.nix</span></span><br><span class="line"></span><br><span class="line">final: prev: </span><br><span class="line"><span class="keyword">let</span></span><br><span class="line">	<span class="attr">pkgs</span> = prev;</span><br><span class="line"><span class="keyword">in</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">vim-darwin</span> =  pkgs.vim-full.customize &#123;</span><br><span class="line">      vimrcConfig.packages.<span class="attr">default</span> = &#123;</span><br><span class="line">        <span class="attr">gui</span> = <span class="literal">true</span>;</span><br><span class="line">        <span class="attr">darwin</span> = <span class="literal">true</span>;</span><br><span class="line">        <span class="attr">start</span> = [</span><br><span class="line">          pkgs.vimPlugins.vim-nix</span><br><span class="line">          pkgs.vimPlugins.vim-plug</span><br><span class="line">        ];</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>完成上面的基础 <code>overlays</code> 脚本, 接下来需要在 home-manager 中引用.</p>
-<pre class="language-nix" data-language="nix"><code class="language-nix">#  ~&#x2F;.config&#x2F;home-manager&#x2F;home.nix
-
-&#123;pkgs, ...&#125; : &#123;
-
-  nixpkgs.overlays &#x3D; [ 
-    (import .&#x2F;overlays&#x2F;default.nix)
-  ];
-
-&#125;</code></pre>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  ~/.config/home-manager/home.nix</span></span><br><span class="line"></span><br><span class="line">&#123;pkgs, ...&#125; : &#123;</span><br><span class="line"></span><br><span class="line">  nixpkgs.<span class="attr">overlays</span> = [ </span><br><span class="line">    (<span class="built_in">import</span> ./overlays/default.nix)</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 <p>再次运行 <code>home-manager switch</code> 完成 <code>overlays</code> 加载</p>
 <p>最后, 再次修改 <code>home.nix</code> 的 <code>home.pacakges</code> 完成 <code>vim-darwin</code> 的安装</p>
-<pre class="language-nix" data-language="nix"><code class="language-nix">
-&#123;pkgs, ...&#125; : &#123;
-
-  nixpkgs.overlays &#x3D; [ 
-    (import .&#x2F;overlays&#x2F;default.nix)
-  ];
-
-  home.packages &#x3D; [
-	vim-darwin
-  ]
-
-&#125;
-</code></pre>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;pkgs, ...&#125; : &#123;</span><br><span class="line"></span><br><span class="line">  nixpkgs.<span class="attr">overlays</span> = [ </span><br><span class="line">    (<span class="built_in">import</span> ./overlays/default.nix)</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  home.<span class="attr">packages</span> = [</span><br><span class="line">	vim-darwin</span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>就此, 本文总结了大部分常见的 home-manager 配置管理技巧, 更多内容可以参考官方文档 <a target="_blank" rel="noopener" href="https://nix-community.github.io/home-manager/index.html">https://nix-community.github.io/home-manager/index.html</a></p>
 <p>相对于手动管理配置文件, 采用 home-manager 有以下几个优点</p>

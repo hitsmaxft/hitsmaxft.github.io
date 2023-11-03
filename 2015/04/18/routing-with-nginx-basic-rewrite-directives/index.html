@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.0.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -22,15 +22,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="在书写 nginx 路由规则的时候， 得保证规则配置的规范， 否则维护起来成本很高。本文简要地讨论了在 rewrite 模块的基础实现的简单路由规则，并解释了常用指令的使用细节。  rewrite 与 location首先，这是一个不完整 nginx 虚拟主机配置: service &amp;#123;     root &#x2F;service&#x2F;http;     index index.">
+    <meta name="description" content="在书写 nginx 路由规则的时候， 得保证规则配置的规范， 否则维护起来成本很高。本文简要地讨论了在 rewrite 模块的基础实现的简单路由规则，并解释了常用指令的使用细节。  rewrite 与 location首先，这是一个不完整 nginx 虚拟主机配置: 123456789101112131415service &#123;    root &#x2F;service&#x2F;http;    ind">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx 路由杂谈 - rewrite 指令与重定向">
 <meta property="og:url" content="https://io.bhe.ink/2015/04/18/routing-with-nginx-basic-rewrite-directives/index.html">
 <meta property="og:site_name" content="Bhe&#39;s Blog">
-<meta property="og:description" content="在书写 nginx 路由规则的时候， 得保证规则配置的规范， 否则维护起来成本很高。本文简要地讨论了在 rewrite 模块的基础实现的简单路由规则，并解释了常用指令的使用细节。  rewrite 与 location首先，这是一个不完整 nginx 虚拟主机配置: service &amp;#123;     root &#x2F;service&#x2F;http;     index index.">
+<meta property="og:description" content="在书写 nginx 路由规则的时候， 得保证规则配置的规范， 否则维护起来成本很高。本文简要地讨论了在 rewrite 模块的基础实现的简单路由规则，并解释了常用指令的使用细节。  rewrite 与 location首先，这是一个不完整 nginx 虚拟主机配置: 123456789101112131415service &#123;    root &#x2F;service&#x2F;http;    ind">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2015-04-18T11:22:40.000Z">
-<meta property="article:modified_time" content="2023-10-13T04:25:36.342Z">
+<meta property="article:modified_time" content="2023-11-03T12:10:19.687Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="nginx">
 <meta property="article:tag" content="web server">
@@ -216,7 +216,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-13 04:25:36" itemprop="dateModified" datetime="2023-10-13T04:25:36+00:00">2023-10-13</time>
+      <time title="Modified: 2023-11-03 12:10:19" itemprop="dateModified" datetime="2023-11-03T12:10:19+00:00">2023-11-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -255,21 +255,7 @@
 <p>在书写 nginx 路由规则的时候， 得保证规则配置的规范， 否则维护起来成本很高。<br>本文简要地讨论了在 rewrite 模块的基础实现的简单路由规则，并解释了常用指令的使用细节。</p>
 </blockquote>
 <h2 id="rewrite-与-location"><a href="#rewrite-与-location" class="headerlink" title="rewrite 与 location"></a>rewrite 与 location</h2><p>首先，这是一个不完整 nginx 虚拟主机配置:</p>
-<pre class="language-none"><code class="language-none">service &#123;
-    root &#x2F;service&#x2F;http;
-    index index.php;
-
-    rewrite ^&#x2F;api&#x2F;(.*)+ &#x2F;index.php?app&#x3D;api&amp;method&#x3D;$1 break;
-    rewrite ^&#x2F;index.php&#x2F;(.*)+ &#x2F;old_api_warning.html break;
-
-    location &#x2F; &#123;
-        return 200 &quot;index&quot;;
-    &#125;
-
-    location &#x3D; &#x2F;index.php &#123;
-        return 200 &quot;index.php&quot;;
-    &#125;
-&#125;</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">service &#123;</span><br><span class="line">    root /service/http;</span><br><span class="line">    index index.php;</span><br><span class="line"></span><br><span class="line">    rewrite ^/api/(.*)+ /index.php?app=api&amp;method=$1 break;</span><br><span class="line">    rewrite ^/index.php/(.*)+ /old_api_warning.html break;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        return 200 &quot;index&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location = /index.php &#123;</span><br><span class="line">        return 200 &quot;index.php&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 <p>上面的例子中， 指定的类型可以分为两种。</p>
@@ -285,22 +271,12 @@
 </ol>
 <p>而对于 rewrite 系列指令和 location 指令的安排， 在书写配置的时候， 应该先定义好 location ， 因为 location 是和 nginx 和后端服务沟通的桥梁。<br>再根据 location 的需要， 使用 rewrite 将各种各样用户输入的 url 正确地映射到 对应 locaton ， 由 location 中的 proxy 指令转发给后端。</p>
 <p>比如一个常规的 php 站点，有以下类似的 location 配置。</p>
-<pre class="language-none"><code class="language-none"># 静态资源
-location &#x2F;assets &#123;
-    root &#x2F;service&#x2F;http&#x2F;assets&#x2F;;
-&#125;
-# 入口 php 脚本 位置
-location &#x2F;index.php &#123;
-    root &#x2F;service&#x2F;http&#x2F;phpsrc&#x2F;webroot&#x2F;;
-       # ... 若干 fast-cgi 代理规则
-&#125;</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 静态资源</span><br><span class="line">location /assets &#123;</span><br><span class="line">    root /service/http/assets/;</span><br><span class="line">&#125;</span><br><span class="line"># 入口 php 脚本 位置</span><br><span class="line">location /index.php &#123;</span><br><span class="line">    root /service/http/phpsrc/webroot/;</span><br><span class="line">       # ... 若干 fast-cgi 代理规则</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <pre><code>注意， 这份配置省略了不必要的指令，能够满足大部分的 php 应用的需要。
 </code></pre>
 <p>有时候，为了优化 url 的展示，或者兼容旧应用的 url 规则， 只是这么简单的两条 location 配置自然是不够用的。这时候我们可以通过 <code>rewrite</code> 规则进行弥补。</p>
-<pre class="language-none"><code class="language-none">rewrite &#x2F;index.html$ &#x2F;app&#x2F;page-default; &#x2F;&#x2F;兼容旧 url
-
-rewrite &#x2F;app&#x2F;page-(.*) &#x2F;index.php?app&#x3D;api&amp;page&#x3D;$1 break;</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rewrite /index.html$ /app/page-default; //兼容旧 url</span><br><span class="line"></span><br><span class="line">rewrite /app/page-(.*) /index.php?app=api&amp;page=$1 break;</span><br></pre></td></tr></table></figure>
 
 <p>请注意这两条 <code>rewrite</code> 规则区别的在最后一个 <code>flag</code> 参数 <code>break</code></p>
 <pre><code> 可用的 flag 参数还有 `permanent`, `redirect`, `last` 等， 后面分析它们之间的差别。
@@ -324,31 +300,11 @@ rewrite &#x2F;app&#x2F;page-(.*) &#x2F;index.php?app&#x3D;api&amp;page&#x3D;$1 b
 <p>stops processing the current set of <code>ngx_http_rewrite_module</code> directives and starts a search for a new location matching the changed URI</p>
 </blockquote>
 <p>如果是在 <code>server</code> 的顶级部分， 那么它们的作用是相同， 跳过剩下的 rewrite 指定， 进入 location 匹配。<br>如果 rewrite 是在 <code>server</code> 区块顶级 if 内部， 和直接放在 server 下级的  rewrite 行为是一致的。</p>
-<pre class="language-none"><code class="language-none">server &#123;
-    rewrite &#x2F;error1.html &#x2F;error.html break;
-    rewrite &#x2F;error2.html &#x2F;error.html last;
-
-    if ( $arg_version &#x3D; &quot;1.1&quot; ) &#123;
-        rewrite &#x2F;error3.html &#x2F;error.html break;
-    &#125;
-
-    location &#x3D; error.html &#123;
-    &#125;
-&#125;</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    rewrite /error1.html /error.html break;</span><br><span class="line">    rewrite /error2.html /error.html last;</span><br><span class="line"></span><br><span class="line">    if ( $arg_version = &quot;1.1&quot; ) &#123;</span><br><span class="line">        rewrite /error3.html /error.html break;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location = error.html &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>以上的 rewrite 的跳转行为是相同的， 进入 location 匹配流程。</p>
 <p>而两者的区别， 在于当 rewrite 指令存在于 <code>location</code> 区块中时, 见例子</p>
-<pre class="language-none"><code class="language-none">location &#x3D; index.php &#123;
-    if ( $arg_q  &#x3D; &quot;&quot; ) &#123;
-        rewrite &#x2F;index.php &#x2F;error.html last;
-    &#125;
-&#125;
-location &#x3D; error.html &#123;
-    if ( $arg_test ~&#x3D; &quot;&quot; ) &#123;
-        rewrite &#x2F;error.html &#x2F;error-test.html break;
-    &#125;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">location = index.php &#123;</span><br><span class="line">    if ( $arg_q  = &quot;&quot; ) &#123;</span><br><span class="line">        rewrite /index.php /error.html last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">location = error.html &#123;</span><br><span class="line">    if ( $arg_test ~= &quot;&quot; ) &#123;</span><br><span class="line">        rewrite /error.html /error-test.html break;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>第一个 location , 如果 <code>q</code> 参数为空， 那么将展示错误页面。</p>
 <p>第二个 location ， 如果 <code>test</code> 参数不为空， 通过 rewrite 规则，使用另外一个 error-test.html,<br>但 location 不变</p>
@@ -365,29 +321,12 @@ location &#x3D; error.html &#123;
 <p><code>locaton = error.html</code></p>
 <p>所以一般情况下， 使用 <code>break</code> 指令会相对安全， 不会造成循环重定向。</p>
 <p>比如：</p>
-<pre class="language-nginx" data-language="nginx"><code class="language-nginx">location &#x3D; error.html &#123;
-    rewrite &#x2F;error.html &#x2F;error.html  break;
-
-    if ($arg_q &#x3D; &quot;&quot;) &#123;
-        return 404 &quot;not q&quot;;
-    &#125;
-
-    fastcgi_pass 127.0.0.1:9000;
-    #其他 fastcgi 配置
-&#125;</code></pre>
-<pre class="language-nginx" data-language="nginx"><code class="language-nginx">location &#x3D; error.html &#123;
-    rewrite &#x2F;error.html &#x2F;error.html last;
-    fastcgi_pass 127.0.0.1:9000;
-&#125;</code></pre>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> = error.html &#123;</span><br><span class="line">    <span class="attribute">rewrite</span> /<span class="literal">error</span>.html /<span class="literal">error</span>.html  <span class="literal">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">if</span> (<span class="variable">$arg_q</span> = <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">        <span class="attribute">return</span> <span class="number">404</span> <span class="string">&quot;not q&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">fastcgi_pass</span> <span class="number">127.0.0.1:9000</span>;</span><br><span class="line">    <span class="comment">#其他 fastcgi 配置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> = error.html &#123;</span><br><span class="line">    <span class="attribute">rewrite</span> /<span class="literal">error</span>.html /<span class="literal">error</span>.html <span class="literal">last</span>;</span><br><span class="line">    <span class="attribute">fastcgi_pass</span> <span class="number">127.0.0.1:9000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>第一个例子，完成了 rewrite 指令之后，break 指令使得后续的其他 rewrite 规则失效, 接着进行 proxy.<br>第二个例子会导致不断地进行 location 匹配， 最终导致 nginx 返回 500.</p>
 <p>返回结果是这样的：</p>
-<pre class="language-none"><code class="language-none">HTTP&#x2F;1.1 500 Internal Server Error
-Server: nginx&#x2F;1.6.3
-Date: Sat, 18 Apr 2015 12:10:49 GMT
-Content-Type: text&#x2F;html
-Content-Length: 192
-Connection: close</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 500 Internal Server Error</span><br><span class="line">Server: nginx/1.6.3</span><br><span class="line">Date: Sat, 18 Apr 2015 12:10:49 GMT</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 192</span><br><span class="line">Connection: close</span><br></pre></td></tr></table></figure>
 
 <pre><code>注：nginx 会记录同一条 rewrite 规则的执行次数，如果超过10次，将自动触发 500 进行自我保护。
 </code></pre>
@@ -401,16 +340,7 @@ Connection: close</code></pre>
 并不代表支持过度使用 rewrite 指令。
 </code></pre>
 <h2 id="return-指令的应用"><a href="#return-指令的应用" class="headerlink" title="return 指令的应用"></a>return 指令的应用</h2><p>在 <code>rewrite</code> 模块中， 有一条非常有用的指令 <code>return</code>, 用于直接返回客户端指定的状态码。<br>甚至支持指定文本内容和url， 相比起使用 <code>rewrite</code> 指令302进行曲线救国，要简便地多。</p>
-<pre class="language-none"><code class="language-none">location &#x3D; &#x2F;index.php &#123;
-  if ( $arg_q &#x3D; &quot;&quot; ) &#123;
-    return 302 &#x2F;page_not_found.html;
-  &#125;
-
-  if ( $arg_id &#x3D; &quot;&quot; ) &#123;
-    return 404 &quot;page not found&quot;;
-  &#125;
-  return 200 &quot;hello&quot;;
-&#125;</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">location = /index.php &#123;</span><br><span class="line">  if ( $arg_q = &quot;&quot; ) &#123;</span><br><span class="line">    return 302 /page_not_found.html;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  if ( $arg_id = &quot;&quot; ) &#123;</span><br><span class="line">    return 404 &quot;page not found&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">  return 200 &quot;hello&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>对于常规的基于 url 提供服务的应用， 基础的 rewrite 指令配合已经足够完成大部分任务。</p>
 <p>下一篇文章再聊聊基于条件，变量和更加复杂的上下文, 完成进行路由规则匹配.</p>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.0.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -30,7 +30,7 @@
 <meta property="og:description" content="rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂家已经不维护了（email咨询得知）. 不过还好他们邮件给了可以下载最新固件的地址 sd-card-images , 下载下来发现是 sd card 用的镜像, 所以需要这里说下怎么制作emmc 版本镜像 单需要稍微处理以下就可以得到更新的 debian 固件  板子官网  刷入默认的 emmc 镜像从这里下载">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-04-02T20:02:04.000Z">
-<meta property="article:modified_time" content="2023-10-13T04:25:36.342Z">
+<meta property="article:modified_time" content="2023-11-03T12:10:19.687Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="sbc">
 <meta property="article:tag" content="debian">
@@ -216,7 +216,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-13 04:25:36" itemprop="dateModified" datetime="2023-10-13T04:25:36+00:00">2023-10-13</time>
+      <time title="Modified: 2023-11-03 12:10:19" itemprop="dateModified" datetime="2023-11-03T12:10:19+00:00">2023-11-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -274,7 +274,7 @@
 </blockquote>
 <p>通过执行 <code>7z x debian-bullseye-arm64-iey4ku.bin.gz</code>, 解压后将得到 ext4.img， 这是Debian 的 rootfs 根目录分区</p>
 <p>从官方手册里 rootfs 的写入命令</p>
-<pre class="language-none"><code class="language-none">rkdeveloptool wl 262144 rootfs.img</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rkdeveloptool wl 262144 rootfs.img</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>这里 262144 是十进制， 换算成16进制就是 0x00040000</p>
@@ -288,11 +288,10 @@
 <p>完成刷入之后， 重启得到一个全新版本的 debian 11.</p>
 <h2 id="接入网络并安装更多包"><a href="#接入网络并安装更多包" class="headerlink" title="接入网络并安装更多包"></a>接入网络并安装更多包</h2><p>由于 sd-card-images 的镜像非常小， 这里需要先通过网络安装常用的 deb 包。</p>
 <p>我是通过usb 以太网转接器接入并安装 network-manager 得到无线接入能力。</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash">apt install sudo iproutes apt-utils fdisk network-manager vim zsh screen</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install sudo iproutes apt-utils fdisk network-manager vim zsh screen</span><br></pre></td></tr></table></figure>
 
 <p>顺便加个新用户</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash">useradd -m -G sudo -s &#x2F;bin&#x2F;sh rock960 
-password rock960</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -G sudo -s /bin/sh rock960 </span><br><span class="line">password rock960</span><br></pre></td></tr></table></figure>
 
 <p>安装完 network-manager，通过 nmtui-connect 就可以通过 TUI 方便地连上无线了。 root 分区容量扩容</p>
 <p>ext4.img 刷入完毕，root 分区的可用容量仅2G， 而 rock960c 的 emmc 容量是 16G， 这里需要通过 resize2fs &#x2F;dev&#x2F;mmcblk1p5 命令完成根分区的自动扩容。 </p>

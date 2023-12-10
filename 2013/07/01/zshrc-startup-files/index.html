@@ -17,10 +17,10 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CLXGW+wenkai:300,300italic,400,400italic,700,700italic%7CLXGW+WenKai+Lite:300,300italic,400,400italic,700,700italic%7CPingFang+SC:300,300italic,400,400italic,700,700italic%7CMicrosoft+YaHei:300,300italic,400,400italic,700,700italic%7Csans-serif:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="shell 环境有必要保持一定的整洁性, 毕竟多台机器之间多少要做些配置环境上的同步.本文简单讨论了 zsh 使用中配置文件规范性. zsh 的 man 手册中提到, zsh 的配置加载顺序如下 最高优先级, 所有情况下都会加载 12&#x2F;etc&#x2F;zshenv$HOME&#x2F;.zshenv  login shell 配置, 两组文件的区别在于, 中间存在着 zshrc 的加载 12345&#x2F;etc&#x2F;zpro">
 <meta property="og:type" content="article">
@@ -30,7 +30,7 @@
 <meta property="og:description" content="shell 环境有必要保持一定的整洁性, 毕竟多台机器之间多少要做些配置环境上的同步.本文简单讨论了 zsh 使用中配置文件规范性. zsh 的 man 手册中提到, zsh 的配置加载顺序如下 最高优先级, 所有情况下都会加载 12&#x2F;etc&#x2F;zshenv$HOME&#x2F;.zshenv  login shell 配置, 两组文件的区别在于, 中间存在着 zshrc 的加载 12345&#x2F;etc&#x2F;zpro">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2013-07-01T22:54:00.000Z">
-<meta property="article:modified_time" content="2023-12-10T05:23:15.337Z">
+<meta property="article:modified_time" content="2023-12-10T05:23:24.249Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="shell environment zshrc">
 <meta name="twitter:card" content="summary">
@@ -46,7 +46,7 @@
 <title>Zshrc: Startup Files | Bhe's Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42604344-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-42604344-1","only_pageview":false}</script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-42604344-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
 
 
@@ -214,7 +214,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-10 05:23:15" itemprop="dateModified" datetime="2023-12-10T05:23:15+00:00">2023-12-10</time>
+      <time title="Modified: 2023-12-10 05:23:24" itemprop="dateModified" datetime="2023-12-10T05:23:24+00:00">2023-12-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

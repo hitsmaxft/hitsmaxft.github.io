@@ -127,7 +127,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -138,7 +138,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -163,6 +163,117 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2024/01/27/release-python-package-to-PYPI-by-github-action/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bhe Hongtyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bhe's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bhe's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/01/27/release-python-package-to-PYPI-by-github-action/" class="post-title-link" itemprop="url">通过 github action 发布 poetry 项目到 PYPI</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-01-27 22:41:18 / Modified: 15:01:26" itemprop="dateCreated datePublished" datetime="2024-01-27T22:41:18+00:00">2024-01-27</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2024/01/27/release-python-package-to-PYPI-by-github-action/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2024/01/27/release-python-package-to-PYPI-by-github-action/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="经过"><a href="#经过" class="headerlink" title="经过"></a>经过</h2><p>gemini-cli 的基础功能已经完备,  我就计划着把包发布到 pypi 上去, 这样子公司那边开发的工具也可以直接引用, 避免和工作的代码产生直接交集.</p>
+<p>python 官方提供了很完善的 github action 发布和自动生成 release 的教程, 但它是基于 pip 和 build 写的, 用 poetry 实现构建依赖管理的项目就需要不少改动了.</p>
+<p>而我是直接从 github 官方的 python 发布 workflow 修改而来, 只实现了构建和发布, release 以后再完善了.</p>
+<p>需要以下几个步骤</p>
+<ul>
+<li>生成发布 token</li>
+<li>配置</li>
+</ul>
+<h3 id="生成-workflow-文件"><a href="#生成-workflow-文件" class="headerlink" title="生成 workflow 文件"></a>生成 workflow 文件</h3><p>脚本内容见下文, <code>https://github.com/&#123;owner&#125;/&#123;repo&#125;/actions/new</code> 通过这个路径进入, 选 python pacakge 再贴入我下面的脚本即可.</p>
+<h3 id="配置-token"><a href="#配置-token" class="headerlink" title="配置 token"></a>配置 token</h3><p>workflow 脚本中有一个密钥变量 <code>PYPI_API_TOKEN</code></p>
+<p>需要去到 <code>https://pypi.org/manage/account/</code> PYPI 的个人账户页面, 在下方的 ‘API tokens&#96; 中生成一个记下来备用.</p>
+<p>这个 token 在本地 deploy 也需要用到, 所以到这一步之前应该已经拿到了.</p>
+<p>接着, 进入 <code>https://github.com/$&#123;owner&#125;/$&#123;repo&#125;/settings/secrets/actions</code> </p>
+<p>在 Repository secrets 中配置上 pypi 上生成的 api token, 这样子脚本中就能顺利地获取到发布 token 了.</p>
+<h3 id="授权-github-workflow"><a href="#授权-github-workflow" class="headerlink" title="授权 github workflow"></a>授权 github workflow</h3><p>和本地发布不同, github 发布需要在 PYPI 中注册 项目信息和 workflow 文件名.</p>
+<p>以 gemini-cil 为例, 打开以下链接, 进入发布配置页面</p>
+<p><a target="_blank" rel="noopener" href="https://pypi.org/manage/project/gemini-cli/settings/publishing/">https://pypi.org/manage/project/gemini-cli/settings/publishing/</a></p>
+<p>在 Trusted Publisher Management 配置自己的 github 项目名和 workflow 文件名 (注意是 xxx.yml 文件名)</p>
+<blockquote>
+<p>如果这里不进行授权, 那么 github workflow 会报 403 错误<br>PYPI 还支持必须带上相应环境变量才放行, 我这里就用不到了.</p>
+</blockquote>
+<h2 id="workflow-脚本内容"><a href="#workflow-脚本内容" class="headerlink" title="workflow 脚本内容"></a>workflow 脚本内容</h2><p>以下是完整的发布脚本</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># This workflow will upload a Python Package using Twine when a release is created</span></span><br><span class="line"><span class="comment"># For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This workflow uses actions that are not certified by GitHub.</span></span><br><span class="line"><span class="comment"># They are provided by a third-party and are governed by</span></span><br><span class="line"><span class="comment"># separate terms of service, privacy policy, and support</span></span><br><span class="line"><span class="comment"># documentation.</span></span><br><span class="line"></span><br><span class="line"><span class="attr">name:</span> <span class="string">Upload</span> <span class="string">Python</span> <span class="string">Package</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">release:</span></span><br><span class="line">    <span class="attr">types:</span> [<span class="string">published</span>]</span><br><span class="line"></span><br><span class="line"><span class="attr">permissions:</span></span><br><span class="line">  <span class="attr">contents:</span> <span class="string">read</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">deploy:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v3</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Set</span> <span class="string">up</span> <span class="string">Python</span></span><br><span class="line">      <span class="attr">uses:</span> <span class="string">actions/setup-python@v3</span></span><br><span class="line">      <span class="attr">with:</span></span><br><span class="line">        <span class="attr">python-version:</span> <span class="string">&#x27;3.x&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">Poetry</span></span><br><span class="line">      <span class="attr">uses:</span> <span class="string">snok/install-poetry@v1</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">dependencies</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">        python -m pip install --upgrade pip</span></span><br><span class="line"><span class="string">        poetry install --no-root --only=main</span></span><br><span class="line"><span class="string"></span>    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span> <span class="string">package</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">poetry</span> <span class="string">build</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Publish</span> <span class="string">package</span></span><br><span class="line">      <span class="attr">uses:</span> <span class="string">pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29</span></span><br><span class="line">      <span class="attr">with:</span></span><br><span class="line">        <span class="attr">user:</span> <span class="string">__token__</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.PYPI_API_TOKEN</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/">python 官方的完整 github 教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/marketplace/actions/install-poetry-action#codecov-upload">install-poetry-action</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -202,7 +313,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-01-27 16:14:48 / Modified: 08:21:45" itemprop="dateCreated datePublished" datetime="2024-01-27T16:14:48+00:00">2024-01-27</time>
+      <time title="Created: 2024-01-27 16:14:48 / Modified: 15:01:26" itemprop="dateCreated datePublished" datetime="2024-01-27T16:14:48+00:00">2024-01-27</time>
     </span>
 
   
@@ -305,7 +416,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-27 08:21:45" itemprop="dateModified" datetime="2024-01-27T08:21:45+00:00">2024-01-27</time>
+      <time title="Modified: 2024-01-27 15:01:26" itemprop="dateModified" datetime="2024-01-27T15:01:26+00:00">2024-01-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -558,7 +669,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-27 08:21:45" itemprop="dateModified" datetime="2024-01-27T08:21:45+00:00">2024-01-27</time>
+      <time title="Modified: 2024-01-27 15:01:26" itemprop="dateModified" datetime="2024-01-27T15:01:26+00:00">2024-01-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -763,7 +874,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-27 08:21:45" itemprop="dateModified" datetime="2024-01-27T08:21:45+00:00">2024-01-27</time>
+      <time title="Modified: 2024-01-27 15:01:26" itemprop="dateModified" datetime="2024-01-27T15:01:26+00:00">2024-01-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -912,7 +1023,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-27 08:21:45" itemprop="dateModified" datetime="2024-01-27T08:21:45+00:00">2024-01-27</time>
+      <time title="Modified: 2024-01-27 15:01:26" itemprop="dateModified" datetime="2024-01-27T15:01:26+00:00">2024-01-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1045,7 +1156,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-27 08:21:45" itemprop="dateModified" datetime="2024-01-27T08:21:45+00:00">2024-01-27</time>
+      <time title="Modified: 2024-01-27 15:01:26" itemprop="dateModified" datetime="2024-01-27T15:01:26+00:00">2024-01-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1236,7 +1347,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-27 08:21:45" itemprop="dateModified" datetime="2024-01-27T08:21:45+00:00">2024-01-27</time>
+      <time title="Modified: 2024-01-27 15:01:26" itemprop="dateModified" datetime="2024-01-27T15:01:26+00:00">2024-01-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1410,7 +1521,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-27 08:21:45" itemprop="dateModified" datetime="2024-01-27T08:21:45+00:00">2024-01-27</time>
+      <time title="Modified: 2024-01-27 15:01:26" itemprop="dateModified" datetime="2024-01-27T15:01:26+00:00">2024-01-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1571,7 +1682,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-27 08:21:45" itemprop="dateModified" datetime="2024-01-27T08:21:45+00:00">2024-01-27</time>
+      <time title="Modified: 2024-01-27 15:01:26" itemprop="dateModified" datetime="2024-01-27T15:01:26+00:00">2024-01-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1621,115 +1732,6 @@
 <p>And, 方向键, 虽玩游戏喜欢用 wasd, 但是用 fn+wasd 操作方向键的方式, 需要适应一下. 通常第一反应还是右手去按右下的按键. 虽然是一个很简单的操作, 着实是成了习惯成自然了.</p>
 <p>买的时候附送了6个无刻彩色键帽, 我换掉了 <code>fn</code> <code>win</code> <code>pn</code>, 平时操作的时候比较视觉上方便定位.</p>
 <p>毕竟是拿来干活的工具, 暂时没太折腾.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2014/06/04/some-words-about-the-new-ios/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Bhe Hongtyu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bhe's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bhe's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2014/06/04/some-words-about-the-new-ios/" class="post-title-link" itemprop="url">新 iOS 杂谈</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-06-04 07:28:44" itemprop="dateCreated datePublished" datetime="2014-06-04T07:28:44+00:00">2014-06-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-27 08:21:45" itemprop="dateModified" datetime="2024-01-27T08:21:45+00:00">2024-01-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/etc/" itemprop="url" rel="index"><span itemprop="name">etc</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2014/06/04/some-words-about-the-new-ios/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/06/04/some-words-about-the-new-ios/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这里对发布会的怨念很大, 发点正能量</p>
-<p>这次的 WWDC, 我个人感觉 Apple 是拿出了诚意了, 只是还没正式发布, 结果还不知道怎么样. </p>
-<p>大学的时候打工买了台 milestone 2 , 对 android 失望得不得了, 后来就一直是用着 iPhone. 再后来年会中了台 N4, 玩了几天, 发现 android 4.x 是稍微好了点, 但是也没什么吸引力, 就送人了.</p>
-<p>我曾经对比过 a 和 i 的区别, 后来我觉得原因就是环境. </p>
-<p>iphone 有 App Store 和 iTunes, android 有什么呢? </p>
-<p>我个人感觉, iPhone 并不是完美无缺才超越了 Android, 相反, 它很多东西没做好. safari 很一般, App 都是沙箱里孤立的, 记事本之类的系统应用做得也不是太舒服. </p>
-<p>在 IOS 8, intent 和 第三方输入法反映了苹果确定在一定程度开放了它的这个操作系统. 但是这是一件顺其自然的事情, </p>
-<p>回头说说安卓? 我觉得它早早走上一条不归路, 过于开放, 乱七八糟. 以至于我都不知道怎么用它了.</p>
-<p>大排档和高级餐厅的差别, 并不只是相差在价格上, 而是体验, 这时候解决的已经不是温饱问题. 对于一个只需要吃饱的人, 大排档够了, 但瞎 BB 酒店太贵这种心态可不少见.</p>
-<p>说实在, 我觉得问题在于, 我希望的手机是好用, 又不费神. 毕竟在这东西花时间又不是工作内容, 没啥回报. 自从买了 kof-i 之后我就再也没买过任何的游戏了, 我也不觉得 iOS 平台能产生游戏性超过任天堂或者索尼的游戏, 就算哪天它把任天堂收购了, 那又怎样.</p>
-<p>我只当它是手机, 能胜任移动助理功能, 至于其他的, 已经超出了它所应该拥有的意义了. </p>
 
       
     </div>

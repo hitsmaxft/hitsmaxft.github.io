@@ -2,69 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://io.bhe.ink/2013/07/01/zshrc-startup-files/</loc>
-    
-    <lastmod>2024-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2013/08/03/longene-qq-on-archlinux/</loc>
-    
-    <lastmod>2024-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2013/08/04/composer-in-action/</loc>
-    
-    <lastmod>2024-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2014/03/07/classmap-generating-by-composer/</loc>
-    
-    <lastmod>2024-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2014/03/22/introduction-to-vim/</loc>
-    
-    <lastmod>2024-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2014/03/16/first-step-on-writing-zsh-completion-functions/</loc>
-    
-    <lastmod>2024-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2014/03/23/asynchronous-programming-with-phpdaemon/</loc>
-    
-    <lastmod>2024-01-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://io.bhe.ink/2014/06/15/a-vimers-kbc-poker2-review/</loc>
     
     <lastmod>2024-01-27</lastmod>
@@ -146,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://io.bhe.ink/2024/01/27/setup-http-proxy-in-an-orbstak-linux-machine/</loc>
+    <loc>https://io.bhe.ink/2024/01/27/release-python-package-to-PYPI-by-github-action/</loc>
     
     <lastmod>2024-01-27</lastmod>
     
@@ -155,7 +92,7 @@
   </url>
   
   <url>
-    <loc>https://io.bhe.ink/2024/01/27/release-python-package-to-PYPI-by-github-action/</loc>
+    <loc>https://io.bhe.ink/2024/01/27/setup-http-proxy-in-an-orbstak-linux-machine/</loc>
     
     <lastmod>2024-01-27</lastmod>
     
@@ -174,6 +111,69 @@
   
   <url>
     <loc>https://io.bhe.ink/tags/index.html</loc>
+    
+    <lastmod>2024-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2013/07/01/zshrc-startup-files/</loc>
+    
+    <lastmod>2024-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2013/08/03/longene-qq-on-archlinux/</loc>
+    
+    <lastmod>2024-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2013/08/04/composer-in-action/</loc>
+    
+    <lastmod>2024-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2014/03/07/classmap-generating-by-composer/</loc>
+    
+    <lastmod>2024-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2014/03/16/first-step-on-writing-zsh-completion-functions/</loc>
+    
+    <lastmod>2024-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2014/03/22/introduction-to-vim/</loc>
+    
+    <lastmod>2024-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2014/03/23/asynchronous-programming-with-phpdaemon/</loc>
     
     <lastmod>2024-01-27</lastmod>
     
@@ -240,20 +240,6 @@
   </url>
   
   <url>
-    <loc>https://io.bhe.ink/tags/tutor/</loc>
-    <lastmod>2024-01-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/tags/vim/</loc>
-    <lastmod>2024-01-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://io.bhe.ink/tags/zsh/</loc>
     <lastmod>2024-01-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -269,6 +255,20 @@
   
   <url>
     <loc>https://io.bhe.ink/tags/tutorial/</loc>
+    <lastmod>2024-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/tags/tutor/</loc>
+    <lastmod>2024-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/tags/vim/</loc>
     <lastmod>2024-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -429,20 +429,6 @@
   </url>
   
   <url>
-    <loc>https://io.bhe.ink/tags/orbstack/</loc>
-    <lastmod>2024-01-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/tags/systemd/</loc>
-    <lastmod>2024-01-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://io.bhe.ink/tags/python/</loc>
     <lastmod>2024-01-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -451,6 +437,20 @@
   
   <url>
     <loc>https://io.bhe.ink/tags/pypi/</loc>
+    <lastmod>2024-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/tags/orbstack/</loc>
+    <lastmod>2024-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/tags/systemd/</loc>
     <lastmod>2024-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

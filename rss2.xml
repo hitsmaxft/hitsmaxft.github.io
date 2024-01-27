@@ -9,8 +9,33 @@
     <atom:link href="https://io.bhe.ink/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 10 Dec 2023 05:23:24 GMT</pubDate>
+    <pubDate>Sat, 27 Jan 2024 08:16:36 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>在 orbstack linux machine 中使用主机 http 代理</title>
+      <link>https://io.bhe.ink/2024/01/27/setup-http-proxy-in-an-orbstak-linux-machine/</link>
+      <guid>https://io.bhe.ink/2024/01/27/setup-http-proxy-in-an-orbstak-linux-machine/</guid>
+      <pubDate>Sat, 27 Jan 2024 16:14:48 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;OrbStack 提供了 Linux Machine 功能, 可以在 mac os 上得 WSL2 一样的体验.&lt;/p&gt;
+&lt;p&gt;由于众所周知的原因, 我需要在宿主机上开了 clash 作为代理工具. 在本地的 7890 端口上提供 http 代理, 但没有开全局代理. 只有</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>OrbStack 提供了 Linux Machine 功能, 可以在 mac os 上得 WSL2 一样的体验.</p><p>由于众所周知的原因, 我需要在宿主机上开了 clash 作为代理工具. 在本地的 7890 端口上提供 http 代理, 但没有开全局代理. 只有 firefox 和 github clone 会进过 7890</p><p>但这也就导致了 OrbStack  里的 linux 默认是不经过代理.<br>这里我想要的效果是 linux machine 全走代理. 宿主机还是保持按需使用.</p><p>一般这种办法就是通过 shell 设置环境变量 <code>http_proxy</code> <code>https_proxy</code> <code>all_proxy</code> , 但为了通过 home-manager 来自动设置, 花了点时间确定了永久配置的方式.</p><p>orbstack 提供了 <code>host.orb.internal</code> 作为宿主机的域名, 不用写死 ip 地址.</p><p>而 http 环境变量可以通过 systemd 配置 <code>~/.config/environment.d/30-proxyenv.conf</code>  注入到整个系统中, 包括其他的服务</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export all_proxy=&quot;http://host.orb.internal:7890&quot;</span><br><span class="line">export http_proxy=&quot;http://host.orb.internal:7890&quot;</span><br><span class="line">export https_proxy=&quot;http://host.orb.internal:7890&quot;</span><br></pre></td></tr></table></figure><p>在 home-manager 里, 只配置 sessionVariables 还是不够的.<br>这个 <code>issue</code> <a href="https://github.com/nix-community/home-manager/issues/1011">https://github.com/nix-community/home-manager/issues/1011</a> 里给出的解决方案是通过配置 systemd 来实现全局变量注入</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">home.sessionVariables = &#123;</span><br><span class="line">  https_proxy=&quot;http://host.orb.internal:7890&quot;;</span><br><span class="line">  http_proxy=&quot;http://host.orb.internal:7890&quot;;</span><br><span class="line">  all_proxy=&quot;http://host.orb.internal:7890&quot;;</span><br><span class="line">&#125;;</span><br><span class="line">systemd.user.sessionVariables = &#123;</span><br><span class="line">  https_proxy=&quot;http://host.orb.internal:7890&quot;;</span><br><span class="line">  http_proxy=&quot;http://host.orb.internal:7890&quot;;</span><br><span class="line">  all_proxy=&quot;http://host.orb.internal:7890&quot;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>最后, 执行</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;nix switch&#125;</span><br><span class="line"></span><br><span class="line">systemctl --user import-environment</span><br></pre></td></tr></table></figure>]]></content:encoded>
+      
+      
+      
+      <category domain="https://io.bhe.ink/tags/nix-orbstack/">nix orbstack</category>
+      
+      
+      <comments>https://io.bhe.ink/2024/01/27/setup-http-proxy-in-an-orbstak-linux-machine/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Nix 语言初学者上手指南</title>

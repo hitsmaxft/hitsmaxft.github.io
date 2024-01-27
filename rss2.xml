@@ -9,11 +9,11 @@
     <atom:link href="https://io.bhe.ink/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 27 Jan 2024 08:16:36 GMT</pubDate>
+    <pubDate>Sat, 27 Jan 2024 08:21:45 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>在 orbstack linux machine 中使用主机 http 代理</title>
+      <title>在 orbstack linux machine 中使用宿主机 http 代理</title>
       <link>https://io.bhe.ink/2024/01/27/setup-http-proxy-in-an-orbstak-linux-machine/</link>
       <guid>https://io.bhe.ink/2024/01/27/setup-http-proxy-in-an-orbstak-linux-machine/</guid>
       <pubDate>Sat, 27 Jan 2024 16:14:48 GMT</pubDate>
@@ -30,7 +30,11 @@
       
       
       
-      <category domain="https://io.bhe.ink/tags/nix-orbstack/">nix orbstack</category>
+      <category domain="https://io.bhe.ink/tags/nix/">nix</category>
+      
+      <category domain="https://io.bhe.ink/tags/orbstack/">orbstack</category>
+      
+      <category domain="https://io.bhe.ink/tags/systemd/">systemd</category>
       
       
       <comments>https://io.bhe.ink/2024/01/27/setup-http-proxy-in-an-orbstak-linux-machine/#disqus_thread</comments>

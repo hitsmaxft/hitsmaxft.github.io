@@ -17,20 +17,20 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CLXGW+wenkai:300,300italic,400,400italic,700,700italic%7CLXGW+WenKai+Lite:300,300italic,400,400italic,700,700italic%7CPingFang+SC:300,300italic,400,400italic,700,700italic%7CMicrosoft+YaHei:300,300italic,400,400italic,700,700italic%7Csans-serif:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="前言由于前阵子 MacBookPro 重新格式化了, 于是用 nix-darwin 和 home-manager 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结 运行环境和工具nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 类 Unix 系统中使用, 作为系统自带包管理系统的补充. 首">
+    <meta name="description" content="前言由于前阵子 MacBookPro 重新格式化了, 于是用 nix-darwin 和 home-manager 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结 安装基础的 nix 环境nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 类 Unix 系统中使用, 作为系统自带包管理系统的">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Nix 语言初学者上手指南">
 <meta property="og:url" content="https://io.bhe.ink/2023/06/17/Getting-Started-with-Nix-Language-A-Beginner-s-Guide/index.html">
 <meta property="og:site_name" content="Bhe&#39;s Blog">
-<meta property="og:description" content="前言由于前阵子 MacBookPro 重新格式化了, 于是用 nix-darwin 和 home-manager 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结 运行环境和工具nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 类 Unix 系统中使用, 作为系统自带包管理系统的补充. 首">
+<meta property="og:description" content="前言由于前阵子 MacBookPro 重新格式化了, 于是用 nix-darwin 和 home-manager 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结 安装基础的 nix 环境nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 类 Unix 系统中使用, 作为系统自带包管理系统的">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-17T14:10:38.000Z">
-<meta property="article:modified_time" content="2024-02-14T09:05:02.067Z">
+<meta property="article:modified_time" content="2024-04-16T15:39:02.352Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="nix">
 <meta property="article:tag" content="programming language">
@@ -121,7 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E5%92%8C%E5%B7%A5%E5%85%B7"><span class="nav-number">2.</span> <span class="nav-text">运行环境和工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E9%9B%B6%E7%86%9F%E6%82%89-nix-lang-%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0"><span class="nav-number">3.</span> <span class="nav-text">从零熟悉 nix-lang 的基本元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E5%92%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">函数式和表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E5%92%8C%E9%9B%86%E5%90%88"><span class="nav-number">4.1.</span> <span class="nav-text">类型和集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.1.</span> <span class="nav-text">基本类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">集合类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80"><span class="nav-number">4.2.</span> <span class="nav-text">函数基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E5%90%8D%E5%8F%82%E6%95%B0%E5%87%BD%E6%95%B0-nameless-parameter-function"><span class="nav-number">4.3.</span> <span class="nav-text">无名参数函数(nameless parameter function)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E5%8F%82%E6%95%B0%E5%87%BD%E6%95%B0"><span class="nav-number">4.3.1.</span> <span class="nav-text">命名参数函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%89%8B%E5%86%8C"><span class="nav-number">4.4.</span> <span class="nav-text">函数手册</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">5.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%9F%BA%E7%A1%80%E7%9A%84-nix-%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">安装基础的 nix 环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E9%9B%B6%E7%86%9F%E6%82%89-nix-lang-%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0"><span class="nav-number">3.</span> <span class="nav-text">从零熟悉 nix-lang 的基本元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E5%92%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">函数式和表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E5%92%8C%E9%9B%86%E5%90%88"><span class="nav-number">4.1.</span> <span class="nav-text">类型和集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.1.</span> <span class="nav-text">基本类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">集合类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80"><span class="nav-number">4.2.</span> <span class="nav-text">函数基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E5%90%8D%E5%8F%82%E6%95%B0%E5%87%BD%E6%95%B0-nameless-parameter-function"><span class="nav-number">4.3.</span> <span class="nav-text">无名参数函数(nameless parameter function)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E5%8F%82%E6%95%B0%E5%87%BD%E6%95%B0"><span class="nav-number">4.3.1.</span> <span class="nav-text">命名参数函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%89%8B%E5%86%8C"><span class="nav-number">4.4.</span> <span class="nav-text">函数手册</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">5.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -134,7 +134,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -145,7 +145,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -216,7 +216,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-02-14 09:05:02" itemprop="dateModified" datetime="2024-02-14T09:05:02+00:00">2024-02-14</time>
+      <time title="Modified: 2024-04-16 15:39:02" itemprop="dateModified" datetime="2024-04-16T15:39:02+00:00">2024-04-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -252,12 +252,11 @@
     
     
     <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于前阵子 MacBookPro 重新格式化了, 于是用 <code>nix-darwin</code> 和 <code>home-manager</code> 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结</p>
-<h2 id="运行环境和工具"><a href="#运行环境和工具" class="headerlink" title="运行环境和工具"></a>运行环境和工具</h2><p>nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 <code>类 Unix</code> 系统中使用, 作为系统自带包管理系统的补充.</p>
+<h2 id="安装基础的-nix-环境"><a href="#安装基础的-nix-环境" class="headerlink" title="安装基础的 nix 环境"></a>安装基础的 nix 环境</h2><p>nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 <code>类 Unix</code> 系统中使用, 作为系统自带包管理系统的补充.</p>
 <p>首先需要安装基础的 nix 环境, </p>
 <blockquote>
 <p><code>nix</code> 安装手册 <a target="_blank" rel="noopener" href="https://github.com/NixOS/nix#installation">https://github.com/NixOS/nix#installation</a></p>
 <p>MacOS 用户可以选择安装 <a target="_blank" rel="noopener" href="https://github.com/LnL7/nix-darwin">https://github.com/LnL7/nix-darwin</a> , 启用系统级的 Nix 集成</p>
-<p>其他 Linux 发行版, 或者 <code>wsl2</code> 用户, 可以通过 <code>home-manager</code>, 管理当前 <code>Home</code> 目录下的 rc 文件和环境变量,<br>起到和 <code>homebrew</code> 等价的效果</p>
 </blockquote>
 <p>安装完毕需要修改默认配置  <code>~/.config/nix/nix.conf</code>  启用 nix-command 和 flakes</p>
 <blockquote>
@@ -299,9 +298,6 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nix-repl&gt; let a = [&quot;a&quot;]; in (let b = [&quot;b&quot;]; in with lib; a ++ b )</span><br><span class="line">[ &quot;a&quot; &quot;b&quot; ]</span><br></pre></td></tr></table></figure>
 
 
-<blockquote>
-<p>! 但复杂语法深度套娃, 最终结果会非常难读.<br>过度炫技不可取.</p>
-</blockquote>
 <h3 id="类型和集合"><a href="#类型和集合" class="headerlink" title="类型和集合"></a>类型和集合</h3><h4 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h4><p>关于基础类型这里就不展开了, 基本的 <code>bool</code>, <code>int</code>, <code>string</code> 和大部分语言差异不大.</p>
 <blockquote>
 <p>见 <a target="_blank" rel="noopener" href="https://nixos.org/manual/nix/stable/language/values.html">https://nixos.org/manual/nix/stable/language/values.html</a></p>
@@ -343,7 +339,7 @@
 </blockquote>
 <figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span></span><br><span class="line">  <span class="attr">values</span> = &#123; <span class="attr">c=2;</span> &#125;;</span><br><span class="line">  <span class="attr">plus1</span> = a: <span class="keyword">with</span> values; <span class="keyword">let</span> <span class="attr">b=1;</span> <span class="keyword">in</span> a+b+c;</span><br><span class="line"><span class="keyword">in</span></span><br><span class="line">  plus1 <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#&gt;&gt; 3</span></span><br></pre></td></tr></table></figure>
 
-<p>好了, 表达式函数的特性, nix 和其他语言的差异不是很明显, 唯一特别的就是在其他语言中, 一般我们只会看到 <code>&#123;param1, ...&#125; : expr</code> 这样的 函数定义.</p>
+<p>好了, 表达式函数的特性, nix 和其他语言的差异不是很明显.<br>唯一特别的就是在其他语言中, 一般我们只会看到 <code>&#123;param1, ...&#125; : expr</code> 这样的 函数定义.</p>
 <p>比如 这段 scala 代码. </p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> my;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myFunction</span></span>(param1: <span class="type">Int</span>, param2: <span class="type">Int</span>): <span class="type">Int</span> = &#123;</span><br><span class="line">  <span class="keyword">val</span> a = my.param3 * my.param4</span><br><span class="line">  param1 + param2 + a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>通过 nix 的书写,往往比较紧凑</p>

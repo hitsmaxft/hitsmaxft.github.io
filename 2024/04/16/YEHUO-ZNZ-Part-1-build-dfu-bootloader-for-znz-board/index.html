@@ -29,18 +29,18 @@
 <meta property="og:site_name" content="Bhe&#39;s Blog">
 <meta property="og:description" content="为啥有这篇文章最近我业余时间给自己的键盘刷上了 qmk 固件, 其中主控代码和 RGB 跑起来了, 但是不太理解硬件原理, 于是想到买了几年一直吃灰的野火开发版,  正好可以用来了解stm32的开发细节。 这里根据开发板的资料，一步步搭建起了专用的 qmk 固件.  这是第一篇文章，讲讲给开发板加上 bootloader。 开发板基本参数和关键引脚信息。野火指南者开发板，是一块比较老的开发板，虽然">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://github.com/hitsmaxft/blog-source/assets/352727/b2fd51e5-c096-432b-84cc-4d6062a4ef07">
-<meta property="og:image" content="https://github.com/hitsmaxft/blog-source/assets/352727/f1999c6c-6722-423c-8385-9992d869cb13">
-<meta property="og:image" content="https://github.com/hitsmaxft/blog-source/assets/352727/ad0056ac-fe85-4981-b386-360135020660">
+<meta property="og:image" content="https://img.bhe.ink/323203815-b2fd51e5-c096-432b-84cc-4d6062a4ef07.png">
+<meta property="og:image" content="https://img.bhe.ink/323204082-f1999c6c-6722-423c-8385-9992d869cb13.png">
+<meta property="og:image" content="https://img.bhe.ink/yehuoznz-pic-button-pins.png">
 <meta property="article:published_time" content="2024-04-16T23:23:58.000Z">
-<meta property="article:modified_time" content="2024-04-17T12:23:11.271Z">
+<meta property="article:modified_time" content="2024-04-17T12:43:32.312Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="microcontroller_board">
 <meta property="article:tag" content="stm32">
 <meta property="article:tag" content="yehuo_znz">
 <meta property="article:tag" content="bootloader">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/hitsmaxft/blog-source/assets/352727/b2fd51e5-c096-432b-84cc-4d6062a4ef07">
+<meta name="twitter:image" content="https://img.bhe.ink/323203815-b2fd51e5-c096-432b-84cc-4d6062a4ef07.png">
 
 
 <link rel="canonical" href="https://io.bhe.ink/2024/04/16/YEHUO-ZNZ-Part-1-build-dfu-bootloader-for-znz-board/">
@@ -222,7 +222,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-17 12:23:11" itemprop="dateModified" datetime="2024-04-17T12:23:11+00:00">2024-04-17</time>
+      <time title="Modified: 2024-04-17 12:43:32" itemprop="dateModified" datetime="2024-04-17T12:43:32+00:00">2024-04-17</time>
     </span>
 
   
@@ -255,7 +255,7 @@
 <p>基本的原理图和开发板材料我已经上传到这里了。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/hitsmaxft/docs-yehuo-znz">https://github.com/hitsmaxft/docs-yehuo-znz</a></p>
 <p>由于 bootloader 提供了 usb 相关功能， 首先看下 znz 的 usb 相关电路. </p>
-<p><img src="https://github.com/hitsmaxft/blog-source/assets/352727/b2fd51e5-c096-432b-84cc-4d6062a4ef07" alt="usb slave原理图"></p>
+<p><img src="https://img.bhe.ink/323203815-b2fd51e5-c096-432b-84cc-4d6062a4ef07.png" alt="usb slave原理图"></p>
 <p>它提供了常规的 mini usb规格的 usb slave，， 引脚是常规的 <code>PA12(D+)</code>， <code>PA11(D-)</code>。 但它在 <code>PA12</code> 上加了个开关电路， 通过 <code>PD6</code> 控制 <code>PA12</code> 输出电平， 所以当 <code>PD6</code> 高电平时，usb 是不工作的.</p>
 <blockquote>
 <p>stm32duino 最早是从 maple 开发板项目中 fork 出来的，它上面也有相同的设计，<code>USB_DISC</code> 引脚控制 usb 的断开。</p>
@@ -268,10 +268,10 @@
 <li>led 从闪烁到熄灭：开始引导用户代码。</li>
 </ul>
 <p>一旦从 bootloader 转向用户的固件代码， 则</p>
-<p><img src="https://github.com/hitsmaxft/blog-source/assets/352727/f1999c6c-6722-423c-8385-9992d869cb13" alt="led原理图"></p>
+<p><img src="https://img.bhe.ink/323204082-f1999c6c-6722-423c-8385-9992d869cb13.png" alt="led原理图"></p>
 <p>野火指南者上有 3 一颗RGB led 由三个引脚控制，这里选择 绿灯 PB0.</p>
 <p>按钮就是用来强制进入 dfu 用的，毕竟平时拔插设备老要等 dfu 模式退出挺麻烦的，毕竟默认是 30s，一般改成 0.<br>需要再按住 dfu 引导按钮。</p>
-<p><img src="https://github.com/hitsmaxft/blog-source/assets/352727/ad0056ac-fe85-4981-b386-360135020660" alt="按钮原理图"></p>
+<p><img src="https://img.bhe.ink/yehuoznz-pic-button-pins.png" alt="按钮原理图"></p>
 <p>这里我选择了 PA0 作为 强制进入 DFU 的按钮。</p>
 <p>以上就是准备工作，选好合适的引脚和作用。接下来就是改写 bootloader 源码。</p>
 <h2 id="bootloader-选型"><a href="#bootloader-选型" class="headerlink" title="bootloader 选型"></a>bootloader 选型</h2><p>为什么需要bootloader？因为qmk 需要经常重新编译和更新固件，老用串口或者swd 更新很不方便，最佳选择自然是通过usb口直接更新。</p>

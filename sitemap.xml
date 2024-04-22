@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://io.bhe.ink/2013/07/01/zshrc-startup-files/</loc>
-    
-    <lastmod>2024-04-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://io.bhe.ink/2013/08/03/longene-qq-on-archlinux/</loc>
     
     <lastmod>2024-04-22</lastmod>
@@ -183,6 +174,15 @@
   
   <url>
     <loc>https://io.bhe.ink/tags/index.html</loc>
+    
+    <lastmod>2024-04-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2013/07/01/zshrc-startup-files/</loc>
     
     <lastmod>2024-04-22</lastmod>
     

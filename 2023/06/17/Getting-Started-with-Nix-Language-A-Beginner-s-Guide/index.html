@@ -22,15 +22,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="前言由于前阵子 MacBookPro 重新格式化了, 于是用 nix-darwin 和 home-manager 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结 安装基础的 nix 环境nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 类 Unix 系统中使用, 作为系统自带包管理系统的">
+    <meta name="description" content="前言由于前阵子 MacBookPro 重新格式化了, 于是用 nix-darwin 和 home-manager 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Nix 语言初学者上手指南">
 <meta property="og:url" content="https://io.bhe.ink/2023/06/17/Getting-Started-with-Nix-Language-A-Beginner-s-Guide/index.html">
 <meta property="og:site_name" content="Bhe&#39;s Blog">
-<meta property="og:description" content="前言由于前阵子 MacBookPro 重新格式化了, 于是用 nix-darwin 和 home-manager 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结 安装基础的 nix 环境nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 类 Unix 系统中使用, 作为系统自带包管理系统的">
+<meta property="og:description" content="前言由于前阵子 MacBookPro 重新格式化了, 于是用 nix-darwin 和 home-manager 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-17T14:10:38.000Z">
-<meta property="article:modified_time" content="2024-04-22T08:33:14.149Z">
+<meta property="article:modified_time" content="2024-04-22T08:34:31.266Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="nix">
 <meta property="article:tag" content="programming language">
@@ -216,7 +216,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-22 08:33:14" itemprop="dateModified" datetime="2024-04-22T08:33:14+00:00">2024-04-22</time>
+      <time title="Modified: 2024-04-22 08:34:31" itemprop="dateModified" datetime="2024-04-22T08:34:31+00:00">2024-04-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -252,6 +252,8 @@
     
     
     <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于前阵子 MacBookPro 重新格式化了, 于是用 <code>nix-darwin</code> 和 <code>home-manager</code> 重新构建了自己的配置管理. 这里写一篇文章记录一些个人对 nix 的学习和总结</p>
+<span id="more"></span>
+
 <h2 id="安装基础的-nix-环境"><a href="#安装基础的-nix-环境" class="headerlink" title="安装基础的 nix 环境"></a>安装基础的 nix 环境</h2><p>nix 本身是一个语言和包管理工具, 完整的 nix os 体验需要安装的它的发行版, 但个人觉得没必要. nix 也可以在其他 <code>类 Unix</code> 系统中使用, 作为系统自带包管理系统的补充.</p>
 <p>首先需要安装基础的 nix 环境, </p>
 <blockquote>

@@ -22,15 +22,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂家已经不维护了（email咨询得知）. 不过还好他们邮件给了可以下载最新固件的地址 sd-card-images , 下载下来发现是 sd card 用的镜像, 所以需要这里说下怎么制作emmc 版本镜像 单需要稍微处理以下就可以得到更新的 debian 固件  板子官网  刷入默认的 emmc 镜像从这里下载">
+    <meta name="description" content="rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂家已经不维护了（email咨询得知）. 不过还好他们邮件给了可以下载最新固件的地址 sd-card-images , 下载下来发现是 sd card 用的镜像, 所以需要这里说下怎么制作emmc 版本镜像 还需要稍微处理以下就可以得到更新的 debian 固件  板子官网  接下来就介绍一下, 从原始的 96b">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="制作 rock960c 的 debian 11  emmc 系统镜像">
 <meta property="og:url" content="https://io.bhe.ink/2023/04/02/make-debian-bullseye-images-for-rock960c/index.html">
 <meta property="og:site_name" content="Bhe&#39;s Blog">
-<meta property="og:description" content="rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂家已经不维护了（email咨询得知）. 不过还好他们邮件给了可以下载最新固件的地址 sd-card-images , 下载下来发现是 sd card 用的镜像, 所以需要这里说下怎么制作emmc 版本镜像 单需要稍微处理以下就可以得到更新的 debian 固件  板子官网  刷入默认的 emmc 镜像从这里下载">
+<meta property="og:description" content="rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂家已经不维护了（email咨询得知）. 不过还好他们邮件给了可以下载最新固件的地址 sd-card-images , 下载下来发现是 sd card 用的镜像, 所以需要这里说下怎么制作emmc 版本镜像 还需要稍微处理以下就可以得到更新的 debian 固件  板子官网  接下来就介绍一下, 从原始的 96b">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-04-02T20:02:04.000Z">
-<meta property="article:modified_time" content="2024-04-27T14:11:38.750Z">
+<meta property="article:modified_time" content="2024-04-28T06:31:23.145Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="sbc">
 <meta property="article:tag" content="debian">
@@ -216,7 +216,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-27 14:11:38" itemprop="dateModified" datetime="2024-04-27T14:11:38+00:00">2024-04-27</time>
+      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -253,10 +253,13 @@
     
     <div class="post-body" itemprop="articleBody"><p>rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂家已经不维护了（email咨询得知）.</p>
 <p>不过还好他们邮件给了可以下载最新固件的地址 sd-card-images , 下载下来发现是 sd card 用的镜像, 所以需要这里说下怎么制作emmc 版本镜像</p>
-<p>单需要稍微处理以下就可以得到更新的 debian 固件</p>
+<p>还需要稍微处理以下就可以得到更新的 debian 固件</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="http://www.96boards.org/product/rock960/">板子官网</a></li>
 </ul>
+<p>接下来就介绍一下, 从原始的 96boards 镜像上更新 rootfs 为更新的版本的 debian 系统. 这样子从老的 boot 分区启动, 然后引导最新的Debian.<br>最完美的方式, 当然是boot分区也一起升级了, 这个以后再折腾了. </p>
+<span id="more"></span>
+
 <h2 id="刷入默认的-emmc-镜像"><a href="#刷入默认的-emmc-镜像" class="headerlink" title="刷入默认的 emmc 镜像"></a>刷入默认的 emmc 镜像</h2><p>从这里下载最更新的 rock960c emmc 镜像 <a target="_blank" rel="noopener" href="https://www.96boards.org/documentation/consumer/rock/downloads/debian.md.html">https://www.96boards.org/documentation/consumer/rock/downloads/debian.md.html</a></p>
 <p>下载完, 先来重新刷新一下板子的 emmc 镜像. (如果已经刷好镜像, 这里就没必要继续, 直接跳到下个章节</p>
 <p>首先通过常规方式， 进入 maskroom 模式。</p>

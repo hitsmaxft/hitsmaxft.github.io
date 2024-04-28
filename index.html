@@ -208,7 +208,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-27 14:11:38" itemprop="dateModified" datetime="2024-04-27T14:11:38+00:00">2024-04-27</time>
+      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
     </span>
 
   
@@ -308,7 +308,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-27 14:11:38" itemprop="dateModified" datetime="2024-04-27T14:11:38+00:00">2024-04-27</time>
+      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
     </span>
 
   
@@ -413,7 +413,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-27 14:11:38" itemprop="dateModified" datetime="2024-04-27T14:11:38+00:00">2024-04-27</time>
+      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
     </span>
 
   
@@ -512,7 +512,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-27 14:11:38" itemprop="dateModified" datetime="2024-04-27T14:11:38+00:00">2024-04-27</time>
+      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -618,7 +618,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-27 14:11:38" itemprop="dateModified" datetime="2024-04-27T14:11:38+00:00">2024-04-27</time>
+      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -734,7 +734,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-27 14:11:38" itemprop="dateModified" datetime="2024-04-27T14:11:38+00:00">2024-04-27</time>
+      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -772,56 +772,19 @@
     <div class="post-body" itemprop="articleBody">
           <p>rock960 是一块不太常见的 96boards 规范得的 rk3399 单板，目前厂家已经不维护了（email咨询得知）.</p>
 <p>不过还好他们邮件给了可以下载最新固件的地址 sd-card-images , 下载下来发现是 sd card 用的镜像, 所以需要这里说下怎么制作emmc 版本镜像</p>
-<p>单需要稍微处理以下就可以得到更新的 debian 固件</p>
+<p>还需要稍微处理以下就可以得到更新的 debian 固件</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="http://www.96boards.org/product/rock960/">板子官网</a></li>
 </ul>
-<h2 id="刷入默认的-emmc-镜像"><a href="#刷入默认的-emmc-镜像" class="headerlink" title="刷入默认的 emmc 镜像"></a>刷入默认的 emmc 镜像</h2><p>从这里下载最更新的 rock960c emmc 镜像 <a target="_blank" rel="noopener" href="https://www.96boards.org/documentation/consumer/rock/downloads/debian.md.html">https://www.96boards.org/documentation/consumer/rock/downloads/debian.md.html</a></p>
-<p>下载完, 先来重新刷新一下板子的 emmc 镜像. (如果已经刷好镜像, 这里就没必要继续, 直接跳到下个章节</p>
-<p>首先通过常规方式， 进入 maskroom 模式。</p>
-<blockquote>
-<p>具体过程省略</p>
-</blockquote>
-<p>通过 <code>RKDevTool_Release_v2.86</code> 把最基本的 debian9 镜像写入 <code>emmc</code>， 完成基础版本的刷入。</p>
-<p>以下是需要的配置的分区地址</p>
-<ul>
-<li>0x0 loader.bin – 这个 loader 负责引导进入分区刷写模式，每次刷入系统都需要加上0x0 gpt.image – 完整镜像，包含了 boot 等5个分区， 必须从 0 开始写入</li>
-</ul>
-<h2 id="通过二次刷写-对-emmc-进行系统升级"><a href="#通过二次刷写-对-emmc-进行系统升级" class="headerlink" title="通过二次刷写, 对 emmc 进行系统升级"></a>通过二次刷写, 对 emmc 进行系统升级</h2><p>从 <a target="_blank" rel="noopener" href="https://sd-card-images.johang.se/boards/rock960.html">https://sd-card-images.johang.se/boards/rock960.html</a> 这里可以下载到 rock960 的更新版本 debian 镜像。</p>
-<blockquote>
-<p>这里只下载debian-bullseye-arm64-iey4ku.bin.gz , boot-rock960.bin.gz 不用下载</p>
-</blockquote>
-<p>通过执行 <code>7z x debian-bullseye-arm64-iey4ku.bin.gz</code>, 解压后将得到 ext4.img， 这是Debian 的 rootfs 根目录分区</p>
-<p>从官方手册里 rootfs 的写入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rkdeveloptool wl 262144 rootfs.img</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>这里 262144 是十进制， 换算成16进制就是 0x00040000</p>
-</blockquote>
-<p>再次进入 <code>mask room</code> 模式</p>
-<p>按以下地址刷入 <code>rootfs</code> 镜像文件</p>
-<ul>
-<li>0x0 loader.bin – 每次更新<code>loader</code>都需要放在首位</li>
-<li>0x00040000 ext4.img - 因为只是覆盖 <code>rootfs</code> ，需要写上正确的偏移地址</li>
-</ul>
-<p>完成刷入之后， 重启得到一个全新版本的 debian 11.</p>
-<h2 id="接入网络并安装更多包"><a href="#接入网络并安装更多包" class="headerlink" title="接入网络并安装更多包"></a>接入网络并安装更多包</h2><p>由于 sd-card-images 的镜像非常小， 这里需要先通过网络安装常用的 deb 包。</p>
-<p>我是通过usb 以太网转接器接入并安装 network-manager 得到无线接入能力。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install sudo iproutes apt-utils fdisk network-manager vim zsh screen</span><br></pre></td></tr></table></figure>
-
-<p>顺便加个新用户</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -G sudo -s /bin/sh rock960 </span><br><span class="line">password rock960</span><br></pre></td></tr></table></figure>
-
-<p>安装完 network-manager，通过 nmtui-connect 就可以通过 TUI 方便地连上无线了。 root 分区容量扩容</p>
-<p>ext4.img 刷入完毕，root 分区的可用容量仅2G， 而 rock960c 的 emmc 容量是 16G， 这里需要通过 resize2fs &#x2F;dev&#x2F;mmcblk1p5 命令完成根分区的自动扩容。 </p>
-<blockquote>
-<p>就目前的进展而言, 这种安装方式并不是很方便, 后续有空再提供安装基础工具包的镜像<br>在附录中有已经合并好的 EMMC 镜像. 后续发出制作教程.</p>
-</blockquote>
-<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>成品镜像 root password: iey4ku</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/hitsmaxft/rock960-debian-images/releases/tag/rock960c_debian_bullseye-arm64-iey4ku-pre1">rock960c_debian_bullseye-arm64-iey4ku-pre1</a></p>
-<p>github 项目地址</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/hitsmaxft/rock960-debian-images">https://github.com/hitsmaxft/rock960-debian-images</a></p>
-
+<p>接下来就介绍一下, 从原始的 96boards 镜像上更新 rootfs 为更新的版本的 debian 系统. 这样子从老的 boot 分区启动, 然后引导最新的Debian.<br>最完美的方式, 当然是boot分区也一起升级了, 这个以后再折腾了. </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/04/02/make-debian-bullseye-images-for-rock960c/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -883,7 +846,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-27 14:11:38" itemprop="dateModified" datetime="2024-04-27T14:11:38+00:00">2024-04-27</time>
+      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1016,7 +979,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-27 14:11:38" itemprop="dateModified" datetime="2024-04-27T14:11:38+00:00">2024-04-27</time>
+      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1207,7 +1170,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-27 14:11:38" itemprop="dateModified" datetime="2024-04-27T14:11:38+00:00">2024-04-27</time>
+      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1381,7 +1344,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-27 14:11:38" itemprop="dateModified" datetime="2024-04-27T14:11:38+00:00">2024-04-27</time>
+      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

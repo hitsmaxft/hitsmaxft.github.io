@@ -22,19 +22,22 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="前言在前文中, 我介绍了移植野火开发板的 bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章再进一步涉及 RGB 和存储等.">
+    <meta name="description" content="前言 在前文中, 我介绍了移植野火开发板的 bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章再进一步涉及 RGB 和存储等.">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="野火指南者2 - 移植 qmk 开源键盘固件">
 <meta property="og:url" content="https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/index.html">
 <meta property="og:site_name" content="Bhe&#39;s Blog">
-<meta property="og:description" content="前言在前文中, 我介绍了移植野火开发板的 bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章再进一步涉及 RGB 和存储等.">
+<meta property="og:description" content="前言 在前文中, 我介绍了移植野火开发板的 bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章再进一步涉及 RGB 和存储等.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img.bhe.ink/IMG_2169.jpeg">
+<meta property="og:image" content="https://img.bhe.ink/IMG_2091.jpeg">
 <meta property="article:published_time" content="2024-04-29T07:18:05.000Z">
-<meta property="article:modified_time" content="2024-04-29T08:31:56.302Z">
+<meta property="article:modified_time" content="2024-04-29T08:47:12.642Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="stm32">
 <meta property="article:tag" content="qmk">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.bhe.ink/IMG_2169.jpeg">
 
 
 <link rel="canonical" href="https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/">
@@ -210,7 +213,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-04-29 07:18:05 / Modified: 08:31:56" itemprop="dateCreated datePublished" datetime="2024-04-29T07:18:05+00:00">2024-04-29</time>
+      <time title="Created: 2024-04-29 07:18:05 / Modified: 08:47:12" itemprop="dateCreated datePublished" datetime="2024-04-29T07:18:05+00:00">2024-04-29</time>
     </span>
 
   
@@ -236,13 +239,14 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在前文中, 我介绍了移植野火开发板的 bootloader, 接下来要介绍的是如何迁移qmk到开发板上.<br>这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.<br>一同解释 qmk 的一些基础知识.<br>后面的文章再进一步涉及 RGB 和存储等.</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><img src="https://img.bhe.ink/IMG_2169.jpeg" alt="最终效果图"></p>
+<p>在前文中, 我介绍了移植野火开发板的 bootloader, 接下来要介绍的是如何迁移qmk到开发板上.<br>这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.<br>一同解释 qmk 的一些基础知识.<br>后面的文章再进一步涉及 RGB 和存储等.</p>
 <span id="more"></span>
 
-<h2 id="开发板"><a href="#开发板" class="headerlink" title="开发板"></a>开发板</h2><p>指南者拥有接进 100 个引脚, 搭建原型用不到那么多</p>
-<p>这个测试版本, 我用的是一个简单的 2x4 微动按钮矩阵用于测试键盘功能.</p>
+<h2 id="开发板"><a href="#开发板" class="headerlink" title="开发板"></a>开发板</h2><p>指南者拥有接近 100 个引脚, 这次搭建键盘原型只会用到很小一部分引脚.</p>
+<p>在本文这个测试键盘中, 我用的是一个简单的 2x4 微动按钮矩阵用于测试键盘功能.</p>
 <ul>
-<li>微动键盘: 4x2 独立按键;</li>
+<li>微动键盘: 4x2 8个独立按键, 9个引脚.</li>
 </ul>
 <p>图片 TODO</p>
 <h2 id="初始化键盘-源代码"><a href="#初始化键盘-源代码" class="headerlink" title="初始化键盘 源代码"></a>初始化键盘 源代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qmk new-keyboard</span><br></pre></td></tr></table></figure>
@@ -305,7 +309,10 @@
 <blockquote>
 <p>RTC Flag 还有额外集中情况, 待补充.</p>
 </blockquote>
-<p>导致了默认的 boardInit 会引起每次上电都进入刷固件模式. 根本不存在这种需求, 需要刷固件按 reset 不就行了.</p>
+<p>所以默认的 boardInit 会引起每次上电都进入刷固件模式.<br>但根本不存在这种需求, 需要刷固件按 reset 不就行了.</p>
+<p>复写这个函数, 需要在 bheznz.c, 也就是键盘的自定义代码中覆盖这个函数</p>
+<figure class="highlight c"><figcaption><span>title: keyboard/bheznz/bheznz.c</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;bheznz.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">boardInit</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">   <span class="comment">//JTAG-DP Disabled and SW-DP Enabled 这句话我还不知道干嘛的, 继续保留</span></span><br><span class="line">   AFIO-&gt;MAPR |= AFIO_MAPR_SWJ_CFG_JTAGDISABLE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>当配置qmk中的 eeprom 或者 rgb matric, 对应的源代码也会在初始化中修改引脚的状态. 另外在键盘自定义用户函数中也可以修改代码,因此 board.h 中初始化状态并不重要, 后面还可以改的.</p>
 </blockquote>
@@ -329,6 +336,7 @@
 <p>开机按住 k1 或者按一下 reset 都能看到 bootloader 指示灯闪烁, 就是成功进入 dfu 模式</p>
 <h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>到这里, 指南者的 qmk 固件就迁移完毕了.<br>刷完固件, 重置开发板, bootloader 如果没有进入 DFU 模式, 接下来就会加载用户代码部分, 也就是 qmk 键盘固件.</p>
 <p>正常启动的话, 就可以在电脑中看到键盘了.</p>
+<p><img src="https://img.bhe.ink/IMG_2091.jpeg" alt="连接效果"></p>
 <blockquote>
 <p>基础的键盘部分只需要配置对 PIN 和 bootloader, 保证 USB 功能正常启动, 测试一下键位对不对就行了.</p>
 </blockquote>

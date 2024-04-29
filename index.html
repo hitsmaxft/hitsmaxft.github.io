@@ -127,7 +127,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -138,7 +138,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -163,6 +163,97 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bhe Hongtyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bhe's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bhe's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/" class="post-title-link" itemprop="url">野火指南者2 - 移植 qmk 开源键盘固件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-04-29 07:18:05 / Modified: 08:30:24" itemprop="dateCreated datePublished" datetime="2024-04-29T07:18:05+00:00">2024-04-29</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在前文中, 我介绍了移植野火开发板的 bootloader, 接下来要介绍的是如何迁移qmk到开发板上.<br>这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.<br>一同解释 qmk 的一些基础知识.<br>后面的文章再进一步涉及 RGB 和存储等.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -208,7 +299,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
+      <time title="Modified: 2024-04-29 08:30:24" itemprop="dateModified" datetime="2024-04-29T08:30:24+00:00">2024-04-29</time>
     </span>
 
   
@@ -308,7 +399,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
+      <time title="Modified: 2024-04-29 08:30:24" itemprop="dateModified" datetime="2024-04-29T08:30:24+00:00">2024-04-29</time>
     </span>
 
   
@@ -413,7 +504,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
+      <time title="Modified: 2024-04-29 08:30:24" itemprop="dateModified" datetime="2024-04-29T08:30:24+00:00">2024-04-29</time>
     </span>
 
   
@@ -512,7 +603,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
+      <time title="Modified: 2024-04-29 08:30:24" itemprop="dateModified" datetime="2024-04-29T08:30:24+00:00">2024-04-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -618,7 +709,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
+      <time title="Modified: 2024-04-29 08:30:24" itemprop="dateModified" datetime="2024-04-29T08:30:24+00:00">2024-04-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -734,7 +825,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
+      <time title="Modified: 2024-04-29 08:30:24" itemprop="dateModified" datetime="2024-04-29T08:30:24+00:00">2024-04-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -846,7 +937,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
+      <time title="Modified: 2024-04-29 08:30:24" itemprop="dateModified" datetime="2024-04-29T08:30:24+00:00">2024-04-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -979,7 +1070,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
+      <time title="Modified: 2024-04-29 08:30:24" itemprop="dateModified" datetime="2024-04-29T08:30:24+00:00">2024-04-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1170,7 +1261,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
+      <time title="Modified: 2024-04-29 08:30:24" itemprop="dateModified" datetime="2024-04-29T08:30:24+00:00">2024-04-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1282,167 +1373,6 @@
 </code></pre>
 <p>总之， php 的约束很弱，可以很灵活地使用，也很容易失控，这也就是为什么 php 构建大型系统很困难。除了性能问题， 还存在对使用者的约束很弱。</p>
 <p>但同时也存在好处， 动态类型和宽泛的约束，使得框架的实现上灵活， 可以轻松实现非常强大的特性，（后面在面向对象和类加载中会谈到）毕竟 php 开发者也习惯了基于约定编程的，只要团队不大，通过开发约定也可能解决这个问题。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2014/12/18/notes-about-apache-nio-client-source-code/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Bhe Hongtyu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bhe's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bhe's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2014/12/18/notes-about-apache-nio-client-source-code/" class="post-title-link" itemprop="url">Apache nio client 源码阅读笔记</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2014-12-18 07:34:29" itemprop="dateCreated datePublished" datetime="2014-12-18T07:34:29+00:00">2014-12-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-28 06:31:23" itemprop="dateModified" datetime="2024-04-28T06:31:23+00:00">2024-04-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/programming/" itemprop="url" rel="index"><span itemprop="name">programming</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/programming/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2014/12/18/notes-about-apache-nio-client-source-code/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/12/18/notes-about-apache-nio-client-source-code/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="1-部分主要类型功能简介"><a href="#1-部分主要类型功能简介" class="headerlink" title="1. 部分主要类型功能简介"></a>1. 部分主要类型功能简介</h2><p><strong><code>org.apache.http.impl.nio.client.HttpAsyncClients</code></strong></p>
-<p>它是一个比较接近业务层的介面, 提供一系列工厂方法, 用于构造 启动对 <code>HttpAsyncClient</code> 的构造和配置工作</p>
-<p><strong><code>org.apache.http.impl.nio.client.HttpAsyncClientBuilder</code></strong></p>
-<p>工厂方法创建buidler 用于构造具体的client.</p>
-<p>从属性可以看出来, 使用策略模式, 支持各种类型策略的注入, 线程工厂, http接受&#x2F;处理回调函数等等, cookie&#x2F;auth 等http协议的内容也在这个地方处理.</p>
-<p>它的 <code>build</code> 方法生成  <code>org.apache.http.impl.nio.client.CloseableHttpAsyncClient</code> 的子类型</p>
-<p><strong><code>org.apache.http.impl.nio.client.InternalHttpAsyncClient</code></strong></p>
-<p>默认的 HttpAsyncClient , 使用之前需要调用 start 方法.</p>
-<p>http 请求任务通过 execute 方法提交, 其实现原理是<br>生成一个fureture对象用作和用户沟通,<br>再生成一个 <code>org.apache.http.impl.nio.client.DefaultClientExchangeHandlerImpl</code> 实例, 由它启动和 io loop 的数据交换<br>最后把 future 对象返回给用户层</p>
-<p><strong><code>org.apache.http.impl.nio.client.DefaultClientExchangeHandlerImpl</code></strong></p>
-<p>InternalHttpAsyncClient 会默认调用他的start方法.</p>
-<p>在 start() 中, exec.prepare 负责向 stat 中填充数据和 request 配置</p>
-<p>requestConnection() 向 connection manager 发起 connection , 并向他注册了一个 future callback, 意味着, conn manager 会向 ExchangeHandler 回调事件, 从而间接地向用户层发起回调.</p>
-<p><strong><code>org.apache.http.nio.conn.NHttpClientConnectionManager</code></strong></p>
-<p>负责接管 client 提交的http请求</p>
-<p>关于接受请求的方法签名如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;NHttpClientConnection&gt; <span class="title function_">requestConnection</span><span class="params">(</span></span><br><span class="line"><span class="params">        HttpRoute route,</span></span><br><span class="line"><span class="params">        Object state,</span></span><br><span class="line"><span class="params">        <span class="type">long</span> connectTimeout,</span></span><br><span class="line"><span class="params">        <span class="type">long</span> connectionRequestTimeout,</span></span><br><span class="line"><span class="params">        TimeUnit timeUnit,</span></span><br><span class="line"><span class="params">        FutureCallback&lt;NHttpClientConnection&gt; callback)</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>HttpRoute 和请求的 ip 相关, 有一个相关的参数 MaxRequestPerRoute, 意思就是对同一个主机发起的最大连接数</p>
-</li>
-<li><p>connectTimeout tcp 等待建立 connection 的等待时间, 对方主机的tcp通道建立需要一定的时间</p>
-</li>
-<li><p>connectionRequestTimeout 表示排队等待 connection 的时间具体参考下文的 lease time</p>
-<p>  ps1: connection 可以认为是一个保持着的长连接资源, 也就是 tcp 通道<br>  ps2: route 里面如果配置了 proxyhost(http代理), 那么这时候就起作用了</p>
-</li>
-</ul>
-<p>释放请求 releaseConnection, 这是真的将一个 connection 实例从 pool里拿出来, 中止链接, 回收实例</p>
-<p>所以它完成的事情也不多, 就是向 pool 里注册和释放 connection</p>
-<p><strong><code>org.apache.http.impl.nio.conn.CPoolProxy</code></strong></p>
-<p>上文提到的 pool , 连接池代理,通过 lease 方法注册新的请求</p>
-<ol>
-<li><p>首先 创建一个 org.apache.http.nio.pool.LeaseRequest#LeaseRequest 实例, 持有传入的参数</p>
-<ul>
-<li>上文提到的 connectionRequestTimeout , 这里叫 lease time , 也就是 lease request 的 dealine</li>
-</ul>
-</li>
-<li><p>在 processPendingRequest 中, 检查deadline ,如果到了, requestTimeout 触发, 触发TimeoutException (注意类型)</p>
-<ul>
-<li>也就是说, lease request 创建完毕, 发现已经到dealine ,那么就不向 pool 索取 connection 了, 直接退出</li>
-</ul>
-</li>
-<li><p>接着向 routeToPool 和 route 对应的 connection pool (org.apache.http.nio.pool.RouteSpecificPool)  , 如果没有的话, 发起一个新的pool.</p>
-</li>
-<li><p>接着从 pool 中索取一个 connection (org.apache.http.nio.reactor.SessionRequest) , 如果没有, 创建新的 pool , 将 socketTimeout 配置进去</p>
-<p> 创建新的connection , 需要检查route对应的connection数量是否达到上限.<br> 对于拿到的新的 connection, 将上文所提到的 requestTimeout 作为 connection 的 connectionTimeout.</p>
-</li>
-</ol>
-<p><strong><code>org.apache.http.impl.nio.reactor.DefaultConnectingIOReactor</code></strong></p>
-<p>nio 反应堆的默认实现, 继承于 org.apache.http.impl.nio.reactor.AbstractMultiworkerIOReactor , 负责发起worker线程, 并维护和 Nio api 之间的交互</p>
-<pre><code>worker 的个数在创建 conm 的时候决定.
-默认配置中通过 `java.lang.Runtime#availableProcessors` 决定,
-也就是 jvm 检测到的当前可用处理器数.
-</code></pre>
-<h2 id="总结和体会"><a href="#总结和体会" class="headerlink" title="总结和体会"></a>总结和体会</h2><p>关于实践</p>
-<ol>
-<li>不应该在callback中使用耗时的操作, 这会导致阻塞io线程, 从而降低io部分的工作效率, 成为系统瓶颈.</li>
-<li>实际使用中发现，保持长链接的情况下， 存在由于链接到期断开导致刚刚放入连接池的新链接瞬间断开的情况， 这种情况需要按需重新发起链接. 我这边统计到的发生率不超过 0.1%.</li>
-</ol>
 
       
     </div>

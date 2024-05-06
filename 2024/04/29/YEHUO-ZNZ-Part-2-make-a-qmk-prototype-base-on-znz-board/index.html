@@ -24,7 +24,7 @@
 
     <meta name="description" content="前言 在前文中, 我介绍了移植野火开发板 stm32f103开发板的 dfu bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章逐步深入到 RGB 和存储等.">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="野火指南者之二 - 移植 qmk 开源键盘固件">
+<meta property="og:title" content="野火指南者开发板之二 - 移植 qmk 开源键盘固件">
 <meta property="og:url" content="https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/index.html">
 <meta property="og:site_name" content="Bhe&#39;s Blog">
 <meta property="og:description" content="前言 在前文中, 我介绍了移植野火开发板 stm32f103开发板的 dfu bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章逐步深入到 RGB 和存储等.">
@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://img.bhe.ink/IMG_2169.jpeg">
 <meta property="og:image" content="https://img.bhe.ink/IMG_2091.jpeg">
 <meta property="article:published_time" content="2024-04-29T07:18:05.000Z">
-<meta property="article:modified_time" content="2024-05-06T04:45:04.670Z">
+<meta property="article:modified_time" content="2024-05-06T04:46:04.480Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="stm32">
 <meta property="article:tag" content="qmk">
@@ -44,10 +44,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/","path":"2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/","title":"野火指南者之二 - 移植 qmk 开源键盘固件"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/","path":"2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/","title":"野火指南者开发板之二 - 移植 qmk 开源键盘固件"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>野火指南者之二 - 移植 qmk 开源键盘固件 | Bhe's Blog</title>
+<title>野火指南者开发板之二 - 移植 qmk 开源键盘固件 | Bhe's Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42604344-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-42604344-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -196,12 +196,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="野火指南者之二 - 移植 qmk 开源键盘固件 | Bhe's Blog">
+      <meta itemprop="name" content="野火指南者开发板之二 - 移植 qmk 开源键盘固件 | Bhe's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          野火指南者之二 - 移植 qmk 开源键盘固件
+          野火指南者开发板之二 - 移植 qmk 开源键盘固件
         </h1>
 
         <div class="post-meta-container">
@@ -219,7 +219,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-06 04:45:04" itemprop="dateModified" datetime="2024-05-06T04:45:04+00:00">2024-05-06</time>
+      <time title="Modified: 2024-05-06 04:46:04" itemprop="dateModified" datetime="2024-05-06T04:46:04+00:00">2024-05-06</time>
     </span>
 
   

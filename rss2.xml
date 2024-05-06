@@ -9,11 +9,11 @@
     <atom:link href="https://io.bhe.ink/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 06 May 2024 04:45:04 GMT</pubDate>
+    <pubDate>Mon, 06 May 2024 04:46:04 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>野火指南者之二 - 移植 qmk 开源键盘固件</title>
+      <title>野火指南者开发板之二 - 移植 qmk 开源键盘固件</title>
       <link>https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/</link>
       <guid>https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/</guid>
       <pubDate>Mon, 29 Apr 2024 07:18:05 GMT</pubDate>

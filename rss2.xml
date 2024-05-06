@@ -9,7 +9,7 @@
     <atom:link href="https://io.bhe.ink/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 06 May 2024 04:44:45 GMT</pubDate>
+    <pubDate>Mon, 06 May 2024 04:45:04 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -37,7 +37,7 @@
     </item>
     
     <item>
-      <title>野火指南者开发版之一, 构建 DFU bootloader</title>
+      <title>野火指南者开发板之一, 构建 DFU bootloader</title>
       <link>https://io.bhe.ink/2024/04/16/YEHUO-ZNZ-Part-1-build-dfu-bootloader-for-znz-board/</link>
       <guid>https://io.bhe.ink/2024/04/16/YEHUO-ZNZ-Part-1-build-dfu-bootloader-for-znz-board/</guid>
       <pubDate>Tue, 16 Apr 2024 23:23:58 GMT</pubDate>

@@ -22,17 +22,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="前言 在前文中, 我介绍了移植野火开发板的 bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章逐步深入到 RGB 和存储等.">
+    <meta name="description" content="前言 在前文中, 我介绍了移植野火开发板 stm32f103开发板的 dfu bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章逐步深入到 RGB 和存储等.">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="野火指南者2 - 移植 qmk 开源键盘固件">
+<meta property="og:title" content="野火指南者之二 - 移植 qmk 开源键盘固件">
 <meta property="og:url" content="https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/index.html">
 <meta property="og:site_name" content="Bhe&#39;s Blog">
-<meta property="og:description" content="前言 在前文中, 我介绍了移植野火开发板的 bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章逐步深入到 RGB 和存储等.">
+<meta property="og:description" content="前言 在前文中, 我介绍了移植野火开发板 stm32f103开发板的 dfu bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章逐步深入到 RGB 和存储等.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img.bhe.ink/IMG_2169.jpeg">
 <meta property="og:image" content="https://img.bhe.ink/IMG_2091.jpeg">
 <meta property="article:published_time" content="2024-04-29T07:18:05.000Z">
-<meta property="article:modified_time" content="2024-04-30T03:08:42.617Z">
+<meta property="article:modified_time" content="2024-05-06T04:44:45.158Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="stm32">
 <meta property="article:tag" content="qmk">
@@ -44,10 +44,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/","path":"2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/","title":"野火指南者2 - 移植 qmk 开源键盘固件"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/","path":"2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/","title":"野火指南者之二 - 移植 qmk 开源键盘固件"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>野火指南者2 - 移植 qmk 开源键盘固件 | Bhe's Blog</title>
+<title>野火指南者之二 - 移植 qmk 开源键盘固件 | Bhe's Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42604344-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-42604344-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -196,12 +196,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="野火指南者2 - 移植 qmk 开源键盘固件 | Bhe's Blog">
+      <meta itemprop="name" content="野火指南者之二 - 移植 qmk 开源键盘固件 | Bhe's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          野火指南者2 - 移植 qmk 开源键盘固件
+          野火指南者之二 - 移植 qmk 开源键盘固件
         </h1>
 
         <div class="post-meta-container">
@@ -219,7 +219,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-30 03:08:42" itemprop="dateModified" datetime="2024-04-30T03:08:42+00:00">2024-04-30</time>
+      <time title="Modified: 2024-05-06 04:44:45" itemprop="dateModified" datetime="2024-05-06T04:44:45+00:00">2024-05-06</time>
     </span>
 
   
@@ -246,7 +246,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><img src="https://img.bhe.ink/IMG_2169.jpeg" alt="最终效果图"></p>
-<p>在前文中, 我介绍了移植野火开发板的 bootloader, 接下来要介绍的是如何迁移qmk到开发板上.<br>这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.<br>一同解释 qmk 的一些基础知识.<br>后面的文章逐步深入到 RGB 和存储等.</p>
+<p>在前文中, 我介绍了移植野火开发板 stm32f103开发板的 dfu bootloader, 接下来要介绍的是如何迁移qmk到开发板上.<br>这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.<br>一同解释 qmk 的一些基础知识.<br>后面的文章逐步深入到 RGB 和存储等.</p>
 <span id="more"></span>
 
 <h2 id="开发板"><a href="#开发板" class="headerlink" title="开发板"></a>开发板</h2><p>指南者拥有接近 100 个引脚, 这次搭建键盘原型只会用到很小一部分引脚.</p>

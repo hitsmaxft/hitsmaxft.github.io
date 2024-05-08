@@ -127,7 +127,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -172,6 +172,108 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2024/04/30/YEHUO-ZNZ-Part-3-make-a-qmk-prototype-base-on-znz-board-rgb-and-eeprom/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bhe Hongtyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bhe's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bhe's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/04/30/YEHUO-ZNZ-Part-3-make-a-qmk-prototype-base-on-znz-board-rgb-and-eeprom/" class="post-title-link" itemprop="url">野火指南者F103之三: 自制QMK键盘固件的 EEPROM 和 RGB 矩阵</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-04-30 07:37:31" itemprop="dateCreated datePublished" datetime="2024-04-30T07:37:31+00:00">2024-04-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-08 12:34:02" itemprop="dateModified" datetime="2024-05-08T12:34:02+00:00">2024-05-08</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2024/04/30/YEHUO-ZNZ-Part-3-make-a-qmk-prototype-base-on-znz-board-rgb-and-eeprom/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2024/04/30/YEHUO-ZNZ-Part-3-make-a-qmk-prototype-base-on-znz-board-rgb-and-eeprom/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在文章 <a href="">[1]</a>和 文章 <a href="">[2]</a> 中, 介绍了 bootloader 和 qmk 核心功能的移植.<br>这篇文章会稍微深入一些, 介绍自己一步一步了解和熟悉 stm32f103 的过程, 摸索之后配置好了键盘更多功能.</p>
+<p>这篇文章中, 将通过阅读相关 datasheet, 了解 stm32 的基础知识, 给固件加上更多功能:</p>
+<ul>
+<li>外置持久化存储 <code>i2c eeprom</code></li>
+<li>基于 dma 和 pwm 的 RGB Matrix.</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/04/30/YEHUO-ZNZ-Part-3-make-a-qmk-prototype-base-on-znz-board-rgb-and-eeprom/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -190,7 +292,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/" class="post-title-link" itemprop="url">野火指南者开发板之二 - 移植 qmk 开源键盘固件</a>
+          <a href="/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/" class="post-title-link" itemprop="url">野火指南者F103开发板之二:  移植 qmk 开源键盘固件</a>
         </h2>
 
         <div class="post-meta-container">
@@ -208,7 +310,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-06 04:46:04" itemprop="dateModified" datetime="2024-05-06T04:46:04+00:00">2024-05-06</time>
+      <time title="Modified: 2024-05-08 12:34:02" itemprop="dateModified" datetime="2024-05-08T12:34:02+00:00">2024-05-08</time>
     </span>
 
   
@@ -288,7 +390,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/04/16/YEHUO-ZNZ-Part-1-build-dfu-bootloader-for-znz-board/" class="post-title-link" itemprop="url">野火指南者开发板之一, 构建 DFU bootloader</a>
+          <a href="/2024/04/16/YEHUO-ZNZ-Part-1-build-dfu-bootloader-for-znz-board/" class="post-title-link" itemprop="url">野火指南者F103开发板之一: 刷入 stm32duino-bootloader 实现 DFU</a>
         </h2>
 
         <div class="post-meta-container">
@@ -306,7 +408,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-06 04:46:04" itemprop="dateModified" datetime="2024-05-06T04:46:04+00:00">2024-05-06</time>
+      <time title="Modified: 2024-05-08 12:34:02" itemprop="dateModified" datetime="2024-05-08T12:34:02+00:00">2024-05-08</time>
     </span>
 
   
@@ -406,7 +508,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-06 04:46:04" itemprop="dateModified" datetime="2024-05-06T04:46:04+00:00">2024-05-06</time>
+      <time title="Modified: 2024-05-08 12:34:02" itemprop="dateModified" datetime="2024-05-08T12:34:02+00:00">2024-05-08</time>
     </span>
 
   
@@ -511,7 +613,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-06 04:46:04" itemprop="dateModified" datetime="2024-05-06T04:46:04+00:00">2024-05-06</time>
+      <time title="Modified: 2024-05-08 12:34:02" itemprop="dateModified" datetime="2024-05-08T12:34:02+00:00">2024-05-08</time>
     </span>
 
   
@@ -610,7 +712,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-06 04:46:04" itemprop="dateModified" datetime="2024-05-06T04:46:04+00:00">2024-05-06</time>
+      <time title="Modified: 2024-05-08 12:34:02" itemprop="dateModified" datetime="2024-05-08T12:34:02+00:00">2024-05-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -716,7 +818,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-06 04:46:04" itemprop="dateModified" datetime="2024-05-06T04:46:04+00:00">2024-05-06</time>
+      <time title="Modified: 2024-05-08 12:34:02" itemprop="dateModified" datetime="2024-05-08T12:34:02+00:00">2024-05-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -832,7 +934,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-06 04:46:04" itemprop="dateModified" datetime="2024-05-06T04:46:04+00:00">2024-05-06</time>
+      <time title="Modified: 2024-05-08 12:34:02" itemprop="dateModified" datetime="2024-05-08T12:34:02+00:00">2024-05-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -944,7 +1046,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-06 04:46:04" itemprop="dateModified" datetime="2024-05-06T04:46:04+00:00">2024-05-06</time>
+      <time title="Modified: 2024-05-08 12:34:02" itemprop="dateModified" datetime="2024-05-08T12:34:02+00:00">2024-05-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1077,7 +1179,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-06 04:46:04" itemprop="dateModified" datetime="2024-05-06T04:46:04+00:00">2024-05-06</time>
+      <time title="Modified: 2024-05-08 12:34:02" itemprop="dateModified" datetime="2024-05-08T12:34:02+00:00">2024-05-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1224,182 +1326,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2015/04/11/php-pro-work-with-weak-type/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Bhe Hongtyu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bhe's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bhe's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2015/04/11/php-pro-work-with-weak-type/" class="post-title-link" itemprop="url">PHP Pro : 动态类型</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-04-11 16:19:44" itemprop="dateCreated datePublished" datetime="2015-04-11T16:19:44+00:00">2015-04-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-06 04:46:04" itemprop="dateModified" datetime="2024-05-06T04:46:04+00:00">2024-05-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/programming-language/" itemprop="url" rel="index"><span itemprop="name">programming language</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/programming-language/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2015/04/11/php-pro-work-with-weak-type/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/04/11/php-pro-work-with-weak-type/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="为什么-php-这么流行"><a href="#为什么-php-这么流行" class="headerlink" title="为什么 php 这么流行"></a>为什么 php 这么流行</h2><p>php 的流行已经不用再提及了， 那么， php 具有哪些优点使得它如此流行呢？</p>
-<ul>
-<li>接近 c(&lt;5.2) 和 java (~&gt;5.3.8) 的语法</li>
-<li>动态类型， 编码成本极低</li>
-<li>特定任务所需的基础库完备</li>
-</ul>
-<p>优点 1 就不多说了， 用的人都知道。基础的 <code>function</code> 和 <code>class</code> 语法都极其相似。<br>优点 3 涉及的话题很多，暂时不进行展开, 这里重点聊下 php 中的动态类型.</p>
-<h2 id="php-和-类型"><a href="#php-和-类型" class="headerlink" title="php 和 类型"></a>php 和 类型</h2><p>先看一组普通的 PHP 语句：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;&#125;; <span class="comment">//定义一个简单的 class A</span></span><br><span class="line"><span class="variable">$a</span> = <span class="number">1</span>;</span><br><span class="line"><span class="variable">$a</span> = <span class="number">1.1</span>;</span><br><span class="line"><span class="variable">$a</span> = <span class="string">&quot;A&quot;</span>;</span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> <span class="variable">$a</span>(); <span class="comment">//类的名字都是直接计算出来的</span></span><br><span class="line"><span class="variable">$a</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;; <span class="comment">//你没看错， 这是匿名函数， php 中叫闭包。</span></span><br></pre></td></tr></table></figure>
-
-<p>从上可以看到的 php 语句的两个重要特点</p>
-<ul>
-<li>可以给一个变量名赋上随便哪种值，随便什么类型，什么时候，重复赋值也行。</li>
-<li>变量名以 <code>$</code> 开头， 后面会聊为什么这里有一个 <code>$</code></li>
-</ul>
-<p>这一点让 php 开发者写代码的时候非常轻松。很多东西都不需要考虑。这也就是为什么 php 容易上手。</p>
-<p>接下来是一个基础的函数定义代码:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">someFunc</span>(<span class="params"> <span class="variable">$a</span> = <span class="number">1</span></span>) </span>&#123; <span class="comment">//一个带默认值的参数 $a</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$a</span> === <span class="number">2</span> || <span class="variable">$a</span> === <span class="number">1</span>) &#123; <span class="comment">// int 类型的严格判断</span></span><br><span class="line">		<span class="keyword">return</span>  <span class="variable">$a</span>+<span class="number">1</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="title function_ invoke__">is_array</span>(<span class="variable">$a</span>)&amp;&amp; <span class="keyword">isset</span>(<span class="variable">$a</span>[<span class="number">0</span>]) ) &#123; <span class="comment">// 数组类型</span></span><br><span class="line">		<span class="keyword">return</span> <span class="variable">$a</span>[<span class="number">0</span>];</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&quot;<span class="subst">$a</span> is unknown&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>这里我们看到， php 的动态性不仅体现在语句上， 函数的定义的参数和返回值也是没有类型的。 对于 php 而言， 返回值是 <code>int</code> 或者 <code>void</code> （在 php 里应该认为是 null） 类型， 在函数定义中没有区别，参数也是。</p>
-<pre><code>所以用 php 写出无法维护的代码是轻而易举的事情。
-</code></pre>
-<p>在实际使用过程中， php 开发者经常干的一件事情是把函数的返回值打印出来，看下数组结构， 找到自己需要的内容。再接着写代码.</p>
-<pre><code>默认情况下，php 的函数和类型都是全局的， 5.3 中引入的命名空间改善了这一点。
-</code></pre>
-<p>当然, 例子中的做法会让使用这个函数的人很头疼， 除非是非常常用以至于用户不可能误解的接口，否则别这么做.</p>
-<pre><code>jQuery 的 $() 是一个很好的例子，很多人认为是很反人类的设计.
-但是显然它的用户觉得用起来很爽
-</code></pre>
-<p>代码中的 <code>!empty($a)</code> , 这个也是很常用的技巧， 用于判断一个变量是不是 <code>null</code>, 空字符串， <code>False</code> ，空数组， 等等等等(当然包括了变量不存在，数组下标和字段 key 不存在等等)， 也就是直觉中所有的空值都会命中，很方便不是吗。</p>
-<p>php 进行真假值判断时， 会尽可能地进行类型传唤，除了数字类型和 null， 字符串也会尽可能地转换成数字再转换到 true、false。甚至自定义类型，也可以通过实现特殊接口， 支持 <code>empty</code> 操作。 </p>
-<blockquote>
-<h3 id="empty-的陷阱"><a href="#empty-的陷阱" class="headerlink" title="empty() 的陷阱"></a>empty() 的陷阱</h3><p>针对字符串类型进行 <code>empty()</code> 操作，比如 <code>&quot;0   &quot;</code>， 和 <code>&quot;0&quot;</code> 在 <code>empty()</code> 中是不一样的， 虽然在 intval 函数中， 它的结果都是 0。 也就是， 只有 <code>&quot;&quot;</code>，<code>&quot;0&quot;</code> 这两个特殊的字符串， 其他长度大于0 的字符串都会认为是非 empty 的。</p>
-<p>empy 看起来像是一个普通的库函数， 但是它是一个特殊的指令， 并不是函数调用。类似于 <code>echo</code> 和 <code>isset</code>。 这也留下一个 bug， empty 只能针对左值操作，也就是变量名.<br>而对于表达式，比如 <code>empty(&quot;a&quot;)</code> , 在目前的 php 语法中是不合法的， 必须提前计算结果并赋值给一个临时变量。 这个小小的麻烦，在未来的 php 版本中说不定会优化掉。</p>
-</blockquote>
-<blockquote>
-<h3 id="isset-和-empty-的区别"><a href="#isset-和-empty-的区别" class="headerlink" title="isset 和 empty 的区别"></a>isset 和 empty 的区别</h3><p>isset 只用来判断数组下标或者变量是否为 null 。它不能区分 null 和 变量未定义.<br>对于 <code>$a=array( &quot;a&quot;=&gt; null)</code>, <code>isset($a[&quot;a&quot;])</code> 和 <code>isset($a[&quot;b&quot;])</code> 都返回 <code>false</code>.</p>
-<p>在 php 中， 不存在是一个模糊的定义，和 null 几乎是等同的。千万不要在代码中依赖一个变量是否定义这种模糊的条件， 这种奇葩的行为只有 javascript 才会关心, 毕竟我么谈的是动态类型语言, 存在感这种东西太弱了。</p>
-<p>然而， php 从 c 中抄来的常量定义 define(“A”, a), 是可以用 defined(“A”) 进行判断的.<br>比如 <code>defined(&quot;DEV_MODE&quot;)</code> 判断应用是否运行在开发模式下.</p>
-</blockquote>
-<pre><code>关于 isset 和 empty 后续的面向对象章节中会谈到。
-</code></pre>
-<p>在静态类型语言的使用者眼里， php 大概就是一种到处都是 object 和 强制转型的及其不安全的语言了。</p>
-<h3 id="又爱又恨的数组"><a href="#又爱又恨的数组" class="headerlink" title="又爱又恨的数组"></a>又爱又恨的数组</h3><p>Array 应该是 php 使用频繁的基础类型了。 也就是它导致了 ide 几乎没办法正确地分析代码中函数返回值和参数的正确性, 因为一切行为都因为 array 的存在而过于灵活。</p>
-<p>在 php 中， 数组和字典（或者说hashmap）, 是混合存在的， 都叫 array。 这个混杂的类型，在处理 key 为数组的hash 数据时，很容易埋下 bug。</p>
-<p>相比之下，javascript 还是严格地划分了 array 和 object 之间的区别。</p>
-<h3 id="使用-array-模拟-struct"><a href="#使用-array-模拟-struct" class="headerlink" title="使用 array 模拟 struct"></a>使用 array 模拟 struct</h3><p>在实际使用中， 针对需要返回复杂结果，但又不需要进行面向对象的包装时，习惯使用 array 做为返回值， 作为 <code>struct</code> 的替代用法.</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">someFunc2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">array</span>( <span class="string">&quot;a&quot;</span> =&gt; <span class="number">1</span>, <span class="string">&quot;b&quot;</span> =&gt;<span class="number">2</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = <span class="title function_ invoke__">someFunc2</span>(); </span><br><span class="line"><span class="variable">$b</span> = <span class="variable">$a</span>[<span class="string">&quot;a&quot;</span>];</span><br></pre></td></tr></table></figure>
-
-<p>或者使用 array 做为参数， 避免函数的参数过多带来的麻烦。相对于使用 call_user_func 模拟函数调用要更加自然方便。</p>
-<p><code>$c = someFunc3( array( &quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; 2));</code></p>
-<p>这里应该说， php 的动态类型特别发挥地淋漓尽致， 虽然可能很多开发者并没有意识到这点， 但是不要紧，这并不妨碍他们用最舒适的方式使用 php。</p>
-<p> php 开发者在写代码过程中， 心里只要了解一个函数、方法的作用，剩下的就是填充合适的参数和获取返回值，用 empty， isset 等函数进行判断是否空返回值。</p>
-<h2 id="PHP-和"><a href="#PHP-和" class="headerlink" title="PHP 和 $"></a>PHP 和 $</h2><p>和同样是动态类型的语言 javascript 相比， php 有什么特点呢？我能想起来的最显眼的区别， 就是 php 的变量名必须有一个 $ 符号。</p>
-<pre><code>当然，这不过是当年从 perl 遗传下来的。
-</code></pre>
-<p>那么这个 <code>$</code> 符号， 除了必须写上，还有什么实际用途吗？</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$a</span> is b&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>哦, 原来如此。<code>$</code> 在输出字符串的过程中用于定位字符串中的变量，在输出的过程中会替换为实际的变量内容。</p>
-<pre><code>对于 php 而言， “” 风格的字符串意味着需要进行变量的替换， 而 ‘’ 则说明直接输出内容就行了。
-这个原则甚至适用与数组的 key .
-</code></pre>
-<p>如果如果变量名和后续内容没有空格等区分，那么 <code>&quot;$&#123;a&#125;isb&quot;</code> , 通过加大括号就可以解决了。</p>
-<p>这样连数组类型也支持了  </p>
-<p><code>echo &quot;$&#123;a[0]&#125;isb&quot;</code></p>
-<p>也就是</p>
-<p><code>&quot;$a is b&quot;</code> 等价于 <code>$a . &quot;is b&quot;</code></p>
-<pre><code>注: 在 php 中， `.` 英文句号用于连接字符串.
-其他语言中常用的 `+` 加号
-</code></pre>
-<p>总之， php 的约束很弱，可以很灵活地使用，也很容易失控，这也就是为什么 php 构建大型系统很困难。除了性能问题， 还存在对使用者的约束很弱。</p>
-<p>但同时也存在好处， 动态类型和宽泛的约束，使得框架的实现上灵活， 可以轻松实现非常强大的特性，（后面在面向对象和类加载中会谈到）毕竟 php 开发者也习惯了基于约定编程的，只要团队不大，通过开发约定也可能解决这个问题。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

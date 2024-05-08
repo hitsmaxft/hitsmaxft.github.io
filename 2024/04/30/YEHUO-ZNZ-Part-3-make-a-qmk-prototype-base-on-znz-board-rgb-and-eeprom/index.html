@@ -22,16 +22,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="前言在文章 [1]和 文章 [2] 中, 分别介绍了 bootloader 和 qmk 核心功能的移植.这篇文章会稍微深入一些, 介绍自己一步一步了解和熟悉 stm32f103 的过程, 摸索之后配置好了键盘更多功能. 这篇文章中, 将通过阅读相关 datasheet, 了解 stm32 的基础知识, 给固件加上更多功能:  外置持久化存储 i2c eeprom 基于 dma 和 pwm 的 RG">
+    <meta name="description" content="前言在文章 [1]和 文章 [2] 中, 分别介绍了 bootloader 和 qmk 核心功能的移植. 这篇文章会稍微深入一些, 介绍自己一步一步了解和熟悉 stm32f103 的过程, 摸索之后配置好了键盘更多功能. 这篇文章中, 将通过阅读相关 datasheet, 了解 stm32 的基础知识, 给固件加上更多功能:  外置持久化存储 i2c eeprom 基于 dma 和 pwm 的 R">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="野火指南者F103开发板之三: 自制QMK键盘固件的 EEPROM 和 RGB 矩阵">
 <meta property="og:url" content="https://io.bhe.ink/2024/04/30/YEHUO-ZNZ-Part-3-make-a-qmk-prototype-base-on-znz-board-rgb-and-eeprom/index.html">
 <meta property="og:site_name" content="Bhe&#39;s Blog">
-<meta property="og:description" content="前言在文章 [1]和 文章 [2] 中, 分别介绍了 bootloader 和 qmk 核心功能的移植.这篇文章会稍微深入一些, 介绍自己一步一步了解和熟悉 stm32f103 的过程, 摸索之后配置好了键盘更多功能. 这篇文章中, 将通过阅读相关 datasheet, 了解 stm32 的基础知识, 给固件加上更多功能:  外置持久化存储 i2c eeprom 基于 dma 和 pwm 的 RG">
+<meta property="og:description" content="前言在文章 [1]和 文章 [2] 中, 分别介绍了 bootloader 和 qmk 核心功能的移植. 这篇文章会稍微深入一些, 介绍自己一步一步了解和熟悉 stm32f103 的过程, 摸索之后配置好了键盘更多功能. 这篇文章中, 将通过阅读相关 datasheet, 了解 stm32 的基础知识, 给固件加上更多功能:  外置持久化存储 i2c eeprom 基于 dma 和 pwm 的 R">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img.bhe.ink/IMG_2169.jpeg">
+<meta property="og:image" content="https://img.bhe.ink/IMG_2238.jpeg">
 <meta property="article:published_time" content="2024-04-30T07:37:31.000Z">
-<meta property="article:modified_time" content="2024-05-08T12:49:34.631Z">
+<meta property="article:modified_time" content="2024-05-08T12:56:35.503Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="stm32">
 <meta property="article:tag" content="stm32f103">
@@ -219,7 +220,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-08 12:49:34" itemprop="dateModified" datetime="2024-05-08T12:49:34+00:00">2024-05-08</time>
+      <time title="Modified: 2024-05-08 12:56:35" itemprop="dateModified" datetime="2024-05-08T12:56:35+00:00">2024-05-08</time>
     </span>
 
   
@@ -245,7 +246,8 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在文章 <a href="/2024/04/16/YEHUO-ZNZ-Part-1-build-dfu-bootloader-for-znz-board/">[1]</a>和 文章 <a href="https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/">[2]</a> 中, 分别介绍了 bootloader 和 qmk 核心功能的移植.<br>这篇文章会稍微深入一些, 介绍自己一步一步了解和熟悉 stm32f103 的过程, 摸索之后配置好了键盘更多功能.</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在文章 <a href="/2024/04/16/YEHUO-ZNZ-Part-1-build-dfu-bootloader-for-znz-board/">[1]</a>和 文章 <a href="https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/">[2]</a> 中, 分别介绍了 bootloader 和 qmk 核心功能的移植.</p>
+<p>这篇文章会稍微深入一些, 介绍自己一步一步了解和熟悉 stm32f103 的过程, 摸索之后配置好了键盘更多功能.</p>
 <p>这篇文章中, 将通过阅读相关 datasheet, 了解 stm32 的基础知识, 给固件加上更多功能:</p>
 <ul>
 <li>外置持久化存储 <code>i2c eeprom</code></li>
@@ -330,6 +332,8 @@
 </blockquote>
 <p>尽管 bitbang 是一种通用方法，但高速 GPIO 切换会占用 MCU 大量资源，并且在多任务环境下可能导致时序问题。为了优化性能，可以考虑将数据发送和其他程序任务在时间上错开，减少资源争用的机会。此外，减小要控制的 LED 数量或降低更新频率也能降低对 MCU 资源的需求。</p>
 <p>bitbang 这里作为一种简单验证的方法进行介绍, 就不过多展开了, 首先确保 LED 连线和工作正常, 接下来会介绍更高效的方式驱动 RGB 矩阵.</p>
+<p>这里再放一张最后成果图, 换上了 4x4 行列扫描的薄膜键盘,, 一个小键盘大工告成.</p>
+<p><img src="https://img.bhe.ink/IMG_2238.jpeg" alt="图片"></p>
 <blockquote>
 <p>待续</p>
 </blockquote>

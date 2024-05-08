@@ -22,17 +22,20 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"io.bhe.ink","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="前言 在前文中, 我介绍了移植野火开发板 stm32f103开发板的 dfu bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章逐步深入到 RGB 和存储等.">
+    <meta name="description" content="前言 在前文中, 我介绍了移植野火开发板 stm32f103开发板的 dfu bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章逐步深入到 RGB 和存储等. 源码仓库 https:&#x2F;&#x2F;gi">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="野火指南者F103开发板之二:  移植 qmk 开源键盘固件">
 <meta property="og:url" content="https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/index.html">
 <meta property="og:site_name" content="Bhe&#39;s Blog">
-<meta property="og:description" content="前言 在前文中, 我介绍了移植野火开发板 stm32f103开发板的 dfu bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章逐步深入到 RGB 和存储等.">
+<meta property="og:description" content="前言 在前文中, 我介绍了移植野火开发板 stm32f103开发板的 dfu bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章逐步深入到 RGB 和存储等. 源码仓库 https:&#x2F;&#x2F;gi">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img.bhe.ink/IMG_2169.jpeg">
+<meta property="og:image" content="https://img.bhe.ink/IMG_2239.jpeg">
+<meta property="og:image" content="https://img.bhe.ink/IMG_2253.jpeg">
 <meta property="og:image" content="https://img.bhe.ink/IMG_2091.jpeg">
+<meta property="og:image" content="https://img.bhe.ink/IMG_2238.jpeg">
 <meta property="article:published_time" content="2024-04-29T07:18:05.000Z">
-<meta property="article:modified_time" content="2024-05-08T12:44:13.102Z">
+<meta property="article:modified_time" content="2024-05-08T12:49:34.631Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="stm32">
 <meta property="article:tag" content="stm32f103">
@@ -220,7 +223,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-08 12:44:13" itemprop="dateModified" datetime="2024-05-08T12:44:13+00:00">2024-05-08</time>
+      <time title="Modified: 2024-05-08 12:49:34" itemprop="dateModified" datetime="2024-05-08T12:49:34+00:00">2024-05-08</time>
     </span>
 
   
@@ -248,6 +251,7 @@
     
     <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><img src="https://img.bhe.ink/IMG_2169.jpeg" alt="最终效果图"></p>
 <p>在前文中, 我介绍了移植野火开发板 stm32f103开发板的 dfu bootloader, 接下来要介绍的是如何迁移qmk到开发板上.<br>这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.<br>一同解释 qmk 的一些基础知识.<br>后面的文章逐步深入到 RGB 和存储等.</p>
+<p>源码仓库 <a target="_blank" rel="noopener" href="https://github.com/hitsmaxft/qmk-kb-bheznz">https://github.com/hitsmaxft/qmk-kb-bheznz</a> , 最新的代码在我的qmk-firmware 中, 这一份是手工尽量同步.</p>
 <span id="more"></span>
 
 <h2 id="开发板"><a href="#开发板" class="headerlink" title="开发板"></a>开发板</h2><p>指南者拥有接近 100 个引脚, 这次搭建键盘原型只会用到很小一部分引脚.</p>
@@ -255,7 +259,8 @@
 <ul>
 <li>微动键盘: 4x2 8个独立按键, 9个引脚.</li>
 </ul>
-<p>图片 TODO</p>
+<p><img src="https://img.bhe.ink/IMG_2239.jpeg" alt="图片"></p>
+<p>每个按钮都是独立引脚, 直接连接到开发板, 还有一个 GND 接地.</p>
 <h2 id="初始化键盘-源代码"><a href="#初始化键盘-源代码" class="headerlink" title="初始化键盘 源代码"></a>初始化键盘 源代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qmk new-keyboard</span><br></pre></td></tr></table></figure>
 <p>我这里给键盘起的名字是  <code>bheznz</code></p>
 <ul>
@@ -263,23 +268,25 @@
 <li>mcu 选 <code>40. STM32F103</code></li>
 </ul>
 <p>qmk会添加一下文件.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">keyboards/bheznz</span><br><span class="line">keyboards/bheznz/keymaps</span><br><span class="line">keyboards/bheznz/keymaps/default</span><br><span class="line">keyboards/bheznz/keymaps/default/keymap.c</span><br><span class="line">çkeyboards/bheznz/readme.md</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">keyboards/bheznz</span><br><span class="line">keyboards/bheznz/keymaps</span><br><span class="line">keyboards/bheznz/keymaps/default</span><br><span class="line">keyboards/bheznz/keymaps/default/keymap.c</span><br><span class="line">keyboards/bheznz/readme.md</span><br><span class="line">keyboards/bheznz/keyboard.json</span><br></pre></td></tr></table></figure>
 
-<p>keyboard.json 是最新的配置格式, 通过 json 配置大部分键盘核心配置. 但是剩下的定制选项还是需要通过其他文件</p>
-<p>后续手动添加以下文件, 来完成迁移 qmk 的所有功能</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">keyboards/bheznz/bheznz.h //键盘公共头文件</span><br><span class="line">keyboards/bheznz/bheznz.c //键盘自定义行为代码</span><br><span class="line">keyboards/bheznz/config.h //qmk 头文件, 大部分通过宏定义的配置项都需要放在这里,</span><br><span class="line">keyboards/bheznz/halconf.h //和 hal 相关的, 主要是 dma,时钟等等 hal 开关</span><br><span class="line">rule.mk //编译选项, 键盘的功能需要在这里开启和配置, 现在大部分在 keyboard 里配置了, 但还是有高级选项还需要 rule.mk 配置的.</span><br></pre></td></tr></table></figure>
+<p>keyboard.json 是最新的配置格式, 通过 json 配置大部分键盘核心配置. 但是剩下的定制选项还是需要通过其他文件来完成.</p>
+<blockquote>
+<p>由于后续我还根据按键个数拆分了不同的外设, 发现一个坑, 就是同一个键盘下多个型号, 需要多份 keyboard.json 的时候, 这里的 keyboard.json 会导致报错, 又被我手动重新改名回 info.json.</p>
+</blockquote>
+<p>实际移植中, 我后续手动添加以下文件, 来完成迁移 qmk 的所有功能</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">keyboards/bheznz/bheznz.h //键盘公共头文件</span><br><span class="line">keyboards/bheznz/bheznz.c //键盘自定义行为代码, 比如实现 qmk的钩子函数, 在这个文件实现不需要额外的构建配置</span><br><span class="line">keyboards/bheznz/config.h //入口头文件, 大部分通过宏定义的配置项都需要放在这里, 最高优先级加载.</span><br><span class="line">keyboards/bheznz/halconf.h //chibios hal 模块开关, 比如开启 dma,时钟等功能, 参考 https://github.com/hitsmaxft/qmk-kb-bheznz/blob/master/halconf.h </span><br><span class="line">keyboards/bheznz/mcuconf.h //定制 mcu 配置, 比如那些  STM32 开头的宏变量. 参考 https://github.com/hitsmaxft/qmk-kb-bheznz/blob/master/mcuconf.h</span><br><span class="line">rule.mk //编译选项, 键盘的功能需要在这里开启和配置, 现在大部分在 keyboard.json/info.json 里配置了, 少部分选项必须通过 rule.mk 开启.</span><br></pre></td></tr></table></figure>
 
 <p>后面需要改的时候再一一说明.</p>
 <h2 id="配置键盘布局"><a href="#配置键盘布局" class="headerlink" title="配置键盘布局"></a>配置键盘布局</h2><p>移植和构建qmk固件的第一步, 是需要让键盘按键逻辑运作起来.<br>这部分配置不需要写代码, 只需要修改 json 配置. </p>
-<p>我这里用上了开发板上给 led 屏幕留的插槽部分和 gnd, 一共9个引脚.</p>
-<p>微动键盘上一共有 8个按钮, 每个按钮都是独立引脚, 直接连接到开发板, 8个按钮引脚和一个 GND 接地.</p>
+<p>我这里选择了开发板上给 led 屏幕留的插槽部分和 gnd, 一共9个引脚.</p>
+<p><img src="https://img.bhe.ink/IMG_2253.jpeg" alt="tft引脚图"></p>
 <p>根据物理的外观, 首先配置好按键在板子上行列情况.</p>
 <blockquote>
 <p>本来独立按钮是没有必要配置行列的, 它并没有行列扫描的逻辑, 直接按一行8列配置就行. 这里只是为了和行列的保持一致, 按照板子上的排列配置了4行2列.<br>接下来 json 的配置都是 <code>keyboard.json</code> 这个文件. </p>
 </blockquote>
 <p>用到的PIN引脚如下</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;matrix_pins&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;direct&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">[</span><span class="string">&quot;D15&quot;</span><span class="punctuation">,</span> <span class="string">&quot;D1&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="comment">//0,0|0,1</span></span><br><span class="line">        <span class="punctuation">[</span><span class="string">&quot;E8&quot;</span><span class="punctuation">,</span> <span class="string">&quot;E10&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">[</span><span class="string">&quot;E12&quot;</span><span class="punctuation">,</span> <span class="string">&quot;E14&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">[</span><span class="string">&quot;D8&quot;</span><span class="punctuation">,</span> <span class="string">&quot;D10&quot;</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
 
 <p>但是考虑到键盘一般是横向的, 内置的 layout 里也只有 2x4&#x2F;2行4列, 接下来会键盘的物理定义顺时针旋转了 90 度. 原因后面会补充.</p>
 <p>最终希望键盘的按键布局和引脚行列编号的对应关系, 是下面这个情况</p>
@@ -352,9 +359,12 @@
 <p><code>qmk</code> 会通过 <code>dfu-tool</code> 发现处于 <code>dfu</code> 状态的设备, 然后把编译好的固件写入到键盘中.</p>
 <p>这部分没啥好介绍的, 参考前面的文章, 把 <code>stmd32duino-bootloader</code> 刷好.</p>
 <p>开机按住 k1 或者按一下 reset 都能看到 bootloader 指示灯闪烁, 就是成功进入 dfu 模式</p>
-<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>到这里, 指南者的 qmk 固件就迁移完毕了.<br>刷完固件, 重置开发板, bootloader 如果没有进入 DFU 模式, 接下来就会加载用户代码部分, 也就是 qmk 键盘固件.</p>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>到这里, 指南者的 qmk 固件就迁移完毕了. </p>
+<p>刷完固件, 重置开发板, bootloader 如果没有进入 DFU 模式, 接下来就会加载用户代码部分, 也就是 qmk 键盘固件.</p>
 <p>正常启动的话, 就可以在电脑中看到键盘了.</p>
 <p><img src="https://img.bhe.ink/IMG_2091.jpeg" alt="连接效果"></p>
+<p>这里再放一张最后成果图, 换上了 4x4, 一个小键盘大工告成.</p>
+<p><img src="https://img.bhe.ink/IMG_2238.jpeg" alt="图片"></p>
 <blockquote>
 <p>基础的键盘部分只需要配置对 PIN 和 bootloader, 保证 USB 功能正常启动, 测试一下键位对不对就行了.</p>
 </blockquote>

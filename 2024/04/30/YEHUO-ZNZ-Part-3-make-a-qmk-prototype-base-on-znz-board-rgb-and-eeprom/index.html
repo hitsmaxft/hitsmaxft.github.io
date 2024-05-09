@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://img.bhe.ink/IMG_2169.jpeg">
 <meta property="og:image" content="https://img.bhe.ink/IMG_2238.jpeg">
 <meta property="article:published_time" content="2024-04-30T07:37:31.000Z">
-<meta property="article:modified_time" content="2024-05-08T12:56:35.503Z">
+<meta property="article:modified_time" content="2024-05-09T02:05:52.352Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="stm32">
 <meta property="article:tag" content="stm32f103">
@@ -125,7 +125,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%99%E9%94%AE%E7%9B%98%E5%8A%A0%E4%B8%8A%E6%8C%81%E4%B9%85%E8%AE%B0%E5%BF%86%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">给键盘加上持久记忆特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-i2c-%E7%9A%84%E5%A4%96%E7%BD%AE-eeprom"><span class="nav-number">2.1.</span> <span class="nav-text">基于 i2c 的外置 eeprom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84-bitbang-%E9%A9%B1%E5%8A%A8%E6%96%B9%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">最简单的 bitbang 驱动方式</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%99%E9%94%AE%E7%9B%98%E5%8A%A0%E4%B8%8A%E6%8C%81%E4%B9%85%E8%AE%B0%E5%BF%86%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">给键盘加上持久记忆特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-i2c-%E7%9A%84%E5%A4%96%E7%BD%AE-eeprom"><span class="nav-number">2.1.</span> <span class="nav-text">基于 i2c 的外置 eeprom</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-flash-%E6%A8%A1%E6%8B%9F%E7%9A%84%E8%BD%AF-eeprom"><span class="nav-number">3.</span> <span class="nav-text">基于 flash 模拟的软 eeprom</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%89%E6%B1%A1%E6%9F%93-RGB-%E9%94%AE%E7%9B%98%E7%9F%A9%E9%98%B5"><span class="nav-number">4.</span> <span class="nav-text">光污染 RGB 键盘矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84-bitbang-%E9%A9%B1%E5%8A%A8%E6%96%B9%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">最简单的 bitbang 驱动方式</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -220,7 +220,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-08 12:56:35" itemprop="dateModified" datetime="2024-05-08T12:56:35+00:00">2024-05-08</time>
+      <time title="Modified: 2024-05-09 02:05:52" itemprop="dateModified" datetime="2024-05-09T02:05:52+00:00">2024-05-09</time>
     </span>
 
   
@@ -310,15 +310,22 @@
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;features&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;console&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>更新完固件之后, 运行 <code>qmk console</code> , 通过按下 A 键就可以看看 eeprom 的初始化是否正常了. </p>
-<!--## 基于 flash 模拟的软 eeprom 
+<h2 id="基于-flash-模拟的软-eeprom"><a href="#基于-flash-模拟的软-eeprom" class="headerlink" title="基于 flash 模拟的软 eeprom"></a>基于 flash 模拟的软 eeprom</h2><p>除了使用专门的 eeprom 硬件, 更常用的是用 mcu 自己的flash 来存储配置. 虽然速度慢一点, 同时有寿命问题, 但是实现简单.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;eeprom&quot;: &#123;</span><br><span class="line">    &quot;driver&quot;: &quot;vendor&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>qmk 已经内置了 stm32f1 和 stm32f4 的 eeprom 模拟实现. 一个配置就搞定了. 而且支持 wearleveling 均衡磨损算法, 可以有效保护 flash寿命.</p>
+<blockquote>
+<p>Wear-Leveling，中文译名为均衡磨损，是一种算法，用于保护固态硬盘（SSD）中的存储单元，防止其因过度使用而损坏。SSD的存储单元，特别是NAND Flash，有固定的擦写次数限制。如果对同一个存储单元反复进行擦写操作，它将更快地达到其寿命极限。<br>Wear-Leveling算法的工作原理是将擦除和写入操作平均地分配到SSD的所有存储单元中，而不是集中在少数几个单元上。这样，所有存储单元的磨损程度就更加均衡，从而延长了SSD的整体寿命。<br>这种算法通过管理空闲块（未使用的存储单元）和数据块（已使用的存储单元）之间的转换来实现。当某个数据块被频繁擦写时，Wear-Leveling算法会将该块标记为空闲块，并在其他空闲块中选择一个块来存储数据。这样，原本频繁擦写的数据块就能得到休息，而其他空闲块则承担了更多的擦写操作。</p>
+</blockquote>
+<!--
+## 基于 flash 模拟的软 eeprom 
 
 ## 光污染 RGB 键盘矩阵
 
 ### ws2812b 4x4 LED 开发板 
 
 -->
-
-<h3 id="最简单的-bitbang-驱动方式"><a href="#最简单的-bitbang-驱动方式" class="headerlink" title="最简单的 bitbang 驱动方式"></a>最简单的 bitbang 驱动方式</h3><p>在不少硬件项目中，特别在那些没有专用硬件序列化接口的情况下，bitbang 是一种可行的方案来驱动 RGB LED。</p>
+<h2 id="光污染-RGB-键盘矩阵"><a href="#光污染-RGB-键盘矩阵" class="headerlink" title="光污染 RGB 键盘矩阵"></a>光污染 RGB 键盘矩阵</h2><h3 id="最简单的-bitbang-驱动方式"><a href="#最简单的-bitbang-驱动方式" class="headerlink" title="最简单的 bitbang 驱动方式"></a>最简单的 bitbang 驱动方式</h3><p>在不少硬件项目中，特别在那些没有专用硬件序列化接口的情况下，bitbang 是一种可行的方案来驱动 RGB LED。</p>
 <p>  Bit-banging 是一种软件模拟的串行通信技术，可以在没有专用序列化硬件支持的情况下实现。这通常意味着通过快速切换 GPIO 的高低状态（电位），来模拟需要的时序脉冲。这种手动翻转通信协议的一个典型例子是 WS2812B LED 的数据线控制。由于 WS2812B 要求非常精确的时序来区分逻辑“0”和逻辑“1”，对代码的执行效率有较高的要求。</p>
 <p>在 qmk 中启用 bitbang 驱动是非常简单的一件事情.</p>
 <p>这里只简单开启两种动画作为测试.</p>
@@ -335,7 +342,7 @@
 <p>这里再放一张最后成果图, 换上了 4x4 行列扫描的薄膜键盘,, 一个小键盘大工告成.</p>
 <p><img src="https://img.bhe.ink/IMG_2238.jpeg" alt="图片"></p>
 <blockquote>
-<p>待续</p>
+<p>使用 DMA 和 PWM 实现 rgb 会更节省资源, 但篇幅比较大, 待续</p>
 </blockquote>
 
     </div>

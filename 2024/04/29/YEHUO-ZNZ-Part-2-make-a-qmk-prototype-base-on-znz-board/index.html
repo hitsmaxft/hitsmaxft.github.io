@@ -29,18 +29,18 @@
 <meta property="og:site_name" content="Bhe&#39;s Blog">
 <meta property="og:description" content="前言 在前文中, 我介绍了移植野火开发板 stm32f103开发板的 dfu bootloader, 接下来要介绍的是如何迁移qmk到开发板上.这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.一同解释 qmk 的一些基础知识.后面的文章逐步深入到 RGB 和存储等. 源码仓库 https:&#x2F;&#x2F;gi">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img.bhe.ink/IMG_2169.jpeg">
+<meta property="og:image" content="https://img.bhe.ink/IMG_2091.jpeg">
 <meta property="og:image" content="https://img.bhe.ink/IMG_2239.jpeg">
 <meta property="og:image" content="https://img.bhe.ink/IMG_2253.jpeg">
 <meta property="og:image" content="https://img.bhe.ink/IMG_2091.jpeg">
 <meta property="article:published_time" content="2024-04-29T07:18:05.000Z">
-<meta property="article:modified_time" content="2024-05-09T02:05:52.352Z">
+<meta property="article:modified_time" content="2024-05-09T02:17:12.068Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="stm32">
 <meta property="article:tag" content="stm32f103">
 <meta property="article:tag" content="qmk">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img.bhe.ink/IMG_2169.jpeg">
+<meta name="twitter:image" content="https://img.bhe.ink/IMG_2091.jpeg">
 
 
 <link rel="canonical" href="https://io.bhe.ink/2024/04/29/YEHUO-ZNZ-Part-2-make-a-qmk-prototype-base-on-znz-board/">
@@ -222,7 +222,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 02:05:52" itemprop="dateModified" datetime="2024-05-09T02:05:52+00:00">2024-05-09</time>
+      <time title="Modified: 2024-05-09 02:17:12" itemprop="dateModified" datetime="2024-05-09T02:17:12+00:00">2024-05-09</time>
     </span>
 
   
@@ -248,7 +248,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><img src="https://img.bhe.ink/IMG_2169.jpeg" alt="最终效果图"></p>
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><img src="https://img.bhe.ink/IMG_2091.jpeg" alt="连接效果"></p>
 <p>在前文中, 我介绍了移植野火开发板 stm32f103开发板的 dfu bootloader, 接下来要介绍的是如何迁移qmk到开发板上.<br>这篇文章会涉及修改 qmk 源码,添加 stm32f103 键盘, 配置测试小键盘的布局, 最后通过 stm32duino 的 dfu 模式刷入固件.<br>一同解释 qmk 的一些基础知识.<br>后面的文章逐步深入到 RGB 和存储等.</p>
 <p>源码仓库 <a target="_blank" rel="noopener" href="https://github.com/hitsmaxft/qmk-kb-bheznz">https://github.com/hitsmaxft/qmk-kb-bheznz</a> , 最新的代码在我的qmk-firmware 中, 这一份是手工尽量同步.</p>
 <span id="more"></span>
@@ -365,7 +365,7 @@
 <blockquote>
 <p>基础的键盘部分只需要配置对 PIN 和 bootloader, 保证 USB 功能正常启动, 测试一下键位对不对就行了.</p>
 </blockquote>
-<p>后面再继续写复杂一点的, RGB EEPROM 等部分.</p>
+<p>后面再继续写复杂一点的, 支持 RGB, EEPROM 和OELD等部分.</p>
 
     </div>
 

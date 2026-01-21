@@ -127,7 +127,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -138,7 +138,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -163,6 +163,125 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2013/08/03/longene-qq-on-archlinux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bhe Hongtyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bhe's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bhe's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2013/08/03/longene-qq-on-archlinux/" class="post-title-link" itemprop="url">Archlinux Longene QQ 轻松上手</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2013-08-03 01:04:00" itemprop="dateCreated datePublished" datetime="2013-08-03T01:04:00+00:00">2013-08-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-01-21 03:23:09" itemprop="dateModified" datetime="2026-01-21T03:23:09+00:00">2026-01-21</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2013/08/03/longene-qq-on-archlinux/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/08/03/longene-qq-on-archlinux/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="通过-Aur-安装相关包"><a href="#通过-Aur-安装相关包" class="headerlink" title="通过 Aur 安装相关包"></a>通过 Aur 安装相关包</h3><p>完整安装 longnen qq 需要以下几个包</p>
+<ul>
+<li><code>wineqq</code> 主要包, 包含完整的 longene 环境和 qq 2012</li>
+<li><code>opendesktop-fonts</code> 提供 odokai 字体, 用于中文字体显示, 不装可能导致方块字</li>
+<li><code>ttf-ms-fonts</code> 提供 arial 用于中文显示</li>
+</ul>
+<p>装上了就能跑了, 基本功能都没问题.</p>
+<h3 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h3><p><strong>英文半角符号显示错位</strong></p>
+<pre><code>字体问题, 未解决
+</code></pre>
+<p><strong>没有声音</strong></p>
+<p>需要安装声音相关的包, 64位系统装上第一个, 32位选择第二个.</p>
+<blockquote>
+<ul>
+<li>lib32-alsa-plugins </li>
+<li>alsa-plugins</li>
+</ul>
+</blockquote>
+<p>64 位系统需要启用 multi 仓库才能找到 lib32 相关包, 具体操作见 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/Multilib">wiki:multilib</a> </p>
+<p>简单说, 就是找到 <code>/etc/pacman.conf</code>, 找到以下文本, 取消注释(如果没有找到就手动加入)</p>
+<pre><code>[multilib]
+Include = /etc/pacman.d/mirrorlist
+</code></pre>
+<p><strong>fcitx无法输入</strong></p>
+<p>找到 <code>/opt/longene/qq2012/qq2012.sh</code>, 将其中的</p>
+<pre><code>export LANG=zh_CN.UTF-8
+</code></pre>
+<p>改为和当前系统一致的编码 (用 locale 命令查看), 比如我的是</p>
+<pre><code>export LANG=en_US.UTF-8
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -208,7 +327,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 06:30:00" itemprop="dateModified" datetime="2024-05-09T06:30:00+00:00">2024-05-09</time>
+      <time title="Modified: 2026-01-21 03:23:09" itemprop="dateModified" datetime="2026-01-21T03:23:09+00:00">2026-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -305,7 +424,7 @@
 
   <div class="copyright">
     &copy; 
-    <span itemprop="copyrightYear">2024</span>
+    <span itemprop="copyrightYear">2026</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>

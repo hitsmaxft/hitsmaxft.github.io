@@ -127,7 +127,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -138,7 +138,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -163,6 +163,240 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2026/01/20/agent-views-skill/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bhe Hongtyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bhe's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bhe's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/01/20/agent-views-skill/" class="post-title-link" itemprop="url">Agent Skill 机制漫谈 | Agent Views 系列 #1</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-01-20 23:30:33" itemprop="dateCreated datePublished" datetime="2026-01-20T23:30:33+00:00">2026-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-01-21 03:23:09" itemprop="dateModified" datetime="2026-01-21T03:23:09+00:00">2026-01-21</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2026/01/20/agent-views-skill/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2026/01/20/agent-views-skill/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p><em>这是 Agent Views 系列的第一篇文章，专注探讨 Agent 技术的原理与实践。</em></p>
+</blockquote>
+<h2 id="从-Slash-Command-说起"><a href="#从-Slash-Command-说起" class="headerlink" title="从 Slash Command 说起"></a>从 Slash Command 说起</h2><p>在聊 Skill 之前，我们先回头说说 Claude Code 里的一个老功能：Slash Command。</p>
+<p>Slash Command 可以说就是一个 prompt 模板或快捷方式，作用是让你很方便地往代码仓库里加入指令。</p>
+<p>比如说：</p>
+<ul>
+<li><code>帮我提交一个 git commit, log 规范是 xxxx</code></li>
+<li><code>使用命令 xx-lint 对其进行格式化 $arguments</code></li>
+<li><code>检查语法 $arguments</code></li>
+</ul>
+<p>这些本质上都是非常明确的指令, 你需要每天输入, 太重复了, 需要快捷方式。由于它本质上就是 Prompt, 也可以用来干预 agent 的运行风格, 起到定制 Agent 行为的作用.</p>
+<p>  业界已经有不少成熟的实践，例如 BMAD 项目就采用这种方式, 提供大量的 Agent 角色指令, 可以通过 slash command 影响 agent 的行为; open spec 也是通过 command 的方式管理提案内容</p>
+<p>这类东西本身就是一段经常要输入的 Prompt, 本来需要手动输入, 现在通过 &#x2F; 命令可以很方便地重复使用.</p>
+<p>但 Slash Command 有个明确边界：必须由人主动触发。</p>
+<blockquote>
+<p>所谓 command，本质上就是”你下发命令，它才会执行”。</p>
+</blockquote>
+<p>所以 Slash Command 作为固定工具，更像是大模型的”工具箱”：你需要时可以拿来用，但不会主动参与流程，只能人为触发。因此，Slash Command 更多是快捷方式，而不是 Agent 自发地使用。</p>
+<h2 id="Subagent-机制的出现"><a href="#Subagent-机制的出现" class="headerlink" title="Subagent 机制的出现"></a>Subagent 机制的出现</h2><p>后来 Claude 推出了很多新功能。其中一个大家经常提到就是 MCP，但这里必须说：真正重要的是, 之后 Claude Code 引入的 subagent 机制。</p>
+<p>Subagent 的核心在于：你可以定义完全属于自己的 Agent。不同于在命令行或对话窗口直接交互的 Agent（即 main agent 或 task agent）。</p>
+<p>Subagent 的”sub”意味着：它作为子 Agent 存在，由用户或 main agent 主动创建调度，完成具体封闭的任务。</p>
+<p>比如常见例子：explore agent。Explore agent 作用是探索文件目录，寻找目标相关文件并读取理解内容。</p>
+<p>我们原来已有 glob 工具。Glob 本质上是通配符文件搜索工具，是内置 tool 用于搜索文件。</p>
+<p>两者可以对比：</p>
+<p>Glob tool 的工作方式：</p>
+<ul>
+<li><strong>性质</strong>：内置工具</li>
+<li><strong>流程</strong>：<ol>
+<li>模型先确定搜索内容</li>
+<li>生成 <code>tool_use</code></li>
+<li>调用 tool 执行搜索</li>
+</ol>
+</li>
+</ul>
+<p>这和调用 bash 工具本质相同：模型必须先完整确定参数再调用工具。</p>
+<p>而新 explore subagent 特点在于：</p>
+<ul>
+<li><strong>性质</strong>: 也是 tool，名叫 <code>task</code>，是通用工具。</li>
+<li><strong>流程</strong>:<ol>
+<li>模型生成 task tool 的任务描述</li>
+<li>task tool 启动通用agent, 并使用 explore agent 作为system prompt</li>
+<li>sub agent 完成多个文件的读取和内容分析</li>
+<li>sub agent 返回结果给 main agent</li>
+</ol>
+</li>
+</ul>
+<p>在传入 explore subagent 描述后，就变成：</p>
+<blockquote>
+<p>在 <code>task</code> tool 中运行、拥有独立上下文的 Sub Agent。</p>
+</blockquote>
+<p>这 SubAgent 与最外层 main agent 之间是一种无法直接交互的关系，前者仅能向后者回传最终结果。。</p>
+<p>这是不是很像远程调用和 MCP：你调用它，不关心中间过程，它可能调用多个模型、工具，最终只返回最终结果。</p>
+<p>不同的是：Subagent 相当于运行了一个小的 claude code, 大多数操作仍在本地。</p>
+<p>如配置允许，subagent 也可用其他 tool，读取文件、执行操作。但对主 Agent 来说，这些过程只是展示，不会写入上下文。</p>
+<p>所以 subagent 核心：把事情封装成独立子 Agent 并隔离上下文。不会污染主 Agent 上下文，这点很重要。</p>
+<blockquote>
+<p>Token 并未节省——因本质是新跑 Agent。但节省主流程上下文空间。</p>
+</blockquote>
+<p>我们知道长流程上下文有限，如 200K。如所有事堆主 Agent 里，很快耗尽。</p>
+<p>而有 subagent：可把任务拆多步，分别由不同 subagent 执行，或对同一任务并发执行。主 Agent 只收结果，不承载过程。</p>
+<p>角度看，subagent 很像编程中 class：封装 + 隔离。</p>
+<h2 id="Skill-的核心特性"><a href="#Skill-的核心特性" class="headerlink" title="Skill 的核心特性"></a>Skill 的核心特性</h2><p>接下来是最近全新推出的 Skill。Skill 本质上仍是 tool，和 MCP、bash、subagent 一样都是工具形态。</p>
+<p>但 Skill 最大不同：它是触发式、按需加载的, 而且它本身不直接执行任务.</p>
+<p>当你在对话中提与 Skill 相关内容时，模型会感知：当前指令和某 Skill 相关, 于是加载 Skill 的 Prompt, 继续执行任务。</p>
+<p>这背后体现了一个重要的交互设计概念——渐进式披露（Progressive Disclosure），即允许模型根据当前任务的需要，动态加载相应的能力。</p>
+<p>回顾之前方式：Slash Command、用户手写 prompt, 或者 CLAUDE.md，都是主动灌信息给模型。</p>
+<p>而 Sub Agent&#x2F;Skill 方式：模型可主动或被动加载.</p>
+<p>再对比 MCP：MCP 必须作为 tool 整体加载上下文。你 MCP 里有多少方法，就必须全告诉模型。</p>
+<p>模型只有在”知道所有接口”前提下，才能决定调哪个 MCP、用什么参数。</p>
+<p>结果导致 MCP 非常像传统的静态链接库——必须在启动时一次性全量加载。当集成的 MCP 服务增多时，上下文窗口会迅速膨胀。</p>
+<p>于是业界又衍生出相关产品：MCP 代理、MCP 封装层。它们做的事就是帮你筛选、转发 MCP 调用，模型不一定需要知道底层实际调哪些 MCP。 </p>
+<p>这些中间层的目的只有一个：缓解 MCP 无法按需加载问题。</p>
+<p>而 Skill 恰好很好解决这点。Skill 是按需触发的，提相关内容时模型才加载。</p>
+<p>Skill 结构简单：名字、上下文描述，本质是行为说明文档，通常是 Markdown 文件。</p>
+<p>甚至无需显式传参，只需提示：这 Skill 能做什么。</p>
+<p>还可扩展：不仅是 MD 文档，还含 Python 脚本或 Shell 脚本。意味着 Skill 本身可执行代码。</p>
+<p>从 Agent 角度好理解：只要模型知”可用某命令”，就可通过 bash 执行操作。于是 Skill 与 bash、其他 tool 形成交叉组合。</p>
+<h2 id="Skill-的创建方式"><a href="#Skill-的创建方式" class="headerlink" title="Skill 的创建方式"></a>Skill 的创建方式</h2><p>刚才提到了 Skill，继续展开说 <strong>Skill 如何创建</strong>。</p>
+<p>官方实现中，创建 Skill 用 <strong>Skill Creator</strong> 工具。Skill Creator 本身简单规范。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/references</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/references/workflows.md</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/references/output-patterns.md</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/scripts</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/scripts/init_skill.py</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/scripts/package_skill.py</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/scripts/quick_validate.py</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/SKILL.md</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/LICENSE.txt</span><br></pre></td></tr></table></figure>
+
+<p>第一步，它提供 <strong><code>init_skill</code> Python 脚本</strong>。通过此脚本可快速初始化 Skill 模板结构，包括：若干默认文件夹、默认 <code>skill.md</code> 文件。</p>
+<p>接下来根据需求编写 <code>skill.md</code> 文件，明确说明：这 Skill 做什么、使用规范、解决问题。</p>
+<p>内容写清后，如模板中有用不到的文件目录，Skill Creator 会自动删除多余内容。</p>
+<p>所以某种意义上，<strong>Skill Creator 本身就是很好的 Skill 范本</strong>。既可用来创建 Skill，也可用于学习.</p>
+<blockquote>
+<p>它同时也展示了一个”好 Skill”如何设计组织。</p>
+</blockquote>
+<hr>
+<h2 id="Skill-带来的变革"><a href="#Skill-带来的变革" class="headerlink" title="Skill 带来的变革"></a>Skill 带来的变革</h2><p>到这里是 Skill 入门部分。接下来看更重要问题：<strong>Skill 带来哪些变化？</strong></p>
+<p>第一点前面已提：Skill 是<strong>渐进式披露、可动态加载的</strong>。同时还能与现有 Agent 能力自然结合。</p>
+<p>实现上看很简单：动态加载 Skill、读取 Markdown 文件、知目录下含哪些脚本。这些信息直接提供给运行中 Agent，从而<strong>增强能力</strong>。</p>
+<h3 id="传统方式的局限性"><a href="#传统方式的局限性" class="headerlink" title="传统方式的局限性"></a>传统方式的局限性</h3><p>Skill 出现前我们通常做法：写大段 prompt、写 subagent 描述、或准备脚本文件放目录里、再通过 <code>@</code> 命令或特定方式触发让模型或 Claude Code Agent 框架加载。</p>
+<p>本质都是在<strong>手动模拟Agent能力的模块化和按需加载</strong>。</p>
+<p>现在有 Skill，通过<strong>标准化机制</strong>，可在合适时间把真正需要能力加载进 Agent。</p>
+<p>从这个角度看，Skill 把原本<strong>巨大复杂 <code>CLAUDE.md</code>（System Prompt）</strong>拆解成<strong>按需使用小模块</strong>。</p>
+<blockquote>
+<p><strong>模型的上下文是有限的</strong>, 不可能把所有东西一次性塞进上下文来强化模型, 需要精耕细作。</p>
+</blockquote>
+<p>举一个实际案例：同事需要帮客户通过 Claude Code 帮写内部框架代码，但这框架是完全私有实现。</p>
+<p>Claude Code 当然不知框架怎么写，于是他们把大量内容——开发文档、编码规范、架构说明、校验方式、编译流程——全塞进很长 <code>CLAUDE.md</code> 文件里，让 Claude Code 启动时一次性加载。</p>
+<p>这方式效率很低：文档多、规则杂、且所有内容常驻上下文。甚至还会尝试通过 MCP 加载外部代码文件，但本质问题没解决。</p>
+<h3 id="Skill-的模块化优势"><a href="#Skill-的模块化优势" class="headerlink" title="Skill 的模块化优势"></a>Skill 的模块化优势</h3><p>现在有 Skill 就完全不同。可把开发文档<strong>按场景拆分多个 Skill</strong>。比如：一个 Skill 负责 JWT 相关实现、一个 Skill 负责定制 Spring Boot 应用开发规范。</p>
+<p>需开发某类应用时，只加载对应 Skill。</p>
+<p>更进一步，Skill 间还可<strong>相互提示</strong>：什么情况用其他 Skill, 甚至自动安装skill。</p>
+<p>实际是给模型提供更高质量”暗示”，让它自发地不断扩展后续执行中能力边界。</p>
+<h3 id="动态文档加载的可能性"><a href="#动态文档加载的可能性" class="headerlink" title="动态文档加载的可能性"></a>动态文档加载的可能性</h3><p>我第一次看到 Skill 时，最直接的感受是：<strong>开发文档终于可动态加载了</strong>. </p>
+<pre><code> 不需要通过 MCP Server 或者 explore task agent 去检索文档。完全可通过 Skill 方式加载内部文档。
+</code></pre>
+<p>而且，如文档比较多需复杂的检索条件，甚至可在 Skill 里提供命令行工具：命令行背后也可能是其他 agent (比如 Codex!)、把用户 prompt 转文档查询、再返最相关内容。</p>
+<p>过程中，Claude Code 可能还调其他模型或工具。</p>
+<pre><code>通过 Skill，可**不断扩展系统能力和边界**。
+</code></pre>
+<h2 id="Shell-Skill-的自然范式"><a href="#Shell-Skill-的自然范式" class="headerlink" title="Shell + Skill 的自然范式"></a>Shell + Skill 的自然范式</h2><p>这也非常符合 Claude Code 作者核心观点：</p>
+<blockquote>
+<p>agent 只需要 shell，其实就够了。</p>
+</blockquote>
+<p>不一定非要学复杂新协议。有 bash 就可做几乎任何事。而且已有大量成熟工具：GitHub 相关工具、<code>rg</code> 文本搜索工具、各种服务命令行封装。这些工具本身为程序员设计。</p>
+<h3 id="为什么选择-Shell-Skill"><a href="#为什么选择-Shell-Skill" class="headerlink" title="为什么选择 Shell + Skill"></a>为什么选择 Shell + Skill</h3><p>原因几个：</p>
+<ol>
+<li><strong>按需加载</strong>：用到才加载，不污染上下文</li>
+<li><strong>自描述</strong>：需时直接 <code>--help</code> 获取说明</li>
+<li><strong>错误信息友好</strong>：Shell 工具错误输出给人看，通常是文本+错误码，而非冗长异常堆栈</li>
+</ol>
+<p>从 Agent 角度看，这点很重要。Agent 本质在”扮演人”，而 Shell 工具本为人设计。</p>
+<p>而 Shell 工具的优势就是:</p>
+<ul>
+<li>交互简洁</li>
+<li>组合使用</li>
+</ul>
+<p>虽然 shell 工具的参数很多, 对不熟悉工具的人来说, 学习成本可能略高，但 Agent 学习速度远快于人, 它可以通过帮助文件瞬间完成学习。</p>
+<p>所以, 引入 <strong>Skill + Bash + Tool</strong> 的组合能力之后，Agent 能力会非常强大。</p>
+<h2 id="Skill-设计的深层思考"><a href="#Skill-设计的深层思考" class="headerlink" title="Skill 设计的深层思考"></a>Skill 设计的深层思考</h2><p>我认为，Skill 是<strong>以小见大设计</strong>。</p>
+<p>表面只是简单能力：</p>
+<blockquote>
+<p>动态读取 Markdown 文件</p>
+</blockquote>
+<p>但相比之下：Subprocess 更偏向具体执行、MCP 是固化远程调用必须全量加载。</p>
+<p>而 Skill 更像<strong>给模型注入知识能力</strong>，让它在合适场景下执行具体事情。</p>
+<p>甚至可把 MCP <strong>拆解多个 Skill</strong>：不同场景只暴露必要接口、其他无关接口不加载。</p>
+<p>这样一来：不需要 MCP 代理、本地就可完成能力分发。扩展性会很强。</p>
+<p>这也让我强烈感觉：<strong>在模型驱动的时代，我们不应过度依赖强约束或复杂的强协议。</strong>.</p>
+<p>它们很快就会限制住模型的能力, 然后马上被抛弃。</p>
+<p>只要协议本身具备足够好扩展性，再配合模型能力和适度约束，系统可扩展性反而更强。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -208,7 +442,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 06:30:00" itemprop="dateModified" datetime="2024-05-09T06:30:00+00:00">2024-05-09</time>
+      <time title="Modified: 2026-01-21 03:23:09" itemprop="dateModified" datetime="2026-01-21T03:23:09+00:00">2026-01-21</time>
     </span>
 
   
@@ -313,7 +547,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 06:30:00" itemprop="dateModified" datetime="2024-05-09T06:30:00+00:00">2024-05-09</time>
+      <time title="Modified: 2026-01-21 03:23:09" itemprop="dateModified" datetime="2026-01-21T03:23:09+00:00">2026-01-21</time>
     </span>
 
   
@@ -412,7 +646,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 06:30:00" itemprop="dateModified" datetime="2024-05-09T06:30:00+00:00">2024-05-09</time>
+      <time title="Modified: 2026-01-21 03:23:09" itemprop="dateModified" datetime="2026-01-21T03:23:09+00:00">2026-01-21</time>
     </span>
 
   
@@ -512,7 +746,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 06:30:00" itemprop="dateModified" datetime="2024-05-09T06:30:00+00:00">2024-05-09</time>
+      <time title="Modified: 2026-01-21 03:23:09" itemprop="dateModified" datetime="2026-01-21T03:23:09+00:00">2026-01-21</time>
     </span>
 
   
@@ -617,7 +851,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 06:30:00" itemprop="dateModified" datetime="2024-05-09T06:30:00+00:00">2024-05-09</time>
+      <time title="Modified: 2026-01-21 03:23:09" itemprop="dateModified" datetime="2026-01-21T03:23:09+00:00">2026-01-21</time>
     </span>
 
   
@@ -716,7 +950,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 06:30:00" itemprop="dateModified" datetime="2024-05-09T06:30:00+00:00">2024-05-09</time>
+      <time title="Modified: 2026-01-21 03:23:09" itemprop="dateModified" datetime="2026-01-21T03:23:09+00:00">2026-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -822,7 +1056,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 06:30:00" itemprop="dateModified" datetime="2024-05-09T06:30:00+00:00">2024-05-09</time>
+      <time title="Modified: 2026-01-21 03:23:09" itemprop="dateModified" datetime="2026-01-21T03:23:09+00:00">2026-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -938,7 +1172,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 06:30:00" itemprop="dateModified" datetime="2024-05-09T06:30:00+00:00">2024-05-09</time>
+      <time title="Modified: 2026-01-21 03:23:09" itemprop="dateModified" datetime="2026-01-21T03:23:09+00:00">2026-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1050,7 +1284,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 06:30:00" itemprop="dateModified" datetime="2024-05-09T06:30:00+00:00">2024-05-09</time>
+      <time title="Modified: 2026-01-21 03:23:09" itemprop="dateModified" datetime="2026-01-21T03:23:09+00:00">2026-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1139,197 +1373,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://io.bhe.ink/2015/04/18/routing-with-nginx-basic-rewrite-directives/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Bhe Hongtyu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bhe's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Bhe's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2015/04/18/routing-with-nginx-basic-rewrite-directives/" class="post-title-link" itemprop="url">nginx 路由杂谈 - rewrite 指令与重定向</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-04-18 11:22:40" itemprop="dateCreated datePublished" datetime="2015-04-18T11:22:40+00:00">2015-04-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-09 06:30:00" itemprop="dateModified" datetime="2024-05-09T06:30:00+00:00">2024-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/etc/" itemprop="url" rel="index"><span itemprop="name">etc</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2015/04/18/routing-with-nginx-basic-rewrite-directives/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/04/18/routing-with-nginx-basic-rewrite-directives/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>在书写 nginx 路由规则的时候， 得保证规则配置的规范， 否则维护起来成本很高。<br>本文简要地讨论了在 rewrite 模块的基础实现的简单路由规则，并解释了常用指令的使用细节。</p>
-</blockquote>
-<h2 id="rewrite-与-location"><a href="#rewrite-与-location" class="headerlink" title="rewrite 与 location"></a>rewrite 与 location</h2><p>首先，这是一个不完整 nginx 虚拟主机配置:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">service &#123;</span><br><span class="line">    root /service/http;</span><br><span class="line">    index index.php;</span><br><span class="line"></span><br><span class="line">    rewrite ^/api/(.*)+ /index.php?app=api&amp;method=$1 break;</span><br><span class="line">    rewrite ^/index.php/(.*)+ /old_api_warning.html break;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        return 200 &quot;index&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location = /index.php &#123;</span><br><span class="line">        return 200 &quot;index.php&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>上面的例子中， 指定的类型可以分为两种。</p>
-<ul>
-<li><code>server</code>,<code>root</code>, <code>index</code>, <code>location</code> 是 <code>ngx_http_core_module</code> 提供的指令</li>
-<li>而 <code>rewrite</code> 则是 <code>ngx_http_rewrite_module</code> 提供的指令之一， 同类的还有常用的 <code>if</code></li>
-</ul>
-<p>简单地概括， nginx 的处理配置流程如下</p>
-<ol>
-<li>进行 rewrite 规则匹配，根据命中规则改写 location。</li>
-<li>如果没有被其他指令中断并退出， 则进入 location 匹配。</li>
-<li>执行匹配成功的 location 区块中的指令。</li>
-</ol>
-<p>而对于 rewrite 系列指令和 location 指令的安排， 在书写配置的时候， 应该先定义好 location ， 因为 location 是和 nginx 和后端服务沟通的桥梁。<br>再根据 location 的需要， 使用 rewrite 将各种各样用户输入的 url 正确地映射到 对应 locaton ， 由 location 中的 proxy 指令转发给后端。</p>
-<p>比如一个常规的 php 站点，有以下类似的 location 配置。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 静态资源</span><br><span class="line">location /assets &#123;</span><br><span class="line">    root /service/http/assets/;</span><br><span class="line">&#125;</span><br><span class="line"># 入口 php 脚本 位置</span><br><span class="line">location /index.php &#123;</span><br><span class="line">    root /service/http/phpsrc/webroot/;</span><br><span class="line">       # ... 若干 fast-cgi 代理规则</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<pre><code>注意， 这份配置省略了不必要的指令，能够满足大部分的 php 应用的需要。
-</code></pre>
-<p>有时候，为了优化 url 的展示，或者兼容旧应用的 url 规则， 只是这么简单的两条 location 配置自然是不够用的。这时候我们可以通过 <code>rewrite</code> 规则进行弥补。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rewrite /index.html$ /app/page-default; //兼容旧 url</span><br><span class="line"></span><br><span class="line">rewrite /app/page-(.*) /index.php?app=api&amp;page=$1 break;</span><br></pre></td></tr></table></figure>
-
-<p>请注意这两条 <code>rewrite</code> 规则区别的在最后一个 <code>flag</code> 参数 <code>break</code></p>
-<pre><code> 可用的 flag 参数还有 `permanent`, `redirect`, `last` 等， 后面分析它们之间的差别。
-</code></pre>
-<p>多出来的 <code>break</code> 参数作用会使得 <code>rewirte</code> 指令的跳转方式发生变化:</p>
-<ul>
-<li>没有 flag 的 rewrite 指令完成 location 改写之后 ，继续往下寻找其他 <code>rewrite</code> 规则， 看看有没有符合要求的。如果没有， 那么进入 <code>location</code> 匹配。</li>
-<li>带 <code>break</code>， 跳过其他所有 <code>rewrite</code> 规则， 进入 <code>location</code> 匹配</li>
-</ul>
-<p>这里简单总结一下:</p>
-<ul>
-<li>如果 某一条 <code>rewrite</code> 规则命中直接转发给后端应用，那么应该加上一个 <code>break</code> 标记。</li>
-<li>如果 <code>rewrite</code> 规则起补充作用，还需要其他规则配合完成， 那么不带第三个的 <code>flag</code> 参数。</li>
-</ul>
-<p>以上说的 <code>rewrite</code> 规则属于 nginx 的内部重定向规则， 也就是说， 用户外部看到的 url 依然是他输入的 url ， 而转给后端应用的 <code>$uri</code> ， 则已经是 nginx 改写之后的结果。</p>
-<p>如果需要进行显式地外部重定向， 需要借助 <code>redirect</code> , <code>permanent</code> 这两个 flag 进行 302 和 301 重定向.<br>它的行为和 <code>break</code> 类似， 区别在于 nginx 会中断流程， 通过 http 请求告诉用户端进行重定向，<br>也就是这次请求不需要进过后端服务， 由 nginx 全职负责。</p>
-<p><code>rewrite /error.html$ /error2.html redirect;</code></p>
-<h3 id="break-和-last-区别"><a href="#break-和-last-区别" class="headerlink" title="break 和 last 区别"></a>break 和 last 区别</h3><p>这两个 flag 都会中断当前 rewrite 流程， 不再继续匹配后续的 rewrite 指令。</p>
-<p>wiki 上是这么写的</p>
-<blockquote>
-<p>stops processing the current set of <code>ngx_http_rewrite_module</code> directives and starts a search for a new location matching the changed URI</p>
-</blockquote>
-<p>如果是在 <code>server</code> 的顶级部分， 那么它们的作用是相同， 跳过剩下的 rewrite 指定， 进入 location 匹配。<br>如果 rewrite 是在 <code>server</code> 区块顶级 if 内部， 和直接放在 server 下级的  rewrite 行为是一致的。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    rewrite /error1.html /error.html break;</span><br><span class="line">    rewrite /error2.html /error.html last;</span><br><span class="line"></span><br><span class="line">    if ( $arg_version = &quot;1.1&quot; ) &#123;</span><br><span class="line">        rewrite /error3.html /error.html break;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location = error.html &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以上的 rewrite 的跳转行为是相同的， 进入 location 匹配流程。</p>
-<p>而两者的区别， 在于当 rewrite 指令存在于 <code>location</code> 区块中时, 见例子</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">location = index.php &#123;</span><br><span class="line">    if ( $arg_q  = &quot;&quot; ) &#123;</span><br><span class="line">        rewrite /index.php /error.html last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">location = error.html &#123;</span><br><span class="line">    if ( $arg_test ~= &quot;&quot; ) &#123;</span><br><span class="line">        rewrite /error.html /error-test.html break;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>第一个 location , 如果 <code>q</code> 参数为空， 那么将展示错误页面。</p>
-<p>第二个 location ， 如果 <code>test</code> 参数不为空， 通过 rewrite 规则，使用另外一个 error-test.html,<br>但 location 不变</p>
-<pre><code>注意， 这里并没有一个 `location = error2.html` 的匹配规则
-</code></pre>
-<p>从这个 case 的结果， 可以明显得区分两个指令之间的细微差别</p>
-<ul>
-<li>last 跳出 location 块， 重新进行 location 匹配</li>
-<li>break 跳过 location 下的后续 rewrite 规则， 执行其他指令。</li>
-</ul>
-<p>所以 last 的特殊在于重新进行 location 匹配，  这也就是为什么会从</p>
-<p><code>locaton = index.php</code></p>
-<p>转向</p>
-<p><code>locaton = error.html</code></p>
-<p>所以一般情况下， 使用 <code>break</code> 指令会相对安全， 不会造成循环重定向。</p>
-<p>比如：</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> = error.html &#123;</span><br><span class="line">    <span class="attribute">rewrite</span> /<span class="literal">error</span>.html /<span class="literal">error</span>.html  <span class="literal">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">if</span> (<span class="variable">$arg_q</span> = <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">        <span class="attribute">return</span> <span class="number">404</span> <span class="string">&quot;not q&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">fastcgi_pass</span> <span class="number">127.0.0.1:9000</span>;</span><br><span class="line">    <span class="comment">#其他 fastcgi 配置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> = error.html &#123;</span><br><span class="line">    <span class="attribute">rewrite</span> /<span class="literal">error</span>.html /<span class="literal">error</span>.html <span class="literal">last</span>;</span><br><span class="line">    <span class="attribute">fastcgi_pass</span> <span class="number">127.0.0.1:9000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>第一个例子，完成了 rewrite 指令之后，break 指令使得后续的其他 rewrite 规则失效, 接着进行 proxy.<br>第二个例子会导致不断地进行 location 匹配， 最终导致 nginx 返回 500.</p>
-<p>返回结果是这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 500 Internal Server Error</span><br><span class="line">Server: nginx/1.6.3</span><br><span class="line">Date: Sat, 18 Apr 2015 12:10:49 GMT</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 192</span><br><span class="line">Connection: close</span><br></pre></td></tr></table></figure>
-
-<pre><code>注：nginx 会记录同一条 rewrite 规则的执行次数，如果超过10次，将自动触发 500 进行自我保护。
-</code></pre>
-<p><strong>小结</strong></p>
-<p>这里构造了两组例子用来说明 <code>last</code> 和 <code>break</code> 两个 flag 参数行为上的不一致。<br>并不是说 rewrite 规则在  server 和 location 上下文中的行为不一致， 而是他们的行为特征很容易造成误解。</p>
-<p>两者的本质区别在于是否<strong>重新</strong>进行 <code>location</code> 匹配，所以当在 location 上下文 进行 last rewrite时。<br>对于不熟悉 rewrite 指定的其他人容易造成误解。</p>
-<p>所以还是前文所提到的观点， 尽可能地将 rewrite 和 location 离开来。 在 location 中进行 rewrite， 容易造成重定向问题。</p>
-<pre><code>由于 rewrite 模块的 `rewrite` 和 `if` 指令会使得 nginx
-的路由规则出现较多的逻辑和分支跳转， 在维护性上是比较糟糕的，
-并不推荐过多地进行使用， 本文只是从行为和特性上分析了这些指令，
-并不代表支持过度使用 rewrite 指令。
-</code></pre>
-<h2 id="return-指令的应用"><a href="#return-指令的应用" class="headerlink" title="return 指令的应用"></a>return 指令的应用</h2><p>在 <code>rewrite</code> 模块中， 有一条非常有用的指令 <code>return</code>, 用于直接返回客户端指定的状态码。<br>甚至支持指定文本内容和url， 相比起使用 <code>rewrite</code> 指令302进行曲线救国，要简便地多。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">location = /index.php &#123;</span><br><span class="line">  if ( $arg_q = &quot;&quot; ) &#123;</span><br><span class="line">    return 302 /page_not_found.html;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  if ( $arg_id = &quot;&quot; ) &#123;</span><br><span class="line">    return 404 &quot;page not found&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">  return 200 &quot;hello&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>对于常规的基于 url 提供服务的应用， 基础的 rewrite 指令配合已经足够完成大部分任务。</p>
-<p>下一篇文章再聊聊基于条件，变量和更加复杂的上下文, 完成进行路由规则匹配.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1342,7 +1385,7 @@
 
   <div class="copyright">
     &copy; 
-    <span itemprop="copyrightYear">2024</span>
+    <span itemprop="copyrightYear">2026</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>

@@ -2,7 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://io.bhe.ink/categories/index.html</loc>
+    
+    <lastmod>2026-01-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://io.bhe.ink/tags/index.html</loc>
+    
+    <lastmod>2026-01-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2014/12/18/notes-about-apache-nio-client-source-code/</loc>
+    
+    <lastmod>2026-01-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/2014/06/04/some-words-about-the-new-ios/</loc>
     
     <lastmod>2026-01-21</lastmod>
     
@@ -74,7 +101,7 @@
   </url>
   
   <url>
-    <loc>https://io.bhe.ink/2024/04/16/YEHUO-ZNZ-Part-1-build-dfu-bootloader-for-znz-board/</loc>
+    <loc>https://io.bhe.ink/2024/01/27/setup-http-proxy-in-an-orbstak-linux-machine/</loc>
     
     <lastmod>2026-01-21</lastmod>
     
@@ -83,7 +110,7 @@
   </url>
   
   <url>
-    <loc>https://io.bhe.ink/2024/01/27/setup-http-proxy-in-an-orbstak-linux-machine/</loc>
+    <loc>https://io.bhe.ink/2024/04/16/YEHUO-ZNZ-Part-1-build-dfu-bootloader-for-znz-board/</loc>
     
     <lastmod>2026-01-21</lastmod>
     
@@ -111,15 +138,6 @@
   
   <url>
     <loc>https://io.bhe.ink/2026/01/20/agent-views-skill/</loc>
-    
-    <lastmod>2026-01-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/categories/index.html</loc>
     
     <lastmod>2026-01-21</lastmod>
     
@@ -173,15 +191,6 @@
   </url>
   
   <url>
-    <loc>https://io.bhe.ink/2014/03/23/asynchronous-programming-with-phpdaemon/</loc>
-    
-    <lastmod>2026-01-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://io.bhe.ink/2014/03/22/introduction-to-vim/</loc>
     
     <lastmod>2026-01-21</lastmod>
@@ -191,25 +200,16 @@
   </url>
   
   <url>
+    <loc>https://io.bhe.ink/2014/03/23/asynchronous-programming-with-phpdaemon/</loc>
+    
+    <lastmod>2026-01-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://io.bhe.ink/2014/06/15/a-vimers-kbc-poker2-review/</loc>
-    
-    <lastmod>2026-01-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2014/12/18/notes-about-apache-nio-client-source-code/</loc>
-    
-    <lastmod>2026-01-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/2014/06/04/some-words-about-the-new-ios/</loc>
     
     <lastmod>2026-01-21</lastmod>
     
@@ -297,6 +297,20 @@
   </url>
   
   <url>
+    <loc>https://io.bhe.ink/tags/tutor/</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/tags/vim/</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://io.bhe.ink/tags/async/</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -319,20 +333,6 @@
   
   <url>
     <loc>https://io.bhe.ink/tags/network/</loc>
-    <lastmod>2026-01-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/tags/tutor/</loc>
-    <lastmod>2026-01-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/tags/vim/</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -479,6 +479,20 @@
   </url>
   
   <url>
+    <loc>https://io.bhe.ink/tags/orbstack/</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://io.bhe.ink/tags/systemd/</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://io.bhe.ink/tags/%E5%8D%95%E7%89%87%E6%9C%BA/</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -501,20 +515,6 @@
   
   <url>
     <loc>https://io.bhe.ink/tags/bootloader/</loc>
-    <lastmod>2026-01-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/tags/orbstack/</loc>
-    <lastmod>2026-01-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://io.bhe.ink/tags/systemd/</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -558,14 +558,14 @@
   </url>
   
   <url>
-    <loc>https://io.bhe.ink/categories/programming-language/</loc>
+    <loc>https://io.bhe.ink/categories/vim/</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://io.bhe.ink/categories/vim/</loc>
+    <loc>https://io.bhe.ink/categories/programming-language/</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

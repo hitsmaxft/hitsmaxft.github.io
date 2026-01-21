@@ -208,7 +208,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-21 04:04:18" itemprop="dateModified" datetime="2026-01-21T04:04:18+00:00">2026-01-21</time>
+      <time title="Modified: 2026-01-21 11:01:51" itemprop="dateModified" datetime="2026-01-21T11:01:51+00:00">2026-01-21</time>
     </span>
 
   
@@ -294,27 +294,35 @@
 <blockquote>
 <p>Token 并未节省——因为背后另外跑了一个 Reactive Agent 流程。但是这些 LLM message 不会引入主流程上下文空间里。</p>
 </blockquote>
-<p>我们知道长流程上下文有限，如 200K。如所有事堆主 Agent 里，很快耗尽。</p>
-<p>而有 subagent：可把任务拆多步，分别由不同 subagent 执行，或对同一任务并发执行。主 Agent 只收结果，不承载过程。</p>
-<p>角度看，subagent 很像编程中 class：封装 + 隔离。</p>
+<p>我们知道长流程的上下文有限，如 200K。如果所有事都堆在主 Agent 里，很快就会耗尽。</p>
+<p>而有 subagent：可以把任务拆分成多步，分别由不同 subagent 执行，或对同一任务并发执行。主 Agent 只收结果，不承载过程。</p>
+<p>从这个角度看，subagent 很像编程中的 class：封装 + 隔离。</p>
+<p>所以, 接下来我们就讲讲 Agent 里的 Trait , 组合拳 , 也就是 skill.</p>
 <h2 id="Skill-的核心特性"><a href="#Skill-的核心特性" class="headerlink" title="Skill 的核心特性"></a>Skill 的核心特性</h2><p>接下来是最近全新推出的 Skill。Skill 实际上仍是 tool，和 MCP、bash、subagent 一样都是工具形态。</p>
 <p>但 Skill 最大不同：它是触发式、按需加载的, 而且它本身不直接执行任务.</p>
 <p>当你在对话中提与 Skill 相关内容时，模型会感知：当前指令和某 Skill 相关, 于是加载 Skill 的 Prompt, 继续执行任务。</p>
 <p>这背后体现了一个重要的交互设计概念——渐进式披露（Progressive Disclosure），即允许模型根据当前任务的需要，动态加载相应的能力。</p>
 <p>回顾之前方式：Slash Command、用户手写 prompt, 或者 CLAUDE.md，都是主动灌信息给模型。</p>
-<p>而 Sub Agent&#x2F;Skill 方式：模型可主动或被动加载.</p>
+<p>而 Sub Agent&#x2F;Skill 可通过模型可主动或被动加载. </p>
+<blockquote>
+<p>实际上, 模型通过 Task 和 Skill tool 的描述信息, 感知到当前具备的动态部分.</p>
+</blockquote>
 <p>再对比 MCP：MCP 必须作为 tool 整体加载上下文。你 MCP 里有多少方法，就必须全告诉模型。</p>
-<p>模型只有在”知道所有接口”前提下，才能决定调哪个 MCP、用什么参数。</p>
+<p>模型需要在”知道所有MCP接口” 前提下，才能决定调哪个 MCP、用什么参数。</p>
 <p>结果导致 MCP 非常像传统的静态链接库——必须在启动时一次性全量加载。当集成的 MCP 服务增多时，上下文窗口会迅速膨胀。</p>
-<p>于是业界又衍生出相关产品：MCP 代理、MCP 封装层。它们做的事就是帮你筛选、转发 MCP 调用，模型不一定需要知道底层实际调哪些 MCP。 </p>
+<p>于是业界又衍生出相关产品：MCP 代理、MCP 封装层。它们做的事就是帮你筛选、转发 MCP 调用。 </p>
 <p>这些中间层的目的只有一个：缓解 MCP 无法按需加载问题。</p>
-<p>而 Skill 恰好很好解决这点。Skill 是按需触发的，提相关内容时模型才加载。</p>
-<p>Skill 结构简单：名字、上下文描述，本质是行为说明文档，通常是 Markdown 文件。</p>
-<p>甚至无需显式传参，只需提示：这 Skill 能做什么。</p>
-<p>还可扩展：不仅是 MD 文档，还含 Python 脚本或 Shell 脚本。意味着 Skill 本身可执行代码。</p>
-<p>从 Agent 角度好理解：只要模型知”可用某命令”，就可通过 bash 执行操作。于是 Skill 与 bash、其他 tool 形成交叉组合。</p>
-<h2 id="Skill-的创建方式"><a href="#Skill-的创建方式" class="headerlink" title="Skill 的创建方式"></a>Skill 的创建方式</h2><p>刚才提到了 Skill，继续展开说 <strong>Skill 如何创建</strong>。</p>
-<p>官方实现中，创建 Skill 用 <strong>Skill Creator</strong> 工具。Skill Creator 本身简单规范。</p>
+<p>而 Skill 恰好很好规避了这点, 因为Skill 是按需触发的，提到相关内容时模型才加载。</p>
+<p>Skill 结构很简单：SKILL.md, 提供名字、描述使用场景, 以及具体内容.</p>
+<p>除了 MD 文档，还可以提供 Python 脚本或 Shell 脚本。告知模型可以通过哪些工具或者脚本来完成任务。</p>
+<p>当模型完成了加载 SKILL , 了解到新的 “可用某命令”，然后自主地通过 bash 执行该操作。</p>
+<p>在完成 Skill 加载之后, Agent 可以进一步与 bash、其他 tool 以及 subagent 开始形成交叉组合. </p>
+<h2 id="Skill-的创建方式"><a href="#Skill-的创建方式" class="headerlink" title="Skill 的创建方式"></a>Skill 的创建方式</h2><p>聊完 Skill 基本情况，继续展开说 <strong>Skill 如何创建</strong>。</p>
+<p>在官方提供的 skill 市场中，创建 Skill 用 <strong>Skill Creator</strong> 工具。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/anthropics/skills">https://github.com/anthropics/skills</a></p>
+</blockquote>
+<p>Skill Creator 本身简单规范。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/references</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/references/workflows.md</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/references/output-patterns.md</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/scripts</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/scripts/init_skill.py</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/scripts/package_skill.py</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/scripts/quick_validate.py</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/SKILL.md</span><br><span class="line">./marketplaces/anthropic-agent-skills/skills/skill-creator/LICENSE.txt</span><br></pre></td></tr></table></figure>
 
 <p>第一步，它提供 <strong><code>init_skill</code> Python 脚本</strong>。通过此脚本可快速初始化 Skill 模板结构，包括：若干默认文件夹、默认 <code>skill.md</code> 文件。</p>
@@ -349,11 +357,11 @@
 <p>过程中，Claude Code 可能还调其他模型或工具。</p>
 <pre><code>通过 Skill，可**不断扩展系统能力和边界**。
 </code></pre>
-<h2 id="Shell-Skill-的自然范式"><a href="#Shell-Skill-的自然范式" class="headerlink" title="Shell + Skill 的自然范式"></a>Shell + Skill 的自然范式</h2><p>我忘记在哪里看到的哪位Claude Code 相关开发者的说法, 后面找到在附上.</p>
+<h2 id="Shell-Skill-的自然范式"><a href="#Shell-Skill-的自然范式" class="headerlink" title="Shell + Skill 的自然范式"></a>Shell + Skill 的自然范式</h2><p>最近经常看到 Flash 作者关于 AI 的分享, 我非常赞同他的其中一个观点 (<a target="_blank" rel="noopener" href="https://lucumr.pocoo.org/2025/11/21/agents-are-hard">https://lucumr.pocoo.org/2025/11/21/agents-are-hard</a>)</p>
 <blockquote>
-<p>agent 只需要 shell，其实就够了。</p>
+<p>「如果你根本不需要 MCP 呢?」很多 MCP server 過度設計，塞了一堆工具吃掉大量 context，其實用簡單的 CLI 工具透過 Bash 執行就好。<br>引用自 <a target="_blank" rel="noopener" href="https://ihower.tw/blog/13513-agent-design-is-still-hard-2025">https://ihower.tw/blog/13513-agent-design-is-still-hard-2025</a></p>
 </blockquote>
-<p>不一定非要学复杂新协议。有 bash 就可做几乎任何事。而且已有大量成熟工具：GitHub 相关工具、<code>rg</code> 文本搜索工具、各种服务命令行封装。这些工具本身为程序员设计。</p>
+<p>Agent 不一定非要学复杂新协议。有 bash 就可做几乎任何事。<br>而且已有大量成熟工具：GitHub 相关工具、<code>rg</code> 文本搜索工具、各种服务命令行封装。这些工具本身为程序员设计。</p>
 <h3 id="为什么选择-Shell-Skill"><a href="#为什么选择-Shell-Skill" class="headerlink" title="为什么选择 Shell + Skill"></a>为什么选择 Shell + Skill</h3><p>原因几个：</p>
 <ol>
 <li><strong>按需加载</strong>：用到才加载，不污染上下文</li>
@@ -442,7 +450,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-21 04:04:18" itemprop="dateModified" datetime="2026-01-21T04:04:18+00:00">2026-01-21</time>
+      <time title="Modified: 2026-01-21 11:01:51" itemprop="dateModified" datetime="2026-01-21T11:01:51+00:00">2026-01-21</time>
     </span>
 
   
@@ -547,7 +555,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-21 04:04:18" itemprop="dateModified" datetime="2026-01-21T04:04:18+00:00">2026-01-21</time>
+      <time title="Modified: 2026-01-21 11:01:51" itemprop="dateModified" datetime="2026-01-21T11:01:51+00:00">2026-01-21</time>
     </span>
 
   
@@ -646,7 +654,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-21 04:04:18" itemprop="dateModified" datetime="2026-01-21T04:04:18+00:00">2026-01-21</time>
+      <time title="Modified: 2026-01-21 11:01:51" itemprop="dateModified" datetime="2026-01-21T11:01:51+00:00">2026-01-21</time>
     </span>
 
   
@@ -746,7 +754,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-21 04:04:18" itemprop="dateModified" datetime="2026-01-21T04:04:18+00:00">2026-01-21</time>
+      <time title="Modified: 2026-01-21 11:01:51" itemprop="dateModified" datetime="2026-01-21T11:01:51+00:00">2026-01-21</time>
     </span>
 
   
@@ -851,7 +859,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-21 04:04:18" itemprop="dateModified" datetime="2026-01-21T04:04:18+00:00">2026-01-21</time>
+      <time title="Modified: 2026-01-21 11:01:51" itemprop="dateModified" datetime="2026-01-21T11:01:51+00:00">2026-01-21</time>
     </span>
 
   
@@ -950,7 +958,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-21 04:04:18" itemprop="dateModified" datetime="2026-01-21T04:04:18+00:00">2026-01-21</time>
+      <time title="Modified: 2026-01-21 11:01:51" itemprop="dateModified" datetime="2026-01-21T11:01:51+00:00">2026-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1056,7 +1064,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-21 04:04:18" itemprop="dateModified" datetime="2026-01-21T04:04:18+00:00">2026-01-21</time>
+      <time title="Modified: 2026-01-21 11:01:51" itemprop="dateModified" datetime="2026-01-21T11:01:51+00:00">2026-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1172,7 +1180,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-21 04:04:18" itemprop="dateModified" datetime="2026-01-21T04:04:18+00:00">2026-01-21</time>
+      <time title="Modified: 2026-01-21 11:01:51" itemprop="dateModified" datetime="2026-01-21T11:01:51+00:00">2026-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1284,7 +1292,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-21 04:04:18" itemprop="dateModified" datetime="2026-01-21T04:04:18+00:00">2026-01-21</time>
+      <time title="Modified: 2026-01-21 11:01:51" itemprop="dateModified" datetime="2026-01-21T11:01:51+00:00">2026-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

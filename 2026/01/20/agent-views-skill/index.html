@@ -30,7 +30,7 @@
 <meta property="og:description" content="这是 Agent Views 系列的第一篇文章，专注探讨 Agent 技术的原理与实践。  从 Slash Command 说起在聊 Skill 之前，我们先回头说说 Claude Code 里的一个老功能：Slash Command。 Slash Command 可以说就是一个 prompt 模板或快捷方式，作用是让你很方便地往代码仓库里加入指令。 比如说：  帮我提交一个 git commi">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-01-20T23:30:33.000Z">
-<meta property="article:modified_time" content="2026-01-21T03:23:09.376Z">
+<meta property="article:modified_time" content="2026-01-21T04:02:36.186Z">
 <meta property="article:author" content="Bhe Hongtyu">
 <meta property="article:tag" content="llm">
 <meta property="article:tag" content="agent">
@@ -216,7 +216,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-21 03:23:09" itemprop="dateModified" datetime="2026-01-21T03:23:09+00:00">2026-01-21</time>
+      <time title="Modified: 2026-01-21 04:02:36" itemprop="dateModified" datetime="2026-01-21T04:02:36+00:00">2026-01-21</time>
     </span>
 
   
@@ -253,19 +253,19 @@
 <li><code>使用命令 xx-lint 对其进行格式化 $arguments</code></li>
 <li><code>检查语法 $arguments</code></li>
 </ul>
-<p>这些本质上都是非常明确的指令, 你需要每天输入, 太重复了, 需要快捷方式。由于它本质上就是 Prompt, 也可以用来干预 agent 的运行风格, 起到定制 Agent 行为的作用.</p>
+<p>这些实际上都是非常明确的指令, 你需要每天输入, 太重复了, 需要快捷方式。由于它就是自动提交一段 Prompt, 也可以用来干预 agent 的运行风格, 起到定制 Agent 行为的作用.</p>
 <p>  业界已经有不少成熟的实践，例如 BMAD 项目就采用这种方式, 提供大量的 Agent 角色指令, 可以通过 slash command 影响 agent 的行为; open spec 也是通过 command 的方式管理提案内容</p>
 <p>这类东西本身就是一段经常要输入的 Prompt, 本来需要手动输入, 现在通过 &#x2F; 命令可以很方便地重复使用.</p>
 <p>但 Slash Command 有个明确边界：必须由人主动触发。</p>
 <blockquote>
-<p>所谓 command，本质上就是”你下发命令，它才会执行”。</p>
+<p>所谓 command，其实就是”你下发命令，它才会执行”。</p>
 </blockquote>
-<p>所以 Slash Command 作为固定工具，更像是大模型的”工具箱”：你需要时可以拿来用，但不会主动参与流程，只能人为触发。因此，Slash Command 更多是快捷方式，而不是 Agent 自发地使用。</p>
+<p>所以 Slash Command 作为固定工具，是用户的”工具库”：你需要时可以拿来用，但模型不会主动使用(虽然也是可以要求它直接使用这些md文件)，只能人为触发。因此，Slash Command 更多是快捷方式，而不是 Agent 自发地使用。</p>
 <h2 id="Subagent-机制的出现"><a href="#Subagent-机制的出现" class="headerlink" title="Subagent 机制的出现"></a>Subagent 机制的出现</h2><p>后来 Claude 推出了很多新功能。其中一个大家经常提到就是 MCP，但这里必须说：真正重要的是, 之后 Claude Code 引入的 subagent 机制。</p>
 <p>Subagent 的核心在于：你可以定义完全属于自己的 Agent。不同于在命令行或对话窗口直接交互的 Agent（即 main agent 或 task agent）。</p>
 <p>Subagent 的”sub”意味着：它作为子 Agent 存在，由用户或 main agent 主动创建调度，完成具体封闭的任务。</p>
 <p>比如常见例子：explore agent。Explore agent 作用是探索文件目录，寻找目标相关文件并读取理解内容。</p>
-<p>我们原来已有 glob 工具。Glob 本质上是通配符文件搜索工具，是内置 tool 用于搜索文件。</p>
+<p>我们原来已有 glob 工具。Glob 实际上是通配符文件搜索工具，是内置 tool 用于搜索文件。</p>
 <p>两者可以对比：</p>
 <p>Glob tool 的工作方式：</p>
 <ul>
@@ -277,7 +277,7 @@
 </ol>
 </li>
 </ul>
-<p>这和调用 bash 工具本质相同：模型必须先完整确定参数再调用工具。</p>
+<p>这和调用 bash 工具实际上相同：模型必须先完整确定参数再调用工具。</p>
 <p>而新 explore subagent 特点在于：</p>
 <ul>
 <li><strong>性质</strong>: 也是 tool，名叫 <code>task</code>，是通用工具。</li>
@@ -299,12 +299,12 @@
 <p>如配置允许，subagent 也可用其他 tool，读取文件、执行操作。但对主 Agent 来说，这些过程只是展示，不会写入上下文。</p>
 <p>所以 subagent 核心：把事情封装成独立子 Agent 并隔离上下文。不会污染主 Agent 上下文，这点很重要。</p>
 <blockquote>
-<p>Token 并未节省——因本质是新跑 Agent。但节省主流程上下文空间。</p>
+<p>Token 并未节省——因为背后另外跑了一个 Reactive Agent 流程。但是这些 LLM message 不会引入主流程上下文空间里。</p>
 </blockquote>
 <p>我们知道长流程上下文有限，如 200K。如所有事堆主 Agent 里，很快耗尽。</p>
 <p>而有 subagent：可把任务拆多步，分别由不同 subagent 执行，或对同一任务并发执行。主 Agent 只收结果，不承载过程。</p>
 <p>角度看，subagent 很像编程中 class：封装 + 隔离。</p>
-<h2 id="Skill-的核心特性"><a href="#Skill-的核心特性" class="headerlink" title="Skill 的核心特性"></a>Skill 的核心特性</h2><p>接下来是最近全新推出的 Skill。Skill 本质上仍是 tool，和 MCP、bash、subagent 一样都是工具形态。</p>
+<h2 id="Skill-的核心特性"><a href="#Skill-的核心特性" class="headerlink" title="Skill 的核心特性"></a>Skill 的核心特性</h2><p>接下来是最近全新推出的 Skill。Skill 实际上仍是 tool，和 MCP、bash、subagent 一样都是工具形态。</p>
 <p>但 Skill 最大不同：它是触发式、按需加载的, 而且它本身不直接执行任务.</p>
 <p>当你在对话中提与 Skill 相关内容时，模型会感知：当前指令和某 Skill 相关, 于是加载 Skill 的 Prompt, 继续执行任务。</p>
 <p>这背后体现了一个重要的交互设计概念——渐进式披露（Progressive Disclosure），即允许模型根据当前任务的需要，动态加载相应的能力。</p>
@@ -344,7 +344,7 @@
 </blockquote>
 <p>举一个实际案例：同事需要帮客户通过 Claude Code 帮写内部框架代码，但这框架是完全私有实现。</p>
 <p>Claude Code 当然不知框架怎么写，于是他们把大量内容——开发文档、编码规范、架构说明、校验方式、编译流程——全塞进很长 <code>CLAUDE.md</code> 文件里，让 Claude Code 启动时一次性加载。</p>
-<p>这方式效率很低：文档多、规则杂、且所有内容常驻上下文。甚至还会尝试通过 MCP 加载外部代码文件，但本质问题没解决。</p>
+<p>这方式效率很低：文档多、规则杂、且所有内容常驻上下文。甚至还会尝试通过 MCP 加载外部代码文件，但本质问。</p>
 <h3 id="Skill-的模块化优势"><a href="#Skill-的模块化优势" class="headerlink" title="Skill 的模块化优势"></a>Skill 的模块化优势</h3><p>现在有 Skill 就完全不同。可把开发文档<strong>按场景拆分多个 Skill</strong>。比如：一个 Skill 负责 JWT 相关实现、一个 Skill 负责定制 Spring Boot 应用开发规范。</p>
 <p>需开发某类应用时，只加载对应 Skill。</p>
 <p>更进一步，Skill 间还可<strong>相互提示</strong>：什么情况用其他 Skill, 甚至自动安装skill。</p>
@@ -367,7 +367,7 @@
 <li><strong>自描述</strong>：需时直接 <code>--help</code> 获取说明</li>
 <li><strong>错误信息友好</strong>：Shell 工具错误输出给人看，通常是文本+错误码，而非冗长异常堆栈</li>
 </ol>
-<p>从 Agent 角度看，这点很重要。Agent 本质在”扮演人”，而 Shell 工具本为人设计。</p>
+<p>从 Agent 角度看，这点很重要。Agent 就是在”扮演人”，而 Shell 工具本为人设计。</p>
 <p>而 Shell 工具的优势就是:</p>
 <ul>
 <li>交互简洁</li>
